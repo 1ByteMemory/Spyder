@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class DimensionChanger
-{
-	public Camera[] cams;
 
-	public void ChangeDimension(int dimensionNumber)
+public class DimensionChanger : MonoBehaviour
+{
+	public Transform[] spawnPoints;
+
+	public Transform GetDimension(int dimensionNumber)
 	{
-		for (int i = 0; i < cams.Length; i++)
+		for (int i = 0; i < spawnPoints.Length; i++)
 		{
-			cams[i].depth = i == dimensionNumber ? 1 : 0;
+			if (i == dimensionNumber)
+			{
+				return spawnPoints[i];
+			}
 		}
+		Debug.LogError("DimensionNumber Out of Bounds!");
+		return null;
 	}
 }

@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
 	private void Awake()
 	{
-		SceneManager.LoadScene(1, LoadSceneMode.Additive);
+		//SceneManager.LoadScene(1, LoadSceneMode.Additive);
 	}
 
 	private void Start()
