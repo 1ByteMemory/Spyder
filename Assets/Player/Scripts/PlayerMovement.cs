@@ -32,50 +32,53 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-
-        Look();
-
-        jumpHeld = Input.GetAxisRaw("Jump") != 0;
-
-        if (!stop)
+        if (!Cursor.visible)
         {
+            Move();
 
-            if (isGrounded && jumpHeld)
-            {
-                startTime = Time.time;
-                Debug.Log("Start Time: " + startTime);
-                isGrounded = false;
-            }
+            Look();
 
-            if (!isGrounded && jumpHeld)
-            {
-                timeSincePressed = Time.time - startTime;
-                Debug.Log("Time held: " + timeSincePressed);
-            }
+            jumpHeld = Input.GetAxisRaw("Jump") != 0;
 
-            if (jumpHeld && timeSincePressed < maxJumpTime)
-			{
-                Jump(maxJumpTime - timeSincePressed);
-			}
-            else if (!jumpHeld && !isGrounded)
-			{
-                Debug.Log("Down");
-                stop = true;
-                SendDown();
-            }
-            else if (timeSincePressed > maxJumpTime)
+            if (!stop)
             {
-                Debug.Log("Down");
-                //isGrounded = true;
-                stop = true;
+
+                if (isGrounded && jumpHeld)
+                {
+                    startTime = Time.time;
+                    Debug.Log("Start Time: " + startTime);
+                    isGrounded = false;
+                }
+
+                if (!isGrounded && jumpHeld)
+                {
+                    timeSincePressed = Time.time - startTime;
+                    Debug.Log("Time held: " + timeSincePressed);
+                }
+
+                if (jumpHeld && timeSincePressed < maxJumpTime)
+                {
+                    Jump(maxJumpTime - timeSincePressed);
+                }
+                else if (!jumpHeld && !isGrounded)
+                {
+                    Debug.Log("Down");
+                    stop = true;
+                    SendDown();
+                }
+                else if (timeSincePressed > maxJumpTime)
+                {
+                    Debug.Log("Down");
+                    //isGrounded = true;
+                    stop = true;
+                    SendDown();
+                }
+            }
+            else if (!isGrounded)
+            {
                 SendDown();
             }
         }
-        else if (!isGrounded)
-		{
-            SendDown();
-		}
     }
 
 
@@ -121,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump(float timePassed)
 	{
         //rb.mass = maxJumpTime - timePassed;
-        rb.AddForce(Vector3.up * playerJumpForce * timePassed, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * playerJumpForce * timePassed * Time.deltaTime, ForceMode.Impulse);
 
 	}
 

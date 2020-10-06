@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+	public GameObject SettingsUI;
+
 	private void Awake()
 	{
 		//SceneManager.LoadScene(1, LoadSceneMode.Additive);
@@ -12,7 +14,33 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
+		SetMouseActive(false);
+
+		if (SettingsUI != null)
+		{
+			SettingsUI.SetActive(false);
+		}
 	}
+
+
+	bool settingsToggel;
+	private void Update()
+	{
+		if (SettingsUI != null)
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				settingsToggel = !settingsToggel;
+				SetMouseActive(settingsToggel);
+				SettingsUI.SetActive(settingsToggel);
+			}
+		}
+	}
+
+	void SetMouseActive(bool value)
+	{
+		Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
+		Cursor.visible = value;
+	}
+
 }
