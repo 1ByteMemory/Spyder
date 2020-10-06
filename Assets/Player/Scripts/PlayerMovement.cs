@@ -16,11 +16,12 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
 
     float timeSincePressed;
-    bool isGrounded;
-    bool ignoreJumpInput;
+    bool isGrounded = true;
 
-    float time;
+    float startTime;
 
+    bool jumpHeld;
+    bool stop = false;
 
     // Use this for initialization
     void Start()
@@ -35,47 +36,48 @@ public class PlayerMovement : MonoBehaviour
 
         Look();
 
-        
-        if (isGrounded)
+        jumpHeld = Input.GetAxisRaw("Jump") != 0;
+
+        if (!stop)
         {
-			timeSincePressed = 0;
-            time = 0;
-            ignoreJumpInput = false;
+
+            if (isGrounded && jumpHeld)
+            {
+                startTime = Time.time;
+                Debug.Log("Start Time: " + startTime);
+                isGrounded = false;
+            }
+
+            if (!isGrounded && jumpHeld)
+            {
+                timeSincePressed = Time.time - startTime;
+                Debug.Log("Time held: " + timeSincePressed);
+            }
+
+            if (jumpHeld && timeSincePressed < maxJumpTime)
+			{
+                Jump(maxJumpTime - timeSincePressed);
+			}
+            else if (!jumpHeld && !isGrounded)
+			{
+                Debug.Log("Down");
+                stop = true;
+                SendDown();
+            }
+            else if (timeSincePressed > maxJumpTime)
+            {
+                Debug.Log("Down");
+                //isGrounded = true;
+                stop = true;
+                SendDown();
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && time == 0 && isGrounded)
-		{
-			time = Time.time;
-            //Debug.Log(timeSincePressed);
-		}
-
-        
-        if (Input.GetKey(KeyCode.Space) && time != 0)
-		{
-            
-            timeSincePressed = Time.time - time + 0.01f;
-            Jump(timeSincePressed);
-		}
-
-        
-        if (timeSincePressed > maxJumpTime)
-		{
-            Debug.Log("test");
-            ignoreJumpInput = true;
-            SendDown();
-		}
-
-
-        if (!ignoreJumpInput && Input.GetAxis("Jump") == 0 && !isGrounded)
+        else if (!isGrounded)
 		{
             SendDown();
 		}
     }
 
-    void SendDown()
-	{
-        rb.AddForce(Vector3.down * fallMultiplayer * Time.deltaTime, ForceMode.Impulse);
-    }
 
     private void OnCollisionStay(Collision collision)
 	{
@@ -87,11 +89,12 @@ public class PlayerMovement : MonoBehaviour
             if (dot < 0)
 			{
                 isGrounded = true;
+                stop = false;
                 break;
 			}
 			else
 			{
-                isGrounded = false;
+                //isGrounded = false;
 			}
 
 		}
@@ -99,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void OnCollisionExit(Collision collision)
 	{
-        isGrounded = false;
+        //isGrounded = false;
 	}
 
 	void Move()
@@ -118,10 +121,14 @@ public class PlayerMovement : MonoBehaviour
     void Jump(float timePassed)
 	{
         //rb.mass = maxJumpTime - timePassed;
-        rb.AddForce(Vector3.up * playerJumpForce * (maxJumpTime - timePassed), ForceMode.Impulse);
+        rb.AddForce(Vector3.up * playerJumpForce * timePassed, ForceMode.Impulse);
 
 	}
 
+    void SendDown()
+    {
+        rb.AddForce(Vector3.down * fallMultiplayer * Time.deltaTime, ForceMode.Impulse);
+    }
 
     void Look()
     {

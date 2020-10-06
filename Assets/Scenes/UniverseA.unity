@@ -2084,9 +2084,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab699a5e09efebe4eb11db67eb45bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 80
-  playerJumpForce: 40
-  maxJumpTime: 0.65
+  playerSpeed: 100
+  playerJumpForce: 1
+  maxJumpTime: 0.5
   fallMultiplayer: 75
   lookSpeed: 5
   fpsCamera: {fileID: 1592914334}
