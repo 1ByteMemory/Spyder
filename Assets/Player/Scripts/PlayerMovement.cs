@@ -105,7 +105,8 @@ public class PlayerMovement : MonoBehaviour
 
 	private void OnCollisionExit(Collision collision)
 	{
-        //isGrounded = false;
+		isGrounded = false;
+        //stop = true;
 	}
 
 	void Move()

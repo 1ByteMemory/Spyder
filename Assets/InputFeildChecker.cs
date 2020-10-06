@@ -83,11 +83,11 @@ public class InputFeildChecker : MonoBehaviour
 	{
 		foreach (char c in str)
 		{
-			if (c < '0' || c > '9')
-				return false;
+			if ((c > '0' || c < '9') || c == 46)
+				return true;
 		}
 
-		return true;
+		return false;
 	}
 
 }
