@@ -16,7 +16,7 @@ public class DimensionChanger : MonoBehaviour
 				return spawnPoints[i];
 			}
 		}
-		Debug.LogError("DimensionNumber Out of Bounds!");
+		Debug.LogWarning("Spawn point at" + dimensionNumber + " has not been assigned.");
 		return null;
 	}
 }
