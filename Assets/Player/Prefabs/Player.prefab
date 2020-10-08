@@ -94,11 +94,12 @@ GameObject:
   - component: {fileID: 6808830610586471016}
   - component: {fileID: 6808830610586471017}
   - component: {fileID: 6808830610586471021}
+  - component: {fileID: 3682504537575836387}
   - component: {fileID: 6808830610586471018}
   - component: {fileID: 6808830610586471019}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,6 +151,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints: []
+--- !u!114 &3682504537575836387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808830610586471030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f5c79dfaf659364dbe70374a281cb6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoText: {fileID: 0}
+  clipText: {fileID: 0}
+  weapon:
+    name: 
+    projectile: {fileID: 0}
+    fireingSpeed: 0
+    projectileShotSpeed: 0
+    reloadSpeed: 0
+    maxAmmo: 0
+    maxClipSize: 0
+    projectileLifeTime: 0
 --- !u!136 &6808830610586471018
 CapsuleCollider:
   m_ObjectHideFlags: 0
