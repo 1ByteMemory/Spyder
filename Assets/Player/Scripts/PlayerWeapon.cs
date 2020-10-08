@@ -8,6 +8,7 @@ public class PlayerWeapon : MonoBehaviour
     public Text ammoText;
     public Text clipText;
 
+
     public WeaponBehaviour weapon;
 
     Transform cam;
@@ -40,7 +41,7 @@ public class PlayerWeapon : MonoBehaviour
                     weapon.Clip--;
 
                     // Spawn the projectile
-                    GameObject projectile = Instantiate(weapon.projectile, cam.position, new Quaternion());
+                    GameObject projectile = Instantiate(weapon.projectile, weapon.ProjectileSpawnPoint.position, new Quaternion());
 
                     // Fire the projectile
                     weapon.FireProjectile(projectile, cam.forward);

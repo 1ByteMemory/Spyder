@@ -8,6 +8,7 @@ public class WeaponBehaviour
 {
     public string name;
     public GameObject projectile;
+    public Transform ProjectileSpawnPoint;
 
     /// <summary>
     /// How fast it takes to fire the next shot
