@@ -701,9 +701,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d122d2d2bda3d4e8e1dcca650d53bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SearchRadius: 20
-  AttackRadius: 10
+  searchRadius: 20
+  attackRadius: 10
   navAgent: {fileID: 1058790648}
+  matDebug: {fileID: 2100000, guid: 2478edbcc6d84694b8a14aafaaf95d8e, type: 2}
 --- !u!4 &1058790650
 Transform:
   m_ObjectHideFlags: 0

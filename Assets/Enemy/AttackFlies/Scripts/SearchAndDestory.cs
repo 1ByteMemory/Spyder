@@ -22,7 +22,7 @@ public class SearchAndDestory : MonoBehaviour
 	AgentState prevState;
 
     Transform player;
-
+	public Material matDebug;
 
 	private void OnValidate()
 	{
@@ -99,6 +99,7 @@ public class SearchAndDestory : MonoBehaviour
 
 	void Idle()
 	{
+		MatDebug(Color.grey);
 		// Play idle animation
 
 		// Maybe patrol a certain route
@@ -106,11 +107,19 @@ public class SearchAndDestory : MonoBehaviour
 
 	void Search()
 	{
+		MatDebug(Color.green);
 		// Get closer to player to attack
 	}
 
 	void Attack()
 	{
+		MatDebug(Color.red);
 		// Attack the player
+	}
+
+	void MatDebug(Color color)
+	{
+		if (matDebug != null)
+			matDebug.color = color;
 	}
 }
