@@ -82,8 +82,8 @@ public class PlayerWeapon : MonoBehaviour
 
     void DisplayAmmo(int ammo, int clip)
 	{
-        ammoText.text = ammo.ToString();
-        clipText.text = clip.ToString();
+        if (ammoText != null) ammoText.text = ammo.ToString();
+        if (clipText != null) clipText.text = clip.ToString();
 	}
 
 }

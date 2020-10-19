@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 6808830610361278410}
   - component: {fileID: 6808830610361278411}
   - component: {fileID: 6808830610361278408}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CamA
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab699a5e09efebe4eb11db67eb45bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 120
+  playerSpeed: 150
   playerJumpForce: 800
   maxJumpTime: 0.3
   fallMultiplayer: 100
@@ -272,15 +272,16 @@ MonoBehaviour:
   ammoText: {fileID: 0}
   clipText: {fileID: 0}
   weapon:
-    name: 
-    projectile: {fileID: 0}
-    ProjectileSpawnPoint: {fileID: 0}
-    fireingSpeed: 0
-    projectileShotSpeed: 0
+    name: Cannon
+    projectile: {fileID: 8604807226791387282, guid: ec6e260de46e46c47be3b3d6cdf87303,
+      type: 3}
+    ProjectileSpawnPoint: {fileID: 4461220149873880172}
+    fireingSpeed: 0.5
+    projectileShotSpeed: 100
     reloadSpeed: 0
-    maxAmmo: 0
-    maxClipSize: 0
-    projectileLifeTime: 0
+    maxAmmo: 24
+    maxClipSize: 12
+    projectileLifeTime: 5
 --- !u!136 &6808830610586471018
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -320,7 +321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6808830611006798375}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CameraHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +356,7 @@ GameObject:
   - component: {fileID: 6808830611910207520}
   - component: {fileID: 6808830611910207525}
   - component: {fileID: 6808830611910207522}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
