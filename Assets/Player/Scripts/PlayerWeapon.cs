@@ -32,7 +32,7 @@ public class PlayerWeapon : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
-                endTime = weapon.fireingSpeed + Time.time;
+                endTime = weapon.fireingTime + Time.time;
 
 
                 // Check that there's enough ammo
@@ -42,6 +42,8 @@ public class PlayerWeapon : MonoBehaviour
 
                     // Spawn the projectile
                     GameObject projectile = Instantiate(weapon.projectile, weapon.ProjectileSpawnPoint.position, new Quaternion());
+
+                    projectile.GetComponent<ProjectileDeathTimer>().ownerTag = "Player";
 
                     // Fire the projectile
                     weapon.FireProjectile(projectile, cam.forward);

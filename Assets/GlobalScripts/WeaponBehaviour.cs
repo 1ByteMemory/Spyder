@@ -14,14 +14,14 @@ public class WeaponBehaviour
     /// How fast it takes to fire the next shot
     /// </summary>
     [Tooltip("How fast it takes to fire the next shot")]
-    public float fireingSpeed;
+    public float fireingTime;
 
     /// <summary>
     /// How fast the projectile fires
     /// </summary>
     [Tooltip("How fast the projectile fires")]
     public float projectileShotSpeed;
-    public float reloadSpeed;
+    //public float reloadSpeed;
     public int maxAmmo;
     public int maxClipSize;
 

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ProjectileDeathTimer : MonoBehaviour
 {
 	public float lifeTime;
 	float endTime;
+	public string ownerTag;
 
 	private void OnEnable()
 	{
@@ -22,9 +24,11 @@ public class ProjectileDeathTimer : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		// Play explosion animation
+		if (!other.CompareTag(ownerTag))
+		{
+			// Play explosion animation
 
-
-		Destroy(gameObject);
+			Destroy(gameObject);
+		}
 	}
 }

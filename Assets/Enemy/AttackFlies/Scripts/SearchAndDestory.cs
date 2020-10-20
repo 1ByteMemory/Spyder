@@ -10,18 +10,22 @@ public enum AgentState
     Attack
 }
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class SearchAndDestory : MonoBehaviour
 {
     public float searchRadius = 20;
     public float attackRadius = 10;
 
+    protected NavMeshAgent navMeshAgent;
     
-    public NavMeshAgent navAgent;
-    RaycastHit navHit;
+	RaycastHit navHit;
     AgentState agentState;
 	AgentState prevState;
 
     Transform player;
+	public Transform Player { get { return player; } }
+
+
 	public Material matDebug;
 
 	private void OnValidate()
@@ -43,14 +47,14 @@ public class SearchAndDestory : MonoBehaviour
 	}
 
 	// Start is called before the first frame update
-	void Start()
+	protected virtual void Start()
     {
-		navAgent = GetComponent<NavMeshAgent>();
+		navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
 	// Update is called once per frame
-	void Update()
+	protected virtual void Update()
     {
         float distance = Mathf.Abs((player.position - transform.position).magnitude);
 
@@ -78,7 +82,7 @@ public class SearchAndDestory : MonoBehaviour
         TakeAction(agentState);
     }
 
-    void TakeAction(AgentState state)
+	protected virtual void TakeAction(AgentState state)
 	{
 		switch (state)
 		{
@@ -97,27 +101,32 @@ public class SearchAndDestory : MonoBehaviour
 	}
 
 
-	void Idle()
+	protected virtual void Idle()
 	{
 		MatDebug(Color.grey);
+		navMeshAgent.isStopped = true;
 		// Play idle animation
 
 		// Maybe patrol a certain route
 	}
 
-	void Search()
+	protected virtual void Search()
 	{
 		MatDebug(Color.green);
 		// Get closer to player to attack
+		navMeshAgent.isStopped = false;
+		navMeshAgent.SetDestination(Player.position);
 	}
 
-	void Attack()
+	protected virtual void Attack()
 	{
 		MatDebug(Color.red);
-		// Attack the player
+		navMeshAgent.isStopped = true;
+
+
 	}
 
-	void MatDebug(Color color)
+	protected virtual void MatDebug(Color color)
 	{
 		if (matDebug != null)
 			matDebug.color = color;
