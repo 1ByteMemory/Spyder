@@ -24,9 +24,15 @@ public class ProjectileDeathTimer : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (!other.CompareTag(ownerTag))
+		if (!other.CompareTag(ownerTag) && !other.CompareTag("Projectile"))
 		{
 			// Play explosion animation
+
+			Health health = other.GetComponent<Health>();
+			if (health != null)
+			{
+				health.TakeDamage(1);
+			}
 
 			Destroy(gameObject);
 		}

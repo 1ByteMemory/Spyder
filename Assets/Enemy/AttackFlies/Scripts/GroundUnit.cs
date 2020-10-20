@@ -5,8 +5,12 @@ using UnityEngine.AI;
 
 public class GroundUnit : SearchAndDestory
 {
+
+	[Header("Weapons")]
 	public WeaponBehaviour weapon;
 	public float reloadTime;
+
+
 
 	protected override void Start()
 	{
@@ -15,6 +19,7 @@ public class GroundUnit : SearchAndDestory
 	protected override void Update()
 	{
 		base.Update();
+
 	}
 
 	protected override void Idle()
