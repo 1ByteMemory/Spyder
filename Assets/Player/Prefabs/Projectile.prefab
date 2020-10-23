@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5086914122347835156}
   - component: {fileID: 37753895348755788}
   - component: {fileID: 2349645757000117450}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,9 +106,9 @@ GameObject:
   - component: {fileID: 6199026290630832999}
   - component: {fileID: 2592678933084013222}
   - component: {fileID: 3244230023573498307}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,7 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c5c8ccebbf04c49b81d49787b8968a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5
+  lifeTime: 10
+  ownerTag: 
 --- !u!135 &2592678933084013222
 SphereCollider:
   m_ObjectHideFlags: 0
