@@ -16,9 +16,16 @@ public class GroundUnit : SearchAndDestory
 	{
 		base.Start();
 	}
+
+	float endStunTime;
 	protected override void Update()
 	{
 		base.Update();
+
+		if (isStunned && Time.time >= endStunTime)
+		{
+			isStunned = false;
+		}
 
 	}
 
@@ -43,27 +50,38 @@ public class GroundUnit : SearchAndDestory
 	protected override void Attack()
 	{
 		base.Attack();
-		
-		if (Time.time >= fireingTime)
+
+		if (!isStunned)
 		{
-			fireingTime = Time.time + weapon.fireingTime;
-
-			if (weapon.Clip == 0)
+			if (Time.time >= fireingTime)
 			{
-				reloadEndTime = Time.time + reloadTime;
-				weapon.Clip = weapon.maxClipSize;
-			}
+				fireingTime = Time.time + weapon.fireingTime;
 
-			if (weapon.Clip > 0 && Time.time > reloadEndTime)
-			{
-				weapon.Clip--;
+				if (weapon.Clip == 0)
+				{
+					reloadEndTime = Time.time + reloadTime;
+					weapon.Clip = weapon.maxClipSize;
+				}
 
-				GameObject projectile = Instantiate(weapon.projectile, transform.position, new Quaternion());
-				projectile.GetComponent<ProjectileDeathTimer>().ownerTag = "Enemy";
+				if (weapon.Clip > 0 && Time.time > reloadEndTime)
+				{
+					weapon.Clip--;
 
-				weapon.FireProjectile(projectile, (player.position - transform.position).normalized);
+					GameObject projectile = Instantiate(weapon.projectile, transform.position, new Quaternion());
+					projectile.GetComponent<ProjectileDeathTimer>().ownerTag = "Enemy";
 
+					weapon.FireProjectile(projectile, (player.position - transform.position).normalized);
+
+				}
 			}
 		}
 	}
+
+	public override void Stun()
+	{
+		base.Stun();
+
+		endStunTime = Time.time + stunnedTime;
+	}
+
 }

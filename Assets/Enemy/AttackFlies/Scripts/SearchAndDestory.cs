@@ -7,7 +7,8 @@ public enum AgentState
 {
     Idle,
     Search,
-    Attack
+    Attack,
+	Stun
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -16,11 +17,15 @@ public class SearchAndDestory : MonoBehaviour
     public float searchRadius = 20;
     public float attackRadius = 10;
 
+	public float stunnedTime = 1;
+
     protected NavMeshAgent navMeshAgent;
     
 	RaycastHit navHit;
     AgentState agentState;
 	AgentState prevState;
+
+	protected bool isStunned;
 
 	public Transform player { get; private set; }
 
@@ -84,6 +89,8 @@ public class SearchAndDestory : MonoBehaviour
         TakeAction(agentState);
     }
 
+
+
 	protected virtual void TakeAction(AgentState state)
 	{
 		switch (state)
@@ -127,6 +134,15 @@ public class SearchAndDestory : MonoBehaviour
 
 
 	}
+
+	public virtual void Stun()
+	{
+		MatDebug(Color.yellow);
+		navMeshAgent.isStopped = true;
+
+		isStunned = true;
+	}
+
 
 	protected virtual void MatDebug(Color color)
 	{

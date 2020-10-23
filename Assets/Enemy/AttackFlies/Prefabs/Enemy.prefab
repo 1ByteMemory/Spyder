@@ -130,6 +130,20 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 10
   dontDestroyOnDeath: 0
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1659801140377113249}
+        m_MethodName: Stun
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1659801140377113249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   searchRadius: 26
   attackRadius: 13.1
-  matDebug: {fileID: 2100000, guid: 2478edbcc6d84694b8a14aafaaf95d8e, type: 2}
+  stunnedTime: 2
   weapon:
     name: Blaster
     projectile: {fileID: 8604807226791387282, guid: ec6e260de46e46c47be3b3d6cdf87303,
@@ -154,7 +168,7 @@ MonoBehaviour:
     projectileShotSpeed: 50
     maxAmmo: 0
     maxClipSize: 6
-    projectileLifeTime: 10
+    projectileLifeTime: 3
   reloadTime: 0.5
 --- !u!195 &1659801140377113248
 NavMeshAgent:
