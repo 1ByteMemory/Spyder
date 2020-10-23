@@ -276,7 +276,7 @@ MonoBehaviour:
     projectile: {fileID: 8604807226791387282, guid: ec6e260de46e46c47be3b3d6cdf87303,
       type: 3}
     ProjectileSpawnPoint: {fileID: 4461220149873880172}
-    fireingTime: 0.5
+    fireingTime: 0.3
     projectileShotSpeed: 100
     maxAmmo: 24
     maxClipSize: 12

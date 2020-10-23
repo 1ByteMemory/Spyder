@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 10
+  maxHealth: 1
   dontDestroyOnDeath: 0
   OnHit:
     m_PersistentCalls:
@@ -156,15 +156,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259fabad11031794594c5242a8ce5b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 26
-  attackRadius: 13.1
+  searchRadius: 35
+  attackRadius: 30
   stunnedTime: 2
   weapon:
     name: Blaster
     projectile: {fileID: 8604807226791387282, guid: ec6e260de46e46c47be3b3d6cdf87303,
       type: 3}
     ProjectileSpawnPoint: {fileID: 0}
-    fireingTime: 0.4
+    fireingTime: 0.8
     projectileShotSpeed: 50
     maxAmmo: 0
     maxClipSize: 6
