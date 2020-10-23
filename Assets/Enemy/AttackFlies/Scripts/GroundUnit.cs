@@ -61,7 +61,7 @@ public class GroundUnit : SearchAndDestory
 				GameObject projectile = Instantiate(weapon.projectile, transform.position, new Quaternion());
 				projectile.GetComponent<ProjectileDeathTimer>().ownerTag = "Enemy";
 
-				weapon.FireProjectile(projectile, (Player.position - transform.position).normalized);
+				weapon.FireProjectile(projectile, (player.position - transform.position).normalized);
 
 			}
 		}

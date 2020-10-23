@@ -22,11 +22,10 @@ public class SearchAndDestory : MonoBehaviour
     AgentState agentState;
 	AgentState prevState;
 
-    Transform player;
-	public Transform Player { get { return player; } }
+	public Transform player { get; private set; }
 
 
-	public Material matDebug;
+	Material matDebug;
 
 	private void OnValidate()
 	{
@@ -51,6 +50,9 @@ public class SearchAndDestory : MonoBehaviour
     {
 		navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+		
+		
+		matDebug = GetComponentInChildren<Renderer>().material;
     }
 
 	// Update is called once per frame
@@ -115,7 +117,7 @@ public class SearchAndDestory : MonoBehaviour
 		MatDebug(Color.green);
 		// Get closer to player to attack
 		navMeshAgent.isStopped = false;
-		navMeshAgent.SetDestination(Player.position);
+		navMeshAgent.SetDestination(player.position);
 	}
 
 	protected virtual void Attack()
