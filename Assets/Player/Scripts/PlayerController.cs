@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour
 {
 
     int currentDimension;
-    public Camera camA;
-    public Camera camB;
+
+	public float coolDown = 0.5f;
 
     public Material materialA;
     public Material materialB;
@@ -38,11 +38,14 @@ public class PlayerController : MonoBehaviour
 		// <<<<<<<<<<<<<<     >>>>>>>>>>> //
 	}
 
+
+	float endTime;
 	// Update is called once per frame
 	void Update()
     {
-        if (Input.GetMouseButtonDown(1) && !isInWall)
+        if (Input.GetMouseButtonDown(1) && !isInWall && Time.time >= endTime)
         {
+			endTime = Time.time + coolDown;
 			if (currentDimension == 1)
 			{
 				// Switch to universe A
