@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6395159639213430946}
   m_Layer: 12
   m_Name: CollisionDetection
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 6808830610586471017}
   - component: {fileID: 6808830610586471021}
   - component: {fileID: 3682504537575836387}
+  - component: {fileID: 7283696070113170742}
   - component: {fileID: 6808830610586471018}
   - component: {fileID: 6808830610586471019}
   m_Layer: 10
@@ -302,8 +303,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51847aeaa1578dd49871484ebf0a5206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camA: {fileID: 0}
-  camB: {fileID: 0}
+  coolDown: 0.5
+  materialA: {fileID: 0}
+  materialB: {fileID: 0}
   triggerDetector: {fileID: 6532164225303208852}
   universeLayer1: 0
   universeLayer2: 0
@@ -331,6 +333,25 @@ MonoBehaviour:
     maxAmmo: 24
     maxClipSize: 12
     projectileLifeTime: 5
+--- !u!114 &7283696070113170742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808830610586471030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e6e09d262b4dd4aa724842a0499ef7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  maxHealth: 20
+  dontDestroyOnDeath: 1
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  healthSlider: {fileID: 0}
 --- !u!136 &6808830610586471018
 CapsuleCollider:
   m_ObjectHideFlags: 0

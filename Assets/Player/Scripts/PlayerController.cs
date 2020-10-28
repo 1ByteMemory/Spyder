@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    int currentDimension;
+    static int currentDimension;
 
 	public float coolDown = 0.5f;
 
@@ -19,9 +19,19 @@ public class PlayerController : MonoBehaviour
     public int universeLayer1;
     public int universeLayer2;
 
+	static int layerA;
+	static int layerB;
+
+	public static int GetActiveLayer()
+	{
+		return currentDimension == 0 ? layerA : layerB;
+	}
 
 	private void Start()
 	{
+		layerA = universeLayer1;
+		layerB = universeLayer2;
+
         triggerDetector.layer = 0;
         IgnoreLayer(universeLayer2, universeLayer1);
 
@@ -39,7 +49,7 @@ public class PlayerController : MonoBehaviour
 	}
 
 
-	float endTime;
+	float endTime = 0;
 	// Update is called once per frame
 	void Update()
     {
@@ -96,13 +106,22 @@ public class PlayerController : MonoBehaviour
         Physics.IgnoreLayerCollision(10, collideLayer, false); // false - do not ignore these collisions....confusing I know
     }
 
+
+	public static void IgnoreLayer(int targetLayer, int ignoreLayer, int collideLayer)
+	{
+		Physics.IgnoreLayerCollision(targetLayer, ignoreLayer, true);
+		Physics.IgnoreLayerCollision(targetLayer, collideLayer, false);
+	}
+
 	private void OnTriggerEnter(Collider other)
 	{
+		if (other.CompareTag("Projectile")) return;
         isInWall = true;
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
+		if (other.CompareTag("Projectile")) return;
         isInWall = false;
 	}
 }

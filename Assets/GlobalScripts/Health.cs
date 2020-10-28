@@ -15,12 +15,12 @@ public class Health : MonoBehaviour
 
 	public UnityEvent OnHit;
 
-	private void Start()
+	private protected virtual void Start()
 	{
 		currentHealth = maxHealth;
 	}
 
-	private void Update()
+	private protected virtual void Update()
 	{
 		if (!dontDestroyOnDeath && isDead)
 		{
@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
 		}
 	}
 
-	public void TakeDamage(int damage)
+	public virtual void TakeDamage(int damage)
 	{
 		currentHealth -= damage;
 

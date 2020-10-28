@@ -10,7 +10,8 @@ public class GroundUnit : SearchAndDestory
 	public WeaponBehaviour weapon;
 	public float reloadTime;
 
-
+	public int normalDamage = 2;
+	public int modifiedDamage = 1;
 
 	protected override void Start()
 	{
@@ -68,7 +69,11 @@ public class GroundUnit : SearchAndDestory
 					weapon.Clip--;
 
 					GameObject projectile = Instantiate(weapon.projectile, transform.position, new Quaternion());
-					projectile.GetComponent<ProjectileDeathTimer>().ownerTag = "Enemy";
+					ProjectileDeathTimer projectileDeathTimer = projectile.GetComponent<ProjectileDeathTimer>();
+					projectileDeathTimer.ownerTag = "Enemy";
+					projectileDeathTimer.layer = gameObject.layer;
+					projectileDeathTimer.normalDamage = normalDamage;
+					projectileDeathTimer.modifiedDamage = modifiedDamage;
 
 					weapon.FireProjectile(projectile, (player.position - transform.position).normalized);
 
