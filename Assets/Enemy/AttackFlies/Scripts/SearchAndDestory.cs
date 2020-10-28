@@ -30,8 +30,6 @@ public class SearchAndDestory : MonoBehaviour
 	public Transform player { get; private set; }
 
 
-	Material matDebug;
-
 	private void OnValidate()
 	{
 		if (attackRadius > searchRadius)
@@ -56,8 +54,6 @@ public class SearchAndDestory : MonoBehaviour
 		navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
 		
-		
-		matDebug = GetComponentInChildren<Renderer>().material;
     }
 
 	// Update is called once per frame
@@ -112,7 +108,6 @@ public class SearchAndDestory : MonoBehaviour
 
 	protected virtual void Idle()
 	{
-		MatDebug(Color.grey);
 		navMeshAgent.isStopped = true;
 		// Play idle animation
 
@@ -121,7 +116,6 @@ public class SearchAndDestory : MonoBehaviour
 
 	protected virtual void Search()
 	{
-		MatDebug(Color.green);
 		// Get closer to player to attack
 		navMeshAgent.isStopped = false;
 		navMeshAgent.SetDestination(player.position);
@@ -129,7 +123,6 @@ public class SearchAndDestory : MonoBehaviour
 
 	protected virtual void Attack()
 	{
-		MatDebug(Color.red);
 		navMeshAgent.isStopped = true;
 
 
@@ -137,16 +130,8 @@ public class SearchAndDestory : MonoBehaviour
 
 	public virtual void Stun()
 	{
-		MatDebug(Color.yellow);
 		navMeshAgent.isStopped = true;
 
 		isStunned = true;
-	}
-
-
-	protected virtual void MatDebug(Color color)
-	{
-		if (matDebug != null)
-			matDebug.color = color;
 	}
 }

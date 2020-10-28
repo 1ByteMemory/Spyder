@@ -1,16 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
+// DON NOT REMOVE EITHER OF THESE
+using UnityEditor.SceneManagement; // EDIOTR
+using UnityEngine.SceneManagement; // ENGINE
+using UnityEditorInternal;
 
 public class GameManager : MonoBehaviour
 {
+	[Header("Scene Loader")]
+	public bool addScene;
+	bool isLoaded;
+	public string sceneToLoad;
+
+
+	[Header("")]
 	public GameObject SettingsUI;
 
 	private void Awake()
 	{
-		//SceneManager.LoadScene(1, LoadSceneMode.Additive);
+		SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
 	}
+
 
 	private void Start()
 	{
