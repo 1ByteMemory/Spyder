@@ -304,11 +304,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: 0.5
-  materialA: {fileID: 0}
-  materialB: {fileID: 0}
+  materialA: {fileID: 2100000, guid: 4ad06878f30e4e941af3558e6ab88216, type: 2}
+  materialB: {fileID: 2100000, guid: 5e1f33984ed18ae46bd7ae1532d5fcae, type: 2}
   triggerDetector: {fileID: 6532164225303208852}
-  universeLayer1: 0
-  universeLayer2: 0
+  universeLayer1: 8
+  universeLayer2: 9
 --- !u!114 &3682504537575836387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,8 +329,8 @@ MonoBehaviour:
       type: 3}
     ProjectileSpawnPoint: {fileID: 4461220149873880172}
     fireingTime: 0.3
-    projectileShotSpeed: 100
-    maxAmmo: 24
+    projectileShotSpeed: 200
+    maxAmmo: 9999
     maxClipSize: 12
     projectileLifeTime: 5
 --- !u!114 &7283696070113170742
@@ -346,12 +346,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 20
+  maxHealth: 100
   dontDestroyOnDeath: 1
   OnHit:
     m_PersistentCalls:
       m_Calls: []
   healthSlider: {fileID: 0}
+  immunityWindow: 0.1
 --- !u!136 &6808830610586471018
 CapsuleCollider:
   m_ObjectHideFlags: 0
