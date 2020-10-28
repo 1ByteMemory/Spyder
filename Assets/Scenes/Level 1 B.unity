@@ -127,7 +127,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65974
+  m_Name: pb_Mesh93170
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -491,7 +491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 59821421}
   - component: {fileID: 59821420}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (62)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -579,7 +579,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65346
+  m_Name: pb_Mesh92684
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -834,7 +834,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65810
+  m_Name: pb_Mesh93062
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1001,7 +1001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 162053433}
   - component: {fileID: 162053432}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1280,7 +1280,7 @@ GameObject:
   - component: {fileID: 183321004}
   - component: {fileID: 183321003}
   - component: {fileID: 183321002}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1587,7 +1587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 201318563}
   - component: {fileID: 201318562}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1679,7 +1679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 282253387}
   - component: {fileID: 282253386}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (63)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1771,7 +1771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 356570815}
   - component: {fileID: 356570816}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (69)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1958,7 +1958,7 @@ GameObject:
   - component: {fileID: 402033231}
   - component: {fileID: 402033230}
   - component: {fileID: 402033229}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2541,7 +2541,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65600
+  m_Name: pb_Mesh92898
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2705,6 +2705,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1040899976}
     m_Modifications:
+    - target: {fileID: 1041185764608810324, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488452, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2765,6 +2770,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorScript (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1041185765406488473, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488475, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: activeOn
@@ -2791,7 +2801,7 @@ GameObject:
   - component: {fileID: 429642959}
   - component: {fileID: 429642958}
   - component: {fileID: 429642957}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3175,7 +3185,7 @@ GameObject:
   m_Component:
   - component: {fileID: 517020638}
   - component: {fileID: 517020637}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3577,7 +3587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 528418455}
   - component: {fileID: 528418454}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (25)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3701,7 +3711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 545595649}
   - component: {fileID: 545595648}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3793,7 +3803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 547250895}
   - component: {fileID: 547250894}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3887,6 +3897,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5e1f33984ed18ae46bd7ae1532d5fcae, type: 2}
+    - target: {fileID: 1041185764608810324, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488452, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3947,6 +3962,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorScript (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 1041185765406488473, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488475, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: activeOn
@@ -3973,7 +3993,7 @@ GameObject:
   - component: {fileID: 570866831}
   - component: {fileID: 570866830}
   - component: {fileID: 570866829}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27699,6 +27719,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5e1f33984ed18ae46bd7ae1532d5fcae, type: 2}
+    - target: {fileID: 1041185764608810324, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488452, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27758,6 +27783,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DoorScript (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041185765406488473, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488475, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
@@ -27877,7 +27907,7 @@ GameObject:
   - component: {fileID: 648899778}
   - component: {fileID: 648899777}
   - component: {fileID: 648899776}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29741,7 +29771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 701716740}
   - component: {fileID: 701716739}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29835,6 +29865,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5e1f33984ed18ae46bd7ae1532d5fcae, type: 2}
+    - target: {fileID: 1041185764608810324, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488452, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29894,6 +29929,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DoorScript (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041185765406488473, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488475, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
@@ -30006,7 +30046,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65672
+  m_Name: pb_Mesh92952
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30169,7 +30209,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65718
+  m_Name: pb_Mesh92996
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -30336,7 +30376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 831972118}
   - component: {fileID: 831972117}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30428,7 +30468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 897465759}
   - component: {fileID: 897465758}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (60)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30520,7 +30560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 910850049}
   - component: {fileID: 910850048}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (64)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30615,7 +30655,7 @@ GameObject:
   - component: {fileID: 934907078}
   - component: {fileID: 934907077}
   - component: {fileID: 934907076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30925,7 +30965,7 @@ GameObject:
   - component: {fileID: 954704528}
   - component: {fileID: 954704527}
   - component: {fileID: 954704526}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31756,7 +31796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1061919229}
   - component: {fileID: 1061919230}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (66)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31910,6 +31950,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 7586178640257154598, guid: 86bac9d6f132b65439c748db3bbbc513,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86bac9d6f132b65439c748db3bbbc513, type: 3}
 --- !u!1001 &1077739531
@@ -31957,7 +32002,7 @@ PrefabInstance:
     - target: {fileID: 7586178640257154596, guid: 86bac9d6f132b65439c748db3bbbc513,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7586178640257154596, guid: 86bac9d6f132b65439c748db3bbbc513,
         type: 3}
@@ -31999,7 +32044,7 @@ GameObject:
   - component: {fileID: 1095895573}
   - component: {fileID: 1095895572}
   - component: {fileID: 1095895571}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32860,6 +32905,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5e1f33984ed18ae46bd7ae1532d5fcae, type: 2}
+    - target: {fileID: 1041185764608810324, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488452, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -32920,6 +32970,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorScript (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1041185765406488473, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488475, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: activeOn
@@ -32939,7 +32994,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65548
+  m_Name: pb_Mesh92846
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33106,7 +33161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1183204385}
   - component: {fileID: 1183204386}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (68)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33198,7 +33253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1184605850}
   - component: {fileID: 1184605851}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (67)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33599,6 +33654,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawn (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7586178640257154598, guid: 86bac9d6f132b65439c748db3bbbc513,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86bac9d6f132b65439c748db3bbbc513, type: 3}
 --- !u!4 &1297603560 stripped
@@ -33617,7 +33677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1299028232}
   - component: {fileID: 1299028231}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33712,7 +33772,7 @@ GameObject:
   - component: {fileID: 1313331295}
   - component: {fileID: 1313331294}
   - component: {fileID: 1313331293}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34930,7 +34990,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65364
+  m_Name: pb_Mesh92702
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -35277,7 +35337,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65428
+  m_Name: pb_Mesh92762
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -35440,7 +35500,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65292
+  m_Name: pb_Mesh92648
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -35702,7 +35762,7 @@ GameObject:
   - component: {fileID: 1461419787}
   - component: {fileID: 1461419786}
   - component: {fileID: 1461419785}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36900,7 +36960,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65854
+  m_Name: pb_Mesh93090
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -37102,7 +37162,7 @@ PrefabInstance:
     - target: {fileID: 7586178640257154596, guid: 86bac9d6f132b65439c748db3bbbc513,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7586178640257154596, guid: 86bac9d6f132b65439c748db3bbbc513,
         type: 3}
@@ -37124,6 +37184,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawn (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7586178640257154598, guid: 86bac9d6f132b65439c748db3bbbc513,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86bac9d6f132b65439c748db3bbbc513, type: 3}
 --- !u!1 &1603561208
@@ -37136,7 +37201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1603561210}
   - component: {fileID: 1603561209}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37228,7 +37293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1610717170}
   - component: {fileID: 1610717169}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37414,6 +37479,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5e1f33984ed18ae46bd7ae1532d5fcae, type: 2}
+    - target: {fileID: 1041185764608810324, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488452, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -37474,6 +37544,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorScript (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 1041185765406488473, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488475, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: activeOn
@@ -37500,7 +37575,7 @@ GameObject:
   - component: {fileID: 1741623822}
   - component: {fileID: 1741623821}
   - component: {fileID: 1741623820}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38144,6 +38219,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawn (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7586178640257154598, guid: 86bac9d6f132b65439c748db3bbbc513,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86bac9d6f132b65439c748db3bbbc513, type: 3}
 --- !u!4 &1751408697 stripped
@@ -38254,7 +38334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803698729}
   - component: {fileID: 1803698728}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38349,7 +38429,7 @@ GameObject:
   - component: {fileID: 1816511581}
   - component: {fileID: 1816511580}
   - component: {fileID: 1816511579}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (27)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38652,7 +38732,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65456
+  m_Name: pb_Mesh92790
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -38968,6 +39048,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawn (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7586178640257154598, guid: 86bac9d6f132b65439c748db3bbbc513,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86bac9d6f132b65439c748db3bbbc513, type: 3}
 --- !u!1 &1866617124
@@ -38980,7 +39065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1866617126}
   - component: {fileID: 1866617125}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (27)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39421,6 +39506,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5e1f33984ed18ae46bd7ae1532d5fcae, type: 2}
+    - target: {fileID: 1041185764608810324, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488452, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -39480,6 +39570,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DoorScript (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041185765406488473, guid: 945e833824c1e0d4a80e4028063f3d57,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1041185765406488475, guid: 945e833824c1e0d4a80e4028063f3d57,
         type: 3}
@@ -39742,7 +39837,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh65562
+  m_Name: pb_Mesh92858
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -39909,7 +40004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2021455271}
   - component: {fileID: 2021455270}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (61)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40001,7 +40096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2035824164}
   - component: {fileID: 2035824163}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40096,7 +40191,7 @@ GameObject:
   - component: {fileID: 2122074403}
   - component: {fileID: 2122074402}
   - component: {fileID: 2122074401}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

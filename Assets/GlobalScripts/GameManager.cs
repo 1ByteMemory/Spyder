@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// DON NOT REMOVE EITHER OF THESE
-using UnityEditor.SceneManagement; // EDIOTR
+
 using UnityEngine.SceneManagement; // ENGINE
-using UnityEditorInternal;
+
 
 public class GameManager : MonoBehaviour
 {
