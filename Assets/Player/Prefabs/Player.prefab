@@ -287,8 +287,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 150
   playerJumpForce: 800
-  maxJumpTime: 0.3
-  fallMultiplayer: 100
+  fallForce: 100
+  jumpTime: 0.05
+  groundBias: 0.9
   lookSpeed: 5
   fpsCamera: {fileID: 6808830611006798375}
 --- !u!114 &6808830610586471021
