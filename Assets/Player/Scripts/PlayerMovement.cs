@@ -46,14 +46,12 @@ public class PlayerMovement : MonoBehaviour
                 if (isGrounded && jumpHeld)
                 {
                     startTime = Time.time;
-                    Debug.Log("Start Time: " + startTime);
                     isGrounded = false;
                 }
 
                 if (!isGrounded && jumpHeld)
                 {
                     timeSincePressed = Time.time - startTime;
-                    Debug.Log("Time held: " + timeSincePressed);
                 }
 
                 if (jumpHeld && timeSincePressed < maxJumpTime)
@@ -62,13 +60,11 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else if (!jumpHeld && !isGrounded)
                 {
-                    Debug.Log("Down");
                     stop = true;
                     SendDown();
                 }
                 else if (timeSincePressed > maxJumpTime)
                 {
-                    Debug.Log("Down");
                     //isGrounded = true;
                     stop = true;
                     SendDown();
