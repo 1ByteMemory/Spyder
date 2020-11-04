@@ -288,7 +288,7 @@ MonoBehaviour:
   playerSpeed: 150
   playerJumpForce: 800
   fallForce: 100
-  jumpTime: 0.05
+  jumpTime: 0.03
   groundBias: 0.9
   lookSpeed: 5
   fpsCamera: {fileID: 6808830611006798375}

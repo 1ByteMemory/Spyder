@@ -12,7 +12,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Range(0,1)]
     public float groundBias = 0.9f;
-    bool isGrounded;
+    bool isGrounded = false;
+    bool hasDoubleJumped = false;
+    bool isOnWall = false;
 
     public float lookSpeed = 5f;
     
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (!Cursor.visible)
         {
             Move();
@@ -39,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (isGrounded)
 			{
+                hasDoubleJumped = false;
                 if (Input.GetButtonDown("Jump"))
 				{
                     Jump();
@@ -47,16 +51,22 @@ public class PlayerMovement : MonoBehaviour
 			}
 			else
 			{
-                if (rb.velocity.y <= 0.1f)
-				{
-                    rb.AddForce(Vector3.down * fallForce * Time.deltaTime, ForceMode.Impulse);
+                if (!hasDoubleJumped && Input.GetButtonDown("Jump"))
+                {
+                    hasDoubleJumped = true;
+                    Jump();
+					endTime = Time.time + jumpTime;
                 }
-                else if (Time.time < endTime)
+
+                if (Time.time < endTime)
 				{
                     Jump();
 				}
-			}
-
+                else if (rb.velocity.y <= 0.1f)
+				{
+                    rb.AddForce(Vector3.down * fallForce * Time.deltaTime, ForceMode.Impulse);
+                }
+            }
         }
     }
 
@@ -73,8 +83,13 @@ public class PlayerMovement : MonoBehaviour
                 isGrounded = true;
                 break;
 			}
+            else if (dot < 0.2f && dot > -0.2f)
+            {
+                isOnWall = true;
+            }
 			else
 			{
+                isOnWall = false;
                 isGrounded = false;
 			}
 
