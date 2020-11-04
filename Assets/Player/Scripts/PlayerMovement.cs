@@ -7,21 +7,26 @@ public class PlayerMovement : MonoBehaviour
 
     public float playerSpeed = 5f;
     public float playerJumpForce = 1f;
-    public float maxJumpTime = 1;
-    public float fallMultiplayer = 2;
+    public float fallForce = 10;
+    public float jumpTime = 0.5f;
+
+    [Range(0,1)]
+    public float groundBias = 0.9f;
+    [Range(0, 1)]
+    public float wallBias = 0;
+    public CapsuleCollider wallCollider;
+
+    bool isGrounded = false;
+    bool hasDoubleJumped = false;
+    bool isOnWall = false;
+    bool isMove = true;
+    Vector3 wallNormal;
 
     public float lookSpeed = 5f;
     
     public Transform fpsCamera;
     Rigidbody rb;
 
-    float timeSincePressed;
-    bool isGrounded = true;
-
-    float startTime;
-
-    bool jumpHeld;
-    bool stop = false;
 
     // Use this for initialization
     void Start()
@@ -29,81 +34,102 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+
+    float endTime;
     // Update is called once per frame
     void Update()
     {
+        
         if (!Cursor.visible)
         {
-            Move();
+            if (isMove)
+			{
+                Move();
+			}
 
             Look();
 
-            jumpHeld = Input.GetAxisRaw("Jump") != 0;
-
-            if (!stop)
-            {
-
-                if (isGrounded && jumpHeld)
+            if (isGrounded)
+			{
+                hasDoubleJumped = false;
+                if (Input.GetButtonDown("Jump"))
+				{
+                    Jump();
+                    endTime = Time.time + jumpTime;
+				}
+			}
+			else
+			{
+                if (!hasDoubleJumped && Input.GetButtonDown("Jump"))
                 {
-                    startTime = Time.time;
-                    isGrounded = false;
+                    hasDoubleJumped = true;
+                    Jump();
+					endTime = Time.time + jumpTime;
                 }
 
-                if (!isGrounded && jumpHeld)
-                {
-                    timeSincePressed = Time.time - startTime;
-                }
-
-                if (jumpHeld && timeSincePressed < maxJumpTime)
-                {
-                    Jump(maxJumpTime - timeSincePressed);
-                }
-                else if (!jumpHeld && !isGrounded)
-                {
-                    stop = true;
-                    SendDown();
-                }
-                else if (timeSincePressed > maxJumpTime)
-                {
-                    //isGrounded = true;
-                    stop = true;
-                    SendDown();
+                if (Time.time < endTime)
+				{
+                    Jump();
+				}
+                else if (rb.velocity.y <= 0.1f && !isOnWall)
+				{
+                    rb.AddForce(Vector3.down * fallForce * Time.deltaTime, ForceMode.Impulse);
                 }
             }
-            else if (!isGrounded)
-            {
-                SendDown();
+            Debug.Log(isOnWall);
+            if (isOnWall && Input.GetKey(KeyCode.LeftShift))
+			{
+                isMove = false;
+                rb.useGravity = false;
+
+                if (Input.GetButtonDown("Jump"))
+				{
+                    isMove = true;
+                    rb.useGravity = true;
+                    isOnWall = false;
+                    Jump(wallNormal + transform.up);
+				}
+			}
+			else
+			{
+                isMove = true;
+                rb.useGravity = true;
+                isOnWall = false;
             }
         }
     }
-
 
     private void OnCollisionStay(Collision collision)
 	{
 		for (int i = 0; i < collision.contactCount; i++)
 		{
             // we check that the contact point is below the player
-            float dot = Vector3.Dot(-transform.up, collision.GetContact(i).point - (-transform.up)); // We use -transform.up instead of adding for the sake of clarity
-
-            if (dot < 0)
+            float dot = Vector3.Dot(-transform.up, transform.position - collision.GetContact(i).point);
+            
+            if (-dot >= groundBias)
 			{
+                isOnWall = false;
                 isGrounded = true;
-                stop = false;
                 break;
 			}
+            else if (dot < wallBias && dot > -wallBias)
+            {
+                wallNormal = collision.GetContact(i).normal;
+                isOnWall = true;
+                break;
+            }
 			else
 			{
-                //isGrounded = false;
+                isGrounded = false;
 			}
-
 		}
 	}
 
 	private void OnCollisionExit(Collision collision)
 	{
 		isGrounded = false;
-        //stop = true;
 	}
+
 
 	void Move()
     {
@@ -118,17 +144,14 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(transform.TransformDirection(force), ForceMode.Impulse);
     }
 
-    void Jump(float timePassed)
+    void Jump()
 	{
-        //rb.mass = maxJumpTime - timePassed;
-        rb.AddForce(Vector3.up * playerJumpForce * timePassed * Time.deltaTime, ForceMode.Impulse);
-
+        rb.AddForce(Vector3.up * playerJumpForce * Time.deltaTime, ForceMode.Impulse);
 	}
-
-    void SendDown()
-    {
-        rb.AddForce(Vector3.down * fallMultiplayer * Time.deltaTime, ForceMode.Impulse);
-    }
+    void Jump(Vector3 direction)
+	{
+        rb.AddForce(direction * playerJumpForce * 2 * Time.deltaTime, ForceMode.Impulse);
+	}
 
     void Look()
     {
