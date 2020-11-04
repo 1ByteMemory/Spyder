@@ -21,7 +21,7 @@ public class InputFeildChecker : MonoBehaviour
 	private void Start()
 	{
 		c = FindObjectOfType<PlayerMovement>();
-
+		/*
 		switch (property)
 		{
 			case Property.speed:
@@ -31,22 +31,23 @@ public class InputFeildChecker : MonoBehaviour
 				text.text = c.playerJumpForce.ToString();
 				break;
 			case Property.jumpTime:
-				text.text = c.maxJumpTime.ToString();
+				///text.text = c.maxJumpTime.ToString();
 				break;
 			case Property.fall:
-				text.text = c.fallMultiplayer.ToString();
+				///text.text = c.fallMultiplayer.ToString();
 				break;
 			case Property.look:
 				text.text = c.lookSpeed.ToString();
 				break;
 			default:
 				break;
-		}
+		}*/
 	}
 
 
 	public void CheckInput(string number)
 	{
+		/*
 		if (IsDigitsOnly(number))
 		{
 			text.text = number;
@@ -60,10 +61,10 @@ public class InputFeildChecker : MonoBehaviour
 					c.playerJumpForce = float.Parse(number);
 					break;
 				case Property.jumpTime:
-					c.maxJumpTime = float.Parse(number);
+					//c.maxJumpTime = float.Parse(number);
 					break;
 				case Property.fall:
-					c.fallMultiplayer = float.Parse(number);
+					//c.fallMultiplayer = float.Parse(number);
 					break;
 				case Property.look:
 					c.lookSpeed = float.Parse(number);
@@ -75,7 +76,7 @@ public class InputFeildChecker : MonoBehaviour
 		else
 		{
 			text.text = "";
-		}
+		}*/
 	}
 
 

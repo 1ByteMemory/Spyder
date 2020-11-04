@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c5c8ccebbf04c49b81d49787b8968a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 3
+  lifeTime: 1
   ownerTag: 
   layer: 0
   normalDamage: 0
