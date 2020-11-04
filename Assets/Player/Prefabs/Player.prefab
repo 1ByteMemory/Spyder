@@ -290,6 +290,8 @@ MonoBehaviour:
   fallForce: 100
   jumpTime: 0.03
   groundBias: 0.9
+  wallBias: 0.68
+  wallCollider: {fileID: 0}
   lookSpeed: 5
   fpsCamera: {fileID: 6808830611006798375}
 --- !u!114 &6808830610586471021
@@ -383,7 +385,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1 &6808830611006798372
 GameObject:
   m_ObjectHideFlags: 0

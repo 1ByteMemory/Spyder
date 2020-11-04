@@ -12,9 +12,15 @@ public class PlayerMovement : MonoBehaviour
 
     [Range(0,1)]
     public float groundBias = 0.9f;
+    [Range(0, 1)]
+    public float wallBias = 0;
+    public CapsuleCollider wallCollider;
+
     bool isGrounded = false;
     bool hasDoubleJumped = false;
     bool isOnWall = false;
+    bool isMove = true;
+    Vector3 wallNormal;
 
     public float lookSpeed = 5f;
     
@@ -36,7 +42,10 @@ public class PlayerMovement : MonoBehaviour
         
         if (!Cursor.visible)
         {
-            Move();
+            if (isMove)
+			{
+                Move();
+			}
 
             Look();
 
@@ -62,14 +71,33 @@ public class PlayerMovement : MonoBehaviour
 				{
                     Jump();
 				}
-                else if (rb.velocity.y <= 0.1f)
+                else if (rb.velocity.y <= 0.1f && !isOnWall)
 				{
                     rb.AddForce(Vector3.down * fallForce * Time.deltaTime, ForceMode.Impulse);
                 }
             }
+            Debug.Log(isOnWall);
+            if (isOnWall && Input.GetKey(KeyCode.LeftShift))
+			{
+                isMove = false;
+                rb.useGravity = false;
+
+                if (Input.GetButtonDown("Jump"))
+				{
+                    isMove = true;
+                    rb.useGravity = true;
+                    isOnWall = false;
+                    Jump(wallNormal + transform.up);
+				}
+			}
+			else
+			{
+                isMove = true;
+                rb.useGravity = true;
+                isOnWall = false;
+            }
         }
     }
-
 
     private void OnCollisionStay(Collision collision)
 	{
@@ -80,19 +108,20 @@ public class PlayerMovement : MonoBehaviour
             
             if (-dot >= groundBias)
 			{
+                isOnWall = false;
                 isGrounded = true;
                 break;
 			}
-            else if (dot < 0.2f && dot > -0.2f)
+            else if (dot < wallBias && dot > -wallBias)
             {
+                wallNormal = collision.GetContact(i).normal;
                 isOnWall = true;
+                break;
             }
 			else
 			{
-                isOnWall = false;
                 isGrounded = false;
 			}
-
 		}
 	}
 
@@ -100,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		isGrounded = false;
 	}
+
 
 	void Move()
     {
@@ -118,7 +148,10 @@ public class PlayerMovement : MonoBehaviour
 	{
         rb.AddForce(Vector3.up * playerJumpForce * Time.deltaTime, ForceMode.Impulse);
 	}
-
+    void Jump(Vector3 direction)
+	{
+        rb.AddForce(direction * playerJumpForce * 2 * Time.deltaTime, ForceMode.Impulse);
+	}
 
     void Look()
     {
