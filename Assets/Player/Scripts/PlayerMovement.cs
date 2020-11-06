@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public LayerMask layer;
 
     public float playerSpeed = 5f;
     public float playerJumpForce = 1f;
     public float fallForce = 10;
     public float jumpTime = 0.5f;
+    public float jumpBoost = 0.001f;
 
     [Range(0,1)]
     public float groundBias = 0.9f;
@@ -16,9 +18,15 @@ public class PlayerMovement : MonoBehaviour
     public float wallBias = 0;
     public CapsuleCollider wallCollider;
 
-    bool isGrounded = false;
-    bool hasDoubleJumped = false;
-    bool isOnWall = false;
+    [HideInInspector]
+    public int jumps;
+    public int maxJumps = 2;
+	public bool JumpButtonHeld => Input.GetButton("Jump");
+	public bool JumpButtonReleased => Input.GetButtonUp("Jump");
+	public bool JumpButtonOnPress => Input.GetButtonDown("Jump");
+
+	bool isOnWall = false;
+    bool falling = false;
     bool isMove = true;
     Vector3 wallNormal;
 
@@ -32,12 +40,23 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        GroundChecker.layerMask = layer;
     }
 
 
     float endTime;
-    // Update is called once per frame
-    void Update()
+
+
+	private void Update()
+	{
+		if (!Cursor.visible)
+		{
+            Look();
+        }
+	}
+
+	// Update is called once per frame
+	void FixedUpdate()
     {
         
         if (!Cursor.visible)
@@ -47,47 +66,50 @@ public class PlayerMovement : MonoBehaviour
                 Move();
 			}
 
-            Look();
+            Ray ray = new Ray(transform.position, -transform.up);
+            bool isGrounded = GroundChecker.IsGrounded(ray, transform.lossyScale.y / 2 + 0.3f);
+
+            if (isGrounded && !JumpButtonHeld)
+			{
+                jumps = 0;
+			}
 
             if (isGrounded)
-			{
-                hasDoubleJumped = false;
-                if (Input.GetButtonDown("Jump"))
+            {
+                falling = false;
+                if (JumpButtonHeld && jumps == 0)
 				{
+                    jumps++;
                     Jump();
-                    endTime = Time.time + jumpTime;
 				}
-			}
-			else
-			{
-                if (!hasDoubleJumped && Input.GetButtonDown("Jump"))
+            }
+            else
+            {
+                if (jumps < maxJumps && JumpButtonOnPress)
                 {
-                    hasDoubleJumped = true;
+                    falling = false;
+                    jumps++;
                     Jump();
-					endTime = Time.time + jumpTime;
                 }
-
-                if (Time.time < endTime)
-				{
-                    Jump();
-				}
-                else if (rb.velocity.y <= 0.1f && !isOnWall)
-				{
-                    rb.AddForce(Vector3.down * fallForce * Time.deltaTime, ForceMode.Impulse);
+                else if (rb.velocity.y <= -0.2f && !isOnWall && !falling)
+                {
+                    falling = true;
+                    Jump(-transform.up, fallForce);
                 }
             }
-            Debug.Log(isOnWall);
+
             if (isOnWall && Input.GetKey(KeyCode.LeftShift))
 			{
                 isMove = false;
                 rb.useGravity = false;
+                falling = false;
 
-                if (Input.GetButtonDown("Jump"))
+                if (JumpButtonOnPress)
 				{
                     isMove = true;
                     rb.useGravity = true;
                     isOnWall = false;
-                    Jump(wallNormal + transform.up);
+                    Jump(wallNormal + transform.up, 1);
 				}
 			}
 			else
@@ -109,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
             if (-dot >= groundBias)
 			{
                 isOnWall = false;
-                isGrounded = true;
                 break;
 			}
             else if (dot < wallBias && dot > -wallBias)
@@ -118,17 +139,9 @@ public class PlayerMovement : MonoBehaviour
                 isOnWall = true;
                 break;
             }
-			else
-			{
-                isGrounded = false;
-			}
 		}
 	}
 
-	private void OnCollisionExit(Collision collision)
-	{
-		isGrounded = false;
-	}
 
 
 	void Move()
@@ -138,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
         float axisV = Input.GetAxisRaw("Vertical");     // Forward/Backward Input
         float axisH = Input.GetAxisRaw("Horizontal");   // Left/Right Input
 
-        Vector3 force = new Vector3(axisH, 0, axisV).normalized * playerSpeed * Time.deltaTime;
+        Vector3 force = new Vector3(axisH, 0, axisV).normalized * playerSpeed * Time.fixedDeltaTime;
 
         //transform.Translate(new Vector3(axisH, 0, axisV).normalized * playerSpeed * Time.deltaTime);
         rb.AddForce(transform.TransformDirection(force), ForceMode.Impulse);
@@ -146,11 +159,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
 	{
-        rb.AddForce(Vector3.up * playerJumpForce * Time.deltaTime, ForceMode.Impulse);
+        Jump(transform.up, 1);
 	}
-    void Jump(Vector3 direction)
+    void Jump(Vector3 direction, float multiplyer)
 	{
-        rb.AddForce(direction * playerJumpForce * 2 * Time.deltaTime, ForceMode.Impulse);
+        rb.AddForce(direction * playerJumpForce * multiplyer * Time.fixedDeltaTime, ForceMode.Impulse);
 	}
 
     void Look()
@@ -182,5 +195,7 @@ public class PlayerMovement : MonoBehaviour
             fpsCamera.localEulerAngles = new Vector3(look.x, 0);
         }
     }
+
+
 
 }
