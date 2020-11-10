@@ -20,9 +20,13 @@ public class PlayerWeapon : MonoBehaviour
         cam = Camera.main.transform;
     }
 
+	private void OnDrawGizmosSelected()
+	{
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position + transform.forward * 5, weapon.bulletSpreadRadius);
+	}
 
-
-    float endTime;
+	float endTime;
     void Update()
     {
         DisplayAmmo(weapon.Ammo, weapon.Clip);
@@ -40,13 +44,15 @@ public class PlayerWeapon : MonoBehaviour
                 {
                     weapon.Clip--;
 
-                    // Spawn the projectile
-                    GameObject projectile = Instantiate(weapon.projectile, weapon.ProjectileSpawnPoint.position, new Quaternion());
+                    if (weapon.isHitscan)
+					{
+                        HitScan();
+					}
+					else
+					{
+                        FireProjectile(weapon);
+					}
 
-                    projectile.GetComponent<ProjectileDeathTimer>().ownerTag = "Player";
-
-                    // Fire the projectile
-                    weapon.FireProjectile(projectile, cam.forward);
                 }
                 else
                 {
@@ -81,6 +87,21 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+    void FireProjectile(WeaponBehaviour weapon)
+	{
+        // Spawn the projectile
+        GameObject projectile = Instantiate(weapon.projectile, weapon.ProjectileSpawnPoint.position, new Quaternion());
+
+        projectile.GetComponent<ProjectileDeathTimer>().ownerTag = "Player";
+
+        // Fire the projectile
+        weapon.FireProjectile(projectile, cam.forward);
+    }
+
+    void HitScan()
+	{
+
+	}
 
     void DisplayAmmo(int ammo, int clip)
 	{
