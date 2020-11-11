@@ -109,17 +109,24 @@ public class PlayerWeapon : MonoBehaviour
 
     void HitScan()
 	{
-        Ray[] rays = weapon.RayDirections(weapon.BulletSpread(aimOffset, cam), cam);
+        Transform spawnpoint = weapon.ProjectileSpawnPoint;
+        Ray[] rays = weapon.RayDirections(weapon.BulletSpread(aimOffset, spawnpoint), spawnpoint);
 
 		for (int i = 0; i < rays.Length; i++)
 		{
-            RaycastHit hit;
-            if (Physics.Raycast(rays[i], out hit, weapon.range))
+            GameObject trail = Instantiate(weapon.bulletTrail, spawnpoint.position, new Quaternion());
+            trail.transform.rotation = Quaternion.LookRotation(rays[i].direction);
+            trail.GetComponent<BulletTrail>().lifeTime = weapon.range;
+            
+
+			if (Physics.Raycast(rays[i], out RaycastHit hit, weapon.range))
 			{
-                if (hit.transform.GetComponent<Health>())
+                trail.GetComponent<BulletTrail>().lifeTime = hit.distance;
+
+				if (hit.transform.GetComponent<Health>())
 				{
-                    hit.transform.GetComponent<Health>().TakeDamage(weapon.damage);
-                }
+					hit.transform.GetComponent<Health>().TakeDamage(weapon.damage);
+				}
 			}
 		}
 
@@ -130,5 +137,4 @@ public class PlayerWeapon : MonoBehaviour
         if (ammoText != null) ammoText.text = ammo.ToString();
         if (clipText != null) clipText.text = clip.ToString();
 	}
-
 }

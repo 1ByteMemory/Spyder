@@ -326,6 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammoText: {fileID: 0}
   clipText: {fileID: 0}
+  aimOffset: {x: 0, y: 0}
   weapon:
     isHitscan: 0
     name: Cannon
@@ -335,9 +336,13 @@ MonoBehaviour:
     bulletSpreadX: 1
     bulletSpreadY: 1
     bulletsDensity: 0
+    bulletTrail: {fileID: 0}
+    muzzleFlash: {fileID: 0}
+    hitEffect: {fileID: 0}
     fireingTime: 0.3
     projectileShotSpeed: 200
-    projectileLifeTime: 5
+    range: 50
+    damage: 0
     maxAmmo: 9999
     maxClipSize: 12
 --- !u!114 &7283696070113170742

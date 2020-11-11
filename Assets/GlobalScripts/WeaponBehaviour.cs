@@ -19,6 +19,10 @@ public class WeaponBehaviour
     public int bulletSpreadY = 1;
     public float bulletsDensity;
 
+    public GameObject bulletTrail;
+    public GameObject muzzleFlash;
+    public GameObject hitEffect;
+
     /// <summary>
     /// How fast it takes to fire the next shot
     /// </summary>
@@ -156,7 +160,7 @@ public class WeaponBehaviour
 
 		for (int i = 0; i < rays.Length; i++)
 		{
-            rays[i] = new Ray(origin.position, destinationPoints[i] - origin.position);
+            rays[i] = new Ray(origin.position, (destinationPoints[i] - origin.position).normalized);
 		}
         return rays;
     }
