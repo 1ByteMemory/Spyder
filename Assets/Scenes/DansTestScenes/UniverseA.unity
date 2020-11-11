@@ -1640,6 +1640,41 @@ PrefabInstance:
       propertyPath: weapon.hitScanSpreadRadius
       value: 1.12
       objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: weapon.bulletSpreadSize.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: weapon.bulletSpreadSize.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: weapon.bulletsDensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: weapon.bulletSpreadX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: weapon.bulletSpreadY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: aimOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: aimOffset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6808830610586471016, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
       propertyPath: m_LocalPosition.x

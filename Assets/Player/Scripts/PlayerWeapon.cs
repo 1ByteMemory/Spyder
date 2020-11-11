@@ -8,6 +8,7 @@ public class PlayerWeapon : MonoBehaviour
     public Text ammoText;
     public Text clipText;
 
+    public Vector2 aimOffset;
 
     public WeaponBehaviour weapon;
 
@@ -23,8 +24,14 @@ public class PlayerWeapon : MonoBehaviour
 	private void OnDrawGizmosSelected()
 	{
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position + transform.forward * 5, weapon.bulletSpreadRadius);
-	}
+        Vector3[] points = weapon.BulletSpread(aimOffset);
+
+		foreach (Vector3 point in points)
+		{
+            Gizmos.DrawSphere(point + (transform.position + transform.forward * 5), 0.1f);
+		}
+
+    }
 
 	float endTime;
     void Update()

@@ -13,9 +13,11 @@ public class WeaponBehaviour
 
     [Header("")]
 
-    public Vector2 bulletSpreadSize;
     [Min(1)]
-    public int bulletsDensity;
+    public int bulletSpreadX = 1;
+    [Min(1)]
+    public int bulletSpreadY = 1;
+    public float bulletsDensity;
 
     /// <summary>
     /// How fast it takes to fire the next shot
@@ -105,26 +107,29 @@ public class WeaponBehaviour
     }
 
 
-    public Vector3[] BulletSpread()
+    public Vector3[] BulletSpread(Vector2 offset)
 	{
-        Vector3[] directions = new Vector3[bulletsDensity];
-		
-        for (int i = 0; i < bulletSpreadSize.y; i++)
+        Vector3[] directions = new Vector3[bulletSpreadX * bulletSpreadY];
+        Vector2 half = new Vector2();
+
+        half.x = bulletSpreadX == 1 ? 0 : bulletSpreadX * 0.5f - 0.5f;
+        half.y = bulletSpreadY == 1 ? 0 : bulletSpreadY * 0.5f - 0.5f;
+
+
+        Debug.Log(half);
+        int index = 0;
+        for (int y = 0; y < bulletSpreadY; y++)
 		{
-			for (int n = 0; n < bulletSpreadSize.x; n++)
+			for (int x = 0; x < bulletSpreadX; x++)
 			{
-                Vector3 position = new Vector3(bulletSpreadSize.x, bulletSpreadSize.y, 0) * bulletsDensity;
+                Vector3 position = new Vector3(x - half.x, y - half.y, 0) / bulletsDensity;
+                position.x += offset.x;
+                position.y += offset.y;
 
+                directions[index] = position;
+                index++;
 			}
-
-
-
-            directions[i] = position;
-
 		}
-
-
-
         return directions;
 	}
 }
