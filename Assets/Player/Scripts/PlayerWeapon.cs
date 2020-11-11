@@ -24,15 +24,15 @@ public class PlayerWeapon : MonoBehaviour
 	private void OnDrawGizmosSelected()
 	{
         Gizmos.color = Color.green;
-        Vector3[] points = weapon.BulletSpread(aimOffset, transform);
+        Vector3[] points = weapon.BulletSpread(aimOffset, Camera.main.transform);
+        Ray[] rays = weapon.RayDirections(points, Camera.main.transform);
 
-		foreach (Vector3 point in points)
+		for (int i = 0; i < points.Length; i++)
 		{
-            Vector3 position = point;
-            
+            Vector3 position = points[i];
             Gizmos.DrawSphere(position, 0.1f);
+            Gizmos.DrawRay(rays[i]);
 		}
-
     }
 
 	float endTime;
@@ -109,6 +109,19 @@ public class PlayerWeapon : MonoBehaviour
 
     void HitScan()
 	{
+        Ray[] rays = weapon.RayDirections(weapon.BulletSpread(aimOffset, cam), cam);
+
+		for (int i = 0; i < rays.Length; i++)
+		{
+            RaycastHit hit;
+            if (Physics.Raycast(rays[i], out hit, weapon.range))
+			{
+                if (hit.transform.GetComponent<Health>())
+				{
+                    hit.transform.GetComponent<Health>().TakeDamage(weapon.damage);
+                }
+			}
+		}
 
 	}
 

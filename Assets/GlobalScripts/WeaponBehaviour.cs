@@ -32,15 +32,15 @@ public class WeaponBehaviour
     [Tooltip("How fast the projectile fires")]
     public float projectileShotSpeed;
     //public float reloadSpeed;
-    public float projectileLifeTime;
-    
+    public float range;
+    public int damage;
+
     [Header("Ammo")]
     public int maxAmmo;
     public int maxClipSize;
 
     private int _ammo;
     private int _clip;
-	private object rays;
 
 	public int Ammo
 	{
@@ -102,11 +102,17 @@ public class WeaponBehaviour
         ProjectileDeathTimer deathTimer = projectile.GetComponent<ProjectileDeathTimer>();
         if (deathTimer != null)
 		{
-            deathTimer.lifeTime = projectileLifeTime;
+            deathTimer.lifeTime = range;
 		}
     }
 
 
+    /// <summary>
+    /// Returns a set of points local to a transform for raycasting to
+    /// </summary>
+    /// <param name="offset"></param>
+    /// <param name="parent"></param>
+    /// <returns></returns>
     public Vector3[] BulletSpread(Vector2 offset, Transform parent)
 	{
         Vector3[] directions = new Vector3[bulletSpreadX * bulletSpreadY];
@@ -143,4 +149,15 @@ public class WeaponBehaviour
 		}
         return directions;
 	}
+
+    public Ray[] RayDirections(Vector3[] destinationPoints, Transform origin)
+    {
+        Ray[] rays = new Ray[destinationPoints.Length];
+
+		for (int i = 0; i < rays.Length; i++)
+		{
+            rays[i] = new Ray(origin.position, destinationPoints[i] - origin.position);
+		}
+        return rays;
+    }
 }
