@@ -107,24 +107,35 @@ public class WeaponBehaviour
     }
 
 
-    public Vector3[] BulletSpread(Vector2 offset)
+    public Vector3[] BulletSpread(Vector2 offset, Transform parent)
 	{
         Vector3[] directions = new Vector3[bulletSpreadX * bulletSpreadY];
-        Vector2 half = new Vector2();
+		Vector2 half = new Vector2
+		{
+			x = bulletSpreadX == 1 ? 0 : bulletSpreadX * 0.5f - 0.5f,
+			y = bulletSpreadY == 1 ? 0 : bulletSpreadY * 0.5f - 0.5f
+		};
 
-        half.x = bulletSpreadX == 1 ? 0 : bulletSpreadX * 0.5f - 0.5f;
-        half.y = bulletSpreadY == 1 ? 0 : bulletSpreadY * 0.5f - 0.5f;
-
-
-        Debug.Log(half);
         int index = 0;
         for (int y = 0; y < bulletSpreadY; y++)
 		{
 			for (int x = 0; x < bulletSpreadX; x++)
 			{
+                // Get point position
                 Vector3 position = new Vector3(x - half.x, y - half.y, 0) / bulletsDensity;
+
+                // Convert to transforms rotation
+                Quaternion rotation = Quaternion.Euler(parent.eulerAngles);
+                Matrix4x4 m = Matrix4x4.Rotate(rotation);
+                position = m.MultiplyPoint3x4(position);
+
+                // Apply offset
                 position.x += offset.x;
                 position.y += offset.y;
+
+                // Set in front of transform at const distence
+                position += parent.position + parent.forward * 5;
+
 
                 directions[index] = position;
                 index++;

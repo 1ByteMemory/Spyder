@@ -24,11 +24,13 @@ public class PlayerWeapon : MonoBehaviour
 	private void OnDrawGizmosSelected()
 	{
         Gizmos.color = Color.green;
-        Vector3[] points = weapon.BulletSpread(aimOffset);
+        Vector3[] points = weapon.BulletSpread(aimOffset, transform);
 
 		foreach (Vector3 point in points)
 		{
-            Gizmos.DrawSphere(point + (transform.position + transform.forward * 5), 0.1f);
+            Vector3 position = point;
+            
+            Gizmos.DrawSphere(position, 0.1f);
 		}
 
     }
