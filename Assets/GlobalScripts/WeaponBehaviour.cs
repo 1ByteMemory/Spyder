@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType
+{
+    HitScan,
+    Projectile
+}
 
 [System.Serializable]
 public class WeaponBehaviour
 {
-    public bool isHitscan;
     public string name;
+    public WeaponType weaponType;
+    public GameObject gunModel;
     public GameObject projectile;
     public Transform ProjectileSpawnPoint;
 

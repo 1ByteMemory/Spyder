@@ -324,27 +324,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5c79dfaf659364dbe70374a281cb6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeWeapon: 1
   ammoText: {fileID: 0}
   clipText: {fileID: 0}
   aimOffset: {x: 0, y: 0}
-  weapon:
-    isHitscan: 0
-    name: Cannon
-    projectile: {fileID: 8604807226791387282, guid: ec6e260de46e46c47be3b3d6cdf87303,
+  weapons:
+  - name: Shogun
+    weaponType: 0
+    gunModel: {fileID: 130794516041731738, guid: ca14c0db4047049459e4e77e08401051,
       type: 3}
-    ProjectileSpawnPoint: {fileID: 4461220149873880172}
+    projectile: {fileID: 0}
+    ProjectileSpawnPoint: {fileID: 1270949675902316355}
+    bulletSpreadX: 4
+    bulletSpreadY: 3
+    bulletsDensity: 2.19
+    bulletTrail: {fileID: 4731568779583813285, guid: 34d77e04a9a949749bfba76ec44a3ae0,
+      type: 3}
+    muzzleFlash: {fileID: 8206606376656270112, guid: 8571d3049a6453a46b36be6ca54e0a25,
+      type: 3}
+    hitEffect: {fileID: 0}
+    fireingTime: 1
+    projectileShotSpeed: 200
+    range: 10
+    damage: 1
+    maxAmmo: 9999
+    maxClipSize: 10
+  - name: Pistol
+    weaponType: 0
+    gunModel: {fileID: 130794516041731738, guid: 530d33f968f28534881833c92bd126a6,
+      type: 3}
+    projectile: {fileID: 0}
+    ProjectileSpawnPoint: {fileID: 1270949675902316355}
     bulletSpreadX: 1
     bulletSpreadY: 1
-    bulletsDensity: 0
-    bulletTrail: {fileID: 0}
-    muzzleFlash: {fileID: 0}
+    bulletsDensity: 1
+    bulletTrail: {fileID: 4731568779583813285, guid: 34d77e04a9a949749bfba76ec44a3ae0,
+      type: 3}
+    muzzleFlash: {fileID: 8206606376656270112, guid: 8571d3049a6453a46b36be6ca54e0a25,
+      type: 3}
     hitEffect: {fileID: 0}
-    fireingTime: 0.3
-    projectileShotSpeed: 200
-    range: 50
-    damage: 0
+    fireingTime: 0.1
+    projectileShotSpeed: 300
+    range: 10
+    damage: 1
     maxAmmo: 9999
-    maxClipSize: 12
+    maxClipSize: 10
 --- !u!114 &7283696070113170742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,7 +543,7 @@ GameObject:
   m_Layer: 0
   m_Name: ProjectileSpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -531,7 +555,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8158144669915718047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.441, y: -0.178, z: 1.324}
+  m_LocalPosition: {x: 0.252, y: -0.074, z: 0.463}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6808830611006798375}
@@ -546,12 +570,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4461220149873880172}
-  - component: {fileID: 4291366214988192606}
-  - component: {fileID: 539863192351639359}
   m_Layer: 11
   m_Name: Gun
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -569,50 +591,3 @@ Transform:
   m_Father: {fileID: 2169920007493777715}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4291366214988192606
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8844571786665598806}
-  m_Mesh: {fileID: 2941274158721294118, guid: 3391a68d9f7400041be624a701b86b1a, type: 3}
---- !u!23 &539863192351639359
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8844571786665598806}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 66f4bb37b050bad43ad179b081fb1160, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
