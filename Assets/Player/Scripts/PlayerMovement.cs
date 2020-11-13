@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
                     rb.AddForce(Vector3.down * fallForce * Time.deltaTime, ForceMode.Impulse);
                 }
             }
-
+            Debug.Log(isOnWall);
             if (isOnWall && Input.GetKey(KeyCode.LeftShift))
 			{
                 isMove = false;
