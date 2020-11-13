@@ -23,7 +23,6 @@ public class SearchAndDestory : MonoBehaviour
     
 	RaycastHit navHit;
     AgentState agentState;
-	AgentState prevState;
 
 	protected bool isStunned;
 
@@ -89,19 +88,27 @@ public class SearchAndDestory : MonoBehaviour
 
 	protected virtual void TakeAction(AgentState state)
 	{
-		switch (state)
+		if (navMeshAgent.isOnNavMesh)
 		{
-			case AgentState.Idle:
-				Idle();
-				break;
-			case AgentState.Search:
-                Search();
-				break;
-			case AgentState.Attack:
-                Attack();
-				break;
-			default:
-				break;
+
+			switch (state)
+			{
+				case AgentState.Idle:
+					Idle();
+					break;
+				case AgentState.Search:
+					Search();
+					break;
+				case AgentState.Attack:
+					Attack();
+					break;
+				default:
+					break;
+			}
+		}
+		else
+		{
+			Debug.LogError(gameObject.name + " is not on a Nav Mesh!");
 		}
 	}
 
