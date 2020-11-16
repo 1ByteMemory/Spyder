@@ -1715,6 +1715,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: yMouseSensitivity
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: xMouseSensitivity
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: friction
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: airControl
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: sideStrafeSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: runAcceleration
+      value: 20.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: runDeacceleration
+      value: 34.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6808830610586471021, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
       propertyPath: universeLayer1
