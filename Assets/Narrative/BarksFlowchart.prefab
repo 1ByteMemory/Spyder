@@ -99,7 +99,6 @@ GameObject:
   - component: {fileID: 8164216649478313560}
   - component: {fileID: 8164216649478313543}
   - component: {fileID: 8164216649478313542}
-  - component: {fileID: 8164216648590793165}
   - component: {fileID: 8164216648590793166}
   - component: {fileID: 8164216648590793167}
   - component: {fileID: 8164216648590793168}
@@ -151,8 +150,7 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks:
-  - {fileID: 8164216648590793170}
+  selectedBlocks: []
   selectedCommands: []
   variables:
   - {fileID: 8164216649478313610}
@@ -6458,21 +6456,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 92
   indentLevel: 0
---- !u!114 &8164216648590793165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8164216649478313715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f6487d21a03404cb21b245f0242e79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 8164216648590793170}
-  suppressBlockAutoSelect: 0
-  waitForFrames: 1
 --- !u!114 &8164216648590793166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6792,7 +6775,7 @@ MonoBehaviour:
   itemId: 93
   blockName: BarkTimerTrigger
   description: 
-  eventHandler: {fileID: 8164216648590793165}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 8164216648590793169}
   - {fileID: 8164216648590793168}
