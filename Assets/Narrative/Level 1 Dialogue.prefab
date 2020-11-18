@@ -63,7 +63,8 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 5626901651511038232}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 8632693487697479825}
   variables: []
   description: 
   stepPause: 0
@@ -90,7 +91,7 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 748
-    y: 63
+    y: 62
     width: 151
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -117,8 +118,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 959
-    y: 62
+    x: 958
+    y: 63
     width: 126
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -149,12 +150,12 @@ MonoBehaviour:
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
+  voiceOverClip: {fileID: 8300000, guid: c0c8a38bda167a04391728ab1a728b0d, type: 3}
   showAlways: 1
   showCount: 1
   extendPrevious: 0
   fadeWhenDone: 1
-  waitForClick: 1
+  waitForClick: 0
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
@@ -176,12 +177,12 @@ MonoBehaviour:
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
+  voiceOverClip: {fileID: 8300000, guid: c0c8a38bda167a04391728ab1a728b0d, type: 3}
   showAlways: 1
   showCount: 1
   extendPrevious: 0
   fadeWhenDone: 1
-  waitForClick: 1
+  waitForClick: 0
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
@@ -203,12 +204,12 @@ MonoBehaviour:
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
+  voiceOverClip: {fileID: 8300000, guid: c0c8a38bda167a04391728ab1a728b0d, type: 3}
   showAlways: 1
   showCount: 1
   extendPrevious: 0
   fadeWhenDone: 1
-  waitForClick: 1
+  waitForClick: 0
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
@@ -231,12 +232,12 @@ MonoBehaviour:
   description: 
   character: {fileID: 0}
   portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
+  voiceOverClip: {fileID: 8300000, guid: c0c8a38bda167a04391728ab1a728b0d, type: 3}
   showAlways: 1
   showCount: 1
   extendPrevious: 0
   fadeWhenDone: 1
-  waitForClick: 1
+  waitForClick: 0
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
