@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 481389711}
   - component: {fileID: 481389710}
   - component: {fileID: 481389673}
-  - component: {fileID: 481389774}
   m_Layer: 0
   m_Name: BarksFlowchart
   m_TagString: Untagged
@@ -195,7 +194,8 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 8164216648590793170}
   selectedCommands: []
   variables:
   - {fileID: 8164216649478313610}
@@ -228,14 +228,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 1019.40216
-    y: 60.597813
-    width: 81.81818
+    x: 1579.6294
+    y: 14.006905
+    width: 113.63635
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 1
-  blockName: Barks
+  blockName: Barks (Old)
   description: 
   eventHandler: {fileID: 0}
   commandList:
@@ -1725,14 +1725,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 877
-    y: 62
-    width: 97.727264
+    x: 1442.9088
+    y: 13.136364
+    width: 129.54544
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 27
-  blockName: RunBark
+  blockName: RunBark (Old)
   description: 
   eventHandler: {fileID: 0}
   commandList:
@@ -2159,14 +2159,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 736
-    y: 115
-    width: 239.7727
+    x: 751.909
+    y: 100.22732
+    width: 240
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 37
-  blockName: Make sure to activate RunBark ^^
+  blockName: Make sure to activate BarkTimerTrigger ^^
   description: 
   eventHandler: {fileID: 0}
   commandList: []
@@ -6796,8 +6796,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 730.09283
-    y: 184.14667
+    x: 759.63824
+    y: 36.41946
     width: 149.99998
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -6805,7 +6805,7 @@ MonoBehaviour:
   itemId: 93
   blockName: BarkTimerTrigger
   description: 
-  eventHandler: {fileID: 481389774}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 8164216648590793169}
   - {fileID: 8164216648590793168}
@@ -6841,14 +6841,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 995.7467
-    y: 186.01538
-    width: 123.863625
+    x: 929.8374
+    y: 38.288136
+    width: 97.727264
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 99
-  blockName: NewRunBark
+  blockName: RunBark
   description: 
   eventHandler: {fileID: 0}
   commandList:
@@ -12605,18 +12605,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 146
   indentLevel: 0
---- !u!114 &481389774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8164216649478313715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f6487d21a03404cb21b245f0242e79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 8164216648590793170}
-  suppressBlockAutoSelect: 0
-  waitForFrames: 1

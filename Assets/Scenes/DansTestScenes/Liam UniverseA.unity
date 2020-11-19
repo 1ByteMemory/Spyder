@@ -2760,16 +2760,6 @@ PrefabInstance:
       propertyPath: collection.collectionVal
       value: 
       objectReference: {fileID: 912062376}
-    - target: {fileID: 8164216648590793170, guid: d2002a1f8c970c446a95f1cd01fd5ad6,
-        type: 3}
-      propertyPath: nodeRect.x
-      value: 793.7292
-      objectReference: {fileID: 0}
-    - target: {fileID: 8164216648590793170, guid: d2002a1f8c970c446a95f1cd01fd5ad6,
-        type: 3}
-      propertyPath: nodeRect.y
-      value: 183.01035
-      objectReference: {fileID: 0}
     - target: {fileID: 8164216649478313536, guid: d2002a1f8c970c446a95f1cd01fd5ad6,
         type: 3}
       propertyPath: collection.collectionVal
@@ -2879,11 +2869,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BarksFlowchart
-      objectReference: {fileID: 0}
-    - target: {fileID: 8164216649478313718, guid: d2002a1f8c970c446a95f1cd01fd5ad6,
-        type: 3}
-      propertyPath: selectedBlocks.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8164216649478313719, guid: d2002a1f8c970c446a95f1cd01fd5ad6,
         type: 3}
