@@ -306,7 +306,7 @@ Transform:
   m_Children:
   - {fileID: 1296437468}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &275648510
 GameObject:
@@ -456,7 +456,7 @@ PrefabInstance:
     - target: {fileID: 1659801140377113250, guid: 707a781239c90a545a81c3c5ea70961d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1659801140377113250, guid: 707a781239c90a545a81c3c5ea70961d,
         type: 3}
@@ -532,7 +532,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &717424126 stripped
 GameObject:
@@ -597,7 +597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &848086305 stripped
 MonoBehaviour:
@@ -1319,7 +1319,7 @@ Transform:
   - {fileID: 1005438469}
   - {fileID: 1577705589}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1555389047 stripped
 MonoBehaviour:
@@ -1520,8 +1520,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1746582530 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5266832472996366185, guid: a24ad55a70a1c2248a95c0256fb6d260,
+    type: 3}
+  m_PrefabInstance: {fileID: 5266832473667042155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0bbe22c246e4c78ad8e9816cbae9d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1919447138 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4621213540622755638, guid: aff29ad6165efc542bb1c590da0bca92,
@@ -1541,6 +1553,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 430270496326336890, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 1926260757065810595, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 3237324784398067511, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 3342275492967589175, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     - target: {fileID: 3465976376806813656, guid: 36bc1c533af105345bbaf528f75346bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1579,7 +1611,7 @@ PrefabInstance:
     - target: {fileID: 3465976376806813656, guid: 36bc1c533af105345bbaf528f75346bb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3465976376806813656, guid: 36bc1c533af105345bbaf528f75346bb,
         type: 3}
@@ -1596,11 +1628,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3678315858132193474, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 4976003905887125984, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     - target: {fileID: 6385383051194693906, guid: 36bc1c533af105345bbaf528f75346bb,
         type: 3}
       propertyPath: m_Name
       value: Intro Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 6645856461017690962, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 7305951762895133891, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 7530735471854514193, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 8919317744378254116, guid: 36bc1c533af105345bbaf528f75346bb,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36bc1c533af105345bbaf528f75346bb, type: 3}
 --- !u!1001 &565321285661344116
@@ -1610,6 +1672,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 191542247703844944, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 733005382950838766, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 1768341711553908389, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 2929333489394587023, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 4253182815353496867, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 4913681443332802784, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     - target: {fileID: 5184569729897014604, guid: aff29ad6165efc542bb1c590da0bca92,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1648,7 +1740,7 @@ PrefabInstance:
     - target: {fileID: 5184569729897014604, guid: aff29ad6165efc542bb1c590da0bca92,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5184569729897014604, guid: aff29ad6165efc542bb1c590da0bca92,
         type: 3}
@@ -1670,6 +1762,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 5 Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 6579348419521425197, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 7103475735024918732, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 7555824521981605773, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 7632961493725377494, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 8903016992805555558, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 9039667496058790910, guid: aff29ad6165efc542bb1c590da0bca92,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aff29ad6165efc542bb1c590da0bca92, type: 3}
 --- !u!1001 &1018527882933637828
@@ -1722,7 +1844,7 @@ PrefabInstance:
     - target: {fileID: 1018527883949394108, guid: 079aa5ee8e3639241bd70ace46645162,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1018527883949394108, guid: 079aa5ee8e3639241bd70ace46645162,
         type: 3}
@@ -1920,7 +2042,7 @@ PrefabInstance:
     - target: {fileID: 3258640449682161519, guid: 921bdb7b256489d479aad92c522feed4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3258640449682161519, guid: 921bdb7b256489d479aad92c522feed4,
         type: 3}
@@ -1951,6 +2073,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 1 Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 3984893204359002751, guid: 26e3c55ad7c09b248bb511cd852e8182,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     - target: {fileID: 5667435614926306217, guid: 26e3c55ad7c09b248bb511cd852e8182,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1989,7 +2116,7 @@ PrefabInstance:
     - target: {fileID: 5667435614926306217, guid: 26e3c55ad7c09b248bb511cd852e8182,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5667435614926306217, guid: 26e3c55ad7c09b248bb511cd852e8182,
         type: 3}
@@ -2006,6 +2133,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7971534652668198824, guid: 26e3c55ad7c09b248bb511cd852e8182,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 8018148245293491385, guid: 26e3c55ad7c09b248bb511cd852e8182,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 8632693487697479825, guid: 26e3c55ad7c09b248bb511cd852e8182,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26e3c55ad7c09b248bb511cd852e8182, type: 3}
 --- !u!114 &3947056953295278388 stripped
@@ -2119,6 +2261,125 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b956cd20d5c39b408b7141044c7219d, type: 3}
+--- !u!1001 &5266832473667042155
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366184, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266832472996366186, guid: a24ad55a70a1c2248a95c0256fb6d260,
+        type: 3}
+      propertyPath: m_Name
+      value: NoTextBoxSayDialog
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a24ad55a70a1c2248a95c0256fb6d260, type: 3}
 --- !u!1001 &6808830612035357625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2258,7 +2519,7 @@ PrefabInstance:
     - target: {fileID: 1946335233485675848, guid: 39ff4317dc927ec42a52b081816ef9af,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1946335233485675848, guid: 39ff4317dc927ec42a52b081816ef9af,
         type: 3}
@@ -2275,11 +2536,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2592963956791307389, guid: 39ff4317dc927ec42a52b081816ef9af,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 3749044068026766343, guid: 39ff4317dc927ec42a52b081816ef9af,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 5070954279186630580, guid: 39ff4317dc927ec42a52b081816ef9af,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 5636612729557580861, guid: 39ff4317dc927ec42a52b081816ef9af,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     - target: {fileID: 6048490731961415204, guid: 39ff4317dc927ec42a52b081816ef9af,
         type: 3}
       propertyPath: m_Name
       value: Level 2 Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 7935577810820522510, guid: 39ff4317dc927ec42a52b081816ef9af,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39ff4317dc927ec42a52b081816ef9af, type: 3}
 --- !u!1001 &7893381983414196463
@@ -2289,11 +2575,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1224532346317019163, guid: 6d5e767c5988a694e84bde50bd46bbe3,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 1387319573667958491, guid: 6d5e767c5988a694e84bde50bd46bbe3,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 1860000142488894971, guid: 6d5e767c5988a694e84bde50bd46bbe3,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     - target: {fileID: 3226652557021043043, guid: 6d5e767c5988a694e84bde50bd46bbe3,
         type: 3}
       propertyPath: m_Name
       value: Level 4 Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 3394358910470430026, guid: 6d5e767c5988a694e84bde50bd46bbe3,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 5516932278657664632, guid: 6d5e767c5988a694e84bde50bd46bbe3,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 6036875106754605130, guid: 6d5e767c5988a694e84bde50bd46bbe3,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 6136648314631739208, guid: 6d5e767c5988a694e84bde50bd46bbe3,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     - target: {fileID: 7988466843056623881, guid: 6d5e767c5988a694e84bde50bd46bbe3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2332,7 +2653,7 @@ PrefabInstance:
     - target: {fileID: 7988466843056623881, guid: 6d5e767c5988a694e84bde50bd46bbe3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 7988466843056623881, guid: 6d5e767c5988a694e84bde50bd46bbe3,
         type: 3}
@@ -2349,6 +2670,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8018983873386018553, guid: 6d5e767c5988a694e84bde50bd46bbe3,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5e767c5988a694e84bde50bd46bbe3, type: 3}
 --- !u!1001 &8164216648590793160
@@ -2650,7 +2976,7 @@ PrefabInstance:
     - target: {fileID: 1953518147819829399, guid: 4431e899ad86c474ea50a26de03fd18d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1953518147819829399, guid: 4431e899ad86c474ea50a26de03fd18d,
         type: 3}
@@ -2672,6 +2998,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level 3 Dialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 3844830951067898352, guid: 4431e899ad86c474ea50a26de03fd18d,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 6929093899595212983, guid: 4431e899ad86c474ea50a26de03fd18d,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
+    - target: {fileID: 9012199771066299791, guid: 4431e899ad86c474ea50a26de03fd18d,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 1746582530}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4431e899ad86c474ea50a26de03fd18d, type: 3}
 --- !u!1001 &8720969391240689188
