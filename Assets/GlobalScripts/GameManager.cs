@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	public bool addScene;
 	bool isLoaded;
 	public string sceneToLoad;
-
+	public bool loadEnemies = true;
 
 	[Header("")]
 	public GameObject SettingsUI;
@@ -30,6 +30,16 @@ public class GameManager : MonoBehaviour
 		if (SettingsUI != null)
 		{
 			SettingsUI.SetActive(false);
+		}
+
+		if (!loadEnemies)
+		{
+			Debug.LogError("All enemies have been disabled. To enable them, go to _GameManager and set Load Enemies to true.");
+			GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+			foreach (GameObject enemy in enemies)
+			{
+				enemy.SetActive(false);
+			}
 		}
 	}
 

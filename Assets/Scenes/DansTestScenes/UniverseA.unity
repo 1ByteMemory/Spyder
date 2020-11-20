@@ -421,7 +421,7 @@ PrefabInstance:
     - target: {fileID: 1659801140377113250, guid: 707a781239c90a545a81c3c5ea70961d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.043163
+      value: -25.6
       objectReference: {fileID: 0}
     - target: {fileID: 1659801140377113250, guid: 707a781239c90a545a81c3c5ea70961d,
         type: 3}
@@ -431,7 +431,7 @@ PrefabInstance:
     - target: {fileID: 1659801140377113250, guid: 707a781239c90a545a81c3c5ea70961d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.038295
+      value: 11.84
       objectReference: {fileID: 0}
     - target: {fileID: 1659801140377113250, guid: 707a781239c90a545a81c3c5ea70961d,
         type: 3}
@@ -486,7 +486,7 @@ PrefabInstance:
     - target: {fileID: 1659801140377113263, guid: 707a781239c90a545a81c3c5ea70961d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 707a781239c90a545a81c3c5ea70961d, type: 3}
@@ -1407,6 +1407,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2903384469088868407, guid: 4f9dc7c70f63c10478734714d3c54543,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2903384469370993399, guid: 4f9dc7c70f63c10478734714d3c54543,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1416,6 +1421,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerHUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 2903384469483961456, guid: 4f9dc7c70f63c10478734714d3c54543,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2903384469483961468, guid: 4f9dc7c70f63c10478734714d3c54543,
         type: 3}
@@ -1630,20 +1640,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: weapon.hitScanSpreadRadius
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: weapon.bulletSpreadSize.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: weapon.bulletSpreadSize.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3682504537575836387, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: weapons.Array.data[0].isHitscan
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6808830610586471016, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.66
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6808830610586471016, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.94
+      value: 2.04
       objectReference: {fileID: 0}
     - target: {fileID: 6808830610586471016, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.92
+      value: -5.25
       objectReference: {fileID: 0}
     - target: {fileID: 6808830610586471016, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
@@ -1833,6 +1863,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerSettingsUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720969390859203546, guid: d12682c312290e74fa9b007930e3583c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d12682c312290e74fa9b007930e3583c, type: 3}
