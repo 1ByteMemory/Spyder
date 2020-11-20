@@ -2,13 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType
+{
+    HitScan,
+    Projectile
+}
 
 [System.Serializable]
 public class WeaponBehaviour
 {
     public string name;
+    public WeaponType weaponType;
+    public GameObject gunModel;
     public GameObject projectile;
     public Transform ProjectileSpawnPoint;
+
+    [Header("")]
+
+    [Min(1)]
+    public int bulletSpreadX = 1;
+    [Min(1)]
+    public int bulletSpreadY = 1;
+    public float bulletsDensity;
+
+    public GameObject bulletTrail;
+    public GameObject muzzleFlash;
+    public GameObject hitEffect;
 
     /// <summary>
     /// How fast it takes to fire the next shot
@@ -16,19 +35,24 @@ public class WeaponBehaviour
     [Tooltip("How fast it takes to fire the next shot")]
     public float fireingTime;
 
+    [Header("Projectile")]
     /// <summary>
     /// How fast the projectile fires
     /// </summary>
     [Tooltip("How fast the projectile fires")]
     public float projectileShotSpeed;
     //public float reloadSpeed;
+    public float range;
+    public int damage;
+
+    [Header("Ammo")]
     public int maxAmmo;
     public int maxClipSize;
 
     private int _ammo;
     private int _clip;
 
-    public int Ammo
+	public int Ammo
 	{
         get { return _ammo; }
         set	{ _ammo = value >= 0 ? value : 0; }
@@ -40,7 +64,7 @@ public class WeaponBehaviour
         set { _clip = value >= 0 ? value : 0; }
 
     }
-    public float projectileLifeTime;
+
 
     /// <summary>
     /// Refill ammo and clip to the maximum amount
@@ -88,8 +112,62 @@ public class WeaponBehaviour
         ProjectileDeathTimer deathTimer = projectile.GetComponent<ProjectileDeathTimer>();
         if (deathTimer != null)
 		{
-            deathTimer.lifeTime = projectileLifeTime;
+            deathTimer.lifeTime = range;
 		}
     }
 
+
+    /// <summary>
+    /// Returns a set of points local to a transform for raycasting to
+    /// </summary>
+    /// <param name="offset"></param>
+    /// <param name="parent"></param>
+    /// <returns></returns>
+    public Vector3[] BulletSpread(Vector2 offset, Transform parent)
+	{
+        Vector3[] directions = new Vector3[bulletSpreadX * bulletSpreadY];
+		Vector2 half = new Vector2
+		{
+			x = bulletSpreadX == 1 ? 0 : bulletSpreadX * 0.5f - 0.5f,
+			y = bulletSpreadY == 1 ? 0 : bulletSpreadY * 0.5f - 0.5f
+		};
+
+        int index = 0;
+        for (int y = 0; y < bulletSpreadY; y++)
+		{
+			for (int x = 0; x < bulletSpreadX; x++)
+			{
+                // Get point position
+                Vector3 position = new Vector3(x - half.x, y - half.y, 0) / bulletsDensity;
+
+                // Convert to transforms rotation
+                Quaternion rotation = Quaternion.Euler(parent.eulerAngles);
+                Matrix4x4 m = Matrix4x4.Rotate(rotation);
+                position = m.MultiplyPoint3x4(position);
+
+                // Apply offset
+                position.x += offset.x;
+                position.y += offset.y;
+
+                // Set in front of transform at const distence
+                position += parent.position + parent.forward * 5;
+
+
+                directions[index] = position;
+                index++;
+			}
+		}
+        return directions;
+	}
+
+    public Ray[] RayDirections(Vector3[] destinationPoints, Transform origin)
+    {
+        Ray[] rays = new Ray[destinationPoints.Length];
+
+		for (int i = 0; i < rays.Length; i++)
+		{
+            rays[i] = new Ray(origin.position, (destinationPoints[i] - origin.position).normalized);
+		}
+        return rays;
+    }
 }
