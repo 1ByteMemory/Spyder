@@ -5,13 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    static int currentDimension;
+    public static int currentDimension;
 
 	public float coolDown = 0.5f;
 
     public Material materialA;
     public Material materialB;
 
+	public Material realEffect;
+	public Material digitalEffect;
+	SannerEffect scanner;
 
     public GameObject triggerDetector;
     bool isInWall;
@@ -26,6 +29,8 @@ public class PlayerController : MonoBehaviour
 	{
 		return currentDimension == 0 ? layerA : layerB;
 	}
+
+	
 
 	private void Start()
 	{
@@ -46,6 +51,9 @@ public class PlayerController : MonoBehaviour
 
 		materialB.SetColor("_Color", col);
 		// <<<<<<<<<<<<<<     >>>>>>>>>>> //
+
+		scanner = GetComponentInChildren<SannerEffect>();
+
 	}
 
 
@@ -74,7 +82,8 @@ public class PlayerController : MonoBehaviour
 				materialB.SetColor("_Color", col);
 				// <<<<<<<<<<<<<<     >>>>>>>>>>> //
 
-
+				scanner.EffectMaterial = realEffect;
+				scanner.Scan();
 			}
 			else
 			{
@@ -93,7 +102,10 @@ public class PlayerController : MonoBehaviour
                 col.a = 1f;
 
                 materialB.SetColor("_Color", col);
-                // <<<<<<<<<<<<<<     >>>>>>>>>>> //
+				// <<<<<<<<<<<<<<     >>>>>>>>>>> //
+
+				scanner.EffectMaterial = digitalEffect;
+				scanner.Scan();
             }
         }
     }
