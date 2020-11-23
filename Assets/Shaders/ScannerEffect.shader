@@ -75,8 +75,8 @@ Shader "Custom/ScannerEffect"
 			float4 _HBarColor;
 
 			float4 horizBars(float2 p)
-			{
-				return 1 - saturate(round(abs(frac(p.x * 100) * 2)));
+			{	
+				return (1 - saturate(round(abs(frac(p.x * 100) * 2)))) + (1 - saturate(round(abs(frac(p.y * 100) * 2))));
 			}
 
 			float4 horizTex(float2 p)

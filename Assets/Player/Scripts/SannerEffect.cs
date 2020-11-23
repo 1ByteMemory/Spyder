@@ -7,7 +7,11 @@ public class SannerEffect : MonoBehaviour
 {
 	public Transform ScannerOrigin;
 	public Material EffectMaterial;
+
+
+
 	public float ScanDistance;
+	public float scanSpeed = 100;
 
 	private Camera _camera;
 
@@ -24,18 +28,23 @@ public class SannerEffect : MonoBehaviour
 	{
 		if (_scanning)
 		{
-			ScanDistance += Time.deltaTime * 50;
+			// Increase scanner radius
+			ScanDistance += Time.deltaTime * scanSpeed;
+
+			// prevent the numbers from getting too high
+			if (ScanDistance >= 500)
+			{
+				ScanDistance = 0;
+				_scanning = false;
+			}
+			
+
+			// for pings to appear
 			foreach (Scannable s in _scannables)
 			{
 				if (Vector3.Distance(ScannerOrigin.position, s.transform.position) <= ScanDistance)
 					s.Ping();
 			}
-		}
-
-		if (Input.GetKeyDown(KeyCode.C))
-		{
-			_scanning = true;
-			ScanDistance = 0;
 		}
 
 		if (Input.GetMouseButtonDown(0))
@@ -45,9 +54,7 @@ public class SannerEffect : MonoBehaviour
 
 			if (Physics.Raycast(ray, out hit))
 			{
-				_scanning = true;
-				ScanDistance = 0;
-				ScannerOrigin.position = hit.point;
+				//Scan(hit.point);
 			}
 		}
 	}
@@ -58,6 +65,19 @@ public class SannerEffect : MonoBehaviour
 		_camera = GetComponent<Camera>();
 		_camera.depthTextureMode = DepthTextureMode.Depth;
 	}
+
+	public void Scan()
+	{
+		_scanning = true;
+		ScanDistance = 0;
+	}
+	public void Scan(Vector3 position)
+	{
+		_scanning = true;
+		ScanDistance = 0;
+		ScannerOrigin.position = position;
+	}
+
 
 	[ImageEffectOpaque]
 	void OnRenderImage(RenderTexture src, RenderTexture dst)
