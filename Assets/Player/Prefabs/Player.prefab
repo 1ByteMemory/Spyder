@@ -32,6 +32,36 @@ Transform:
   m_Father: {fileID: 6808830611006798375}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5602213967657973049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2012813232706640525}
+  m_Layer: 0
+  m_Name: ScannerOrigiin
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2012813232706640525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5602213967657973049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6808830610586471016}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6532164225303208852
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +177,7 @@ GameObject:
   - component: {fileID: 6808830610361278410}
   - component: {fileID: 6808830610361278411}
   - component: {fileID: 6808830610361278408}
+  - component: {fileID: 6526146437068683538}
   m_Layer: 10
   m_Name: CamA
   m_TagString: MainCamera
@@ -219,6 +250,22 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6808830610361278409}
   m_Enabled: 1
+--- !u!114 &6526146437068683538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808830610361278409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf3802a19d40a4a4793346507e779cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScannerOrigin: {fileID: 2012813232706640525}
+  EffectMaterial: {fileID: 2100000, guid: 8ddf3690dce2eba4fbc856adf4bb0b3e, type: 2}
+  ScanDistance: 0
+  scanSpeed: 150
 --- !u!1 &6808830610586471030
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +303,7 @@ Transform:
   - {fileID: 663708884074824330}
   - {fileID: 6808830611006798375}
   - {fileID: 6808830611910207520}
+  - {fileID: 2012813232706640525}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -370,6 +418,8 @@ MonoBehaviour:
   coolDown: 0.5
   materialA: {fileID: 2100000, guid: 4ad06878f30e4e941af3558e6ab88216, type: 2}
   materialB: {fileID: 2100000, guid: 5e1f33984ed18ae46bd7ae1532d5fcae, type: 2}
+  realEffect: {fileID: 2100000, guid: c8dd3e7e4d5434842ba97351f5f2e075, type: 2}
+  digitalEffect: {fileID: 2100000, guid: 8ddf3690dce2eba4fbc856adf4bb0b3e, type: 2}
   triggerDetector: {fileID: 6532164225303208852}
   universeLayer1: 8
   universeLayer2: 9
