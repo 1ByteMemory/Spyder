@@ -2,34 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
-public class SannerEffect : MonoBehaviour
+public class DimensionEffect : MonoBehaviour
 {
-	public Transform ScannerOrigin;
-	public Material EffectMaterial;
+	Transform ScannerOrigin;
+	Material EffectMaterial;
+	ScannerEffect scannerEffect;
 
+	public Material inactiveDimensionMaterial;
+	public Material activeDimensionMaterial;
+	Material activeMat;
 
+	public Dimension camDimension;
 
-	public float ScanDistance;
-	public float scanSpeed = 100;
+	float ScanDistance;
+	float scanSpeed = 100;
 
 	private Camera _camera;
 
 	// Demo Code
 	bool _scanning;
-	Scannable[] _scannables;
 
-	void Start()
-	{
-		_scannables = FindObjectsOfType<Scannable>();
-	}
 
 	void Update()
 	{
+		_scanning = scannerEffect._scanning;
+
+		if (camDimension == GameManager.currentActiveDimension)
+		{
+			activeMat = inactiveDimensionMaterial;
+		}
+		else
+		{
+			activeMat = activeDimensionMaterial;
+		}
+
 		if (_scanning)
 		{
-			// Increase scanner radius
-			ScanDistance += Time.deltaTime * scanSpeed;
+			ScanDistance = scannerEffect.ScanDistance;
+			scanSpeed = scannerEffect.scanSpeed;
 
 			// prevent the numbers from getting too high
 			if (ScanDistance >= 500)
@@ -37,56 +47,34 @@ public class SannerEffect : MonoBehaviour
 				ScanDistance = 0;
 				_scanning = false;
 			}
-			
-
-			// for pings to appear
-			foreach (Scannable s in _scannables)
-			{
-				if (Vector3.Distance(ScannerOrigin.position, s.transform.position) <= ScanDistance)
-					s.Ping();
-			}
-		}
-
-		if (Input.GetMouseButtonDown(0))
-		{
-			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-
-			if (Physics.Raycast(ray, out hit))
-			{
-				//Scan(hit.point);
-			}
 		}
 	}
 	// End Demo Code
 
 	void OnEnable()
 	{
+		scannerEffect = Camera.main.GetComponent<ScannerEffect>();
+		ScannerOrigin = scannerEffect.ScannerOrigin;
+
+
 		_camera = GetComponent<Camera>();
 		_camera.depthTextureMode = DepthTextureMode.Depth;
 	}
 
-	public void Scan()
-	{
-		_scanning = true;
-		ScanDistance = 0;
-	}
-	public void Scan(Vector3 position)
-	{
-		_scanning = true;
-		ScanDistance = 0;
-		ScannerOrigin.position = position;
-	}
-
-
+	
 	[ImageEffectOpaque]
 	void OnRenderImage(RenderTexture src, RenderTexture dst)
 	{
-		EffectMaterial.SetVector("_WorldSpaceScannerPos", ScannerOrigin.position);
-		EffectMaterial.SetFloat("_ScanDistance", ScanDistance);
-		RaycastCornerBlit(src, dst, EffectMaterial);
+		//EffectMaterial.SetVector("_WorldSpaceScannerPos", ScannerOrigin.position);
+		//EffectMaterial.SetFloat("_ScanDistance", ScanDistance);
+		
+		if (activeMat != null)
+		{
+			RaycastCornerBlit(src, dst, activeMat);
+		}
+		
 	}
-
+	
 	void RaycastCornerBlit(RenderTexture source, RenderTexture dest, Material mat)
 	{
 		// Compute Frustum Corners
@@ -148,5 +136,4 @@ public class SannerEffect : MonoBehaviour
 		GL.End();
 		GL.PopMatrix();
 	}
-
 }

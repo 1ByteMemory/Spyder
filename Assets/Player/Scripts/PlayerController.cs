@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
 	public Material realEffect;
 	public Material digitalEffect;
-	SannerEffect scanner;
+	ScannerEffect scanner;
 
     public GameObject triggerDetector;
     bool isInWall;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
         triggerDetector.layer = 0;
 
-		scanner = GetComponentInChildren<SannerEffect>();
+		scanner = GetComponentInChildren<ScannerEffect>();
 
 	}
 

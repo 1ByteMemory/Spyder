@@ -30,28 +30,31 @@ public class GameManager : MonoBehaviour
 	public GameObject realWorldObjects;
 	public GameObject digitalWorldObjects;
 
-	GameObject player;
-
-	private void Awake()
-	{
-		//SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
-	}
+	public Camera mainCam;
+	public DimensionEffect digtalCam;
+	public DimensionEffect realCam;
 
 
 	private void Start()
 	{
 		SetMouseActive(false);
 
-		player = GameObject.FindGameObjectWithTag("Player");
-
-		// Asign objects to layers
-		for (int i = 0; i < realWorldObjects.transform.childCount; i++)
+		if (realWorldObjects != null)
 		{
-			realWorldObjects.transform.GetChild(i).gameObject.layer = 9; // the real world layer
+			// Asign objects to layers
+			for (int i = 0; i < realWorldObjects.transform.childCount; i++)
+			{
+				realWorldObjects.transform.GetChild(i).gameObject.layer = 9; // the real world layer
+			}
 		}
-		for (int i = 0; i < digitalWorldObjects.transform.childCount; i++)
+
+
+		if (digitalWorldObjects != null)
 		{
-			digitalWorldObjects.transform.GetChild(i).gameObject.layer = 8; // the digital layer
+			for (int i = 0; i < digitalWorldObjects.transform.childCount; i++)
+			{
+				digitalWorldObjects.transform.GetChild(i).gameObject.layer = 8; // the digital layer
+			}
 		}
 
 
@@ -128,6 +131,10 @@ public class GameManager : MonoBehaviour
 		Physics.IgnoreLayerCollision(10, collideLayer, false); // false - do not ignore these collisions
 
 		activeLayer = collideLayer;
+
+		Debug.Log(mainCam.cullingMask);
+		
+	
 	}
 
 	void SetMouseActive(bool value)
