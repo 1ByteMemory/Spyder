@@ -3,11 +3,22 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _EdgeColor("XRay Edge Color", Color) = (1,0,0,0)
     }
     SubShader
     {
-        // No culling or depth
-        Cull Off ZWrite Off ZTest Always
+		Tags
+		{
+			"Queue" = "Transparent"
+			"RenderType" = "Transparent"
+            //"RenderType" = "Opaque"
+			"XRay" = "ColoredOutline"
+		}
+
+        //Cull Off
+    	//ZWrite Off
+		//ZTest Always
+		//Blend One One
 
         Pass
         {
@@ -38,12 +49,13 @@
             }
 
             sampler2D _MainTex;
+            fixed4 _EdgeColor;
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, i.uv) * _EdgeColor;
                 // just invert the colors
-                col.rgb = 1 - col.rgb;
+                //col.rgb = 1 - col.rgb;
                 return col;
             }
             ENDCG
