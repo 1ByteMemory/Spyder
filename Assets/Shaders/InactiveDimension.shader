@@ -49,7 +49,7 @@
             }
 
             sampler2D _MainTex;
-            fixed4 _EdgeColor;
+            fixed4 _Color;
 
             fixed4 frag (v2f i) : SV_Target
             {

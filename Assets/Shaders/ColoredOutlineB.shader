@@ -18,16 +18,17 @@ Shader "Custom/ColoredOutlineB"
 			"Switchable" = "B"
 		}
 
+		
 		Stencil
 		{
-			Ref 1
-			Comp Always
-			Pass Replace
+			Ref 0
+			Comp NotEqual
+			Pass keep
 		}
 
-		//ZWrite Off
-		//ZTest Always
-		//Blend One One
+		ZWrite Off
+		ZTest Always
+		Blend One One
 
 		Pass
 		{
@@ -69,7 +70,8 @@ Shader "Custom/ColoredOutlineB"
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float NdotV = 1 - dot(i.normal, i.viewDir) * 1.5;
-				return _EdgeColor * NdotV;
+				return _EdgeColor;
+				//return _EdgeColor * NdotV;
 			}
 
 			ENDCG
