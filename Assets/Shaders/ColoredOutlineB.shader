@@ -1,7 +1,7 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "XRay Shaders/ColoredOutline"
+Shader "Custom/ColoredOutlineB"
 {
 	Properties
 	{
@@ -10,23 +10,24 @@ Shader "XRay Shaders/ColoredOutline"
 
 	SubShader
 	{
-		Stencil
-		{
-			Ref 0
-			Comp NotEqual
-			Pass keep
-		}
 
 		Tags
 		{
 			"Queue" = "Transparent"
 			"RenderType" = "Transparent"
-			"XRay" = "ColoredOutline"
+			"Switchable" = "B"
 		}
 
-		ZWrite Off
-		ZTest Always
-		Blend SrcAlpha OneMinusSrcAlpha
+		Stencil
+		{
+			Ref 1
+			Comp Always
+			Pass Replace
+		}
+
+		//ZWrite Off
+		//ZTest Always
+		//Blend One One
 
 		Pass
 		{

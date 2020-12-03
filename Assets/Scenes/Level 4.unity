@@ -127,7 +127,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh14798
+  m_Name: pb_Mesh17790
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12912,95 +12912,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1765933224572598470, guid: 43e840c0725b45845a4b3b05c1121c56,
+    - target: {fileID: 4010893674030396105, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
-      propertyPath: m_ClearFlags
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765933224572598470, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_Depth
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765933224572598470, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765933224572598470, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765933224572598470, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765933224572598470, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1765933224572598470, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260310444370953696, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260310444370953696, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_Depth
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260310444370953696, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260310444370953696, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260310444370953696, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260310444370953696, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260310444370953696, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6526146437068683538, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
       propertyPath: scanSpeed
       value: 125
-      objectReference: {fileID: 0}
-    - target: {fileID: 6808830610361278409, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_Name
-      value: MainCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 6808830610361278411, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 1079
-      objectReference: {fileID: 0}
-    - target: {fileID: 6808830610361278411, guid: 43e840c0725b45845a4b3b05c1121c56,
-        type: 3}
-      propertyPath: m_Depth
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6808830610586471016, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}

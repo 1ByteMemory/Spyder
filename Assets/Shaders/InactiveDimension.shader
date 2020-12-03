@@ -3,7 +3,7 @@
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _EdgeColor("XRay Edge Color", Color) = (1,0,0,0)
+        _Color("XRay Edge Color", Color) = (1,0,0,0)
     }
     SubShader
     {
@@ -12,7 +12,7 @@
 			"Queue" = "Transparent"
 			"RenderType" = "Transparent"
             //"RenderType" = "Opaque"
-			"XRay" = "ColoredOutline"
+			"Switchable" = "true"
 		}
 
         //Cull Off
@@ -53,7 +53,7 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv) * _EdgeColor;
+                fixed4 col = tex2D(_MainTex, i.uv) * _Color;
                 // just invert the colors
                 //col.rgb = 1 - col.rgb;
                 return col;

@@ -10,14 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6983990748169424763}
   - component: {fileID: 1765933224572598470}
-  - component: {fileID: 6029506895930931850}
+  - component: {fileID: 4074046145890409323}
   m_Layer: 10
   m_Name: DigitalWorldCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6983990748169424763
 Transform:
   m_ObjectHideFlags: 0
@@ -41,7 +41,7 @@ Camera:
   m_GameObject: {fileID: 461234788184491697}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -63,7 +63,7 @@ Camera:
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -75,7 +75,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &6029506895930931850
+--- !u!114 &4074046145890409323
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,11 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ad1da0274294c4bbfbd456199845f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inactiveDimensionMaterial: {fileID: 2100000, guid: 7ebbfbbca52ac8c44a6d9acd379488b9,
-    type: 2}
-  activeDimensionMaterial: {fileID: 2100000, guid: 0e203267ffbf32741904c1eeb0d55120,
-    type: 2}
-  camDimension: 0
+  inactiveShader: {fileID: 4800000, guid: b641243254650e1468f1ae1edbd5547d, type: 3}
 --- !u!1 &803962575408997417
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,14 +98,14 @@ GameObject:
   m_Component:
   - component: {fileID: 9040100093398668786}
   - component: {fileID: 4260310444370953696}
-  - component: {fileID: 4010893674030396105}
+  - component: {fileID: 6189168280067409468}
   m_Layer: 10
   m_Name: RealWorldCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9040100093398668786
 Transform:
   m_ObjectHideFlags: 0
@@ -133,7 +129,7 @@ Camera:
   m_GameObject: {fileID: 803962575408997417}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -155,7 +151,7 @@ Camera:
   m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -167,7 +163,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &4010893674030396105
+--- !u!114 &6189168280067409468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,11 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ad1da0274294c4bbfbd456199845f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inactiveDimensionMaterial: {fileID: 2100000, guid: 7ebbfbbca52ac8c44a6d9acd379488b9,
-    type: 2}
-  activeDimensionMaterial: {fileID: 2100000, guid: 0e203267ffbf32741904c1eeb0d55120,
-    type: 2}
-  camDimension: 1
+  inactiveShader: {fileID: 4800000, guid: ffb57f77504d1d24eb8c21861da7f082, type: 3}
 --- !u!1 &2534765294646136419
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +409,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1079
+    m_Bits: 5943
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

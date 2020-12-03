@@ -31,13 +31,16 @@ public class GameManager : MonoBehaviour
 	public GameObject digitalWorldObjects;
 
 	public Camera mainCam;
-	public DimensionEffect digtalCam;
-	public DimensionEffect realCam;
 
+	GameObject digitalCam;
+	GameObject realCam;
 
 	private void Start()
 	{
 		SetMouseActive(false);
+
+		realCam = mainCam.transform.GetChild(0).gameObject;
+		digitalCam = mainCam.transform.GetChild(1).gameObject;
 
 		if (realWorldObjects != null)
 		{
@@ -111,18 +114,24 @@ public class GameManager : MonoBehaviour
 
 			if (dimension == Dimension.Digital)
 			{
+				digitalCam.SetActive(false);
+				realCam.SetActive(true);
+
 				// ignore collisions from real world
 				IgnoreLayer(9, 8); 
-
 			}
 			else if (dimension == Dimension.Real)
 			{
+
+				digitalCam.SetActive(true);
+				realCam.SetActive(false);
+
+
 				// ignore collisions from digital world
 				IgnoreLayer(8, 9);
 			}
 		}
 	}
-
 
 	void IgnoreLayer(int ignoreLayer, int collideLayer)
 	{
