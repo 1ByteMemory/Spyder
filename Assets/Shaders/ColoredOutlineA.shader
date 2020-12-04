@@ -1,81 +1,79 @@
-﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
-// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
-Shader "Custom/ColoredOutlineA"
+﻿Shader "Custom/ColoredOutlineA"
 {
 	Properties
 	{
 		_EdgeColor("Edge Color", Color) = (1,1,1,1)
+		_Strength("EdgeStrength", Float) = 1
+
+		_CellSize("Cell Size", Range(0,2)) = 2
+		_CellOffset("Cell Offset", Float) = 1
 	}
 
 	SubShader
 	{
-
 		Tags
 		{
 			"Queue" = "Transparent"
 			"RenderType" = "Transparent"
 			"Switchable" = "A"
 		}
+		LOD 200
 
-		
 		Stencil
 		{
 			Ref 0
 			Comp Always
-			//Pass Replace
-			//ZFail 
 		}
-		
-		//ZWrite Off
-		//ZTest Always
-		//Blend One One
 
-		Pass
+		CGPROGRAM
+
+		#pragma target 3.0
+		#pragma surface surf Standard fullforwardshadows
+
+		#include "RandomGenerator.cginc"
+
+		struct Input
 		{
-
-			CGPROGRAM
-
-			#pragma vertex vert
-			#pragma fragment frag
+			float3 worldPos;
+		};
 			
-			#include "UnityCG.cginc"
+		float _CellSize;
+		float _CellOffset;
 
-			struct appdata
-			{
-				float4 vertex : POSITION;
-				float2 uv : TEXCOORD0;
-				float3 normal : NORMAL;
-			};
+		float voronoiNoise(float2 value)
+		{
+			float2 baseCell = floor(value);
 
-			struct v2f
+			float minDistToCell = 10;
+			float2 closestCell;
+			[unroll]
+			for	(int x = -1; x <= 1; x++)
 			{
-				float2 uv : TEXCOORD0;
-				float4 vertex : SV_POSITION;
-				float3 normal : NORMAL;
-				float3 viewDir : TEXCOORD1;
-			};
-
-			v2f vert (appdata v)
-			{
-				v2f o;
-				o.vertex = UnityObjectToClipPos(v.vertex);
-				o.uv = v.uv;
-				o.normal = UnityObjectToWorldNormal(v.normal);
-				o.viewDir = normalize(_WorldSpaceCameraPos.xyz - mul(unity_ObjectToWorld, v.vertex).xyz);
-				return o;
+				[unroll]
+				for (int y = -1; y <= 1; y++)
+				{
+					float2 cell = baseCell + float2(x, y);
+					float2 cellPosition = cell + rand2dTo2d(cell);
+					float2 toCell = cellPosition - value;
+					float distToCell = length(toCell);
+					if (distToCell < minDistToCell)
+					{
+						minDistToCell = distToCell;
+						closestCell = cell;
+					}
+				}
 			}
-
-			float4 _EdgeColor;
-
-			fixed4 frag (v2f i) : SV_Target
-			{
-				float NdotV = 1 - dot(i.normal, i.viewDir) * 1.5;
-				//return _EdgeColor;
-				return _EdgeColor * NdotV;
-			}
-
-			ENDCG
+			float random = rand2dTo1d(closestCell);
+			return float2(minDistToCell, random);
 		}
+
+		void surf (Input i, inout SurfaceOutputStandard o)
+		{
+			float2 value = i.worldPos.xz / _CellSize;
+			float noise = voronoiNoise(value);
+
+			o.Albedo = noise;
+		}
+		ENDCG
 	}
 }
