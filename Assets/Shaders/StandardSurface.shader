@@ -15,14 +15,6 @@
             "Switchable"="A"
         }
 
-        Stencil
-        {
-            Ref 1
-            Comp Always
-            Pass Replace
-            //ZFail Replace
-        }
-
         LOD 200
 
         CGPROGRAM
