@@ -1,4 +1,4 @@
-﻿Shader "Custom/StandardSurfaceB"
+﻿Shader "Custom/Replaceable Surface"
 {
     Properties
     {
@@ -18,13 +18,14 @@
 		_TimeScale("Time Scale", Range(0,2)) = 1
 
 		_Step("Step", Range(0,1)) = 1
+
     }
     SubShader
     {
         Tags 
         { 
             "RenderType"="Opaque"
-            "Switchable"="B"
+            "Switchable"="A"
         }
         LOD 200
 

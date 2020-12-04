@@ -1,4 +1,4 @@
-﻿Shader "Custom/ColoredOutlineA"
+﻿Shader "Custom/Fragmented Shader"
 {
 	Properties
 	{
