@@ -12,7 +12,7 @@
         Tags 
         { 
             "RenderType"="Opaque"
-            "Switchable"="A"
+            "Switchable"="false"
         }
 
         LOD 200

@@ -141,9 +141,6 @@ public class GameManager : MonoBehaviour
 
 		activeLayer = collideLayer;
 
-		Debug.Log(mainCam.cullingMask);
-		
-	
 	}
 
 	void SetMouseActive(bool value)
@@ -151,5 +148,4 @@ public class GameManager : MonoBehaviour
 		Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
 		Cursor.visible = value;
 	}
-
 }

@@ -2,11 +2,22 @@
 {
     Properties
     {
-        _Color ("Color", Color) = (1,1,1,1)
-        _EdgeColor ("Edge Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
+
+        
+        _Color ("Color", Color) = (1,1,1,1)
+        _Tint("Tint", Color) = (1,1,1,1)
+        
+        _EdgeColor ("Edge Color", Color) = (1,1,1,1)
+		_EdgeThickness("Edge Thisckness", Float) = 1
+        
+		_CellSize("Cell Size", Range(0,2)) = 2
+		_TimeScale("Time Scale", Range(0,2)) = 1
+
+		_Step("Step", Range(0,1)) = 1
     }
     SubShader
     {
