@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class SannerEffect : MonoBehaviour
+public class ScannerEffect : MonoBehaviour
 {
 	public Transform ScannerOrigin;
 	public Material EffectMaterial;
-
 
 
 	public float ScanDistance;
@@ -15,14 +14,9 @@ public class SannerEffect : MonoBehaviour
 
 	private Camera _camera;
 
-	// Demo Code
-	bool _scanning;
-	Scannable[] _scannables;
+	[HideInInspector]
+	public bool _scanning;
 
-	void Start()
-	{
-		_scannables = FindObjectsOfType<Scannable>();
-	}
 
 	void Update()
 	{
@@ -36,25 +30,6 @@ public class SannerEffect : MonoBehaviour
 			{
 				ScanDistance = 0;
 				_scanning = false;
-			}
-			
-
-			// for pings to appear
-			foreach (Scannable s in _scannables)
-			{
-				if (Vector3.Distance(ScannerOrigin.position, s.transform.position) <= ScanDistance)
-					s.Ping();
-			}
-		}
-
-		if (Input.GetMouseButtonDown(0))
-		{
-			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-
-			if (Physics.Raycast(ray, out hit))
-			{
-				//Scan(hit.point);
 			}
 		}
 	}

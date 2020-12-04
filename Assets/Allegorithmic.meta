@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Environment/Materials/SolidBase.meta
-guid: d1472c8a9cdb9dd4e8b4030ee58186c5
-=======
-guid: 14f8113d36bd28d44bf91392a15ee040
->>>>>>> origin/Bridge/BlockoutV3:Assets/Allegorithmic.meta
+guid: ddf73b44cb673234fb1468aa135cc9af
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -5,27 +5,61 @@ using UnityEngine;
 
 using UnityEngine.SceneManagement; // ENGINE
 
+public enum Dimension
+{
+	Digital,
+	Real
+}
 
 public class GameManager : MonoBehaviour
 {
 	[Header("Scene Loader")]
-	public bool addScene;
+	//public bool addScene;
 	bool isLoaded;
-	public string sceneToLoad;
+	//public string sceneToLoad;
 	public bool loadEnemies = true;
 
 	[Header("")]
 	public GameObject SettingsUI;
 
-	private void Awake()
-	{
-		SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Additive);
-	}
 
+	[Header("Dimension Switching")]
+	public static Dimension currentActiveDimension;
+	public static int activeLayer;
+
+	public GameObject realWorldObjects;
+	public GameObject digitalWorldObjects;
+
+	public Camera mainCam;
+
+	GameObject digitalCam;
+	GameObject realCam;
 
 	private void Start()
 	{
 		SetMouseActive(false);
+
+		realCam = mainCam.transform.GetChild(0).gameObject;
+		digitalCam = mainCam.transform.GetChild(1).gameObject;
+
+		if (realWorldObjects != null)
+		{
+			// Asign objects to layers
+			for (int i = 0; i < realWorldObjects.transform.childCount; i++)
+			{
+				realWorldObjects.transform.GetChild(i).gameObject.layer = 9; // the real world layer
+			}
+		}
+
+
+		if (digitalWorldObjects != null)
+		{
+			for (int i = 0; i < digitalWorldObjects.transform.childCount; i++)
+			{
+				digitalWorldObjects.transform.GetChild(i).gameObject.layer = 8; // the digital layer
+			}
+		}
+
 
 		if (SettingsUI != null)
 		{
@@ -58,10 +92,60 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public void ToggleDimension()
+	{
+		switch (currentActiveDimension)
+		{
+			case Dimension.Digital:
+				SetDimension(Dimension.Real);
+				break;
+
+			case Dimension.Real:
+				SetDimension(Dimension.Digital);
+				break;
+		}
+	}
+
+	public void SetDimension(Dimension dimension)
+	{
+		if (dimension != currentActiveDimension)
+		{
+			currentActiveDimension = dimension;
+
+			if (dimension == Dimension.Digital)
+			{
+				digitalCam.SetActive(false);
+				realCam.SetActive(true);
+
+				// ignore collisions from real world
+				IgnoreLayer(9, 8); 
+			}
+			else if (dimension == Dimension.Real)
+			{
+
+				digitalCam.SetActive(true);
+				realCam.SetActive(false);
+
+
+				// ignore collisions from digital world
+				IgnoreLayer(8, 9);
+			}
+		}
+	}
+
+	void IgnoreLayer(int ignoreLayer, int collideLayer)
+	{
+		// 10 is the Player's layer
+		Physics.IgnoreLayerCollision(10, ignoreLayer, true); // true - do ignore these collisions
+		Physics.IgnoreLayerCollision(10, collideLayer, false); // false - do not ignore these collisions
+
+		activeLayer = collideLayer;
+
+	}
+
 	void SetMouseActive(bool value)
 	{
 		Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
 		Cursor.visible = value;
 	}
-
 }
