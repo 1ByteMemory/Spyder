@@ -16,7 +16,7 @@ public class PlayerWeapon : MonoBehaviour
 
     Transform cam;
 
-    GameObject gunViewModel;
+    public GameObject gunViewModel;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +27,7 @@ public class PlayerWeapon : MonoBehaviour
 		}
 		cam = Camera.main.transform;
 
-        gunViewModel = transform.GetChild(1).GetChild(2).GetChild(1).gameObject;
-
+        
         activeWeapon = 0;
         CycleWeapons(0, true);
     }
