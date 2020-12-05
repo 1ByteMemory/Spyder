@@ -51,7 +51,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+	private void OnDisable()
+	{
+		digitalEffect.SetFloat("_ScanDistance", 0);
+		realEffect.SetFloat("_ScanDistance", 0);
+	}
 
 	private void OnTriggerEnter(Collider other)
 	{

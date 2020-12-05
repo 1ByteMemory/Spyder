@@ -75,6 +75,10 @@ public class GameManager : MonoBehaviour
 				enemy.SetActive(false);
 			}
 		}
+
+		// Set the active dimension to the real
+		
+		SetDimension(Dimension.Real);
 	}
 
 
