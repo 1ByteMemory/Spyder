@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 6808830610361278411}
   - component: {fileID: 6808830610361278408}
   - component: {fileID: 3838751021370548654}
+  - component: {fileID: 8805740762039504024}
   m_Layer: 10
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -446,6 +447,20 @@ MonoBehaviour:
   ScanDistance: 0
   scanSpeed: 125
   _scanning: 0
+--- !u!114 &8805740762039504024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808830610361278409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5002383c02f27aa4c9b0322e4755adf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  digitalOverleyEffect: {fileID: 2100000, guid: ecfc80ac5397e5149b1ddbe13b9077bc,
+    type: 2}
 --- !u!1 &6808830610586471030
 GameObject:
   m_ObjectHideFlags: 0
