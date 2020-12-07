@@ -1548,21 +1548,6 @@ MonoBehaviour:
   vector3Data:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 0, z: 0}
---- !u!114 &1274917036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6026280727056612101}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f6487d21a03404cb21b245f0242e79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 6026280727056612111}
-  suppressBlockAutoSelect: 0
-  waitForFrames: 1
 --- !u!114 &1274917038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3058,7 +3043,7 @@ PrefabInstance:
         type: 3}
       propertyPath: eventHandler
       value: 
-      objectReference: {fileID: 1274917036}
+      objectReference: {fileID: 0}
     - target: {fileID: 7309152944160184693, guid: 235acbadcb47dca47b7e2c0e6ec5f835,
         type: 3}
       propertyPath: nodeRect.x
