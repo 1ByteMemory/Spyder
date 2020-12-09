@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		overlay = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<DigitalOverlay>();
-
+		
 		SetMouseActive(false);
 
 		realCam = mainCam.transform.GetChild(0).gameObject;

@@ -39,13 +39,22 @@
 
             sampler2D _MainTex;
             sampler _CameraDepthTexture;
+            fixed4 _CameraDepthTexture_TexelSize; // Vector4(1 / width, 1 / height, width, height)
             float _Scale;
+            float _Thickness;
+            fixed4 _Color;
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_CameraDepthTexture, i.uv);
-                col.gb = col.r;
-                return col * _Scale;
+                fixed4 center = tex2D(_CameraDepthTexture, i.uv);
+                fixed4 right = tex2D(_CameraDepthTexture, i.uv + _CameraDepthTexture_TexelSize.xy * float2(1,0) * _Thickness);
+                fixed4 left = tex2D(_CameraDepthTexture, i.uv + _CameraDepthTexture_TexelSize.xy * float2(-1,0) * _Thickness);
+                fixed4 up = tex2D(_CameraDepthTexture, i.uv + _CameraDepthTexture_TexelSize.xy * float2(0,1) * _Thickness);
+                fixed4 down = tex2D(_CameraDepthTexture, i.uv + _CameraDepthTexture_TexelSize.xy * float2(0,-1) * _Thickness);
+                
+                float depthLines = clamp(((center.x - right.x) + (center.x - left.x) + (center.x - up.x) + (center.x - down.x)) * _Scale, 0, 1);
+                
+                return depthLines * _Color;
 
             }
             ENDCG
