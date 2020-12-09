@@ -12992,6 +12992,26 @@ PrefabInstance:
       propertyPath: enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8805740762039504024, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: depthScale
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805740762039504024, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: multiplier
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805740762039504024, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: bias
+      value: 15.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805740762039504024, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: lineThickness
+      value: 1.96
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43e840c0725b45845a4b3b05c1121c56, type: 3}
 --- !u!1 &1440945625
