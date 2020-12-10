@@ -462,8 +462,11 @@ MonoBehaviour:
   digitalOverleyEffect: {fileID: 2100000, guid: ecfc80ac5397e5149b1ddbe13b9077bc,
     type: 2}
   enabled: 0
-  depthScale: 1000
-  lineThickness: 2.15
+  depthScale: 10
+  depthBias: 10
+  normalScale: 10
+  normalBias: 10
+  lineThickness: 1
   lineColor: {r: 0, g: 1, b: 0.0666666, a: 0}
 --- !u!1 &6808830610586471030
 GameObject:

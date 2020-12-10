@@ -1,4 +1,6 @@
-﻿Shader "Custom/DigtalImageEffect"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/DigtalImageEffect"
 {
     Properties
     {
@@ -21,69 +23,66 @@
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
-                float3 normal : NORMAL;
             };
 
             struct v2f
             {
                 float2 uv : TEXCOORD0;
+                float4 scrPos : TEXCOORD1;
                 float4 vertex : SV_POSITION;
-                float3 worldNormal : NORMAL;
             };
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.worldNormal = UnityObjectToWorldNormal(v.normal);
+                o.scrPos = ComputeScreenPos(o.vertex);
+                //o.scrPos.y = 1 - o.scrPos.y;
                 o.uv = v.uv;
                 return o;
             }
 
             sampler2D _MainTex;
-            sampler _CameraDepthTexture;
-            fixed4 _CameraDepthTexture_TexelSize; // Vector4(1 / width, 1 / height, width, height)
-            float _Scale;
+            sampler2D _CameraDepthNormalsTexture;
+            float _DepthScale;
+            float _DepthBias;
+            float _NormalScale;
+            float _NormalBias;
             float _Thickness;
             fixed4 _Color;
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // Depth
-                fixed4 center = tex2D(_CameraDepthTexture, i.uv);
-                fixed4 d_right = tex2D(_CameraDepthTexture, i.uv + _CameraDepthTexture_TexelSize.xy * float2(1,0) * _Thickness);
-                fixed4 d_left = tex2D(_CameraDepthTexture, i.uv + _CameraDepthTexture_TexelSize.xy * float2(-1,0) * _Thickness);
-                fixed4 d_up = tex2D(_CameraDepthTexture, i.uv + _CameraDepthTexture_TexelSize.xy * float2(0,1) * _Thickness);
-                fixed4 d_down = tex2D(_CameraDepthTexture, i.uv + _CameraDepthTexture_TexelSize.xy * float2(0,-1) * _Thickness);
                 
-                // Normals
-                //fixed4 n_center = tex2D(i.worldNormal, i.uv);
-                //fixed4 n_right = tex2D(i.worldNormal, i.uv + _CameraDepthTexture_TexelSize.xy * float2(1,0) * _Thickness);
-                //fixed4 n_left = tex2D(i.worldNormal, i.uv + _CameraDepthTexture_TexelSize.xy * float2(-1,0) * _Thickness);
-                //fixed4 n_up = tex2D(i.worldNormal, i.uv + _CameraDepthTexture_TexelSize.xy * float2(0,1) * _Thickness);
-                //fixed4 n_down = tex2D(i.worldNormal, i.uv + _CameraDepthTexture_TexelSize.xy * float2(0,-1) * _Thickness);
-                
-                
-                float depthLines = clamp(
-                (
-                    (center.x - d_right.x)
-                    + (center.x - d_left.x)
-                    + (center.x - d_up.x)
-                    + (center.x - d_down.x)) 
-                    * _Scale, 0, 1
-                );
+                float dCenter;
+                float3 nCenter;
 
-                //float normalLines = clamp(
-                //(
-                //    (center.x - n_right.x)
-                //    + (center.x - n_left.x)
-                //    + (center.x - n_up.x)
-                //    + (center.x - n_down.x))
-                //    * _Scale, 0, 1
-                //);
+                float dUp, dDown, dLeft, dRight;
+                float3 nUp, nDown, nLeft, nRight;
 
-                //return depthLines * _Color;
-                return float4(i.worldNormal, 1);
+                DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.scrPos.xy), dCenter, nCenter);
+                
+                // Grab noraml and depth pixels from above, below and to the side
+                DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.scrPos.xy + float2(0,1) * _Thickness), dUp, nUp);
+                DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.scrPos.xy + float2(0,-1) * _Thickness), dDown, nDown);
+                DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.scrPos.xy + float2(-1,0) * _Thickness), dLeft, nLeft);
+                DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.scrPos.xy + float2(1,0) * _Thickness), dRight, nRight);
+
+                // minus them from the center and add them all tofether to get a line
+                float depthValue = (dCenter - dUp) + (dCenter - dDown) + (dCenter - dLeft) + (dCenter - dRight);
+                float3 normalValue3 = (nCenter - nUp) + (nCenter - nDown) + (nCenter - nLeft) + (nCenter - nRight);
+
+                // add normal.xyz together to merge into on channel
+                float normalValue = clamp(normalValue3.x + normalValue3.y + normalValue3.x, 0,1);
+                
+                // multiply and pow the result to increase definition
+                depthValue = clamp(depthValue * _DepthScale, 0, 1);
+                depthValue = clamp(pow(depthValue, _DepthBias), 0, 1);
+
+                normalValue = clamp(pow(normalValue * _NormalScale, _NormalBias), 0,1);
+
+                // retrun the maximum result and multiply by a color
+                return max(normalValue, depthValue) * _Color;
             }
             ENDCG
         }

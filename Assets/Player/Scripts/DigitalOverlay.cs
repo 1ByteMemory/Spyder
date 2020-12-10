@@ -9,6 +9,10 @@ public class DigitalOverlay : MonoBehaviour
     public Material digitalOverleyEffect;
 	public new bool enabled;
 	public float depthScale;
+	public float depthBias;
+	public float normalScale;
+	public float normalBias;
+
 	public float lineThickness;
 	public Color lineColor;
 
@@ -18,8 +22,12 @@ public class DigitalOverlay : MonoBehaviour
 		{
 			GetComponent<Camera>().depthTextureMode = DepthTextureMode.DepthNormals;
 
-			digitalOverleyEffect.SetFloat("_Scale", depthScale);
-			digitalOverleyEffect.SetFloat("_Thickness", lineThickness);
+			digitalOverleyEffect.SetFloat("_DepthScale", depthScale * 100);
+			digitalOverleyEffect.SetFloat("_DepthBias", depthBias);
+			digitalOverleyEffect.SetFloat("_NormalScale", normalScale);
+			digitalOverleyEffect.SetFloat("_NormalBias", normalBias);
+
+			digitalOverleyEffect.SetFloat("_Thickness", lineThickness / 1000);
 			digitalOverleyEffect.SetVector("_Color", lineColor);
 			Graphics.Blit(source, destination, digitalOverleyEffect);
 		}
