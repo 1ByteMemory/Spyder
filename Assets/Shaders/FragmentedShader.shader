@@ -4,6 +4,7 @@
 	{
 		_MainTex("Main Texture", 2D) = "white" {}
 		_Tint("Tint", Color) = (1,1,1,1)
+		_Color("Color", Color) = (1,1,1,1)
 
 		_EdgeColor("Edge Color", Color) = (1,1,1,1)
 		_EdgeThickness("Edge Thisckness", Float) = 1
@@ -27,13 +28,15 @@
 		Stencil
 		{
 			Ref 0
-			Comp Always
+			Comp NotEqual
+			Fail Keep
 		}
 
 		ZWrite Off
+		ZTest Always
 		Blend SrcAlpha OneMinusSrcAlpha
-		
-		
+		//Blend One One
+
 		//--------------------------//
 		//  Shattered Noise Map     //
 		//--------------------------//
@@ -47,6 +50,7 @@
 		
 		sampler2D _MainTex;
 		float3 _Tint;
+		float3 _Color;
 
 		float3 _EdgeColor;
 		float _EdgeThickness;
@@ -59,6 +63,7 @@
 		struct Input 
 		{
 			float3 worldPos;
+			float2 uv_MainTex;
 		};
 
 		float3 voronoiNoise(float3 value){
@@ -124,7 +129,9 @@
 			float fragments = 1 - step(valueChange, noise.y - _Step);
 			float edge = 1 - step(valueChange, noise.z - _EdgeThickness);
 
-			o.Albedo = fragments * _Tint;
+			fixed4 c = tex2D(_MainTex, i.uv_MainTex);
+
+			o.Albedo = max(1 - fragments, c.rgb * _Color);
 			o.Emission = edge * _EdgeColor;
 
 			o.Alpha = fragments;
@@ -154,6 +161,5 @@
 		CGPROGRAM
 		#pragma target 3.0
 		ENDCG
-
 	}
 }

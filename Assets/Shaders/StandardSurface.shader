@@ -12,7 +12,13 @@
         Tags 
         { 
             "RenderType"="Opaque"
-            "Switchable"="false"
+        }
+
+        Stencil
+        {
+            Ref 1
+            Comp Always
+            Pass Replace
         }
 
         LOD 200
