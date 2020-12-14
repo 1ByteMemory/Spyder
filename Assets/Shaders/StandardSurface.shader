@@ -10,16 +10,18 @@
     SubShader
     {
         Tags 
-        { 
+        {
+            "Queue" = "Geometry-1"
             "RenderType"="Opaque"
         }
-
-        Stencil
-        {
-            Ref 1
-            Comp Always
-            Pass Replace
-        }
+        
+        //Stencil
+        //{
+        //    Ref 1
+        //    Comp Always
+        //    Pass Replace
+        //    ZFail keep
+        //}
 
         LOD 200
 

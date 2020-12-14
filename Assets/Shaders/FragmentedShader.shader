@@ -19,23 +19,24 @@
 	{
 		Tags
 		{
-			"Queue" = "Transparent"
-			"RenderType" = "Transparent"
+			"Queue" = "Geometry+1"
+			"RenderType" = "Opaque"
 			"Switchable" = "A"
 		}
 		LOD 200
 
-		Stencil
-		{
-			Ref 0
+        Stencil
+        {
+			Ref 2
 			Comp NotEqual
-			Fail Keep
-		}
+			Pass Replace
 
-		ZWrite Off
+        }
+
 		ZTest Always
-		Blend SrcAlpha OneMinusSrcAlpha
-		//Blend One One
+		//ZWrite Off
+		//Blend SrcAlpha OneMinusSrcAlpha
+		Blend One One
 
 		//--------------------------//
 		//  Shattered Noise Map     //

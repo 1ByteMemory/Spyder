@@ -23,12 +23,23 @@
     SubShader
     {
         Tags 
-        { 
+        {
+            "Queue" = "Geometry-1"
             "RenderType"="Opaque"
             "Switchable"="A"
         }
         LOD 200
 
+        
+        Stencil
+        {
+            Ref 1
+            Comp Always
+            Pass Replace
+            //ZFail keep
+        }
+
+        //ColorMask 0
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
         #pragma surface surf Standard fullforwardshadows
