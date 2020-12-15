@@ -11,6 +11,7 @@ public class ReplacmentShader : MonoBehaviour
 
 	void OnEnable()
 	{
+		GetComponent<Camera>().clearStencilAfterLightingPass = true;
 
 		if (inactiveShader != null)
 		{

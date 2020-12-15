@@ -11,17 +11,9 @@
     {
         Tags 
         {
-            "Queue" = "Geometry-1"
+            "Queue" = "Geometry"
             "RenderType"="Opaque"
         }
-        
-        //Stencil
-        //{
-        //    Ref 1
-        //    Comp Always
-        //    Pass Replace
-        //    ZFail keep
-        //}
 
         LOD 200
 

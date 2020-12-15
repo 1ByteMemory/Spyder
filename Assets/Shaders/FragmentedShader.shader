@@ -19,7 +19,7 @@
 	{
 		Tags
 		{
-			"Queue" = "Geometry+1"
+			"Queue" = "Geometry+2"
 			"RenderType" = "Opaque"
 			"Switchable" = "A"
 		}
@@ -27,16 +27,16 @@
 
         Stencil
         {
-			Ref 2
-			Comp NotEqual
-			Pass Replace
-
+			Ref 1
+			Comp Equal
         }
 
-		ZTest Always
+		//ZTest Always
 		//ZWrite Off
+		
 		//Blend SrcAlpha OneMinusSrcAlpha
-		Blend One One
+		//Blend One One
+		//Blend Zero One
 
 		//--------------------------//
 		//  Shattered Noise Map     //
