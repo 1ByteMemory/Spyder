@@ -12912,6 +12912,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3838751021370548654, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3838751021370548654, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: ScanDistance
+      value: 6.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4010893674030396105, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
       propertyPath: m_Enabled
@@ -12990,7 +13000,7 @@ PrefabInstance:
     - target: {fileID: 8805740762039504024, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
       propertyPath: enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8805740762039504024, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
@@ -13000,7 +13010,12 @@ PrefabInstance:
     - target: {fileID: 8805740762039504024, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}
       propertyPath: bias
-      value: -0.36
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805740762039504024, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: distance
+      value: 0.013
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43e840c0725b45845a4b3b05c1121c56, type: 3}

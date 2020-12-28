@@ -5,9 +5,9 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ScannerEffect : MonoBehaviour
 {
+	[Header("Scanner")]
 	public Transform ScannerOrigin;
 	public Material EffectMaterial;
-
 
 	public float ScanDistance;
 	public float scanSpeed = 100;
@@ -16,6 +16,17 @@ public class ScannerEffect : MonoBehaviour
 
 	[HideInInspector]
 	public bool _scanning;
+
+
+	[Header("Edge Effect")]
+	//public Material EdgeEffect;
+	public float depthScale;
+	public float depthBias;
+	public float normalScale;
+	public float normalBias;
+
+	public float lineThickness;
+	public Color lineColor;
 
 
 	void Update()
@@ -59,7 +70,21 @@ public class ScannerEffect : MonoBehaviour
 	{
 		EffectMaterial.SetVector("_WorldSpaceScannerPos", ScannerOrigin.position);
 		EffectMaterial.SetFloat("_ScanDistance", ScanDistance);
+
+		SetEdgeProperties();
+
 		RaycastCornerBlit(src, dst, EffectMaterial);
+	}
+
+	void SetEdgeProperties()
+	{
+		EffectMaterial.SetFloat("_DepthScale", depthScale * 100);
+		EffectMaterial.SetFloat("_DepthBias", depthBias);
+		EffectMaterial.SetFloat("_NormalScale", normalScale);
+		EffectMaterial.SetFloat("_NormalBias", normalBias);
+		
+		EffectMaterial.SetFloat("_Thickness", lineThickness / 1000);
+		EffectMaterial.SetVector("_Color", lineColor);
 	}
 
 	void RaycastCornerBlit(RenderTexture source, RenderTexture dest, Material mat)

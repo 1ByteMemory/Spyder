@@ -30,6 +30,7 @@ Shader "Custom/DigtalImageEffect"
                 float2 uv : TEXCOORD0;
                 float4 scrPos : TEXCOORD1;
                 float4 vertex : SV_POSITION;
+                float depth : DEPTH;
             };
 
             v2f vert (appdata v)
@@ -37,7 +38,7 @@ Shader "Custom/DigtalImageEffect"
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.scrPos = ComputeScreenPos(o.vertex);
-                //o.scrPos.y = 1 - o.scrPos.y;
+                o.depth = -UnityObjectToViewPos(v.vertex).z * _ProjectionParams.w;
                 o.uv = v.uv;
                 return o;
             }
@@ -83,6 +84,7 @@ Shader "Custom/DigtalImageEffect"
 
                 // retrun the maximum result and multiply by a color
                 return max(normalValue, depthValue) * _Color;
+
             }
             ENDCG
         }

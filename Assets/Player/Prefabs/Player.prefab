@@ -447,6 +447,12 @@ MonoBehaviour:
   ScanDistance: 0
   scanSpeed: 125
   _scanning: 0
+  depthScale: 10
+  depthBias: 10
+  normalScale: 10
+  normalBias: 10
+  lineThickness: 1
+  lineColor: {r: 0, g: 1, b: 0, a: 0}
 --- !u!114 &8805740762039504024
 MonoBehaviour:
   m_ObjectHideFlags: 0
