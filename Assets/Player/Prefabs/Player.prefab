@@ -443,13 +443,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScannerOrigin: {fileID: 2012813232706640525}
   EffectMaterial: {fileID: 2100000, guid: 8ddf3690dce2eba4fbc856adf4bb0b3e, type: 2}
+  MaxScanDist: 200
   ScanDistance: 0
-  scanSpeed: 125
+  scanSpeed: 75
   _scanning: 0
-  depthScale: 10
-  depthBias: 10
-  normalScale: 10
-  normalBias: 10
+  depthScale: 0.59
+  depthBias: 5.34
+  normalScale: 3.1
+  normalBias: 12.89
   lineThickness: 1
   lineColor: {r: 0, g: 1, b: 0, a: 0}
 --- !u!1 &6808830610586471030

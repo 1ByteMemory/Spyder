@@ -50,12 +50,14 @@ public class PlayerController : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Projectile")) return;
+		if (other.isTrigger) return;
         isInWall = true;
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.CompareTag("Projectile")) return;
+		if (other.isTrigger) return;
         isInWall = false;
 	}
 }

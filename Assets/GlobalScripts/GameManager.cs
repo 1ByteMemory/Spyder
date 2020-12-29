@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 	public GameObject realWorldObjects;
 	public GameObject digitalWorldObjects;
 
-	public Camera mainCam;
+	Camera mainCam;
 
 	GameObject digitalCam;
 	GameObject realCam;
@@ -39,8 +39,9 @@ public class GameManager : MonoBehaviour
 	{
 		SetMouseActive(false);
 
-		realCam = mainCam.transform.GetChild(0).gameObject;
-		digitalCam = mainCam.transform.GetChild(1).gameObject;
+		mainCam = Camera.main;
+		realCam = mainCam.transform.Find("RealWorldCam").gameObject;
+		digitalCam = mainCam.transform.Find("DigitalWorldCam").gameObject;
 
 		if (realWorldObjects != null)
 		{
