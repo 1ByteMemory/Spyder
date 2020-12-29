@@ -446,7 +446,7 @@ MonoBehaviour:
   EffectMaterial: {fileID: 2100000, guid: 8ddf3690dce2eba4fbc856adf4bb0b3e, type: 2}
   MaxScanDist: 200
   ScanDistance: 0
-  scanSpeed: 75
+  scanSpeed: 125
   _scanning: 0
   depthScale: 0.59
   depthBias: 5.34
