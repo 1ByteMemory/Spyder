@@ -37,17 +37,7 @@ public class PlayerController : MonoBehaviour
 			game.ToggleDimension();
 
 			endTime = Time.time + coolDown;
-			if (GameManager.currentActiveDimension == Dimension.Real)
-			{
-
-				scanner.EffectMaterial = realEffect;
-				scanner.Scan();
-			}
-			else if (GameManager.currentActiveDimension == Dimension.Digital)
-			{
-				scanner.EffectMaterial = digitalEffect;
-				scanner.Scan();
-            }
+			scanner.Scan(GameManager.currentActiveDimension);
         }
     }
 

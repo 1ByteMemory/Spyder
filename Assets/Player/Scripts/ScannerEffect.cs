@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [ExecuteInEditMode]
 public class ScannerEffect : MonoBehaviour
 {
+	
+
 	[Header("Scanner")]
 	public Transform ScannerOrigin;
 	public Material EffectMaterial;
 
+	public float MaxScanDist = 200;
 	public float ScanDistance;
 	public float scanSpeed = 100;
 
@@ -17,6 +21,7 @@ public class ScannerEffect : MonoBehaviour
 	[HideInInspector]
 	public bool _scanning;
 
+	private Dimension currDimension;
 
 	[Header("Edge Effect")]
 	//public Material EdgeEffect;
@@ -29,17 +34,37 @@ public class ScannerEffect : MonoBehaviour
 	public Color lineColor;
 
 
+	[Header("Furthest Point")]
+	private float posX, posY;
+	private Vector2 scrPos;
+	private bool hasFurthestPoint;
+
 	void Update()
 	{
 		if (_scanning)
 		{
-			// Increase scanner radius
-			ScanDistance += Time.deltaTime * scanSpeed;
+			// Increase or decrease scanner radius
+			switch (currDimension)
+			{
+				case Dimension.Digital:
+					ScanDistance += Time.deltaTime * scanSpeed;
+					hasFurthestPoint = false;
+					break;
+				case Dimension.Real:
+					if (!hasFurthestPoint)
+					{
+						ScanDistance = GetFurthestPoint();
+						hasFurthestPoint = true;
+					} 
+
+					ScanDistance -= Time.deltaTime * scanSpeed;
+					break;
+			}
 
 			// prevent the numbers from getting too high
-			if (ScanDistance >= 500)
+			if (ScanDistance >= MaxScanDist || ScanDistance <= 0)
 			{
-				ScanDistance = 0;
+				//ScanDistance = 0;
 				_scanning = false;
 			}
 		}
@@ -52,10 +77,27 @@ public class ScannerEffect : MonoBehaviour
 		_camera.depthTextureMode = DepthTextureMode.DepthNormals;
 	}
 
-	public void Scan()
+	private float GetFurthestPoint()
 	{
+		float maxDist = 0;
+		for (float y = 0; y < 1; y += 0.01f)
+		{
+			for (float x = 0; x < 1; x += 0.01f)
+			{
+				scrPos = new Vector2(x * _camera.pixelWidth, y * _camera.pixelHeight);
+				Ray ray = _camera.ScreenPointToRay(scrPos);
+				Physics.Raycast(ray, out RaycastHit hitInfo, 500);
+				if (hitInfo.distance > maxDist) maxDist = hitInfo.distance;
+			}
+		}
+		return maxDist;
+	}
+
+	public void Scan(Dimension dimension)
+	{
+		currDimension = dimension;
 		_scanning = true;
-		ScanDistance = 0;
+		//ScanDistance = 0;
 	}
 	public void Scan(Vector3 position)
 	{
