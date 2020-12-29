@@ -161,7 +161,7 @@ Shader "Custom/ScannerEffect"
 				if (dist < _ScanDistance && linearDepth < 1)
 				{
 					edgeCol = max(normalValue, depthValue) * _Color;
-					
+
 					float diff = (_ScanDistance - dist) / (_ScanWidth);
 					half4 edge = lerp(col, edgeCol, pow(diff, _LeadSharp));
 					edgeCol = lerp(edgeCol, edge, diff);

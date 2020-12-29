@@ -30,7 +30,7 @@ Shader "Custom/DigtalImageEffect"
                 float2 uv : TEXCOORD0;
                 float4 scrPos : TEXCOORD1;
                 float4 vertex : SV_POSITION;
-                float depth : DEPTH;
+                //float depth : DEPTH;
             };
 
             v2f vert (appdata v)
@@ -38,7 +38,7 @@ Shader "Custom/DigtalImageEffect"
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.scrPos = ComputeScreenPos(o.vertex);
-                o.depth = -UnityObjectToViewPos(v.vertex).z * _ProjectionParams.w;
+                //o.depth = -UnityObjectToViewPos(v.vertex).z * _ProjectionParams.w;
                 o.uv = v.uv;
                 return o;
             }
