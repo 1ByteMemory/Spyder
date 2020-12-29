@@ -37,17 +37,7 @@ public class PlayerController : MonoBehaviour
 			game.ToggleDimension();
 
 			endTime = Time.time + coolDown;
-			if (GameManager.currentActiveDimension == Dimension.Real)
-			{
-
-				scanner.EffectMaterial = realEffect;
-				scanner.Scan();
-			}
-			else if (GameManager.currentActiveDimension == Dimension.Digital)
-			{
-				scanner.EffectMaterial = digitalEffect;
-				scanner.Scan();
-            }
+			scanner.Scan(GameManager.currentActiveDimension);
         }
     }
 
@@ -60,12 +50,14 @@ public class PlayerController : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Projectile")) return;
+		if (other.isTrigger) return;
         isInWall = true;
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.CompareTag("Projectile")) return;
+		if (other.isTrigger) return;
         isInWall = false;
 	}
 }
