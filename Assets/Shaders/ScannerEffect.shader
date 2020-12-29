@@ -50,7 +50,9 @@ Shader "Custom/ScannerEffect"
 				VertOut o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = v.uv.xy;
-				o.uv_depth = v.uv.xy;
+				
+				//o.uv_depth = v.uv.xy;
+				o.uv_depth = ComputeScreenPos(o.vertex);
 
 				#if UNITY_UV_STARTS_AT_TOP
 				if (_MainTex_TexelSize.y < 0)
@@ -74,6 +76,18 @@ Shader "Custom/ScannerEffect"
 			float4 _TrailColor;
 			float4 _HBarColor;
 
+			// Edge variables
+            sampler2D _CameraDepthNormalsTexture;
+            float _DepthScale;
+            float _DepthBias;
+            float _NormalScale;
+            float _NormalBias;
+            float _Thickness;
+            float _Distance;
+            float _Bias;
+            fixed4 _Color;
+
+
 			float4 horizBars(float2 p)
 			{	
 				return (1 - saturate(round(abs(frac(p.x * 100) * 2)))) + (1 - saturate(round(abs(frac(p.y * 100) * 2))));
@@ -96,6 +110,10 @@ Shader "Custom/ScannerEffect"
 
 				float dist = distance(wsPos, _WorldSpaceScannerPos);
 
+				half4 edgeCol = col;
+
+				
+				//if (dist < _ScanDistance - _ScanWidth && linearDepth < 1)
 				if (dist < _ScanDistance && dist > _ScanDistance - _ScanWidth && linearDepth < 1)
 				{
 					float diff = 1 - (_ScanDistance - dist) / (_ScanWidth);
@@ -104,7 +122,53 @@ Shader "Custom/ScannerEffect"
 					scannerCol *= diff;
 				}
 
-				return col + scannerCol;
+
+				float dCenter;
+				float3 nCenter;
+
+				float dUp, dDown, dLeft, dRight;
+				float3 nUp, nDown, nLeft, nRight;
+
+				DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv_depth.xy), dCenter, nCenter);
+                
+				// Grab noraml and depth pixels from above, below and to the side
+				DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv_depth.xy + float2(0,1) * _Thickness), dUp, nUp);
+				DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv_depth.xy + float2(0,-1) * _Thickness), dDown, nDown);
+				DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv_depth.xy + float2(-1,0) * _Thickness), dLeft, nLeft);
+				DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv_depth.xy + float2(1,0) * _Thickness), dRight, nRight);
+
+				dCenter = Linear01Depth(dCenter);
+				dUp = Linear01Depth(dUp);
+				dDown = Linear01Depth(dDown);
+				dLeft = Linear01Depth(dLeft);
+				dRight = Linear01Depth(dRight);
+
+
+				// minus them from the center and add them all tofether to get a line
+				float depthValue = (dCenter - dUp) + (dCenter - dDown) + (dCenter - dLeft) + (dCenter - dRight);
+				float3 normalValue3 = (nCenter - nUp) + (nCenter - nDown) + (nCenter - nLeft) + (nCenter - nRight);
+
+				// add normal.xyz together to merge into on channel
+				float normalValue = clamp(normalValue3.x + normalValue3.y + normalValue3.x, 0,1);
+                
+				
+				// multiply and pow the result to increase definition
+				depthValue = clamp(depthValue * _DepthScale, 0, 1);
+				depthValue = clamp(pow(depthValue, _DepthBias), 0, 1);
+
+				normalValue = clamp(pow(normalValue * _NormalScale, _NormalBias), 0,1);
+
+				if (dist < _ScanDistance && linearDepth < 1)
+				{
+					edgeCol = max(normalValue, depthValue) * _Color;
+
+					float diff = (_ScanDistance - dist) / (_ScanWidth);
+					half4 edge = lerp(col, edgeCol, pow(diff, _LeadSharp));
+					edgeCol = lerp(edgeCol, edge, diff);
+					edgeCol *= diff;
+				}
+
+				return edgeCol + scannerCol;
 			}
 			ENDCG
 		}
