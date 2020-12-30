@@ -10,9 +10,9 @@
     SubShader
     {
         Tags 
-        { 
+        {
+            "Queue" = "Geometry"
             "RenderType"="Opaque"
-            "Switchable"="false"
         }
 
         LOD 200

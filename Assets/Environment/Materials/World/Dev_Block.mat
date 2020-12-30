@@ -57,7 +57,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _CellSize: 0.2
+    - _CellSize: 0.44
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -72,12 +72,12 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Step: 0.15
-    - _TimeScale: 0.25
+    - _Step: 0.381
+    - _TimeScale: 0.15
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0, g: 0.32854462, b: 1, a: 1}
     - _EdgeColor: {r: 0, g: 0.43586493, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Tint: {r: 0.36320752, g: 0.7701057, b: 1, a: 1}
+    - _Tint: {r: 0, g: 0, b: 0, a: 1}
