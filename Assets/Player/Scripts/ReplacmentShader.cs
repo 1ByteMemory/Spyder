@@ -11,12 +11,12 @@ public class ReplacmentShader : MonoBehaviour
 
 	void OnEnable()
 	{
-		GetComponent<Camera>().clearStencilAfterLightingPass = true;
+		//GetComponent<Camera>().clearStencilAfterLightingPass = true;
 
 		if (inactiveShader != null)
 		{
 			//GetComponent<Camera>().SetReplacementShader(zero, "Switchable");
-			GetComponent<Camera>().SetReplacementShader(inactiveShader, "Switchable");
+			GetComponent<Camera>().SetReplacementShader(inactiveShader, "Replace");
 		}
 	}
 

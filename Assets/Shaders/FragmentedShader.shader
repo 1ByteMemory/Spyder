@@ -19,17 +19,12 @@
 	{
 		Tags
 		{
-			"Queue" = "Geometry+2"
-			"RenderType" = "Opaque"
-			"Switchable" = "A"
+			"Queue" = "Transparent"
+			"RenderType" = "Transparent"
+			"Replace" = "true"
 		}
 		LOD 200
 
-        Stencil
-        {
-			Ref 1
-			Comp Equal
-        }
 
 		//ZTest Always
 		//ZWrite Off
@@ -139,6 +134,7 @@
 			
 		}
 		ENDCG
+
 
 		//--------------------------//
 		//  Render the back faces   //
