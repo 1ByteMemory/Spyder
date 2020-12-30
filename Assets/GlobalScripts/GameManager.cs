@@ -32,16 +32,16 @@ public class GameManager : MonoBehaviour
 
 	Camera mainCam;
 
-	GameObject digitalCam;
-	GameObject realCam;
+	ReplacmentShader digitalCam;
+	ReplacmentShader realCam;
 
 	private void Start()
 	{
 		SetMouseActive(false);
 
 		mainCam = Camera.main;
-		realCam = mainCam.transform.Find("RealWorldCam").gameObject;
-		digitalCam = mainCam.transform.Find("DigitalWorldCam").gameObject;
+		realCam = mainCam.transform.Find("RealWorldCam").GetComponent<ReplacmentShader>();
+		digitalCam = mainCam.transform.Find("DigitalWorldCam").GetComponent<ReplacmentShader>();
 
 		if (realWorldObjects != null)
 		{
@@ -119,8 +119,8 @@ public class GameManager : MonoBehaviour
 
 			if (dimension == Dimension.Digital)
 			{
-				digitalCam.SetActive(false);
-				realCam.SetActive(true);
+				digitalCam.enabled = false;
+				realCam.enabled = true;
 
 				// ignore collisions from real world
 				IgnoreLayer(9, 8); 
@@ -128,8 +128,8 @@ public class GameManager : MonoBehaviour
 			else if (dimension == Dimension.Real)
 			{
 
-				digitalCam.SetActive(true);
-				realCam.SetActive(false);
+				digitalCam.enabled = true;
+				realCam.enabled = false;
 
 				// ignore collisions from digital world
 				IgnoreLayer(8, 9);
