@@ -47,6 +47,7 @@ public class ScannerEffect : MonoBehaviour
 			switch (currDimension)
 			{
 				case Dimension.Digital:
+					ScanDistance = ScanDistance < 0 ? 0 : ScanDistance;
 					ScanDistance += Time.deltaTime * scanSpeed;
 					hasFurthestPoint = false;
 					break;
