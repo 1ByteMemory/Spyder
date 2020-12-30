@@ -30,21 +30,18 @@ public class GameManager : MonoBehaviour
 	public GameObject realWorldObjects;
 	public GameObject digitalWorldObjects;
 
-	public Camera mainCam;
+	Camera mainCam;
 
 	GameObject digitalCam;
 	GameObject realCam;
 
-	DigitalOverlay overlay;
-
 	private void Start()
 	{
-		overlay = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<DigitalOverlay>();
-		
 		SetMouseActive(false);
 
-		realCam = mainCam.transform.GetChild(0).gameObject;
-		digitalCam = mainCam.transform.GetChild(1).gameObject;
+		mainCam = Camera.main;
+		realCam = mainCam.transform.Find("RealWorldCam").gameObject;
+		digitalCam = mainCam.transform.Find("DigitalWorldCam").gameObject;
 
 		if (realWorldObjects != null)
 		{
@@ -125,8 +122,6 @@ public class GameManager : MonoBehaviour
 				digitalCam.SetActive(false);
 				realCam.SetActive(true);
 
-				overlay.enabled = true;
-
 				// ignore collisions from real world
 				IgnoreLayer(9, 8); 
 			}
@@ -135,8 +130,6 @@ public class GameManager : MonoBehaviour
 
 				digitalCam.SetActive(true);
 				realCam.SetActive(false);
-
-				overlay.enabled = false;
 
 				// ignore collisions from digital world
 				IgnoreLayer(8, 9);

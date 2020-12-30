@@ -199,15 +199,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2534765294646136419}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1270949675902316355}
   - {fileID: 139015096482344239}
   - {fileID: 4461220149873880172}
-  m_Father: {fileID: 6808830611006798375}
-  m_RootOrder: 1
+  m_Father: {fileID: 6808830610361278410}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5602213967657973049
 GameObject:
@@ -355,7 +355,6 @@ GameObject:
   - component: {fileID: 6808830610361278411}
   - component: {fileID: 6808830610361278408}
   - component: {fileID: 3838751021370548654}
-  - component: {fileID: 8805740762039504024}
   m_Layer: 10
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -376,6 +375,7 @@ Transform:
   m_Children:
   - {fileID: 9040100093398668786}
   - {fileID: 6983990748169424763}
+  - {fileID: 2169920007493777715}
   m_Father: {fileID: 6808830611006798375}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -444,30 +444,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScannerOrigin: {fileID: 2012813232706640525}
   EffectMaterial: {fileID: 2100000, guid: 8ddf3690dce2eba4fbc856adf4bb0b3e, type: 2}
+  MaxScanDist: 200
   ScanDistance: 0
   scanSpeed: 125
   _scanning: 0
---- !u!114 &8805740762039504024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6808830610361278409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5002383c02f27aa4c9b0322e4755adf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  digitalOverleyEffect: {fileID: 2100000, guid: ecfc80ac5397e5149b1ddbe13b9077bc,
-    type: 2}
-  enabled: 0
-  depthScale: 10
-  depthBias: 10
-  normalScale: 10
-  normalBias: 10
+  depthScale: 0.59
+  depthBias: 5.34
+  normalScale: 3.1
+  normalBias: 12.89
   lineThickness: 1
-  lineColor: {r: 0, g: 1, b: 0.0666666, a: 0}
+  lineColor: {r: 0, g: 1, b: 0, a: 0}
 --- !u!1 &6808830610586471030
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +761,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6808830610361278410}
-  - {fileID: 2169920007493777715}
   m_Father: {fileID: 6808830610586471016}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
