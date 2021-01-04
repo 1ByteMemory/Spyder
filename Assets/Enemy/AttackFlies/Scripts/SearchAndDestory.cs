@@ -147,10 +147,12 @@ public class SearchAndDestory : MonoBehaviour
 
 	}
 
+	/*
 	public virtual void Stun()
 	{
 		navMeshAgent.isStopped = true;
 
 		isStunned = true;
 	}
+	*/
 }

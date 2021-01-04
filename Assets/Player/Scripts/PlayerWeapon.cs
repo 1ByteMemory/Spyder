@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class PlayerWeapon : MonoBehaviour
 {
     public int activeWeapon;
 
-    public Text ammoText;
-    public Text clipText;
+    public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI clipText;
 
     public Vector2 aimOffset;
 
@@ -27,7 +27,10 @@ public class PlayerWeapon : MonoBehaviour
 		}
 		cam = Camera.main.transform;
 
+        ammoText = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("AmmoReserve").GetComponent<TextMeshProUGUI>();
+        clipText = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("AmmoClip").GetComponent<TextMeshProUGUI>();
         
+
         activeWeapon = 0;
         CycleWeapons(0, true);
     }
