@@ -507,20 +507,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab699a5e09efebe4eb11db67eb45bd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerView: {fileID: 0}
+  playerView: {fileID: 6808830610361278410}
   playerViewYOffset: 0.6
-  xMouseSensitivity: 170
-  yMouseSensitivity: 170
-  gravity: 20
+  xMouseSensitivity: 100
+  yMouseSensitivity: 100
+  gravity: 21
   friction: 3
-  moveSpeed: 10
-  runAcceleration: 20.67
-  runDeacceleration: 34.4
+  moveSpeed: 12
+  runAcceleration: 14
+  runDeacceleration: 14
   airAcceleration: 2
-  airDecceleration: 2
-  airControl: 0.5
+  airDecceleration: 4
+  airControl: 0.3
   sideStrafeAcceleration: 50
-  sideStrafeSpeed: 7
+  sideStrafeSpeed: 1
   jumpSpeed: 8
   holdJumpToBhop: 0
   style:
