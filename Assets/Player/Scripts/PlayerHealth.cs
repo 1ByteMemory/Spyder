@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class PlayerHealth : Health
 {
-	public Slider healthSlider;
+	Slider healthSlider;
 
 	public float immunityWindow = 0.1f;
 
 	private protected override void Start()
 	{
 		base.Start();
+
+		healthSlider = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("HealthBar").GetComponent<Slider>();
 
 		healthSlider.maxValue = maxHealth;
 		healthSlider.value = maxHealth;

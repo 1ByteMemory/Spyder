@@ -32,7 +32,6 @@ public class ProjectileDeathTimer : MonoBehaviour
 		// On hit player and not shot from player
 		if (other.CompareTag("Player") && ownerTag != "Player")
 		{
-			Debug.Log(other.name);
 			if (layer == GameManager.activeLayer)
 			{
 				// If in same layer, deal regular damge

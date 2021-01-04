@@ -43,7 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c32f6c2d36556848acccc2c7bed7cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addScene: 0
-  sceneToLoad: 
   loadEnemies: 1
-  SettingsUI: {fileID: 0}
+  SettingsUI: {fileID: 8720969390859203546, guid: d12682c312290e74fa9b007930e3583c,
+    type: 3}
+  PlayerHUD: {fileID: 2903384469483961456, guid: 4f9dc7c70f63c10478734714d3c54543,
+    type: 3}
+  Fungus: {fileID: 1702795076003710115, guid: 021bc6490108c094ba62e413ff237212, type: 3}
+  realWorldObjects: {fileID: 0}
+  digitalWorldObjects: {fileID: 0}

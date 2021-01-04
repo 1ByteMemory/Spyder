@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-using UnityEngine.SceneManagement; // ENGINE
-
 public enum Dimension
 {
 	Digital,
@@ -19,9 +17,10 @@ public class GameManager : MonoBehaviour
 	//public string sceneToLoad;
 	public bool loadEnemies = true;
 
-	[Header("")]
+	[Header("Ui and HUDs")]
 	public GameObject SettingsUI;
-
+	public GameObject PlayerHUD;
+	public GameObject Fungus;
 
 	[Header("Dimension Switching")]
 	public static Dimension currentActiveDimension;
@@ -35,6 +34,8 @@ public class GameManager : MonoBehaviour
 	ReplacmentShader digitalCam;
 	ReplacmentShader realCam;
 
+	static PlayerMovement playerMove;
+
 	private void Start()
 	{
 		SetMouseActive(false);
@@ -42,6 +43,10 @@ public class GameManager : MonoBehaviour
 		mainCam = Camera.main;
 		realCam = mainCam.transform.Find("RealWorldCam").GetComponent<ReplacmentShader>();
 		digitalCam = mainCam.transform.Find("DigitalWorldCam").GetComponent<ReplacmentShader>();
+
+		playerMove = FindObjectOfType<PlayerMovement>();
+
+		Time.timeScale = 1;
 
 		if (realWorldObjects != null)
 		{
@@ -61,11 +66,15 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
+		UI(SettingsUI);
+		UI(PlayerHUD);
+		UI(Fungus);
 
-		if (SettingsUI != null)
-		{
-			SettingsUI.SetActive(false);
-		}
+		SettingsUI = transform.GetChild(0).gameObject;
+		PlayerHUD = transform.GetChild(1).gameObject;
+		Fungus = transform.GetChild(2).gameObject;
+
+		SettingsUI.SetActive(false);
 
 		if (!loadEnemies)
 		{
@@ -82,21 +91,31 @@ public class GameManager : MonoBehaviour
 		SetDimension(Dimension.Real);
 	}
 
+	void UI(GameObject ui)
+	{
+		if (ui != null && !GameObject.Find(ui.name))
+		{
+			Instantiate(ui, transform);
+		}
+	}
 
 	bool settingsToggel;
 	private void Update()
 	{
 		if (SettingsUI != null)
 		{
-			if (Input.GetKeyDown(KeyCode.Escape))
+			if (Input.GetKeyDown(KeyCode.V))
 			{
 				settingsToggel = !settingsToggel;
 				SetMouseActive(settingsToggel);
 				SettingsUI.SetActive(settingsToggel);
+
+				Time.timeScale = settingsToggel ? 0 : 1;
 			}
 		}
 	}
 
+	#region Dimensions
 	public void ToggleDimension()
 	{
 		switch (currentActiveDimension)
@@ -146,10 +165,37 @@ public class GameManager : MonoBehaviour
 		activeLayer = collideLayer;
 
 	}
+	#endregion
+
 
 	void SetMouseActive(bool value)
 	{
 		Cursor.lockState = value ? CursorLockMode.None : CursorLockMode.Locked;
 		Cursor.visible = value;
+	}
+
+	public void SetMouseSensitivity(float value)
+	{
+		playerMove.xMouseSensitivity = value;
+		playerMove.yMouseSensitivity = value;
+	}
+
+	public void ResumeGame()
+	{
+		Time.timeScale = 1;
+
+		settingsToggel = false;
+		SetMouseActive(false);
+
+		// Find the game manager in the scene and set active on the settings ui from there
+		// This is because this method is called as a static method from an intasiated gameObject
+		FindObjectOfType<GameManager>().SettingsUI.SetActive(false);
+
+	}
+
+	public void QuitGame()
+	{
+		Debug.Log("Quiting");
+		Application.Quit();
 	}
 }

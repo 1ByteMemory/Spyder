@@ -683,7 +683,6 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
-  healthSlider: {fileID: 0}
   immunityWindow: 0.1
 --- !u!136 &6808830610586471018
 CapsuleCollider:
