@@ -82,11 +82,14 @@ public class GroundUnit : SearchAndDestory
 			}
 		}
 	}
+	
 
+	/*
 	public override void Stun()
 	{
 		base.Stun();
 
 		endStunTime = Time.time + stunnedTime;
 	}
+	*/
 }
