@@ -13,6 +13,7 @@ public class GroundUnit : SearchAndDestory
 	public int normalDamage = 2;
 	public int modifiedDamage = 1;
 
+
 	protected override void Start()
 	{
 		base.Start();
@@ -88,5 +89,4 @@ public class GroundUnit : SearchAndDestory
 
 		endStunTime = Time.time + stunnedTime;
 	}
-
 }

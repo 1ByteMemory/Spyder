@@ -28,6 +28,9 @@ public class SearchAndDestory : MonoBehaviour
 
 	public Transform player { get; private set; }
 
+	[HideInInspector]
+	public bool spawnedFromSpawner;
+
 
 	private void OnValidate()
 	{
@@ -52,8 +55,8 @@ public class SearchAndDestory : MonoBehaviour
     {
 		navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-		
-    }
+
+	}
 
 	// Update is called once per frame
 	protected virtual void Update()
@@ -108,7 +111,16 @@ public class SearchAndDestory : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError(gameObject.name + " is not on a Nav Mesh!");
+			Debug.LogError(gameObject.name + " was not on a Nav Mesh, destroying game object.");
+
+			// prevent further spawns
+			if (gameObject.GetComponentInParent<EnemyWaveSpawner>() != null)
+			{
+				gameObject.GetComponentInParent<EnemyWaveSpawner>().spawnAnother = false;
+				Debug.Log(gameObject.transform.parent + " has stopped spawning");
+			}
+
+			Destroy(gameObject);
 		}
 	}
 

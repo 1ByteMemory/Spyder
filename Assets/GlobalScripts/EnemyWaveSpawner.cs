@@ -16,9 +16,9 @@ public class EnemyWaveSpawner : MonoBehaviour
     public int remainingEnemies;
 	public int spawnedEnemies;
 
-	bool spawnAnother = true;
-	bool spawningWave;
-
+	[HideInInspector]
+	public bool spawnAnother = true;
+	
 	bool delaying;
 
 	private void Start()
@@ -50,7 +50,8 @@ public class EnemyWaveSpawner : MonoBehaviour
 		{
 			spawnedEnemies++;
 			remainingEnemies++;
-			Instantiate(enemy, transform);
+			GameObject spawnedEnemy = Instantiate(enemy, transform);
+			spawnedEnemy.GetComponent<SearchAndDestory>().spawnedFromSpawner = true;
 		}
 	}
 

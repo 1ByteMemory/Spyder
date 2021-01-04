@@ -15,9 +15,14 @@ public class Health : MonoBehaviour
 
 	public UnityEvent OnHit;
 
+	private ParticleSystem bloodParticle;
+
+
 	private protected virtual void Start()
 	{
 		currentHealth = maxHealth;
+
+		bloodParticle = GetComponentInChildren<ParticleSystem>();
 	}
 
 	private protected virtual void Update()
@@ -31,6 +36,11 @@ public class Health : MonoBehaviour
 	public virtual void TakeDamage(int damage)
 	{
 		currentHealth -= damage;
+
+		if (bloodParticle != null)
+		{
+			bloodParticle.Play();
+		}
 
 		if (currentHealth <= 0)
 		{
