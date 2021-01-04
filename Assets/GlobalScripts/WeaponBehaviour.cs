@@ -23,6 +23,7 @@ public class WeaponBehaviour
     public int bulletSpreadX = 1;
     [Min(1)]
     public int bulletSpreadY = 1;
+    [Min(1)]
     public float bulletsDensity;
 
     public GameObject bulletTrail;

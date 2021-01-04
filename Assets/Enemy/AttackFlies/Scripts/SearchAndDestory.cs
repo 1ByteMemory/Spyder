@@ -111,10 +111,10 @@ public class SearchAndDestory : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError(gameObject.name + " was not on a Nav Mesh, destroying game object.");
+			Debug.LogWarning(gameObject.name + " was not on a Nav Mesh, destroying game object.");
 
 			// prevent further spawns
-			if (gameObject.GetComponentInParent<EnemyWaveSpawner>() != null)
+			if (spawnedFromSpawner)
 			{
 				gameObject.GetComponentInParent<EnemyWaveSpawner>().spawnAnother = false;
 				Debug.Log(gameObject.transform.parent + " has stopped spawning");

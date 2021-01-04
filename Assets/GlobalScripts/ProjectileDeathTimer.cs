@@ -29,10 +29,10 @@ public class ProjectileDeathTimer : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 
-
 		// On hit player and not shot from player
 		if (other.CompareTag("Player") && ownerTag != "Player")
 		{
+			Debug.Log(other.name);
 			if (layer == GameManager.activeLayer)
 			{
 				// If in same layer, deal regular damge
@@ -49,9 +49,10 @@ public class ProjectileDeathTimer : MonoBehaviour
 		// On hit anything, but the one who shot it, other projectiles and objects not in the active layer
 		if (!other.CompareTag(ownerTag) && !other.CompareTag("Projectile") && GameManager.activeLayer == other.gameObject.layer)
 		{
+			Debug.Log(other.name);
 			// Play explosion animation
 
-			DealDamage(other, 1);
+			DealDamage(other, normalDamage);
 		}
 	}
 

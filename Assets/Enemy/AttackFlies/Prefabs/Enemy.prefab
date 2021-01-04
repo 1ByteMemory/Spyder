@@ -4933,13 +4933,13 @@ MonoBehaviour:
     ProjectileSpawnPoint: {fileID: 0}
     bulletSpreadX: 1
     bulletSpreadY: 1
-    bulletsDensity: 0
+    bulletsDensity: 1
     bulletTrail: {fileID: 0}
     muzzleFlash: {fileID: 0}
     hitEffect: {fileID: 0}
     fireingTime: 0.8
     projectileShotSpeed: 50
-    range: 0
+    range: 10
     damage: 0
     maxAmmo: 0
     maxClipSize: 6

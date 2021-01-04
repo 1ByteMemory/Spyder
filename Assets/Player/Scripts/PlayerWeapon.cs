@@ -135,6 +135,7 @@ public class PlayerWeapon : MonoBehaviour
         GameObject projectile = Instantiate(weapon.projectile, weapon.ProjectileSpawnPoint.position, new Quaternion());
 
         projectile.GetComponent<ProjectileDeathTimer>().ownerTag = "Player";
+        projectile.GetComponent<ProjectileDeathTimer>().normalDamage = weapon.damage;
 
         // Fire the projectile
         weapon.FireProjectile(projectile, cam.forward);
