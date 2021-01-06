@@ -70,9 +70,11 @@ public class GameManager : MonoBehaviour
 		UI(PlayerHUD);
 		UI(Fungus);
 
-		SettingsUI = transform.GetChild(0).gameObject;
-		PlayerHUD = transform.GetChild(1).gameObject;
-		Fungus = transform.GetChild(2).gameObject;
+		Debug.Log("!-----------!");
+		SettingsUI = transform.GetChild(1).gameObject;
+		PlayerHUD = transform.GetChild(2).gameObject;
+		Fungus = transform.GetChild(3).gameObject;
+		Debug.Log("!-----------!");
 
 		SettingsUI.SetActive(false);
 
