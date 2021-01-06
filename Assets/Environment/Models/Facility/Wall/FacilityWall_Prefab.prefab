@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2496754225485432070}
+  - component: {fileID: 1493194411762263342}
   m_Layer: 0
   m_Name: FacilityWall_Prefab
   m_TagString: Untagged
@@ -31,6 +32,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1493194411762263342
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58233024688014543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.0586386, y: 3.5989947, z: 0.51166946}
+  m_Center: {x: 2.0307403, y: 1.7802447, z: -0.24416533}
 --- !u!1001 &2721084646871231396
 PrefabInstance:
   m_ObjectHideFlags: 0

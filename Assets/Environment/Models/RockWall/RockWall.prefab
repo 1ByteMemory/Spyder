@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5553117184902120694}
-  - component: {fileID: -1480879394130020691}
+  - component: {fileID: 8676114616044068667}
   m_Layer: 0
-  m_Name: RockWalls
+  m_Name: RockWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,8 +32,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &-1480879394130020691
-BoxCollider:
+--- !u!64 &8676114616044068667
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -42,9 +42,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.120357, y: 6.275445, z: 1.8796965}
-  m_Center: {x: -0.026095867, y: 3.0679002, z: -0.003287971}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1821408271528166991, guid: d598ddec4b5783f46b424eb404a8fa5f, type: 3}
 --- !u!1001 &4998336704933007677
 PrefabInstance:
   m_ObjectHideFlags: 0
