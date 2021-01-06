@@ -41,8 +41,10 @@ public class GameManager : MonoBehaviour
 		SetMouseActive(false);
 
 		mainCam = Camera.main;
-		realCam = mainCam.transform.Find("RealWorldCam").GetComponent<ReplacmentShader>();
-		digitalCam = mainCam.transform.Find("DigitalWorldCam").GetComponent<ReplacmentShader>();
+
+		realCam = mainCam.transform.Find("RealWorldCam").gameObject.GetComponent<ReplacmentShader>();
+		digitalCam = mainCam.transform.Find("DigitalWorldCam").gameObject.GetComponent<ReplacmentShader>();
+		
 
 		playerMove = FindObjectOfType<PlayerMovement>();
 
@@ -66,15 +68,14 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
+
 		UI(SettingsUI);
 		UI(PlayerHUD);
 		UI(Fungus);
 
-		Debug.Log("!-----------!");
 		SettingsUI = transform.GetChild(1).gameObject;
 		PlayerHUD = transform.GetChild(2).gameObject;
 		Fungus = transform.GetChild(3).gameObject;
-		Debug.Log("!-----------!");
 
 		SettingsUI.SetActive(false);
 
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	bool settingsToggel;
+	static bool settingsToggel;
 	private void Update()
 	{
 		if (SettingsUI != null)

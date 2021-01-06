@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4074046145890409323}
   m_Layer: 10
   m_Name: DigitalWorldCam
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 6189168280067409468}
   m_Layer: 10
   m_Name: RealWorldCam
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
