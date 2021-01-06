@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 	{
 		if (SettingsUI != null)
 		{
-			if (Input.GetKeyDown(KeyCode.V))
+			if (Input.GetKeyDown(KeyCode.Escape))
 			{
 				settingsToggel = !settingsToggel;
 				SetMouseActive(settingsToggel);
