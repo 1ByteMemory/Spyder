@@ -48,7 +48,7 @@ public class ProjectileDeathTimer : MonoBehaviour
 		// On hit anything, but the one who shot it, other projectiles and objects not in the active layer
 		if (!other.CompareTag(ownerTag) && !other.CompareTag("Projectile") && GameManager.activeLayer == other.gameObject.layer)
 		{
-			Debug.Log(other.name);
+
 			// Play explosion animation
 
 			DealDamage(other, normalDamage);
