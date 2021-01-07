@@ -117,7 +117,7 @@ public class SearchAndDestory : MonoBehaviour
 			if (spawnedFromSpawner)
 			{
 				gameObject.GetComponentInParent<EnemyWaveSpawner>().spawnAnother = false;
-				Debug.Log(gameObject.transform.parent + " has stopped spawning");
+				Debug.Log(gameObject.transform.parent.name + " has stopped spawning");
 			}
 
 			Destroy(gameObject);
