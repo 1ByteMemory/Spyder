@@ -4896,9 +4896,12 @@ MonoBehaviour:
   dontDestroyOnDeath: 0
   OnHit:
     m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1659801140377113249}
-        m_MethodName: Stun
+        m_MethodName: EnemyDefeated
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

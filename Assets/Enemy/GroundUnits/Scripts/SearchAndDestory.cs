@@ -124,6 +124,13 @@ public class SearchAndDestory : MonoBehaviour
 		}
 	}
 
+	public virtual void EnemyDefeated()
+	{
+		if (spawnedFromSpawner)
+		{
+			GetComponentInParent<EnemyWaveSpawner>().remainingEnemies--;
+		}
+	}
 
 	protected virtual void Idle()
 	{
