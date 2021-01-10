@@ -9,16 +9,22 @@ public class Wave : MonoBehaviour
     public EnemyWaveSpawner[] SpawnerList;
 
     public UnityEvent OnWaveComplete;
-	public int numCompleted;
-	public int maxEnemies;
+	int numCompleted;
+	int maxEnemies;
 
 	private void Start()
 	{
+		foreach (GameObject item in EnemyList)
+		{
+			item.SetActive(false);
+		}
+
 		foreach (EnemyWaveSpawner item in SpawnerList)
 		{
 			maxEnemies += item.spawnAmount;
+			item.gameObject.SetActive(false);
 		}
-
+		
 		maxEnemies += EnemyList.Length;
 
 	}
@@ -47,6 +53,19 @@ public class Wave : MonoBehaviour
 		if(numCompleted == maxEnemies)
 		{
 			OnWaveComplete.Invoke();
+		}
+	}
+
+	public void SpawnEnemies()
+	{
+		foreach (GameObject item in EnemyList)
+		{
+			item.SetActive(true);
+		}
+
+		foreach (EnemyWaveSpawner item in SpawnerList)
+		{
+			item.gameObject.SetActive(true);
 		}
 	}
 }
