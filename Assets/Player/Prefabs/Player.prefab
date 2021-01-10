@@ -513,13 +513,13 @@ MonoBehaviour:
   yMouseSensitivity: 100
   gravity: 21
   friction: 3
-  moveSpeed: 12
+  moveSpeed: 9
   runAcceleration: 14
-  runDeacceleration: 14
-  airAcceleration: 2
-  airDecceleration: 4
-  airControl: 0.3
-  sideStrafeAcceleration: 50
+  runDeacceleration: 20
+  airAcceleration: 1
+  airDecceleration: 5
+  airControl: 0.5
+  sideStrafeAcceleration: 40
   sideStrafeSpeed: 1
   jumpSpeed: 8
   holdJumpToBhop: 0
@@ -604,7 +604,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: 0.5
-  realEffect: {fileID: 2100000, guid: c8dd3e7e4d5434842ba97351f5f2e075, type: 2}
   digitalEffect: {fileID: 2100000, guid: 8ddf3690dce2eba4fbc856adf4bb0b3e, type: 2}
   triggerDetector: {fileID: 6532164225303208852}
 --- !u!114 &3682504537575836387
@@ -681,6 +680,9 @@ MonoBehaviour:
   maxHealth: 100
   dontDestroyOnDeath: 1
   OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
     m_PersistentCalls:
       m_Calls: []
   immunityWindow: 0.1
