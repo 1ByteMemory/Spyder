@@ -30,7 +30,7 @@ public class DoorController : MonoBehaviour
 	}
 
 
-	public void WaveComplete()
+	public void OpenDoor()
 	{
 		SetDoor(true);
 	}

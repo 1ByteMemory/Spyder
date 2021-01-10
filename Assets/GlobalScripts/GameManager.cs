@@ -81,11 +81,16 @@ public class GameManager : MonoBehaviour
 
 		if (!loadEnemies)
 		{
-			Debug.LogError("All enemies have been disabled. To enable them, go to _GameManager and set Load Enemies to true.");
+			Debug.LogWarning("All enemies have been disabled. To enable them, go to _GameManager and set Load Enemies to true.");
 			GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 			foreach (GameObject enemy in enemies)
 			{
 				enemy.SetActive(false);
+			}
+			EnemyWaveSpawner[] spawners = GameObject.FindObjectsOfType<EnemyWaveSpawner>();
+			foreach (EnemyWaveSpawner spawner in spawners)
+			{
+				spawner.gameObject.SetActive(false);
 			}
 		}
 

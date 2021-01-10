@@ -22,6 +22,8 @@ public class Wave : MonoBehaviour
 			}
 		}
 
+
+
 		if(numCompleted == SpawnerList.Length)
 		{
 			OnWaveComplete.Invoke();
