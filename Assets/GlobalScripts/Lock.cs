@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Lock : MonoBehaviour
 {
     public Key key;
-	public DoorController[] doors;
+	public UnityEvent OnUnlock;
 
 	public Material activatedMat;
 
@@ -13,12 +14,9 @@ public class Lock : MonoBehaviour
 	{
 		if (other.CompareTag("Player") && key.isHeld)
 		{
-			foreach (DoorController door in doors)
-			{
-				door.OpenDoor();
+			OnUnlock.Invoke();
 
-				if (activatedMat != null) transform.GetChild(1).GetComponent<MeshRenderer>().material = activatedMat;
-			}
+			if (activatedMat != null) transform.GetChild(1).GetComponent<MeshRenderer>().material = activatedMat;
 		}
 	}
 }
