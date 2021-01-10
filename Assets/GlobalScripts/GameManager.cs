@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
 	public GameObject realWorldObjects;
 	public GameObject digitalWorldObjects;
 
+
+	[Header("")]
+	public bool spawnAtSpawnPoint = true;
+	public Transform spawnPoint;
+
 	Camera mainCam;
 
 	ReplacmentShader digitalCam;
@@ -97,6 +102,17 @@ public class GameManager : MonoBehaviour
 		// Set the active dimension to the real
 		
 		SetDimension(Dimension.Real);
+
+		if (spawnAtSpawnPoint) GoToSpawn();
+	}
+
+	public void GoToSpawn()
+	{
+		if (spawnPoint != null)
+		{
+			GameObject.FindGameObjectWithTag("Player").transform.position = spawnPoint.position;
+			GameObject.FindGameObjectWithTag("Player").transform.eulerAngles = spawnPoint.eulerAngles;
+		}
 	}
 
 	void UI(GameObject ui)

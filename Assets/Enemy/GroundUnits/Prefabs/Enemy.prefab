@@ -4892,7 +4892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 1
+  maxHealth: 5
   dontDestroyOnDeath: 0
   OnHit:
     m_PersistentCalls:

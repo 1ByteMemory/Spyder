@@ -9,7 +9,10 @@ public class Key : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		isHeld = true;
-		gameObject.SetActive(false);
+		if (other.CompareTag("Player"))
+		{
+			isHeld = true;
+			gameObject.SetActive(false);
+		}
 	}
 }
