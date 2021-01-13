@@ -42,11 +42,22 @@ public class EnemyWaveSpawner : MonoBehaviour
 				SpawnEnemy();
 			}
 		}
+
+		if (remainingEnemies == 0 && spawnedEnemies == spawnAmount)
+		{
+			isWaveCompleted = true;
+		}
+	}
+
+	private bool isWaveCompleted = false;
+	public bool IsWaveCompleted
+	{
+		get { return isWaveCompleted; }
 	}
 
 	void SpawnEnemy()
 	{
-		if (spawnedEnemies <= spawnAmount)
+		if (spawnedEnemies < spawnAmount)
 		{
 			spawnedEnemies++;
 			remainingEnemies++;
@@ -54,7 +65,6 @@ public class EnemyWaveSpawner : MonoBehaviour
 			spawnedEnemy.GetComponent<SearchAndDestory>().spawnedFromSpawner = true;
 		}
 	}
-
 
 	private void OnTriggerStay(Collider other)
 	{
@@ -72,6 +82,4 @@ public class EnemyWaveSpawner : MonoBehaviour
 			delaying = false;
 		}
 	}
-
-
 }

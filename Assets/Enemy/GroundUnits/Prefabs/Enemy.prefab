@@ -4892,13 +4892,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  maxHealth: 1
+  maxHealth: 5
   dontDestroyOnDeath: 0
   OnHit:
     m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1659801140377113249}
-        m_MethodName: Stun
+        m_MethodName: EnemyDefeated
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4920,8 +4923,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259fabad11031794594c5242a8ce5b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchRadius: 35
-  attackRadius: 30
+  searchRadius: 25
+  attackRadius: 6
   stunnedTime: 2
   spawnedFromSpawner: 0
   weapon:

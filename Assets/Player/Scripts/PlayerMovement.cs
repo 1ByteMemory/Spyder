@@ -79,6 +79,8 @@ public class PlayerMovement : MonoBehaviour
             transform.position.z);
 
         _controller = GetComponent<CharacterController>();
+
+        rotY = transform.eulerAngles.y;
     }
 
     private void Update()

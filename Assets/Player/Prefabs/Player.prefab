@@ -513,13 +513,13 @@ MonoBehaviour:
   yMouseSensitivity: 100
   gravity: 21
   friction: 3
-  moveSpeed: 12
+  moveSpeed: 9
   runAcceleration: 14
-  runDeacceleration: 14
-  airAcceleration: 2
-  airDecceleration: 4
-  airControl: 0.3
-  sideStrafeAcceleration: 50
+  runDeacceleration: 20
+  airAcceleration: 1
+  airDecceleration: 5
+  airControl: 0.5
+  sideStrafeAcceleration: 40
   sideStrafeSpeed: 1
   jumpSpeed: 8
   holdJumpToBhop: 0
@@ -680,6 +680,9 @@ MonoBehaviour:
   maxHealth: 100
   dontDestroyOnDeath: 1
   OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
     m_PersistentCalls:
       m_Calls: []
   immunityWindow: 0.1

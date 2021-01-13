@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6790534244141458623}
   m_Layer: 0
   m_Name: _GameManager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,6 +52,8 @@ MonoBehaviour:
   Fungus: {fileID: 1702795076003710115, guid: 021bc6490108c094ba62e413ff237212, type: 3}
   realWorldObjects: {fileID: 0}
   digitalWorldObjects: {fileID: 0}
+  spawnAtSpawnPoint: 1
+  spawnPoint: {fileID: 0}
 --- !u!1 &6068823486426130756
 GameObject:
   m_ObjectHideFlags: 0

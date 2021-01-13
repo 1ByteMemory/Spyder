@@ -31,6 +31,11 @@ public class GroundUnit : SearchAndDestory
 
 	}
 
+	public override void EnemyDefeated()
+	{
+		base.EnemyDefeated();
+	}
+
 	protected override void Idle()
 	{
 		base.Idle();
