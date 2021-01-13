@@ -14,6 +14,7 @@ public class Health : MonoBehaviour
 	public bool dontDestroyOnDeath;
 
 	public UnityEvent OnHit;
+	public UnityEvent OnDeath;
 
 	private ParticleSystem bloodParticle;
 
@@ -42,9 +43,10 @@ public class Health : MonoBehaviour
 			bloodParticle.Play();
 		}
 
-		if (currentHealth <= 0)
+		if (currentHealth <= 0 && !isDead)
 		{
-            isDead = true;
+			isDead = true;
+			OnDeath.Invoke();
 		}
 
 		OnHit.Invoke();

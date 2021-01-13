@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
 	public GameObject realWorldObjects;
 	public GameObject digitalWorldObjects;
 
+
+	[Header("")]
+	public bool spawnAtSpawnPoint = true;
+	public Transform spawnPoint;
+
 	Camera mainCam;
 
 	ReplacmentShader digitalCam;
@@ -81,17 +86,33 @@ public class GameManager : MonoBehaviour
 
 		if (!loadEnemies)
 		{
-			Debug.LogError("All enemies have been disabled. To enable them, go to _GameManager and set Load Enemies to true.");
+			Debug.LogWarning("All enemies have been disabled. To enable them, go to _GameManager and set Load Enemies to true.");
 			GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 			foreach (GameObject enemy in enemies)
 			{
 				enemy.SetActive(false);
+			}
+			EnemyWaveSpawner[] spawners = GameObject.FindObjectsOfType<EnemyWaveSpawner>();
+			foreach (EnemyWaveSpawner spawner in spawners)
+			{
+				spawner.gameObject.SetActive(false);
 			}
 		}
 
 		// Set the active dimension to the real
 		
 		SetDimension(Dimension.Real);
+
+		if (spawnAtSpawnPoint) GoToSpawn();
+	}
+
+	public void GoToSpawn()
+	{
+		if (spawnPoint != null)
+		{
+			GameObject.FindGameObjectWithTag("Player").transform.position = spawnPoint.position;
+			GameObject.FindGameObjectWithTag("Player").transform.eulerAngles = spawnPoint.eulerAngles;
+		}
 	}
 
 	void UI(GameObject ui)

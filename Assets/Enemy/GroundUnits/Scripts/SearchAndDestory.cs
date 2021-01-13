@@ -7,6 +7,7 @@ public enum AgentState
 {
     Idle,
     Search,
+	SearchAndAttack,
     Attack,
 	Stun
 }
@@ -102,6 +103,10 @@ public class SearchAndDestory : MonoBehaviour
 				case AgentState.Search:
 					Search();
 					break;
+				case AgentState.SearchAndAttack:
+					Search();
+					Attack();
+					break;
 				case AgentState.Attack:
 					Attack();
 					break;
@@ -124,6 +129,13 @@ public class SearchAndDestory : MonoBehaviour
 		}
 	}
 
+	public virtual void EnemyDefeated()
+	{
+		if (spawnedFromSpawner)
+		{
+			GetComponentInParent<EnemyWaveSpawner>().remainingEnemies--;
+		}
+	}
 
 	protected virtual void Idle()
 	{
@@ -142,7 +154,8 @@ public class SearchAndDestory : MonoBehaviour
 
 	protected virtual void Attack()
 	{
-		navMeshAgent.isStopped = true;
+		if (agentState == AgentState.Attack)
+			navMeshAgent.isStopped = true;
 
 
 	}
