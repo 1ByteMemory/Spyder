@@ -604,7 +604,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: 0.5
-  realEffect: {fileID: 2100000, guid: c8dd3e7e4d5434842ba97351f5f2e075, type: 2}
   digitalEffect: {fileID: 2100000, guid: 8ddf3690dce2eba4fbc856adf4bb0b3e, type: 2}
   triggerDetector: {fileID: 6532164225303208852}
 --- !u!114 &3682504537575836387
@@ -658,7 +657,7 @@ MonoBehaviour:
     muzzleFlash: {fileID: 8206606376656270112, guid: 8571d3049a6453a46b36be6ca54e0a25,
       type: 3}
     hitEffect: {fileID: 0}
-    fireingTime: 0.1
+    fireingTime: 1
     projectileShotSpeed: 300
     range: 10
     damage: 1
