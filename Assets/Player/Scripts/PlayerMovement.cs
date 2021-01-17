@@ -17,15 +17,18 @@ public class PlayerMovement : MonoBehaviour
     public float xMouseSensitivity = 30.0f;
     public float yMouseSensitivity = 30.0f;
     //
-    /*Frame occuring factors*/
+    [Header("Frame occuring factors")]
     public float gravity = 20.0f;
 
     public float friction = 6; //Ground friction
 
-    /* Movement stuff */
+    [Header("Movement stuff")]
     public float moveSpeed = 7.0f;                // Ground move speed
     public float runAcceleration = 14.0f;         // Ground accel
     public float runDeacceleration = 10.0f;       // Deacceleration that occurs when running on the ground
+    
+    [Header("Jumping stuff")]
+    public float coyoteTime = 0.1f;
     public float airAcceleration = 2.0f;          // Air accel
     public float airDecceleration = 2.0f;         // Deacceleration experienced when ooposite strafing
     public float airControl = 0.3f;               // How precise air control is
@@ -58,6 +61,9 @@ public class PlayerMovement : MonoBehaviour
 
     // Player commands, stores wish commands that the player asks for (Forward, back, jump, etc)
     private Cmd _cmd;
+
+    private float timer;
+    private bool isCoyote;
 
     private void Start()
     {
@@ -113,9 +119,32 @@ public class PlayerMovement : MonoBehaviour
             /* Movement, here's the important part */
             QueueJump();
             if (_controller.isGrounded)
+			{
+                isCoyote = true;
+                timer = 0;
                 GroundMove();
+			}
             else if (!_controller.isGrounded)
+			{
                 AirMove();
+
+                // Coyote time to make jumping easier
+                if (timer <= coyoteTime && isCoyote)
+				{
+                    timer += Time.deltaTime;
+                    
+                    if (wishJump)
+					{
+                        playerVelocity.y = jumpSpeed;
+                        wishJump = false;
+                        isCoyote = false;
+					}
+                }
+                else
+				{
+                    isCoyote = false;
+                }
+			}
 
             // Move the controller
             _controller.Move(playerVelocity * Time.deltaTime);
