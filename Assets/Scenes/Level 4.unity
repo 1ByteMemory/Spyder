@@ -127,7 +127,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25892
+  m_Name: pb_Mesh52248
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2875,7 +2875,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh16986
+  m_Name: pb_Mesh52260
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9937,7 +9937,7 @@ Transform:
   m_GameObject: {fileID: 990707699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4, y: 0, z: -4.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.5272, z: 1}
   m_Children: []
   m_Father: {fileID: 1787534974}
   m_RootOrder: 1
@@ -12722,6 +12722,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: gravity
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: friction
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: runAcceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: runDeacceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: sideStrafeAcceleration
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6808830610586471017, guid: 43e840c0725b45845a4b3b05c1121c56,
+        type: 3}
+      propertyPath: sideStrafeSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6808830610586471030, guid: 43e840c0725b45845a4b3b05c1121c56,
         type: 3}

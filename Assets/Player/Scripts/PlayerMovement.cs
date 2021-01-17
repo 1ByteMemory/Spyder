@@ -17,15 +17,18 @@ public class PlayerMovement : MonoBehaviour
     public float xMouseSensitivity = 30.0f;
     public float yMouseSensitivity = 30.0f;
     //
-    /*Frame occuring factors*/
+    [Header("Frame occuring factors")]
     public float gravity = 20.0f;
 
     public float friction = 6; //Ground friction
 
-    /* Movement stuff */
+    [Header("Movement stuff")]
     public float moveSpeed = 7.0f;                // Ground move speed
     public float runAcceleration = 14.0f;         // Ground accel
     public float runDeacceleration = 10.0f;       // Deacceleration that occurs when running on the ground
+    
+    [Header("Jumping stuff")]
+    public float coyoteTime = 0.1f;
     public float airAcceleration = 2.0f;          // Air accel
     public float airDecceleration = 2.0f;         // Deacceleration experienced when ooposite strafing
     public float airControl = 0.3f;               // How precise air control is
@@ -59,6 +62,9 @@ public class PlayerMovement : MonoBehaviour
     // Player commands, stores wish commands that the player asks for (Forward, back, jump, etc)
     private Cmd _cmd;
 
+    private float timer;
+    private bool isCoyote;
+
     private void Start()
     {
         // Hide the cursor
@@ -79,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position.z);
 
         _controller = GetComponent<CharacterController>();
+        _controller.detectCollisions = false;
 
         rotY = transform.eulerAngles.y;
     }
@@ -113,9 +120,32 @@ public class PlayerMovement : MonoBehaviour
             /* Movement, here's the important part */
             QueueJump();
             if (_controller.isGrounded)
+			{
+                isCoyote = true;
+                timer = 0;
                 GroundMove();
+			}
             else if (!_controller.isGrounded)
+			{
                 AirMove();
+
+                // Coyote time to make jumping easier
+                if (timer <= coyoteTime && isCoyote)
+				{
+                    timer += Time.deltaTime;
+                    
+                    if (wishJump && !headHitCieling)
+					{
+                        playerVelocity.y = jumpSpeed;
+                        wishJump = false;
+                        isCoyote = false;
+					}
+                }
+                else
+				{
+                    isCoyote = false;
+                }
+			}
 
             // Move the controller
             _controller.Move(playerVelocity * Time.deltaTime);
@@ -135,14 +165,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*******************************************************************************************************\
+
+	/*******************************************************************************************************\
    |* MOVEMENT
    \*******************************************************************************************************/
 
-    /**
+	#region Movement
+
+	/**
      * Sets the movement direction based on player input
      */
-    private void SetMovementDir()
+	private void SetMovementDir()
     {
         _cmd.forwardMove = Input.GetAxisRaw("Vertical");
         _cmd.rightMove = Input.GetAxisRaw("Horizontal");
@@ -338,4 +371,26 @@ public class PlayerMovement : MonoBehaviour
         GUI.Label(new Rect(0, 15, 400, 100), "Speed: " + Mathf.Round(ups.magnitude * 100) / 100 + "ups", style);
         GUI.Label(new Rect(0, 30, 400, 100), "Top Speed: " + Mathf.Round(playerTopVelocity * 100) / 100 + "ups", style);
     }
+
+    #endregion
+
+    bool headHitCieling;
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.transform.CompareTag("Untagged"))
+		{
+            float hieghtOffset = 0.8f;
+            float direction = collision.GetContact(0).point.y - (transform.position.y + hieghtOffset);
+
+            if (direction > 0)
+			{
+				playerVelocity.y = -gravity * Time.deltaTime;
+                headHitCieling = true;
+            }
+            else
+			{
+                headHitCieling = false;
+            }
+		}
+	}
 }
