@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
             transform.position.z);
 
         _controller = GetComponent<CharacterController>();
+        _controller.detectCollisions = false;
 
         rotY = transform.eulerAngles.y;
     }
@@ -133,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
 				{
                     timer += Time.deltaTime;
                     
-                    if (wishJump)
+                    if (wishJump && !headHitCieling)
 					{
                         playerVelocity.y = jumpSpeed;
                         wishJump = false;
@@ -164,14 +165,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*******************************************************************************************************\
+
+	/*******************************************************************************************************\
    |* MOVEMENT
    \*******************************************************************************************************/
 
-    /**
+	#region Movement
+
+	/**
      * Sets the movement direction based on player input
      */
-    private void SetMovementDir()
+	private void SetMovementDir()
     {
         _cmd.forwardMove = Input.GetAxisRaw("Vertical");
         _cmd.rightMove = Input.GetAxisRaw("Horizontal");
@@ -367,4 +371,26 @@ public class PlayerMovement : MonoBehaviour
         GUI.Label(new Rect(0, 15, 400, 100), "Speed: " + Mathf.Round(ups.magnitude * 100) / 100 + "ups", style);
         GUI.Label(new Rect(0, 30, 400, 100), "Top Speed: " + Mathf.Round(playerTopVelocity * 100) / 100 + "ups", style);
     }
+
+    #endregion
+
+    bool headHitCieling;
+	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.transform.CompareTag("Untagged"))
+		{
+            float hieghtOffset = 0.8f;
+            float direction = collision.GetContact(0).point.y - (transform.position.y + hieghtOffset);
+            Debug.Log(direction);
+            if (direction > 0)
+			{
+				playerVelocity.y = -gravity * Time.deltaTime;
+                headHitCieling = true;
+            }
+            else
+			{
+                headHitCieling = false;
+            }
+		}
+	}
 }
