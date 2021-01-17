@@ -381,7 +381,7 @@ public class PlayerMovement : MonoBehaviour
 		{
             float hieghtOffset = 0.8f;
             float direction = collision.GetContact(0).point.y - (transform.position.y + hieghtOffset);
-            Debug.Log(direction);
+
             if (direction > 0)
 			{
 				playerVelocity.y = -gravity * Time.deltaTime;
