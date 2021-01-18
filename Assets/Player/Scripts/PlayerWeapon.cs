@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PlayerWeapon : MonoBehaviour
+public class PlayerWeapon : WeaponBehaviour
 {
     public int activeWeapon;
 
@@ -12,7 +12,7 @@ public class PlayerWeapon : MonoBehaviour
 
     public Vector2 aimOffset;
 
-    public WeaponBehaviour[] weapons;
+    Weapon[] weapons;
 
     Transform cam;
 
@@ -21,10 +21,6 @@ public class PlayerWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		foreach (var weapon in weapons)
-		{
-		    weapon.RefillAmmoToMax();
-		}
 		cam = Camera.main.transform;
 
         ammoText = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("AmmoReserve").GetComponent<TextMeshProUGUI>();
@@ -40,8 +36,8 @@ public class PlayerWeapon : MonoBehaviour
         if (weapons.Length > 0)
         {
             Gizmos.color = Color.green;
-            Vector3[] points = weapons[activeWeapon].BulletSpread(aimOffset, Camera.main.transform);
-            Ray[] rays = weapons[activeWeapon].RayDirections(points, Camera.main.transform);
+            Vector3[] points = BulletSpread(weapons[activeWeapon], Camera.main.transform);
+            Ray[] rays = RayDirections(points, Camera.main.transform);
 
             for (int i = 0; i < points.Length; i++)
             {
@@ -69,27 +65,26 @@ public class PlayerWeapon : MonoBehaviour
 
         if (activeWeapon >= 0 && activeWeapon < weapons.Length)
         {
-            DisplayAmmo(weapons[activeWeapon].Ammo, weapons[activeWeapon].Clip);
+            DisplayAmmo(weapons[activeWeapon].ammo, weapons[activeWeapon].clip);
             // Fire is cooldown has finished
             if (Time.time >= endTime)
             {
                 if (Input.GetMouseButton(0))
                 {
-                    endTime = weapons[activeWeapon].fireingTime + Time.time;
-
+                    endTime = weapons[activeWeapon].firingTime + Time.time;
 
                     // Check that there's enough ammo
-                    if (weapons[activeWeapon].Clip > 0)
+                    if (weaponsBehavoirs[activeWeapon].Clip > 0)
                     {
-                        weapons[activeWeapon].Clip--;
+                        weaponsBehavoirs[activeWeapon].Clip--;
 
-                        if (weapons[activeWeapon].weaponType == WeaponType.HitScan)
+                        if (weaponsBehavoirs[activeWeapon].weaponType == WeaponType.HitScan)
                         {
                             HitScan();
                         }
-                        else if (weapons[activeWeapon].weaponType == WeaponType.Projectile)
+                        else if (weaponsBehavoirs[activeWeapon].weaponType == WeaponType.Projectile)
                         {
-                            FireProjectile(weapons[activeWeapon]);
+                            FireProjectile(weaponsBehavoirs[activeWeapon]);
                         }
 
                     }
@@ -97,28 +92,28 @@ public class PlayerWeapon : MonoBehaviour
                     {
                         // check if there's anough ammo left in reserve
                         // to refill clip all the way
-                        if (weapons[activeWeapon].Ammo == 0)
+                        if (weaponsBehavoirs[activeWeapon].Ammo == 0)
                         {
                             return;
                         }
                         // only refill clip to what is left in reserve
-                        else if (weapons[activeWeapon].Ammo < weapons[activeWeapon].maxClipSize)
+                        else if (weaponsBehavoirs[activeWeapon].Ammo < weaponsBehavoirs[activeWeapon].maxClipSize)
                         {
                             // Play reload animation here:
 
                             // Whatever ammo is left is put into the clip
-                            weapons[activeWeapon].Clip = weapons[activeWeapon].Ammo;
+                            weaponsBehavoirs[activeWeapon].Clip = weaponsBehavoirs[activeWeapon].Ammo;
 
                             // the reserve ammo is now empty
-                            weapons[activeWeapon].Ammo = 0;
+                            weaponsBehavoirs[activeWeapon].Ammo = 0;
                         }
                         // If there's enough left in reserve to completly fill the clip
                         else
                         {
                             // Play reload animation here:
 
-                            weapons[activeWeapon].Clip = weapons[activeWeapon].maxClipSize;
-                            weapons[activeWeapon].Ammo -= weapons[activeWeapon].maxClipSize;
+                            weaponsBehavoirs[activeWeapon].Clip = weaponsBehavoirs[activeWeapon].maxClipSize;
+                            weaponsBehavoirs[activeWeapon].Ammo -= weaponsBehavoirs[activeWeapon].maxClipSize;
 
                         }
                     }
@@ -146,23 +141,23 @@ public class PlayerWeapon : MonoBehaviour
 
     void HitScan()
 	{
-        Transform spawnpoint = weapons[activeWeapon].ProjectileSpawnPoint;
-        Ray[] rays = weapons[activeWeapon].RayDirections(weapons[activeWeapon].BulletSpread(aimOffset, spawnpoint), spawnpoint);
+        Transform spawnpoint = weaponsBehavoirs[activeWeapon].ProjectileSpawnPoint;
+        Ray[] rays = weaponsBehavoirs[activeWeapon].RayDirections(weaponsBehavoirs[activeWeapon].BulletSpread(aimOffset, spawnpoint), spawnpoint);
 
 		for (int i = 0; i < rays.Length; i++)
 		{
-            GameObject trail = Instantiate(weapons[activeWeapon].bulletTrail, spawnpoint.position, new Quaternion());
+            GameObject trail = Instantiate(weaponsBehavoirs[activeWeapon].bulletTrail, spawnpoint.position, new Quaternion());
             trail.transform.rotation = Quaternion.LookRotation(rays[i].direction);
-            trail.GetComponent<BulletTrail>().lifeTime = weapons[activeWeapon].range;
+            trail.GetComponent<BulletTrail>().lifeTime = weaponsBehavoirs[activeWeapon].range;
             
 
-			if (Physics.Raycast(rays[i], out RaycastHit hit, weapons[activeWeapon].range))
+			if (Physics.Raycast(rays[i], out RaycastHit hit, weaponsBehavoirs[activeWeapon].range))
 			{
                 trail.GetComponent<BulletTrail>().lifeTime = hit.distance;
 
 				if (hit.transform.GetComponent<Health>())
 				{
-					hit.transform.GetComponent<Health>().TakeDamage(weapons[activeWeapon].damage);
+					hit.transform.GetComponent<Health>().TakeDamage(weaponsBehavoirs[activeWeapon].damage);
 				}
 			}
 		}
@@ -178,9 +173,9 @@ public class PlayerWeapon : MonoBehaviour
     void CycleWeapons(int amount, bool isIndex)
 	{
         activeWeapon = isIndex ? amount : activeWeapon + amount;
-        activeWeapon = (int)Mathf.Repeat(activeWeapon, weapons.Length);
+        activeWeapon = (int)Mathf.Repeat(activeWeapon, weaponsBehavoirs.Length);
 
         if (gunViewModel.transform.childCount > 0) Destroy(gunViewModel.transform.GetChild(0).gameObject);
-        Instantiate(weapons[activeWeapon].gunModel, gunViewModel.transform);
+        Instantiate(weaponsBehavoirs[activeWeapon].gunModel, gunViewModel.transform);
 	}
 }

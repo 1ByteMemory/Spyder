@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum WeaponType
 {
@@ -36,6 +34,4 @@ public class Weapon : ScriptableObject
 
 	public int ammo;
 	public int clip;
-
-
 }
