@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType
-{
-    HitScan,
-    Projectile
-}
+
 
 [System.Serializable]
 public class WeaponBehaviour
