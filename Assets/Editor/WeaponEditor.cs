@@ -13,12 +13,13 @@ public class WeaponEditor : Editor
 
 	SerializedProperty Name;
 	SerializedProperty weaponType;
+	SerializedProperty hitLayers;
 
 	SerializedProperty flags;
-	SerializedProperty entities;
 
 	SerializedProperty model;
 	SerializedProperty bullet;
+	SerializedProperty muzzleFlash;
 
 	SerializedProperty bulletOrigin;
 	SerializedProperty bulletCount;
@@ -29,6 +30,7 @@ public class WeaponEditor : Editor
 	SerializedProperty shotSpeed;
 	SerializedProperty range;
 	SerializedProperty damage;
+	SerializedProperty dmgMult;
 
 	SerializedProperty maxAmmo;
 	SerializedProperty maxClip;
@@ -38,8 +40,7 @@ public class WeaponEditor : Editor
 
 	public WeaponType _weapontype;
 
-	public int index = 0;
-	string[] options;
+	public int bulletIndex = 0;
 
 	private void OnEnable()
 	{
@@ -52,9 +53,15 @@ public class WeaponEditor : Editor
 	public override void OnInspectorGUI()
 	{
 		#region Styles and Layouts
-		GUIStyle bold = new GUIStyle
+		GUIStyle subtitle = new GUIStyle
 		{
-			fontStyle = FontStyle.Bold
+			fontStyle = FontStyle.Bold,
+		};
+
+		GUIStyle title = new GUIStyle
+		{
+			fontStyle = FontStyle.Bold,
+			fontSize = 15
 		};
 
 		#endregion
@@ -62,12 +69,13 @@ public class WeaponEditor : Editor
 		#region serializedObjects
 		Name = serializedObject.FindProperty("Name");
 		weaponType = serializedObject.FindProperty("weaponTpye");
+		hitLayers = serializedObject.FindProperty("hitLayers");
 		flags = serializedObject.FindProperty("flags");
-		entities = serializedObject.FindProperty("entities");
 
 		model = serializedObject.FindProperty("model");
 		bulletOrigin = serializedObject.FindProperty("bulletOrigin");
 		bullet = serializedObject.FindProperty("bullet");
+		muzzleFlash = serializedObject.FindProperty("muzzleFlash");
 		
 		bulletCount = serializedObject.FindProperty("bulletCount");
 		bulletDensity = serializedObject.FindProperty("bulletDensity");
@@ -77,31 +85,41 @@ public class WeaponEditor : Editor
 		shotSpeed = serializedObject.FindProperty("shotSpeed");
 		range = serializedObject.FindProperty("range");
 		damage = serializedObject.FindProperty("damage");
+		dmgMult = serializedObject.FindProperty("dmgMult");
 
 		maxAmmo = serializedObject.FindProperty("maxAmmo");
 		maxClip = serializedObject.FindProperty("maxClip");
-		ammo = serializedObject.FindProperty("ammo");
-		clip = serializedObject.FindProperty("clip");
+		ammo = serializedObject.FindProperty("startingAmmo");
+		clip = serializedObject.FindProperty("startingClip");
 		#endregion
 
 		GetTarget.Update();
 
-		EditorGUILayout.LabelField("Weapon", bold);
+		EditorGUILayout.LabelField("Weapon", title);
 		Name.stringValue = EditorGUILayout.TextField("Name", Name.stringValue);
 		_weapontype = (WeaponType)EditorGUILayout.EnumPopup("Weapon Type", _weapontype);
+		
 
-		string[] options = new string[entities.arraySize];
+
+
+		#region Enitity Flags
+		EditorGUILayout.Space();
+		EditorGUILayout.Space();
+		EditorGUILayout.LabelField("Entities that can use this weapon:", subtitle);
+
+		string[] options = new string[] { "Player", "Goons", "Security", "Digital Spiders" };
+		flags.arraySize = options.Length;
+		
 		for (int i = 0; i < options.Length; i++)
 		{
-			options[i] = entities.GetArrayElementAtIndex(i).stringValue;
+			flags.GetArrayElementAtIndex(i).boolValue = EditorGUILayout.Toggle(options[i], flags.GetArrayElementAtIndex(i).boolValue);
 		}
-
-		flags.intValue = EditorGUILayout.MaskField("Useable by:", flags.intValue, options);
+		#endregion
 
 		#region Gun and Bullet Model
 		EditorGUILayout.Space();
 		EditorGUILayout.Space();
-		EditorGUILayout.LabelField("Gun and Bullet Model", bold);
+		EditorGUILayout.LabelField("Gun and Bullet Model", subtitle);
 
 		model.objectReferenceValue = EditorGUILayout.ObjectField("Gun Model", model.objectReferenceValue, typeof(GameObject), false);
 
@@ -121,13 +139,17 @@ public class WeaponEditor : Editor
 		}
 
 		bullet.objectReferenceValue = EditorGUILayout.ObjectField("Bullet", bullet.objectReferenceValue, typeof(GameObject), false);
-		index = EditorGUILayout.Popup("Bullet Origin:", index, options, EditorStyles.popup);
+		muzzleFlash.objectReferenceValue = EditorGUILayout.ObjectField("Muzzle Flash", muzzleFlash.objectReferenceValue, typeof(GameObject), false);
+		bulletIndex = EditorGUILayout.Popup("Bullet Origin:", bulletIndex, options, EditorStyles.popup);
+
+		GameObject _model = (GameObject)model.objectReferenceValue;
+		bulletOrigin.objectReferenceValue = bulletIndex == 0 ? _model.transform : _model.transform.GetChild(bulletIndex - 1);
 		#endregion
 
 		#region Bullet Spread and Density
 		EditorGUILayout.Space();
 		EditorGUILayout.Space();
-		EditorGUILayout.LabelField("Bullet Spread and Density", bold);
+		EditorGUILayout.LabelField("Bullet Spread and Density", subtitle);
 
 		Vector2Int xy = EditorGUILayout.Vector2IntField("Bullet Count", bulletCount.vector2IntValue);
 		xy.x = xy.x < 1 ? 1 : xy.x;
@@ -142,25 +164,30 @@ public class WeaponEditor : Editor
 		#region Stats
 		EditorGUILayout.Space();
 		EditorGUILayout.Space();
-		EditorGUILayout.LabelField("Stats", bold);
+		EditorGUILayout.LabelField("Stats", subtitle);
 
-		holdToFire.boolValue = EditorGUILayout.Toggle("Hold To Fire", holdToFire.boolValue);
-		
+		// If the player can use the weapon, display HoldToFire bool
+		if (flags.GetArrayElementAtIndex(0).boolValue)
+		{
+			holdToFire.boolValue = EditorGUILayout.Toggle("Hold To Fire", holdToFire.boolValue);
+		}
 		
 		firingTime.floatValue = EditorGUILayout.FloatField("Time between shots", firingTime.floatValue);
-		shotSpeed.floatValue = EditorGUILayout.FloatField("Bullet travel speed", shotSpeed.floatValue);
+		if (_weapontype == WeaponType.Projectile)
+			shotSpeed.floatValue = EditorGUILayout.FloatField("Bullet travel speed", shotSpeed.floatValue);
 		range.floatValue = EditorGUILayout.FloatField("Range", range.floatValue);
 		damage.intValue = EditorGUILayout.IntField("Damage per bullet", damage.intValue);
+		dmgMult.floatValue = EditorGUILayout.FloatField("Dimension Multiplier", dmgMult.floatValue);
 
 		firingTime.floatValue = firingTime.floatValue < 0 ? 0 : firingTime.floatValue;
 		shotSpeed.floatValue = shotSpeed.floatValue < 0 ? 0 : shotSpeed.floatValue;
-		range.floatValue = range.floatValue < 0 ? 0 : range.floatValue;
+		range.floatValue = range.floatValue < 0 ? 0 : range.floatValue > 100 ? 100 : range.floatValue;
 		#endregion
 
 		#region Ammo and Clip
 		EditorGUILayout.Space();
 		EditorGUILayout.Space();
-		EditorGUILayout.LabelField("Ammo and Clip", bold);
+		EditorGUILayout.LabelField("Ammo and Clip", subtitle);
 
 		maxAmmo.intValue = EditorGUILayout.IntField("Max Ammo", maxAmmo.intValue);
 		maxClip.intValue = EditorGUILayout.IntField("Max Clip", maxClip.intValue);
@@ -171,8 +198,9 @@ public class WeaponEditor : Editor
 		maxAmmo.intValue = maxAmmo.intValue < 1 ? 1 : maxAmmo.intValue;
 		maxClip.intValue = maxClip.intValue < 1 ? 1 : maxClip.intValue;
 
-		ammo.intValue = ammo.intValue < 0 ? 0 : ammo.intValue;
-		clip.intValue = clip.intValue < 0 ? 0 : clip.intValue;
+		// Keep the starting ammo and clip inside the range of 0 - maxAmmo/maxClip respectivly
+		ammo.intValue = ammo.intValue < 0 ? 0 : ammo.intValue > maxAmmo.intValue ? maxAmmo.intValue : ammo.intValue;
+		clip.intValue = clip.intValue < 0 ? 0 : clip.intValue > maxClip.intValue ? maxClip.intValue : clip.intValue;
 		#endregion
 
 		// Save the changes to the scriptable object

@@ -62,6 +62,7 @@ public class GroundUnit : SearchAndDestory
 		{
 			if (Time.time >= fireingTime)
 			{
+				/*
 				fireingTime = Time.time + weapon.fireingTime;
 
 				if (weapon.Clip == 0)
@@ -84,6 +85,7 @@ public class GroundUnit : SearchAndDestory
 					weapon.FireProjectile(projectile, (player.position - transform.position).normalized);
 					
 				}
+				*/
 			}
 		}
 	}

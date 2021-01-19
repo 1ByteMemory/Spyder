@@ -5,29 +5,37 @@ using TMPro;
 
 public class PlayerWeapon : WeaponBehaviour
 {
-    public int activeWeapon;
-
-    public TextMeshProUGUI ammoText;
-    public TextMeshProUGUI clipText;
+    TextMeshProUGUI ammoText;
+    TextMeshProUGUI clipText;
 
     public Vector2 aimOffset;
 
-    Weapon[] weapons;
-
     Transform cam;
 
-    public GameObject gunViewModel;
+    public Transform gunViewModel;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-		cam = Camera.main.transform;
+        base.Start();
+		
+        cam = Camera.main.transform;
 
         ammoText = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("AmmoReserve").GetComponent<TextMeshProUGUI>();
         clipText = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("AmmoClip").GetComponent<TextMeshProUGUI>();
-        
 
-        activeWeapon = 0;
+		foreach (Weapon gun in weapons)
+		{
+            if (gunViewModel != null)
+			{
+				GameObject _gun = Instantiate(gun.model, gunViewModel);
+                _gun.SetActive(false);
+			}
+        }
+
+        InstantiateParticles(gunViewModel);
+
+        weaponIndex = 0;
         CycleWeapons(0, true);
     }
 
@@ -36,7 +44,7 @@ public class PlayerWeapon : WeaponBehaviour
         if (weapons.Length > 0)
         {
             Gizmos.color = Color.green;
-            Vector3[] points = BulletSpread(weapons[activeWeapon], Camera.main.transform);
+            Vector3[] points = BulletSpread(weapons[weaponIndex], Camera.main.transform);
             Ray[] rays = RayDirections(points, Camera.main.transform);
 
             for (int i = 0; i < points.Length; i++)
@@ -48,121 +56,22 @@ public class PlayerWeapon : WeaponBehaviour
         }
     }
 
-	float endTime;
     void Update()
     {
-        CycleWeapons(Mathf.FloorToInt(Input.mouseScrollDelta.y), false);
+        if (Input.mouseScrollDelta.y != 0)
+            CycleWeapons(Mathf.FloorToInt(Input.mouseScrollDelta.y), false);
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+
+        if (weaponIndex >= 0 && weaponIndex < weapons.Length)
         {
-            CycleWeapons(0, true);
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-            CycleWeapons(1, true);
-		}
+            DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
 
-
-        if (activeWeapon >= 0 && activeWeapon < weapons.Length)
-        {
-            DisplayAmmo(weapons[activeWeapon].ammo, weapons[activeWeapon].clip);
-            // Fire is cooldown has finished
-            if (Time.time >= endTime)
+            if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
             {
-                if (Input.GetMouseButton(0))
-                {
-                    endTime = weapons[activeWeapon].firingTime + Time.time;
-
-                    // Check that there's enough ammo
-                    if (weaponsBehavoirs[activeWeapon].Clip > 0)
-                    {
-                        weaponsBehavoirs[activeWeapon].Clip--;
-
-                        if (weaponsBehavoirs[activeWeapon].weaponType == WeaponType.HitScan)
-                        {
-                            HitScan();
-                        }
-                        else if (weaponsBehavoirs[activeWeapon].weaponType == WeaponType.Projectile)
-                        {
-                            FireProjectile(weaponsBehavoirs[activeWeapon]);
-                        }
-
-                    }
-                    else
-                    {
-                        // check if there's anough ammo left in reserve
-                        // to refill clip all the way
-                        if (weaponsBehavoirs[activeWeapon].Ammo == 0)
-                        {
-                            return;
-                        }
-                        // only refill clip to what is left in reserve
-                        else if (weaponsBehavoirs[activeWeapon].Ammo < weaponsBehavoirs[activeWeapon].maxClipSize)
-                        {
-                            // Play reload animation here:
-
-                            // Whatever ammo is left is put into the clip
-                            weaponsBehavoirs[activeWeapon].Clip = weaponsBehavoirs[activeWeapon].Ammo;
-
-                            // the reserve ammo is now empty
-                            weaponsBehavoirs[activeWeapon].Ammo = 0;
-                        }
-                        // If there's enough left in reserve to completly fill the clip
-                        else
-                        {
-                            // Play reload animation here:
-
-                            weaponsBehavoirs[activeWeapon].Clip = weaponsBehavoirs[activeWeapon].maxClipSize;
-                            weaponsBehavoirs[activeWeapon].Ammo -= weaponsBehavoirs[activeWeapon].maxClipSize;
-
-                        }
-                    }
-                }
+                UseWeapon(weapons[weaponIndex], cam);
             }
         }
     }
-
-    void FireProjectile(WeaponBehaviour weapon)
-	{
-        if (weapon.projectile == null)
-        {
-            Debug.LogError(weapon.name + " doesn't have a gun model");
-            return;
-        }
-        // Spawn the projectile
-        GameObject projectile = Instantiate(weapon.projectile, weapon.ProjectileSpawnPoint.position, new Quaternion());
-
-        projectile.GetComponent<ProjectileDeathTimer>().ownerTag = "Player";
-        projectile.GetComponent<ProjectileDeathTimer>().normalDamage = weapon.damage;
-
-        // Fire the projectile
-        weapon.FireProjectile(projectile, cam.forward);
-    }
-
-    void HitScan()
-	{
-        Transform spawnpoint = weaponsBehavoirs[activeWeapon].ProjectileSpawnPoint;
-        Ray[] rays = weaponsBehavoirs[activeWeapon].RayDirections(weaponsBehavoirs[activeWeapon].BulletSpread(aimOffset, spawnpoint), spawnpoint);
-
-		for (int i = 0; i < rays.Length; i++)
-		{
-            GameObject trail = Instantiate(weaponsBehavoirs[activeWeapon].bulletTrail, spawnpoint.position, new Quaternion());
-            trail.transform.rotation = Quaternion.LookRotation(rays[i].direction);
-            trail.GetComponent<BulletTrail>().lifeTime = weaponsBehavoirs[activeWeapon].range;
-            
-
-			if (Physics.Raycast(rays[i], out RaycastHit hit, weaponsBehavoirs[activeWeapon].range))
-			{
-                trail.GetComponent<BulletTrail>().lifeTime = hit.distance;
-
-				if (hit.transform.GetComponent<Health>())
-				{
-					hit.transform.GetComponent<Health>().TakeDamage(weaponsBehavoirs[activeWeapon].damage);
-				}
-			}
-		}
-
-	}
 
     void DisplayAmmo(int ammo, int clip)
 	{
@@ -172,10 +81,15 @@ public class PlayerWeapon : WeaponBehaviour
 
     void CycleWeapons(int amount, bool isIndex)
 	{
-        activeWeapon = isIndex ? amount : activeWeapon + amount;
-        activeWeapon = (int)Mathf.Repeat(activeWeapon, weaponsBehavoirs.Length);
+        weaponIndex = isIndex ? amount : weaponIndex + amount;
+        weaponIndex = (int)Mathf.Repeat(weaponIndex, weapons.Length);
 
-        if (gunViewModel.transform.childCount > 0) Destroy(gunViewModel.transform.GetChild(0).gameObject);
-        Instantiate(weaponsBehavoirs[activeWeapon].gunModel, gunViewModel.transform);
+		// Disable all guns, then enable the selected on.
+		for (int i = 0; i < gunViewModel.childCount; i++)
+		{
+            gunViewModel.GetChild(i).gameObject.SetActive(false);
+		}
+
+        gunViewModel.GetChild(weaponIndex).gameObject.SetActive(true);
 	}
 }
