@@ -619,52 +619,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5c79dfaf659364dbe70374a281cb6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeWeapon: 1
-  ammoText: {fileID: 0}
-  clipText: {fileID: 0}
-  aimOffset: {x: 0, y: 0}
   weapons:
-  - name: Shogun
-    weaponType: 0
-    gunModel: {fileID: 130794516041731738, guid: ca14c0db4047049459e4e77e08401051,
-      type: 3}
-    projectile: {fileID: 0}
-    ProjectileSpawnPoint: {fileID: 1270949675902316355}
-    bulletSpreadX: 4
-    bulletSpreadY: 3
-    bulletsDensity: 2.19
-    bulletTrail: {fileID: 4731568779583813285, guid: 34d77e04a9a949749bfba76ec44a3ae0,
-      type: 3}
-    muzzleFlash: {fileID: 8206606376656270112, guid: 8571d3049a6453a46b36be6ca54e0a25,
-      type: 3}
-    hitEffect: {fileID: 0}
-    fireingTime: 1
-    projectileShotSpeed: 200
-    range: 10
-    damage: 1
-    maxAmmo: 9999
-    maxClipSize: 10
-  - name: Pistol
-    weaponType: 0
-    gunModel: {fileID: 130794516041731738, guid: 530d33f968f28534881833c92bd126a6,
-      type: 3}
-    projectile: {fileID: 0}
-    ProjectileSpawnPoint: {fileID: 1270949675902316355}
-    bulletSpreadX: 1
-    bulletSpreadY: 1
-    bulletsDensity: 1
-    bulletTrail: {fileID: 4731568779583813285, guid: 34d77e04a9a949749bfba76ec44a3ae0,
-      type: 3}
-    muzzleFlash: {fileID: 8206606376656270112, guid: 8571d3049a6453a46b36be6ca54e0a25,
-      type: 3}
-    hitEffect: {fileID: 0}
-    fireingTime: 1
-    projectileShotSpeed: 300
-    range: 10
-    damage: 1
-    maxAmmo: 9999
-    maxClipSize: 10
-  gunViewModel: {fileID: 8844571786665598806}
+  - {fileID: 11400000, guid: 2db7517f8db13a24a8a30510a41d3c58, type: 2}
+  - {fileID: 11400000, guid: 364f1677cb912a04b82876c02ccc7c61, type: 2}
+  aimOffset: {x: 0, y: 0}
+  gunViewModel: {fileID: 4461220149873880172}
 --- !u!114 &7283696070113170742
 MonoBehaviour:
   m_ObjectHideFlags: 0

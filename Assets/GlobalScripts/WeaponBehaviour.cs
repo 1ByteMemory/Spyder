@@ -1,120 +1,186 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public enum WeaponType
+
+public class WeaponBehaviour : MonoBehaviour
 {
-    HitScan,
-    Projectile
-}
+    
+    protected int weaponIndex;
+    public Weapon[] weapons;
 
-[System.Serializable]
-public class WeaponBehaviour
-{
-    public string name;
-    public WeaponType weaponType;
-    public GameObject gunModel;
-    public GameObject projectile;
-    public Transform ProjectileSpawnPoint;
+    protected bool isFiring;
+    protected bool isReloading;
+    
+    private float firingEndTime;
+    private float reloadingEndTime;
 
-    [Header("")]
-
-    [Min(1)]
-    public int bulletSpreadX = 1;
-    [Min(1)]
-    public int bulletSpreadY = 1;
-    [Min(1)]
-    public float bulletsDensity;
-
-    public GameObject bulletTrail;
-    public GameObject muzzleFlash;
-    public GameObject hitEffect;
-
-    /// <summary>
-    /// How fast it takes to fire the next shot
-    /// </summary>
-    [Tooltip("How fast it takes to fire the next shot")]
-    public float fireingTime;
-
-    [Header("Projectile")]
-    /// <summary>
-    /// How fast the projectile fires
-    /// </summary>
-    [Tooltip("How fast the projectile fires")]
-    public float projectileShotSpeed;
-    //public float reloadSpeed;
-    public float range;
-    public int damage;
-
-    [Header("Ammo")]
-    public int maxAmmo;
-    public int maxClipSize;
-
-    private int _ammo;
-    private int _clip;
-
-	public int Ammo
+    protected virtual void Start()
 	{
-        get { return _ammo; }
-        set	{ _ammo = value >= 0 ? value : 0; }
+		foreach (Weapon item in weapons)
+		{
+            item.clip = item.startingClip;
+            item.ammo = item.startingAmmo;
+        }
 	}
 
-    public int Clip
+    protected virtual void InstantiateWeapons(Transform gunTransform)
 	{
-        get { return _clip; }
-        set { _clip = value >= 0 ? value : 0; }
+        foreach (Weapon gun in weapons)
+        {
+            GameObject _gun = Instantiate(gun.model, gunTransform);
 
+            ParticleSystem bullet = gun.bullet.GetComponent<ParticleSystem>();
+            if (bullet != null)
+            {
+                bullet = Instantiate(gun.bullet, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
+                var main = bullet.main;
+                main.playOnAwake = false;
+            }
+
+            ParticleSystem muzzleFlash = gun.muzzleFlash;
+            if (muzzleFlash != null)
+            {
+                muzzleFlash = Instantiate(gun.muzzleFlash, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
+                var main = muzzleFlash.main;
+                main.playOnAwake = false;
+            }
+        }
     }
 
+    protected virtual void UseWeapon(Transform weaponScene)
+	{
+        UseWeapon(weaponScene, weapons[weaponIndex], transform);
+    }
+
+    protected virtual void UseWeapon(Transform weaponScene, Weapon weaponAsset, Transform raycastOrigin)
+	{
+        if (Time.time >= firingEndTime)
+		{
+            firingEndTime = Time.time + weaponAsset.firingTime;
+            
+            if (weaponAsset.clip > 0)
+		    {
+                isFiring = true;
+                isReloading = false;
+
+                if (!weaponAsset.isClipInf)
+                    weaponAsset.clip--;
+
+                if (weaponAsset.weaponType == WeaponType.HitScan)
+                {
+                    HitScan(weaponAsset, weaponScene, raycastOrigin);
+                }
+                else if (weaponAsset.weaponType == WeaponType.Projectile)
+                {
+                    FireProjectile(weaponAsset, weaponScene);
+                }
+            }
+			else
+			{
+                isFiring = false;
+                isReloading = true;
+                weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
+                if (!weaponAsset.isAmmoInf)
+				{
+                    weaponAsset.ammo -= weaponAsset.maxClip;
+                    weaponAsset.ammo = weaponAsset.ammo < 0 ? 0 : weaponAsset.ammo;
+				}
+			}
+		}
+		else
+		{
+            isFiring = false;
+            isReloading = false;
+		}
+	}
+
+    void HitScan(Weapon weaponAsset, Transform weaponScene, Transform raycastOrigin)
+    {
+        //Transform spawnpoint = weapon.bulletOrigin;
+        Ray[] bulletRays = RayDirections(BulletSpread(weaponAsset, raycastOrigin), raycastOrigin);
+
+        if (weaponAsset.bullet != null)
+		{
+            ParticleSystem bulletParticle = weaponAsset.GetBulletOrigin(weaponScene).Find(weaponAsset.bullet.name + "(Clone)").GetComponent<ParticleSystem>();
+            bulletParticle.Play();
+		}
+
+        if (weaponAsset.muzzleFlash != null)
+		{
+            ParticleSystem muzleParticle = weaponAsset.GetBulletOrigin(weaponScene).Find(weaponAsset.muzzleFlash.name + "(Clone)").GetComponent<ParticleSystem>();
+            muzleParticle.Play();
+		}
+
+        for (int i = 0; i < bulletRays.Length; i++)
+        {
+            RaycastHit[] hit = Physics.RaycastAll(bulletRays[i], weaponAsset.range);
+
+			for (int n = 0; n < hit.Length; n++)
+			{
+                if (hit[n].transform != transform && hit[n].transform.GetComponent<Health>())
+                {
+                    hit[n].transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
+                    break;
+                }
+			}
+        }
+    }
 
     /// <summary>
     /// Refill ammo and clip to the maximum amount
     /// </summary>
-    public void RefillAmmoToMax()
+    public static void RefillAmmoToMax(Weapon weapon)
 	{
-        Ammo = maxAmmo;
-        Clip = maxClipSize;
+        weapon.ammo = weapon.maxAmmo;
+        weapon.clip = weapon.maxClip;
 	}
     /// <summary>
     /// Refill ammo and clip to a specified amount
     /// </summary>
     /// <param name="refillClip"></param>
     /// <param name="refillAmmo"></param>
-    public void RefillAmmo(int refillClip, int refillAmmo)
+    public static void RefillAmmo(Weapon weapon, int refillAmmo)
 	{
-        Ammo = refillAmmo;
-        Clip = refillClip;
+        weapon.ammo = refillAmmo;
 	}
 
-    public static void FireProjectile(GameObject projectile, Vector3 fireDirection, float shotSpeed, float projectileLifeTime)
+
+    protected virtual void FireProjectile(Weapon weapon, Transform sceneWeapon)
 	{
-        // Get the rigidbody of the projectile, if it has one
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        if (rb != null)
+        Vector2 offset = new Vector2(0, 0);
+        Vector3[] bulletSpreadPositions = BulletSpread(weapon, weapon.GetBulletOrigin(sceneWeapon), offset);
+        Ray[] bulletRays = RayDirections(bulletSpreadPositions, weapon.GetBulletOrigin(sceneWeapon));
+
+		for (int i = 0; i < bulletRays.Length; i++)
 		{
-            // Set it's velocity in a specifc dierction with speed
-            rb.AddForce(fireDirection * shotSpeed, ForceMode.VelocityChange);
-		}
-
-		Object.Destroy(projectile, projectileLifeTime);
-	}
-    public void FireProjectile(GameObject gameObject, Vector3 fireDirection)
-	{
-
-        // Get the rigidbody of the projectile, if it has one
-        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
+            GameObject bullet = Instantiate(weapon.bullet, weapon.GetBulletOrigin(sceneWeapon));
+            bullet.transform.parent = null;
             
-            // Set it's velocity in a specifc dierction with speed
-            rb.AddForce(fireDirection * projectileShotSpeed, ForceMode.VelocityChange);
-        }
-
-        ProjectileDeathTimer deathTimer = projectile.GetComponent<ProjectileDeathTimer>();
-        if (deathTimer != null)
-		{
-            deathTimer.lifeTime = range;
+            // Get the rigidbody of the projectile, if it has one
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                // Set it's velocity in a specifc dierction with speed
+                rb.velocity = bulletRays[i].direction * weapon.shotSpeed;
+            }
+            
+            Projectile projectile = bullet.GetComponent<Projectile>();
+            if (projectile != null)
+		    {
+                projectile.weapon = weapon;
+                projectile.layer = gameObject.layer;
+                projectile.ownerTag = gameObject.tag;
+		    }
+			else
+			{
+                Destroy(bullet, weapon.range);
+			}
 		}
+
+        if (weapon.muzzleFlash != null)
+            weapon.muzzleFlash.Play();
+        
+
+
     }
 
 
@@ -124,22 +190,22 @@ public class WeaponBehaviour
     /// <param name="offset"></param>
     /// <param name="parent"></param>
     /// <returns></returns>
-    public Vector3[] BulletSpread(Vector2 offset, Transform parent)
+    public Vector3[] BulletSpread(Weapon weapon, Transform parent, Vector2 offset = default)
 	{
-        Vector3[] directions = new Vector3[bulletSpreadX * bulletSpreadY];
+        Vector3[] directions = new Vector3[weapon.bulletCount.x * weapon.bulletCount.y];
 		Vector2 half = new Vector2
 		{
-			x = bulletSpreadX == 1 ? 0 : bulletSpreadX * 0.5f - 0.5f,
-			y = bulletSpreadY == 1 ? 0 : bulletSpreadY * 0.5f - 0.5f
+			x = weapon.bulletCount.x == 1 ? 0 : weapon.bulletCount.x * 0.5f - 0.5f,
+			y = weapon.bulletCount.y == 1 ? 0 : weapon.bulletCount.y * 0.5f - 0.5f
 		};
 
         int index = 0;
-        for (int y = 0; y < bulletSpreadY; y++)
+        for (int y = 0; y < weapon.bulletCount.y; y++)
 		{
-			for (int x = 0; x < bulletSpreadX; x++)
+			for (int x = 0; x < weapon.bulletCount.x; x++)
 			{
                 // Get point position
-                Vector3 position = new Vector3(x - half.x, y - half.y, 0) / bulletsDensity;
+                Vector3 position = new Vector3(x - half.x, y - half.y, 0) / weapon.bulletDensity;
 
                 // Convert to transforms rotation
                 Quaternion rotation = Quaternion.Euler(parent.eulerAngles);
