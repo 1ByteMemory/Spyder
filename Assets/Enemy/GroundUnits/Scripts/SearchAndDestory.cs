@@ -13,7 +13,7 @@ public enum AgentState
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class SearchAndDestory : MonoBehaviour
+public class SearchAndDestory : WeaponBehaviour
 {
     public float searchRadius = 20;
     public float attackRadius = 10;
@@ -32,6 +32,8 @@ public class SearchAndDestory : MonoBehaviour
 	[HideInInspector]
 	public bool spawnedFromSpawner;
 
+	public Transform gunPosition;
+	protected Transform activeWeapon;
 
 	private void OnValidate()
 	{
@@ -52,11 +54,18 @@ public class SearchAndDestory : MonoBehaviour
 	}
 
 	// Start is called before the first frame update
-	protected virtual void Start()
+	protected override void Start()
     {
+		base.Start();
+
 		navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
+		InstantiateWeapons(gunPosition);
+		if (gunPosition.childCount > 0)
+			activeWeapon = gunPosition.GetChild(0);
+		else
+			Debug.Log(transform + "Doesn't have a gun!");
 	}
 
 	// Update is called once per frame
@@ -157,6 +166,8 @@ public class SearchAndDestory : MonoBehaviour
 		if (agentState == AgentState.Attack)
 			navMeshAgent.isStopped = true;
 
+		if (gunPosition.childCount > 0)
+			UseWeapon(activeWeapon);
 
 	}
 

@@ -22,7 +22,7 @@ public class WeaponBehaviour : MonoBehaviour
         }
 	}
 
-    protected virtual void InstantiateParticles(Transform gunTransform)
+    protected virtual void InstantiateWeapons(Transform gunTransform)
 	{
         foreach (Weapon gun in weapons)
         {
@@ -43,13 +43,15 @@ public class WeaponBehaviour : MonoBehaviour
                 var main = muzzleFlash.main;
                 main.playOnAwake = false;
             }
-
-            _gun.SetActive(false);
         }
     }
 
+    protected virtual void UseWeapon(Transform weaponScene)
+	{
+        UseWeapon(weaponScene, weapons[weaponIndex], transform);
+    }
 
-    protected virtual void UseWeapon(Weapon weaponAsset, Transform weaponScene, Transform raycastOrigin)
+    protected virtual void UseWeapon(Transform weaponScene, Weapon weaponAsset, Transform raycastOrigin)
 	{
         if (Time.time >= firingEndTime)
 		{
