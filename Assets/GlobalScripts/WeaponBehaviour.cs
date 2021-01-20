@@ -24,58 +24,59 @@ public class WeaponBehaviour : MonoBehaviour
 
     protected virtual void InstantiateParticles(Transform gunTransform)
 	{
-		for (int i = 0; i < gunTransform.childCount; i++)
-		{
-            Weapon item = weapons[i];
+        foreach (Weapon gun in weapons)
+        {
+            GameObject _gun = Instantiate(gun.model, gunTransform);
 
-            ParticleSystem bullet = item.bullet.GetComponent<ParticleSystem>();
+            ParticleSystem bullet = gun.bullet.GetComponent<ParticleSystem>();
             if (bullet != null)
             {
-                
-                Instantiate(item.bullet, gunTransform.GetChild(i).Find(item.bulletOrigin.name));
+                bullet = Instantiate(gun.bullet, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
                 var main = bullet.main;
                 main.playOnAwake = false;
             }
 
-            ParticleSystem muzzleFlash = item.muzzleFlash;
+            ParticleSystem muzzleFlash = gun.muzzleFlash;
             if (muzzleFlash != null)
             {
-                Instantiate(item.muzzleFlash, gunTransform.GetChild(i).Find(item.bulletOrigin.name));
+                muzzleFlash = Instantiate(gun.muzzleFlash, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
                 var main = muzzleFlash.main;
                 main.playOnAwake = false;
             }
-		}
+
+            _gun.SetActive(false);
+        }
     }
 
 
-    protected virtual void UseWeapon(Weapon weapon, Transform raycastOrigin)
+    protected virtual void UseWeapon(Weapon weaponAsset, Transform weaponScene, Transform raycastOrigin)
 	{
         if (Time.time >= firingEndTime)
 		{
-            firingEndTime = Time.time + weapon.firingTime;
+            firingEndTime = Time.time + weaponAsset.firingTime;
             
-            if (weapon.clip > 0)
+            if (weaponAsset.clip > 0)
 		    {
                 isFiring = true;
                 isReloading = false;
-                weapon.clip--;
+                weaponAsset.clip--;
 
-                if(weapon.weaponType == WeaponType.HitScan)
+                if(weaponAsset.weaponType == WeaponType.HitScan)
 				{
-                    HitScan(weapon, raycastOrigin);
+                    HitScan(weaponAsset, weaponScene, raycastOrigin);
 				}
-                else if (weapon.weaponType == WeaponType.Projectile)
+                else if (weaponAsset.weaponType == WeaponType.Projectile)
 				{
-                    FireProjectile(weapon);
+                    FireProjectile(weaponAsset, weaponScene);
 				}
 		    }
 			else
 			{
                 isFiring = false;
                 isReloading = true;
-                weapon.clip = weapon.ammo > weapon.maxClip ? weapon.maxClip : weapon.ammo;
-                weapon.ammo -= weapon.maxClip;
-                weapon.ammo = weapon.ammo < 0 ? 0 : weapon.ammo;
+                weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
+                weaponAsset.ammo -= weaponAsset.maxClip;
+                weaponAsset.ammo = weaponAsset.ammo < 0 ? 0 : weaponAsset.ammo;
 			}
 		}
 		else
@@ -85,24 +86,30 @@ public class WeaponBehaviour : MonoBehaviour
 		}
 	}
 
-    void HitScan(Weapon weapon, Transform raycastOrigin)
+    void HitScan(Weapon weaponAsset, Transform weaponScene, Transform raycastOrigin)
     {
         //Transform spawnpoint = weapon.bulletOrigin;
-        Ray[] bulletRays = RayDirections(BulletSpread(weapon, raycastOrigin), raycastOrigin);
+        Ray[] bulletRays = RayDirections(BulletSpread(weaponAsset, raycastOrigin), raycastOrigin);
 
-        if (weapon.bullet.GetComponent<ParticleSystem>() != null)
-            weapon.bullet.GetComponent<ParticleSystem>().Play();
+        if (weaponAsset.bullet != null)
+		{
+            ParticleSystem bulletParticle = weaponAsset.GetBulletOrigin(weaponScene).Find(weaponAsset.bullet.name + "(Clone)").GetComponent<ParticleSystem>();
+            bulletParticle.Play();
+		}
 
-        if (weapon.muzzleFlash != null)
-            weapon.muzzleFlash.Play();
+        if (weaponAsset.muzzleFlash != null)
+		{
+            ParticleSystem muzleParticle = weaponAsset.GetBulletOrigin(weaponScene).Find(weaponAsset.muzzleFlash.name + "(Clone)").GetComponent<ParticleSystem>();
+            muzleParticle.Play();
+		}
 
         for (int i = 0; i < bulletRays.Length; i++)
         {
-            if (Physics.Raycast(bulletRays[i], out RaycastHit hit, weapon.range))
+            if (Physics.Raycast(bulletRays[i], out RaycastHit hit, weaponAsset.range))
             {
                 if (hit.transform.GetComponent<Health>())
                 {
-                    hit.transform.GetComponent<Health>().TakeDamage(weapon.damage);
+                    hit.transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
                 }
             }
         }
@@ -127,17 +134,19 @@ public class WeaponBehaviour : MonoBehaviour
 	}
 
 
-    protected virtual void FireProjectile(Weapon weapon)
+    protected virtual void FireProjectile(Weapon weapon, Transform sceneWeapon)
 	{
-        Ray[] bulletRays = RayDirections(BulletSpread(weapon, weapon.bulletOrigin), weapon.bulletOrigin);
+        Vector2 offset = new Vector2(0.5f, 0.5f);
+        Vector3[] bulletSpreadPositions = BulletSpread(weapon, weapon.GetBulletOrigin(sceneWeapon), offset);
+        Ray[] bulletRays = RayDirections(bulletSpreadPositions, weapon.GetBulletOrigin(sceneWeapon));
 
 		for (int i = 0; i < bulletRays.Length; i++)
 		{
-            GameObject bullet = Instantiate(weapon.bullet, weapon.bulletOrigin);
+            GameObject bullet = Instantiate(weapon.bullet, weapon.GetBulletOrigin(sceneWeapon));
             bullet.transform.parent = null;
             
             // Get the rigidbody of the projectile, if it has one
-            Rigidbody rb = weapon.bullet.GetComponent<Rigidbody>();
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 // Set it's velocity in a specifc dierction with speed

@@ -13,15 +13,16 @@ public class WeaponEditor : Editor
 
 	SerializedProperty Name;
 	SerializedProperty weaponType;
+	SerializedProperty weaponTypeIndex;
 	SerializedProperty hitLayers;
 
 	SerializedProperty flags;
 
 	SerializedProperty model;
 	SerializedProperty bullet;
+	SerializedProperty bulletIndex;
 	SerializedProperty muzzleFlash;
 
-	SerializedProperty bulletOrigin;
 	SerializedProperty bulletCount;
 	SerializedProperty bulletDensity;
 
@@ -40,7 +41,6 @@ public class WeaponEditor : Editor
 
 	public WeaponType _weapontype;
 
-	public int bulletIndex = 0;
 
 	private void OnEnable()
 	{
@@ -68,13 +68,14 @@ public class WeaponEditor : Editor
 
 		#region serializedObjects
 		Name = serializedObject.FindProperty("Name");
-		weaponType = serializedObject.FindProperty("weaponTpye");
+		weaponType = serializedObject.FindProperty("weaponType");
+		weaponTypeIndex = serializedObject.FindProperty("weaponTypeIndex");
 		hitLayers = serializedObject.FindProperty("hitLayers");
 		flags = serializedObject.FindProperty("flags");
 
 		model = serializedObject.FindProperty("model");
-		bulletOrigin = serializedObject.FindProperty("bulletOrigin");
 		bullet = serializedObject.FindProperty("bullet");
+		bulletIndex = serializedObject.FindProperty("bulletIndex");
 		muzzleFlash = serializedObject.FindProperty("muzzleFlash");
 		
 		bulletCount = serializedObject.FindProperty("bulletCount");
@@ -97,9 +98,9 @@ public class WeaponEditor : Editor
 
 		EditorGUILayout.LabelField("Weapon", title);
 		Name.stringValue = EditorGUILayout.TextField("Name", Name.stringValue);
-		_weapontype = (WeaponType)EditorGUILayout.EnumPopup("Weapon Type", _weapontype);
-		
-
+		//_weapontype = (WeaponType)EditorGUILayout.EnumPopup("Weapon Type", _weapontype);
+		weaponType.enumValueIndex = (int)(WeaponType)EditorGUILayout.EnumPopup("Weapon Type", weapon.weaponType);
+		_weapontype = (WeaponType)weaponType.enumValueIndex;
 
 
 		#region Enitity Flags
@@ -126,24 +127,21 @@ public class WeaponEditor : Editor
 		if ((GameObject)model.objectReferenceValue != null)
 		{
 			GameObject obj = (GameObject)model.objectReferenceValue;
-			options = new string[obj.transform.childCount + 1];
+			options = new string[obj.transform.childCount];
 		
-			options[0] = model.objectReferenceValue.name;
 			if (obj.transform.childCount > 0)
 			{
-				for (int i = 1; i < options.Length; i++)
+				for (int i = 0; i < options.Length; i++)
 				{
-					options[i] = obj.transform.GetChild(i - 1).name;
+					options[i] = obj.transform.GetChild(i).name;
 				}
 			}
 		}
 
 		bullet.objectReferenceValue = EditorGUILayout.ObjectField("Bullet", bullet.objectReferenceValue, typeof(GameObject), false);
 		muzzleFlash.objectReferenceValue = EditorGUILayout.ObjectField("Muzzle Flash", muzzleFlash.objectReferenceValue, typeof(GameObject), false);
-		bulletIndex = EditorGUILayout.Popup("Bullet Origin:", bulletIndex, options, EditorStyles.popup);
+		bulletIndex.intValue = EditorGUILayout.Popup("Bullet Origin:", bulletIndex.intValue, options, EditorStyles.popup);
 
-		GameObject _model = (GameObject)model.objectReferenceValue;
-		bulletOrigin.objectReferenceValue = bulletIndex == 0 ? _model.transform : _model.transform.GetChild(bulletIndex - 1);
 		#endregion
 
 		#region Bullet Spread and Density

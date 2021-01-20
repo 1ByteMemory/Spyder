@@ -8,19 +8,22 @@ public class Projectile : MonoBehaviour
 	public Weapon weapon;
 	public int layer;
 	public string ownerTag;
-	float endTime;
+	float endTime = -1;
 
-	private void OnEnable()
-	{
-		endTime = weapon.range + Time.time;
-	}
 
 	private void Update()
 	{
-		if (Time.time >= endTime)
+		if (weapon != null)
 		{
-			Destroy(gameObject);
+			if (endTime == -1)
+				endTime = weapon.range + Time.time;
+
+			if (Time.time >= endTime)
+			{
+				Destroy(gameObject);
+			}
 		}
+
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -43,16 +46,16 @@ public class Projectile : MonoBehaviour
 
 
 		// On hit anything, but the one who shot it, other projectiles and objects not in the active layer
-		if (!other.CompareTag(ownerTag) && !other.CompareTag("Projectile") && GameManager.activeLayer == other.gameObject.layer)
+		if (!other.CompareTag(ownerTag) && !other.CompareTag("Projectile"))
 		{
 			DealDamage(other, weapon.damage);
 		}
 
-		if (other.gameObject.layer == 0)
-		{
-			Debug.Log(other.gameObject);
-			DealDamage(other, weapon.damage);
-		}
+		//if (other.gameObject.layer == 0 && !other.CompareTag("Projectile"))
+		//{
+		//	Debug.Log(other.gameObject);
+		//	DealDamage(other, weapon.damage);
+		//}
 	}
 
 	void DealDamage(Collider other, int dmg)

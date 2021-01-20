@@ -24,15 +24,6 @@ public class PlayerWeapon : WeaponBehaviour
         ammoText = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("AmmoReserve").GetComponent<TextMeshProUGUI>();
         clipText = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("AmmoClip").GetComponent<TextMeshProUGUI>();
 
-		foreach (Weapon gun in weapons)
-		{
-            if (gunViewModel != null)
-			{
-				GameObject _gun = Instantiate(gun.model, gunViewModel);
-                _gun.SetActive(false);
-			}
-        }
-
         InstantiateParticles(gunViewModel);
 
         weaponIndex = 0;
@@ -68,7 +59,7 @@ public class PlayerWeapon : WeaponBehaviour
 
             if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
             {
-                UseWeapon(weapons[weaponIndex], cam);
+                UseWeapon(weapons[weaponIndex], gunViewModel.GetChild(weaponIndex), cam);
             }
         }
     }
