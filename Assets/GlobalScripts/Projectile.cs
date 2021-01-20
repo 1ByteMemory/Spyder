@@ -8,17 +8,26 @@ public class Projectile : MonoBehaviour
 	public Weapon weapon;
 	public int layer;
 	public string ownerTag;
-	float endTime = -1;
+	private float endTime = -1;
+	private Vector3 pos;
 
+	private void OnEnable()
+	{
+		pos = transform.position;
+	}
 
 	private void Update()
 	{
 		if (weapon != null)
 		{
-			if (endTime == -1)
-				endTime = weapon.range + Time.time;
+			// Calulate the distance without useing Vector3.Distance
+			float xD = pos.x - transform.position.x;
+			float yD = pos.y - transform.position.y;
+			float zD = pos.z - transform.position.z;
+			float distance = xD * xD + yD * yD + zD * zD;
 
-			if (Time.time >= endTime)
+			// Check against range^2 instead of useing sqrRoot on distance
+			if (distance >= weapon.range * weapon.range)
 			{
 				Destroy(gameObject);
 			}
@@ -28,6 +37,7 @@ public class Projectile : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+		if (other.isTrigger) return;
 
 		// On hit player and not shot from player
 		if (other.CompareTag("Player") && ownerTag != "Player")
@@ -50,12 +60,6 @@ public class Projectile : MonoBehaviour
 		{
 			DealDamage(other, weapon.damage);
 		}
-
-		//if (other.gameObject.layer == 0 && !other.CompareTag("Projectile"))
-		//{
-		//	Debug.Log(other.gameObject);
-		//	DealDamage(other, weapon.damage);
-		//}
 	}
 
 	void DealDamage(Collider other, int dmg)

@@ -66,9 +66,10 @@ public class PlayerWeapon : WeaponBehaviour
 
     void DisplayAmmo(int ammo, int clip)
 	{
-        if (ammoText != null) ammoText.text = ammo.ToString();
-        if (clipText != null) clipText.text = clip.ToString();
-	}
+        if (ammoText != null) ammoText.text = weapons[weaponIndex].isAmmoInf ? "99..." : ammo.ToString();
+        if (clipText != null) clipText.text = weapons[weaponIndex].isClipInf ? "99..." : clip.ToString();
+
+    }
 
     void CycleWeapons(int amount, bool isIndex)
 	{

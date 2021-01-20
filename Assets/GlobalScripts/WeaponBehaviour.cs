@@ -59,24 +59,29 @@ public class WeaponBehaviour : MonoBehaviour
 		    {
                 isFiring = true;
                 isReloading = false;
-                weaponAsset.clip--;
 
-                if(weaponAsset.weaponType == WeaponType.HitScan)
-				{
+                if (!weaponAsset.isClipInf)
+                    weaponAsset.clip--;
+
+                if (weaponAsset.weaponType == WeaponType.HitScan)
+                {
                     HitScan(weaponAsset, weaponScene, raycastOrigin);
-				}
+                }
                 else if (weaponAsset.weaponType == WeaponType.Projectile)
-				{
+                {
                     FireProjectile(weaponAsset, weaponScene);
-				}
-		    }
+                }
+            }
 			else
 			{
                 isFiring = false;
                 isReloading = true;
                 weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
-                weaponAsset.ammo -= weaponAsset.maxClip;
-                weaponAsset.ammo = weaponAsset.ammo < 0 ? 0 : weaponAsset.ammo;
+                if (!weaponAsset.isAmmoInf)
+				{
+                    weaponAsset.ammo -= weaponAsset.maxClip;
+                    weaponAsset.ammo = weaponAsset.ammo < 0 ? 0 : weaponAsset.ammo;
+				}
 			}
 		}
 		else
@@ -105,13 +110,16 @@ public class WeaponBehaviour : MonoBehaviour
 
         for (int i = 0; i < bulletRays.Length; i++)
         {
-            if (Physics.Raycast(bulletRays[i], out RaycastHit hit, weaponAsset.range))
-            {
-                if (hit.transform.GetComponent<Health>())
+            RaycastHit[] hit = Physics.RaycastAll(bulletRays[i], weaponAsset.range);
+
+			for (int n = 0; n < hit.Length; n++)
+			{
+                if (hit[n].transform != transform && hit[n].transform.GetComponent<Health>())
                 {
-                    hit.transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
+                    hit[n].transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
+                    break;
                 }
-            }
+			}
         }
     }
 
@@ -136,7 +144,7 @@ public class WeaponBehaviour : MonoBehaviour
 
     protected virtual void FireProjectile(Weapon weapon, Transform sceneWeapon)
 	{
-        Vector2 offset = new Vector2(0.5f, 0.5f);
+        Vector2 offset = new Vector2(0, 0);
         Vector3[] bulletSpreadPositions = BulletSpread(weapon, weapon.GetBulletOrigin(sceneWeapon), offset);
         Ray[] bulletRays = RayDirections(bulletSpreadPositions, weapon.GetBulletOrigin(sceneWeapon));
 
@@ -150,7 +158,7 @@ public class WeaponBehaviour : MonoBehaviour
             if (rb != null)
             {
                 // Set it's velocity in a specifc dierction with speed
-                rb.AddForce(bulletRays[i].direction * weapon.shotSpeed, ForceMode.VelocityChange);
+                rb.velocity = bulletRays[i].direction * weapon.shotSpeed;
             }
             
             Projectile projectile = bullet.GetComponent<Projectile>();

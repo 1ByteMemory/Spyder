@@ -33,6 +33,9 @@ public class WeaponEditor : Editor
 	SerializedProperty damage;
 	SerializedProperty dmgMult;
 
+	SerializedProperty isAmmoInf;
+	SerializedProperty isClipInf;
+
 	SerializedProperty maxAmmo;
 	SerializedProperty maxClip;
 
@@ -88,6 +91,9 @@ public class WeaponEditor : Editor
 		damage = serializedObject.FindProperty("damage");
 		dmgMult = serializedObject.FindProperty("dmgMult");
 
+
+		isAmmoInf = serializedObject.FindProperty("isAmmoInf");
+		isClipInf = serializedObject.FindProperty("isClipInf");
 		maxAmmo = serializedObject.FindProperty("maxAmmo");
 		maxClip = serializedObject.FindProperty("maxClip");
 		ammo = serializedObject.FindProperty("startingAmmo");
@@ -187,11 +193,31 @@ public class WeaponEditor : Editor
 		EditorGUILayout.Space();
 		EditorGUILayout.LabelField("Ammo and Clip", subtitle);
 
-		maxAmmo.intValue = EditorGUILayout.IntField("Max Ammo", maxAmmo.intValue);
-		maxClip.intValue = EditorGUILayout.IntField("Max Clip", maxClip.intValue);
+		isAmmoInf.boolValue = EditorGUILayout.Toggle("Is Ammo Infinate", isAmmoInf.boolValue);
+		if (!isAmmoInf.boolValue)
+		{
+			maxAmmo.intValue = EditorGUILayout.IntField("Max Ammo", maxAmmo.intValue);
+			ammo.intValue = EditorGUILayout.IntField("Starting Ammo", ammo.intValue);
+		}
+		else
+		{
+			maxAmmo.intValue = 1;
+			ammo.intValue = 1;
+		}
 
-		ammo.intValue = EditorGUILayout.IntField("Starting Ammo", ammo.intValue);
-		clip.intValue = EditorGUILayout.IntField("Starting Ammo in Clip", clip.intValue);
+		EditorGUILayout.Space();
+
+		isClipInf.boolValue = EditorGUILayout.Toggle("Is Clip Infinate", isClipInf.boolValue);
+		if (!isClipInf.boolValue)
+		{
+			maxClip.intValue = EditorGUILayout.IntField("Max Clip", maxClip.intValue);
+			clip.intValue = EditorGUILayout.IntField("Starting Ammo in Clip", clip.intValue);
+		}
+		else
+		{
+			maxClip.intValue = 1;
+			clip.intValue = 1;
+		}
 
 		maxAmmo.intValue = maxAmmo.intValue < 1 ? 1 : maxAmmo.intValue;
 		maxClip.intValue = maxClip.intValue < 1 ? 1 : maxClip.intValue;

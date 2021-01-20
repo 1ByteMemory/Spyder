@@ -49,10 +49,12 @@ public class Weapon : ScriptableObject
 	public int damage;
 	public float dmgMult;
 
+	public bool isAmmoInf;
 	public int maxAmmo;
-	public int maxClip;
-
 	public int startingAmmo;
+
+	public bool isClipInf;
+	public int maxClip;
 	public int startingClip;
 
 	public int ammo;
