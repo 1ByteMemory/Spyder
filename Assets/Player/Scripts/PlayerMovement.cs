@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement stuff")]
     public float moveSpeed = 7.0f;                // Ground move speed
+    public float crouchSpeed = 7.0f;              // Crouching move speed
     public float runAcceleration = 14.0f;         // Ground accel
     public float runDeacceleration = 10.0f;       // Deacceleration that occurs when running on the ground
     
@@ -299,7 +300,7 @@ public class PlayerMovement : MonoBehaviour
         wishdir.Normalize();
 
         var wishspeed = wishdir.magnitude;
-        wishspeed *= moveSpeed;
+        wishspeed *= PlayerController.IsCrouching ? crouchSpeed : moveSpeed;
 
         Accelerate(wishdir, wishspeed, runAcceleration);
 

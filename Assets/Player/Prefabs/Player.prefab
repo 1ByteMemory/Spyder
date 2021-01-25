@@ -514,6 +514,7 @@ MonoBehaviour:
   gravity: 24
   friction: 5
   moveSpeed: 9
+  crouchSpeed: 5
   runAcceleration: 15
   runDeacceleration: 15
   coyoteTime: 0.1
