@@ -110,8 +110,13 @@ public class GameManager : MonoBehaviour
 	{
 		if (spawnPoint != null)
 		{
-			GameObject.FindGameObjectWithTag("Player").transform.position = spawnPoint.position;
-			GameObject.FindGameObjectWithTag("Player").transform.eulerAngles = spawnPoint.eulerAngles;
+			// deactivate the player so the character controller doesn't ovverride teleporting
+			playerMove.gameObject.SetActive(false);
+			
+			playerMove.transform.position = spawnPoint.position;
+			playerMove.transform.eulerAngles = spawnPoint.eulerAngles;
+
+			playerMove.gameObject.SetActive(true);
 		}
 	}
 
@@ -136,6 +141,12 @@ public class GameManager : MonoBehaviour
 
 				Time.timeScale = settingsToggel ? 0 : 1;
 			}
+		}
+
+		if (playerMove.transform.position.y <= -100)
+		{
+			Debug.LogError("Player was below -100, teleporting to spawn");
+			GoToSpawn();
 		}
 	}
 
