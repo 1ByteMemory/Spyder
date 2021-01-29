@@ -176,6 +176,29 @@ public class GameManager : MonoBehaviour
 				digitalCam.enabled = false;
 				realCam.enabled = true;
 
+				// Play animations for blocks in this dimension
+				for (int i = 0; i < digitalWorldObjects.transform.childCount; i++)
+				{
+					Animator anim = digitalWorldObjects.transform.GetChild(i).GetComponent<Animator>();
+					
+					if (anim != null)
+					{
+						anim.speed = 1;
+					}
+				}
+
+				// Stop animations for blocks in the other dimension
+				for (int i = 0; i < realWorldObjects.transform.childCount; i++)
+				{
+					Animator anim = realWorldObjects.transform.GetChild(i).GetComponent<Animator>();
+
+					if (anim != null)
+					{
+						anim.speed = 0;
+					}
+				}
+
+
 				// ignore collisions from real world
 				IgnoreLayer(9, 8); 
 			}
@@ -184,6 +207,28 @@ public class GameManager : MonoBehaviour
 
 				digitalCam.enabled = true;
 				realCam.enabled = false;
+
+				// Play animations for blocks in this dimension
+				for (int i = 0; i < realWorldObjects.transform.childCount; i++)
+				{
+					Animator anim = realWorldObjects.transform.GetChild(i).GetComponent<Animator>();
+
+					if (anim != null)
+					{
+						anim.speed = 1;
+					}
+				}
+
+				// Play animations for blocks in the other dimension
+				for (int i = 0; i < digitalWorldObjects.transform.childCount; i++)
+				{
+					Animator anim = digitalWorldObjects.transform.GetChild(i).GetComponent<Animator>();
+
+					if (anim != null)
+					{
+						anim.speed = 0;
+					}
+				}
 
 				// ignore collisions from digital world
 				IgnoreLayer(8, 9);
