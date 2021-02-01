@@ -675,7 +675,7 @@ MonoBehaviour:
   fadeWhenDone: 1
   waitForClick: 0
   stopVoiceover: 0
-  waitForVO: 0
+  waitForVO: 1
   setSayDialog: {fileID: 9195182803461477866}
 --- !u!114 &2858066227965574520
 MonoBehaviour:
@@ -692,37 +692,7 @@ MonoBehaviour:
   scope: 1
   key: DialoguePlaying
   value: 0
---- !u!114 &5751092839744651612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3052720070733361297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeRect:
-    serializedVersion: 2
-    x: 560
-    y: 77
-    width: 214
-    height: 40
-  tint: {r: 1, g: 1, b: 1, a: 1}
-  useCustomTint: 0
-  itemId: 7
-  blockName: A little way into the first level.
-  description: 
-  eventHandler: {fileID: 0}
-  commandList:
-  - {fileID: 7802278451595825898}
-  - {fileID: 7679096517397299895}
-  - {fileID: 387734220787649276}
-  - {fileID: 6211994596309361191}
-  suppressAllAutoSelections: 0
---- !u!114 &6211994596309361191
+--- !u!114 &5295279278453032312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -734,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 11
+  itemId: 13
   indentLevel: 0
   anyVar:
     variable: {fileID: 2858066227965574520}
@@ -874,7 +844,7 @@ MonoBehaviour:
   vector3Data:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 0, z: 0}
---- !u!114 &7679096517397299895
+--- !u!114 &5751092839744651612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -883,25 +853,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 3052720070733361297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d3d73aef2cfc4f51abf34ac00241f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 9
-  indentLevel: 0
-  storyText: "Commander: \u201CLooks like they know you're here.\u201D"
+  nodeRect:
+    serializedVersion: 2
+    x: 560
+    y: 77
+    width: 214
+    height: 40
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  useCustomTint: 0
+  itemId: 7
+  blockName: A little way into the first level.
   description: 
-  character: {fileID: 0}
-  portrait: {fileID: 0}
-  voiceOverClip: {fileID: 8300000, guid: c0c8a38bda167a04391728ab1a728b0d, type: 3}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeWhenDone: 1
-  waitForClick: 0
-  stopVoiceover: 1
-  waitForVO: 0
-  setSayDialog: {fileID: 9195182803461477866}
---- !u!114 &7802278451595825898
+  eventHandler: {fileID: 0}
+  commandList:
+  - {fileID: 7802278451595825898}
+  - {fileID: 7679096517397299895}
+  - {fileID: 387734220787649276}
+  - {fileID: 6211994596309361191}
+  suppressAllAutoSelections: 0
+--- !u!114 &6211994596309361191
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -913,7 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 8
+  itemId: 11
   indentLevel: 0
   anyVar:
     variable: {fileID: 2858066227965574520}
@@ -926,7 +899,7 @@ MonoBehaviour:
         audioSourceVal: {fileID: 0}
       booleanData:
         booleanRef: {fileID: 0}
-        booleanVal: 1
+        booleanVal: 0
       collectionData:
         collectionRef: {fileID: 0}
         collectionVal: {fileID: 0}
@@ -1205,7 +1178,34 @@ MonoBehaviour:
   vector3Data:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 0, z: 0}
---- !u!114 &5295279278453032312
+--- !u!114 &7679096517397299895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052720070733361297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 9
+  indentLevel: 0
+  storyText: "Commander: \u201CLooks like they know you're here.\u201D"
+  description: 
+  character: {fileID: 0}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 8300000, guid: 88a33d679593ba940aa78d92429b93e1, type: 3}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 0
+  stopVoiceover: 0
+  waitForVO: 1
+  setSayDialog: {fileID: 9195182803461477866}
+--- !u!114 &7802278451595825898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1217,7 +1217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 13
+  itemId: 8
   indentLevel: 0
   anyVar:
     variable: {fileID: 2858066227965574520}
@@ -1230,7 +1230,7 @@ MonoBehaviour:
         audioSourceVal: {fileID: 0}
       booleanData:
         booleanRef: {fileID: 0}
-        booleanVal: 0
+        booleanVal: 1
       collectionData:
         collectionRef: {fileID: 0}
         collectionVal: {fileID: 0}
@@ -1416,7 +1416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogFlow: {fileID: 3052720070733361300}
   targetBlock: When Gauntlet Starts
---- !u!114 &4172232277890481125
+--- !u!114 &1235744528047635840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 8
+  itemId: 9
   indentLevel: 0
   anyVar:
     variable: {fileID: 2858066227965574520}
@@ -1441,7 +1441,7 @@ MonoBehaviour:
         audioSourceVal: {fileID: 0}
       booleanData:
         booleanRef: {fileID: 0}
-        booleanVal: 1
+        booleanVal: 0
       collectionData:
         collectionRef: {fileID: 0}
         collectionVal: {fileID: 0}
@@ -1568,7 +1568,7 @@ MonoBehaviour:
   vector3Data:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 0, z: 0}
---- !u!114 &1235744528047635840
+--- !u!114 &4172232277890481125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1580,7 +1580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 9
+  itemId: 8
   indentLevel: 0
   anyVar:
     variable: {fileID: 2858066227965574520}
@@ -1593,7 +1593,7 @@ MonoBehaviour:
         audioSourceVal: {fileID: 0}
       booleanData:
         booleanRef: {fileID: 0}
-        booleanVal: 0
+        booleanVal: 1
       collectionData:
         collectionRef: {fileID: 0}
         collectionVal: {fileID: 0}
@@ -6165,158 +6165,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 6522218701509252484}
---- !u!114 &9082617555277725003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6527582607989903880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 4
-  indentLevel: 0
-  anyVar:
-    variable: {fileID: 2858066227965574520}
-    data:
-      animatorData:
-        animatorRef: {fileID: 0}
-        animatorVal: {fileID: 0}
-      audioSourceData:
-        audioSourceRef: {fileID: 0}
-        audioSourceVal: {fileID: 0}
-      booleanData:
-        booleanRef: {fileID: 0}
-        booleanVal: 1
-      collectionData:
-        collectionRef: {fileID: 0}
-        collectionVal: {fileID: 0}
-      collider2DData:
-        collider2DRef: {fileID: 0}
-        collider2DVal: {fileID: 0}
-      colliderData:
-        colliderRef: {fileID: 0}
-        colliderVal: {fileID: 0}
-      colorData:
-        colorRef: {fileID: 0}
-        colorVal: {r: 0, g: 0, b: 0, a: 0}
-      floatData:
-        floatRef: {fileID: 0}
-        floatVal: 0
-      gameObjectData:
-        gameObjectRef: {fileID: 0}
-        gameObjectVal: {fileID: 0}
-      integerData:
-        integerRef: {fileID: 0}
-        integerVal: 0
-      materialData:
-        materialRef: {fileID: 0}
-        materialVal: {fileID: 0}
-      matrix4x4Data:
-        matrix4x4Ref: {fileID: 0}
-        matrix4x4Val:
-          e00: 0
-          e01: 0
-          e02: 0
-          e03: 0
-          e10: 0
-          e11: 0
-          e12: 0
-          e13: 0
-          e20: 0
-          e21: 0
-          e22: 0
-          e23: 0
-          e30: 0
-          e31: 0
-          e32: 0
-          e33: 0
-      objectData:
-        objectRef: {fileID: 0}
-        objectVal: {fileID: 0}
-      quaternionData:
-        quaternionRef: {fileID: 0}
-        quaternionVal: {x: 0, y: 0, z: 0, w: 0}
-      rigidbody2DData:
-        rigidbody2DRef: {fileID: 0}
-        rigidbody2DVal: {fileID: 0}
-      rigidbodyData:
-        rigidbodyRef: {fileID: 0}
-        rigidbodyVal: {fileID: 0}
-      spriteData:
-        spriteRef: {fileID: 0}
-        spriteVal: {fileID: 0}
-      stringData:
-        stringRef: {fileID: 0}
-        stringVal: 
-      textureData:
-        textureRef: {fileID: 0}
-        textureVal: {fileID: 0}
-      transformData:
-        transformRef: {fileID: 0}
-        transformVal: {fileID: 0}
-      vector2Data:
-        vector2Ref: {fileID: 0}
-        vector2Val: {x: 0, y: 0}
-      vector3Data:
-        vector3Ref: {fileID: 0}
-        vector3Val: {x: 0, y: 0, z: 0}
-      vector4Data:
-        vector4Ref: {fileID: 0}
-        vector4Val: {x: 0, y: 0, z: 0, w: 0}
-  setOperator: 0
-  variable: {fileID: 0}
-  booleanData:
-    booleanRef: {fileID: 0}
-    booleanVal: 0
-  integerData:
-    integerRef: {fileID: 0}
-    integerVal: 0
-  floatData:
-    floatRef: {fileID: 0}
-    floatVal: 0
-  stringData:
-    stringRef: {fileID: 0}
-    stringVal: 
-  animatorData:
-    animatorRef: {fileID: 0}
-    animatorVal: {fileID: 0}
-  audioSourceData:
-    audioSourceRef: {fileID: 0}
-    audioSourceVal: {fileID: 0}
-  colorData:
-    colorRef: {fileID: 0}
-    colorVal: {r: 0, g: 0, b: 0, a: 0}
-  gameObjectData:
-    gameObjectRef: {fileID: 0}
-    gameObjectVal: {fileID: 0}
-  materialData:
-    materialRef: {fileID: 0}
-    materialVal: {fileID: 0}
-  objectData:
-    objectRef: {fileID: 0}
-    objectVal: {fileID: 0}
-  rigidbody2DData:
-    rigidbody2DRef: {fileID: 0}
-    rigidbody2DVal: {fileID: 0}
-  spriteData:
-    spriteRef: {fileID: 0}
-    spriteVal: {fileID: 0}
-  textureData:
-    textureRef: {fileID: 0}
-    textureVal: {fileID: 0}
-  transformData:
-    transformRef: {fileID: 0}
-    transformVal: {fileID: 0}
-  vector2Data:
-    vector2Ref: {fileID: 0}
-    vector2Val: {x: 0, y: 0}
-  vector3Data:
-    vector3Ref: {fileID: 0}
-    vector3Val: {x: 0, y: 0, z: 0}
 --- !u!114 &3397252027817744356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6469,19 +6317,19 @@ MonoBehaviour:
   vector3Data:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 0, z: 0}
---- !u!114 &4276935188455872070
+--- !u!114 &9082617555277725003
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7188892988481379122}
+  m_GameObject: {fileID: 6527582607989903880}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 16
+  itemId: 4
   indentLevel: 0
   anyVar:
     variable: {fileID: 2858066227965574520}
@@ -6773,6 +6621,158 @@ MonoBehaviour:
   vector3Data:
     vector3Ref: {fileID: 0}
     vector3Val: {x: 0, y: 0, z: 0}
+--- !u!114 &4276935188455872070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7188892988481379122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb77d0ce495044f6e9feb91b31798e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 16
+  indentLevel: 0
+  anyVar:
+    variable: {fileID: 2858066227965574520}
+    data:
+      animatorData:
+        animatorRef: {fileID: 0}
+        animatorVal: {fileID: 0}
+      audioSourceData:
+        audioSourceRef: {fileID: 0}
+        audioSourceVal: {fileID: 0}
+      booleanData:
+        booleanRef: {fileID: 0}
+        booleanVal: 1
+      collectionData:
+        collectionRef: {fileID: 0}
+        collectionVal: {fileID: 0}
+      collider2DData:
+        collider2DRef: {fileID: 0}
+        collider2DVal: {fileID: 0}
+      colliderData:
+        colliderRef: {fileID: 0}
+        colliderVal: {fileID: 0}
+      colorData:
+        colorRef: {fileID: 0}
+        colorVal: {r: 0, g: 0, b: 0, a: 0}
+      floatData:
+        floatRef: {fileID: 0}
+        floatVal: 0
+      gameObjectData:
+        gameObjectRef: {fileID: 0}
+        gameObjectVal: {fileID: 0}
+      integerData:
+        integerRef: {fileID: 0}
+        integerVal: 0
+      materialData:
+        materialRef: {fileID: 0}
+        materialVal: {fileID: 0}
+      matrix4x4Data:
+        matrix4x4Ref: {fileID: 0}
+        matrix4x4Val:
+          e00: 0
+          e01: 0
+          e02: 0
+          e03: 0
+          e10: 0
+          e11: 0
+          e12: 0
+          e13: 0
+          e20: 0
+          e21: 0
+          e22: 0
+          e23: 0
+          e30: 0
+          e31: 0
+          e32: 0
+          e33: 0
+      objectData:
+        objectRef: {fileID: 0}
+        objectVal: {fileID: 0}
+      quaternionData:
+        quaternionRef: {fileID: 0}
+        quaternionVal: {x: 0, y: 0, z: 0, w: 0}
+      rigidbody2DData:
+        rigidbody2DRef: {fileID: 0}
+        rigidbody2DVal: {fileID: 0}
+      rigidbodyData:
+        rigidbodyRef: {fileID: 0}
+        rigidbodyVal: {fileID: 0}
+      spriteData:
+        spriteRef: {fileID: 0}
+        spriteVal: {fileID: 0}
+      stringData:
+        stringRef: {fileID: 0}
+        stringVal: 
+      textureData:
+        textureRef: {fileID: 0}
+        textureVal: {fileID: 0}
+      transformData:
+        transformRef: {fileID: 0}
+        transformVal: {fileID: 0}
+      vector2Data:
+        vector2Ref: {fileID: 0}
+        vector2Val: {x: 0, y: 0}
+      vector3Data:
+        vector3Ref: {fileID: 0}
+        vector3Val: {x: 0, y: 0, z: 0}
+      vector4Data:
+        vector4Ref: {fileID: 0}
+        vector4Val: {x: 0, y: 0, z: 0, w: 0}
+  setOperator: 0
+  variable: {fileID: 0}
+  booleanData:
+    booleanRef: {fileID: 0}
+    booleanVal: 0
+  integerData:
+    integerRef: {fileID: 0}
+    integerVal: 0
+  floatData:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  stringData:
+    stringRef: {fileID: 0}
+    stringVal: 
+  animatorData:
+    animatorRef: {fileID: 0}
+    animatorVal: {fileID: 0}
+  audioSourceData:
+    audioSourceRef: {fileID: 0}
+    audioSourceVal: {fileID: 0}
+  colorData:
+    colorRef: {fileID: 0}
+    colorVal: {r: 0, g: 0, b: 0, a: 0}
+  gameObjectData:
+    gameObjectRef: {fileID: 0}
+    gameObjectVal: {fileID: 0}
+  materialData:
+    materialRef: {fileID: 0}
+    materialVal: {fileID: 0}
+  objectData:
+    objectRef: {fileID: 0}
+    objectVal: {fileID: 0}
+  rigidbody2DData:
+    rigidbody2DRef: {fileID: 0}
+    rigidbody2DVal: {fileID: 0}
+  spriteData:
+    spriteRef: {fileID: 0}
+    spriteVal: {fileID: 0}
+  textureData:
+    textureRef: {fileID: 0}
+    textureVal: {fileID: 0}
+  transformData:
+    transformRef: {fileID: 0}
+    transformVal: {fileID: 0}
+  vector2Data:
+    vector2Ref: {fileID: 0}
+    vector2Val: {x: 0, y: 0}
+  vector3Data:
+    vector3Ref: {fileID: 0}
+    vector3Val: {x: 0, y: 0, z: 0}
 --- !u!1001 &229865204692818362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6879,6 +6879,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 811352807683442150, guid: f01a5f769d9045b438e2605fa76f0e2c,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 811352807683442150, guid: f01a5f769d9045b438e2605fa76f0e2c,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
@@ -6887,6 +6892,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 811352807683442150, guid: f01a5f769d9045b438e2605fa76f0e2c,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811352807683442150, guid: f01a5f769d9045b438e2605fa76f0e2c,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0be069edc7facb040b176bf9dc8ef947, type: 3}
     - target: {fileID: 1806928681704524431, guid: f01a5f769d9045b438e2605fa76f0e2c,
         type: 3}
       propertyPath: nodeRect.x
@@ -6945,12 +6960,12 @@ PrefabInstance:
     - target: {fileID: 3258954555560838764, guid: f01a5f769d9045b438e2605fa76f0e2c,
         type: 3}
       propertyPath: selectedBlocks.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3258954555560838764, guid: f01a5f769d9045b438e2605fa76f0e2c,
         type: 3}
       propertyPath: selectedCommands.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3258954555560838764, guid: f01a5f769d9045b438e2605fa76f0e2c,
         type: 3}
@@ -6961,7 +6976,7 @@ PrefabInstance:
         type: 3}
       propertyPath: selectedCommands.Array.data[0]
       value: 
-      objectReference: {fileID: 875334711472354078}
+      objectReference: {fileID: 8147097178599095256}
     - target: {fileID: 3258954555560838765, guid: f01a5f769d9045b438e2605fa76f0e2c,
         type: 3}
       propertyPath: m_RootOrder
@@ -7079,12 +7094,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8536323385244798240, guid: f01a5f769d9045b438e2605fa76f0e2c,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536323385244798240, guid: f01a5f769d9045b438e2605fa76f0e2c,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 8536323385244798240, guid: f01a5f769d9045b438e2605fa76f0e2c,
         type: 3}
       propertyPath: waitForClick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536323385244798240, guid: f01a5f769d9045b438e2605fa76f0e2c,
+        type: 3}
+      propertyPath: stopVoiceover
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -7488,6 +7513,16 @@ PrefabInstance:
       objectReference: {fileID: 7986717116839719361}
     - target: {fileID: 821864443547754354, guid: c057f1d1b57952f4bbd6c02b334e4db1,
         type: 3}
+      propertyPath: storyText
+      value: "Commander: \u201CLooks like you have company in the digital dimension.\""
+      objectReference: {fileID: 0}
+    - target: {fileID: 821864443547754354, guid: c057f1d1b57952f4bbd6c02b334e4db1,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 821864443547754354, guid: c057f1d1b57952f4bbd6c02b334e4db1,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
@@ -7496,6 +7531,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 821864443547754354, guid: c057f1d1b57952f4bbd6c02b334e4db1,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 821864443547754354, guid: c057f1d1b57952f4bbd6c02b334e4db1,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b4c336413675c9843be204ea2ac00d29, type: 3}
     - target: {fileID: 1452851939023650861, guid: c057f1d1b57952f4bbd6c02b334e4db1,
         type: 3}
       propertyPath: setSayDialog
@@ -7558,6 +7603,11 @@ PrefabInstance:
       objectReference: {fileID: 1235744528047635840}
     - target: {fileID: 4660478039359296765, guid: c057f1d1b57952f4bbd6c02b334e4db1,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4660478039359296765, guid: c057f1d1b57952f4bbd6c02b334e4db1,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
@@ -7566,6 +7616,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4660478039359296765, guid: c057f1d1b57952f4bbd6c02b334e4db1,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4660478039359296765, guid: c057f1d1b57952f4bbd6c02b334e4db1,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a6c13a89b6624f149a1de7be4759b1bd, type: 3}
     - target: {fileID: 4955896229336257344, guid: c057f1d1b57952f4bbd6c02b334e4db1,
         type: 3}
       propertyPath: nodeRect.x
@@ -7578,12 +7638,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6382376295660382969, guid: c057f1d1b57952f4bbd6c02b334e4db1,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382376295660382969, guid: c057f1d1b57952f4bbd6c02b334e4db1,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 6382376295660382969, guid: c057f1d1b57952f4bbd6c02b334e4db1,
         type: 3}
       propertyPath: waitForClick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382376295660382969, guid: c057f1d1b57952f4bbd6c02b334e4db1,
+        type: 3}
+      propertyPath: stopVoiceover
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6719576365178842097, guid: c057f1d1b57952f4bbd6c02b334e4db1,
@@ -7649,12 +7719,12 @@ PrefabInstance:
     - target: {fileID: 6719576365178842110, guid: c057f1d1b57952f4bbd6c02b334e4db1,
         type: 3}
       propertyPath: selectedBlocks.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6719576365178842110, guid: c057f1d1b57952f4bbd6c02b334e4db1,
         type: 3}
       propertyPath: selectedCommands.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1452851939023650861, guid: c057f1d1b57952f4bbd6c02b334e4db1, type: 3}
@@ -7718,6 +7788,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1355288582121787215, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355288582121787215, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
@@ -7726,6 +7801,21 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1355288582121787215, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355288582121787215, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f1823eeff176fc4985aa654cce0b1ff, type: 3}
+    - target: {fileID: 3388125436556714132, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3388125436556714132, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
       propertyPath: setSayDialog
@@ -7735,6 +7825,16 @@ PrefabInstance:
         type: 3}
       propertyPath: waitForClick
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388125436556714132, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384762372294013626, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4384762372294013626, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
@@ -7746,6 +7846,21 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4384762372294013626, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384762372294013626, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: aefac6d48cccd0b428dc56146f64b58e, type: 3}
+    - target: {fileID: 4576669061993985575, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4576669061993985575, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
       propertyPath: setSayDialog
@@ -7754,6 +7869,11 @@ PrefabInstance:
     - target: {fileID: 4576669061993985575, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
       propertyPath: waitForClick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576669061993985575, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5026140352966251666, guid: 899f6e617f2678744aa07b1b250f81be,
@@ -7833,6 +7953,11 @@ PrefabInstance:
       objectReference: {fileID: 2176478364362086673}
     - target: {fileID: 5321080347412189537, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321080347412189537, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
@@ -7841,6 +7966,21 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5321080347412189537, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321080347412189537, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: acfdebcdd22213f4f89ced8ea57fc75c, type: 3}
+    - target: {fileID: 5991759382481433037, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5991759382481433037, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
       propertyPath: setSayDialog
@@ -7850,6 +7990,21 @@ PrefabInstance:
         type: 3}
       propertyPath: waitForClick
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991759382481433037, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991759382481433037, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6f6dda0c1aa2a62429375c0e5b538699, type: 3}
+    - target: {fileID: 6830677743589492282, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6830677743589492282, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
@@ -7861,6 +8016,21 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6830677743589492282, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6830677743589492282, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e09970ca4578c5148ba7fc2283c19b5c, type: 3}
+    - target: {fileID: 7401060282771987820, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7401060282771987820, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
       propertyPath: setSayDialog
@@ -7870,6 +8040,21 @@ PrefabInstance:
         type: 3}
       propertyPath: waitForClick
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401060282771987820, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401060282771987820, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c9cf8afa153f6a458992f4f8294a9c6, type: 3}
+    - target: {fileID: 7551428687379814801, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7551428687379814801, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
@@ -7881,6 +8066,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7551428687379814801, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805569824211292032, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7805569824211292032, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
       propertyPath: setSayDialog
@@ -7890,6 +8085,21 @@ PrefabInstance:
         type: 3}
       propertyPath: waitForClick
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805569824211292032, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805569824211292032, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8a78ae6380396b64bae114c312899464, type: 3}
+    - target: {fileID: 7808724350777688758, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7808724350777688758, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
@@ -7901,6 +8111,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7808724350777688758, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451924746302310615, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8451924746302310615, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
       propertyPath: setSayDialog
@@ -7911,6 +8131,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8451924746302310615, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8451924746302310615, guid: 899f6e617f2678744aa07b1b250f81be,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e9a3f3e87330d74469c792771c2a782f, type: 3}
     - target: {fileID: 8628293015802733752, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
       propertyPath: selectedBlocks.Array.size
@@ -7930,7 +8160,7 @@ PrefabInstance:
         type: 3}
       propertyPath: selectedCommands.Array.data[0]
       value: 
-      objectReference: {fileID: 2176478364362086673}
+      objectReference: {fileID: 8659079285191094287}
     - target: {fileID: 8628293015802733753, guid: 899f6e617f2678744aa07b1b250f81be,
         type: 3}
       propertyPath: m_RootOrder
@@ -8170,42 +8400,97 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 203671056895566995, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 203671056895566995, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
       propertyPath: setSayDialog
       value: 
-      objectReference: {fileID: 6522218701509252484}
+      objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 203671056895566995, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 203671056895566995, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 203671056895566995, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 414e800ac28319c498e65be669e99a17, type: 3}
+    - target: {fileID: 366522005358758310, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 366522005358758310, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
       propertyPath: setSayDialog
       value: 
-      objectReference: {fileID: 6522218701509252484}
+      objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 366522005358758310, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: waitForClick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 366522005358758310, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 366522005358758310, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f63d291f6488b24a8ae79fa27ee97dc, type: 3}
+    - target: {fileID: 1553276731953346839, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553276731953346839, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 9195182803461477866}
+    - target: {fileID: 1553276731953346839, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1553276731953346839, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553276731953346839, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a30a88a73784b2f429bb4d1f2b67c6d1, type: 3}
+    - target: {fileID: 2544668702477418640, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544668702477418640, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
       propertyPath: setSayDialog
       value: 
-      objectReference: {fileID: 6522218701509252484}
-    - target: {fileID: 1553276731953346839, guid: c169b88b82491d04a89a6f4219209b0a,
+      objectReference: {fileID: 9195182803461477866}
+    - target: {fileID: 2544668702477418640, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2544668702477418640, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
-      propertyPath: setSayDialog
-      value: 
-      objectReference: {fileID: 6522218701509252484}
-    - target: {fileID: 2544668702477418640, guid: c169b88b82491d04a89a6f4219209b0a,
-        type: 3}
-      propertyPath: waitForClick
+      propertyPath: stopVoiceover
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3729251996483836227, guid: c169b88b82491d04a89a6f4219209b0a,
@@ -8275,32 +8560,62 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5467549786196051555, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5467549786196051555, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
       propertyPath: setSayDialog
       value: 
-      objectReference: {fileID: 6522218701509252484}
+      objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 5467549786196051555, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5467549786196051555, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477882182017066782, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5477882182017066782, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
       propertyPath: setSayDialog
       value: 
-      objectReference: {fileID: 6522218701509252484}
+      objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 5477882182017066782, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: waitForClick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477882182017066782, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5911335191203878325, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5911335191203878325, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 9195182803461477866}
+    - target: {fileID: 5911335191203878325, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5911335191203878325, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
-      propertyPath: setSayDialog
-      value: 
-      objectReference: {fileID: 6522218701509252484}
-    - target: {fileID: 5911335191203878325, guid: c169b88b82491d04a89a6f4219209b0a,
-        type: 3}
-      propertyPath: waitForClick
+      propertyPath: stopVoiceover
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6482393708682247386, guid: c169b88b82491d04a89a6f4219209b0a,
@@ -8311,22 +8626,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6482393708682247386, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482393708682247386, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
       propertyPath: setSayDialog
       value: 
-      objectReference: {fileID: 6522218701509252484}
+      objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 6482393708682247386, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: waitForClick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482393708682247386, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6482393708682247386, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: caa91d6fbdd4fb9439b85bd34701a2ec, type: 3}
+    - target: {fileID: 6708293287707363224, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708293287707363224, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: setSayDialog
+      value: 
+      objectReference: {fileID: 9195182803461477866}
+    - target: {fileID: 6708293287707363224, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708293287707363224, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
-      propertyPath: setSayDialog
-      value: 
-      objectReference: {fileID: 6522218701509252484}
-    - target: {fileID: 6708293287707363224, guid: c169b88b82491d04a89a6f4219209b0a,
-        type: 3}
-      propertyPath: waitForClick
+      propertyPath: stopVoiceover
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6809716179270750299, guid: c169b88b82491d04a89a6f4219209b0a,
@@ -8412,14 +8752,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6921834265989109369, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921834265989109369, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
       propertyPath: setSayDialog
       value: 
-      objectReference: {fileID: 6522218701509252484}
+      objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 6921834265989109369, guid: c169b88b82491d04a89a6f4219209b0a,
         type: 3}
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6921834265989109369, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921834265989109369, guid: c169b88b82491d04a89a6f4219209b0a,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 569a5dfd553a89b4aa490cdea0db7195, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c169b88b82491d04a89a6f4219209b0a, type: 3}
 --- !u!114 &7809560561426790566 stripped
@@ -8835,6 +9190,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 44236146996187533, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 44236146996187533, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
@@ -8843,6 +9203,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 44236146996187533, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 44236146996187533, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1920f205da6a9924db5afe2b06b74c0d, type: 3}
     - target: {fileID: 521608036989852839, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
       propertyPath: blockName
@@ -8911,7 +9281,7 @@ PrefabInstance:
     - target: {fileID: 2897471682521924560, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
       propertyPath: selectedCommands.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2897471682521924561, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
@@ -8975,6 +9345,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5734440552561070026, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734440552561070026, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
@@ -8983,6 +9358,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5734440552561070026, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5734440552561070026, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 72af68d7e8523fd46a7c0d557b48d505, type: 3}
     - target: {fileID: 6032325432956856101, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
       propertyPath: setSayDialog
@@ -8995,12 +9380,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6468526737836144831, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468526737836144831, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 6468526737836144831, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
       propertyPath: waitForClick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6468526737836144831, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
+      propertyPath: stopVoiceover
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7499222337343250259, guid: 23837a3711daf164c83b16178905466f,
@@ -9025,12 +9420,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8962071595923568234, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962071595923568234, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
     - target: {fileID: 8962071595923568234, guid: 23837a3711daf164c83b16178905466f,
         type: 3}
       propertyPath: waitForClick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962071595923568234, guid: 23837a3711daf164c83b16178905466f,
+        type: 3}
+      propertyPath: stopVoiceover
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -9664,6 +10069,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 449190803370821572, guid: c9bb0fcfbeac785498a266d8856d1a4d,
         type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 449190803370821572, guid: c9bb0fcfbeac785498a266d8856d1a4d,
+        type: 3}
       propertyPath: setSayDialog
       value: 
       objectReference: {fileID: 9195182803461477866}
@@ -9672,6 +10082,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 449190803370821572, guid: c9bb0fcfbeac785498a266d8856d1a4d,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 449190803370821572, guid: c9bb0fcfbeac785498a266d8856d1a4d,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e2e58684c8d3f954cbf38e496debe329, type: 3}
     - target: {fileID: 1454800058616941520, guid: c9bb0fcfbeac785498a266d8856d1a4d,
         type: 3}
       propertyPath: m_RootOrder
@@ -9735,12 +10155,17 @@ PrefabInstance:
     - target: {fileID: 1454800058616941551, guid: c9bb0fcfbeac785498a266d8856d1a4d,
         type: 3}
       propertyPath: selectedBlocks.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1454800058616941551, guid: c9bb0fcfbeac785498a266d8856d1a4d,
         type: 3}
       propertyPath: selectedCommands.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131137914512407639, guid: c9bb0fcfbeac785498a266d8856d1a4d,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3131137914512407639, guid: c9bb0fcfbeac785498a266d8856d1a4d,
         type: 3}
@@ -9752,6 +10177,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3131137914512407639, guid: c9bb0fcfbeac785498a266d8856d1a4d,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249806408631496595, guid: c9bb0fcfbeac785498a266d8856d1a4d,
+        type: 3}
+      propertyPath: waitForVO
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7249806408631496595, guid: c9bb0fcfbeac785498a266d8856d1a4d,
         type: 3}
       propertyPath: setSayDialog
@@ -9762,6 +10197,16 @@ PrefabInstance:
       propertyPath: waitForClick
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7249806408631496595, guid: c9bb0fcfbeac785498a266d8856d1a4d,
+        type: 3}
+      propertyPath: stopVoiceover
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249806408631496595, guid: c9bb0fcfbeac785498a266d8856d1a4d,
+        type: 3}
+      propertyPath: voiceOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a4bce8fb73cc8640945f1f7f21263fb, type: 3}
     - target: {fileID: 7982390712007045771, guid: c9bb0fcfbeac785498a266d8856d1a4d,
         type: 3}
       propertyPath: blockName
