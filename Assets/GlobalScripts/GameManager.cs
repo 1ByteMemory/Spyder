@@ -110,8 +110,13 @@ public class GameManager : MonoBehaviour
 	{
 		if (spawnPoint != null)
 		{
-			GameObject.FindGameObjectWithTag("Player").transform.position = spawnPoint.position;
-			GameObject.FindGameObjectWithTag("Player").transform.eulerAngles = spawnPoint.eulerAngles;
+			// deactivate the player so the character controller doesn't ovverride teleporting
+			playerMove.gameObject.SetActive(false);
+			
+			playerMove.transform.position = spawnPoint.position;
+			playerMove.transform.eulerAngles = spawnPoint.eulerAngles;
+
+			playerMove.gameObject.SetActive(true);
 		}
 	}
 
@@ -136,6 +141,12 @@ public class GameManager : MonoBehaviour
 
 				Time.timeScale = settingsToggel ? 0 : 1;
 			}
+		}
+
+		if (playerMove.transform.position.y <= -100)
+		{
+			Debug.LogError("Player was below -100, teleporting to spawn");
+			GoToSpawn();
 		}
 	}
 
@@ -165,6 +176,29 @@ public class GameManager : MonoBehaviour
 				digitalCam.enabled = false;
 				realCam.enabled = true;
 
+				// Play animations for blocks in this dimension
+				for (int i = 0; i < digitalWorldObjects.transform.childCount; i++)
+				{
+					Animator anim = digitalWorldObjects.transform.GetChild(i).GetComponent<Animator>();
+					
+					if (anim != null)
+					{
+						anim.speed = 1;
+					}
+				}
+
+				// Stop animations for blocks in the other dimension
+				for (int i = 0; i < realWorldObjects.transform.childCount; i++)
+				{
+					Animator anim = realWorldObjects.transform.GetChild(i).GetComponent<Animator>();
+
+					if (anim != null)
+					{
+						anim.speed = 0;
+					}
+				}
+
+
 				// ignore collisions from real world
 				IgnoreLayer(9, 8); 
 			}
@@ -173,6 +207,28 @@ public class GameManager : MonoBehaviour
 
 				digitalCam.enabled = true;
 				realCam.enabled = false;
+
+				// Play animations for blocks in this dimension
+				for (int i = 0; i < realWorldObjects.transform.childCount; i++)
+				{
+					Animator anim = realWorldObjects.transform.GetChild(i).GetComponent<Animator>();
+
+					if (anim != null)
+					{
+						anim.speed = 1;
+					}
+				}
+
+				// Play animations for blocks in the other dimension
+				for (int i = 0; i < digitalWorldObjects.transform.childCount; i++)
+				{
+					Animator anim = digitalWorldObjects.transform.GetChild(i).GetComponent<Animator>();
+
+					if (anim != null)
+					{
+						anim.speed = 0;
+					}
+				}
 
 				// ignore collisions from digital world
 				IgnoreLayer(8, 9);

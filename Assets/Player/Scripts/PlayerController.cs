@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
 	GameManager game;
 
+	CharacterController cc;
+
 	private void Start()
 	{
 		game = FindObjectOfType<GameManager>();
@@ -22,7 +24,7 @@ public class PlayerController : MonoBehaviour
         triggerDetector.layer = 0;
 
 		scanner = GetComponentInChildren<ScannerEffect>();
-
+		cc = GetComponent<CharacterController>();
 	}
 
 
@@ -37,7 +39,41 @@ public class PlayerController : MonoBehaviour
 			endTime = Time.time + coolDown;
 			scanner.Scan(GameManager.currentActiveDimension);
         }
+
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+		{
+			Crouch(true);
+		}
+		if (IsCrouching && !Input.GetKey(KeyCode.LeftShift))
+		{
+			Crouch(false);
+		}
     }
+
+	private bool canStand = false;
+	private static bool _isCrouch = false;
+	public static bool IsCrouching
+	{
+		get { return _isCrouch; }
+	}
+
+	void Crouch(bool isCrouch)
+	{
+		if (isCrouch)
+		{
+			_isCrouch = isCrouch;
+			cc.height = 0.8f;
+			//cc.center = new Vector3(0, 0.25f, 0);
+		}
+		else
+		{
+			if (!Physics.Raycast(transform.position, Vector3.up, out _, 1.5f))
+			{
+				_isCrouch = isCrouch;
+				cc.height = 1.8f;
+			}
+		}
+	}
 
 	private void OnDisable()
 	{
