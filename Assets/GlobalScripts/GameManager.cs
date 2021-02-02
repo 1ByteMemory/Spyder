@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
 	public static Dimension currentActiveDimension;
 	public static int activeLayer;
 
+	public AudioClip dimensionClip;
+	private AudioSource src;
+
 	public GameObject realWorldObjects;
 	public GameObject digitalWorldObjects;
 
@@ -73,6 +76,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
+		src = GetComponent<AudioSource>();
 
 		UI(SettingsUI);
 		UI(PlayerHUD);
@@ -153,6 +157,8 @@ public class GameManager : MonoBehaviour
 	#region Dimensions
 	public void ToggleDimension()
 	{
+		src.clip = dimensionClip;
+		src.Play();
 		switch (currentActiveDimension)
 		{
 			case Dimension.Digital:
