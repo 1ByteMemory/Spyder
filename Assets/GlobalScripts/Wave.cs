@@ -60,12 +60,18 @@ public class Wave : MonoBehaviour
 	{
 		foreach (GameObject item in EnemyList)
 		{
-			item.SetActive(true);
+			if (item != null)
+			{
+				item.SetActive(true);
+			}
 		}
 
 		foreach (EnemyWaveSpawner item in SpawnerList)
 		{
-			item.gameObject.SetActive(true);
+			if (item != null)
+			{
+				item.gameObject.SetActive(true);
+			}
 		}
 	}
 }

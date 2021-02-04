@@ -52,10 +52,19 @@ public class FootstepsManager : MonoBehaviour
 				{
 					strideEndTime = Time.time + stride;
 
-					MatAudio matAudio = GetAudio(hit.gameObject.GetComponent<Renderer>().sharedMaterial);
-
-					src.clip = matAudio != null ? matAudio.audioClip : defaultAudio;
-					src.volume = matAudio.volume;
+					Renderer ren = hit.gameObject.GetComponent<Renderer>();
+					MatAudio matAudio = ren != null ? GetAudio(ren.sharedMaterial) : null;
+					
+					if (ren != null && matAudio != null)
+					{
+						src.clip =  matAudio.audioClip;
+						src.volume = matAudio.volume;
+					}
+					else
+					{
+						src.clip =  defaultAudio;
+						src.volume = 1;
+					}
 					src.Play();
 				}
 			}
