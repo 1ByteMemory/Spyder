@@ -25,6 +25,10 @@ public class Weapon : ScriptableObject
 	public GameObject model;
 	public GameObject bullet;
 	public ParticleSystem muzzleFlash;
+
+	public AudioClip fireAudio;
+	public AudioClip reloadAudio;
+
 	public Transform GetBulletOrigin(Transform sceneObject)
 	{
 		if (bulletIndex < sceneObject.childCount && bulletIndex >= 0)
@@ -44,6 +48,7 @@ public class Weapon : ScriptableObject
 
 	public bool holdToFire;
 	public float firingTime;
+	public float reloadTime;
 	public float shotSpeed;
 	public float range;
 	public int damage;

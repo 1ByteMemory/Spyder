@@ -23,11 +23,15 @@ public class WeaponEditor : Editor
 	SerializedProperty bulletIndex;
 	SerializedProperty muzzleFlash;
 
+	SerializedProperty fireAudio;
+	SerializedProperty reloadAudio;
+
 	SerializedProperty bulletCount;
 	SerializedProperty bulletDensity;
 
 	SerializedProperty holdToFire;
 	SerializedProperty firingTime;
+	SerializedProperty reloadTime;
 	SerializedProperty shotSpeed;
 	SerializedProperty range;
 	SerializedProperty damage;
@@ -80,12 +84,16 @@ public class WeaponEditor : Editor
 		bullet = serializedObject.FindProperty("bullet");
 		bulletIndex = serializedObject.FindProperty("bulletIndex");
 		muzzleFlash = serializedObject.FindProperty("muzzleFlash");
+
+		fireAudio = serializedObject.FindProperty("fireAudio");
+		reloadAudio = serializedObject.FindProperty("reloadAudio");
 		
 		bulletCount = serializedObject.FindProperty("bulletCount");
 		bulletDensity = serializedObject.FindProperty("bulletDensity");
 
 		holdToFire = serializedObject.FindProperty("holdToFire");
 		firingTime = serializedObject.FindProperty("firingTime");
+		reloadTime = serializedObject.FindProperty("reloadTime");
 		shotSpeed = serializedObject.FindProperty("shotSpeed");
 		range = serializedObject.FindProperty("range");
 		damage = serializedObject.FindProperty("damage");
@@ -148,6 +156,11 @@ public class WeaponEditor : Editor
 		muzzleFlash.objectReferenceValue = EditorGUILayout.ObjectField("Muzzle Flash", muzzleFlash.objectReferenceValue, typeof(GameObject), false);
 		bulletIndex.intValue = EditorGUILayout.Popup("Bullet Origin:", bulletIndex.intValue, options, EditorStyles.popup);
 
+
+		fireAudio.objectReferenceValue = EditorGUILayout.ObjectField("Firing Sound", fireAudio.objectReferenceValue, typeof(AudioClip), false);
+		reloadAudio.objectReferenceValue = EditorGUILayout.ObjectField("Reloading Sound", reloadAudio.objectReferenceValue, typeof(AudioClip), false);
+		
+		
 		#endregion
 
 		#region Bullet Spread and Density
@@ -177,6 +190,7 @@ public class WeaponEditor : Editor
 		}
 		
 		firingTime.floatValue = EditorGUILayout.FloatField("Time between shots", firingTime.floatValue);
+		reloadTime.floatValue = EditorGUILayout.FloatField("Reloading Time", reloadTime.floatValue);
 		if (_weapontype == WeaponType.Projectile)
 			shotSpeed.floatValue = EditorGUILayout.FloatField("Bullet travel speed", shotSpeed.floatValue);
 		range.floatValue = EditorGUILayout.FloatField("Range", range.floatValue);
