@@ -62,6 +62,8 @@ public class WeaponBehaviour : MonoBehaviour
                 isFiring = true;
                 isReloading = false;
 
+                // Play animation
+
                 if (!weaponAsset.isClipInf)
                     weaponAsset.clip--;
 
