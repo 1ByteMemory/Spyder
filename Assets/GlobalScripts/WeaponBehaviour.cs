@@ -72,9 +72,14 @@ public class WeaponBehaviour : MonoBehaviour
                 if (!weaponAsset.isClipInf)
                     weaponAsset.clip--;
                 
+                // Play Fire Sound
                 weaponScene.GetComponent<AudioSource>().clip = weaponAsset.fireAudio;
                 weaponScene.GetComponent<AudioSource>().Play();
-                
+
+                // Play Fire Animation
+                if (weaponScene.GetComponentInChildren<Animator>())
+                    weaponScene.GetComponentInChildren<Animator>().SetTrigger("Fire");
+
 
                 if (weaponAsset.weaponType == WeaponType.HitScan)
                 {
@@ -91,8 +96,14 @@ public class WeaponBehaviour : MonoBehaviour
 				{
                     reloadingEndTime = Time.time + weaponAsset.reloadTime;
 
+                    // Play reload sound
                     weaponScene.GetComponent<AudioSource>().clip = weaponAsset.reloadAudio;
-                    weaponScene.GetComponent<AudioSource>().Play();
+					weaponScene.GetComponent<AudioSource>().Play();
+
+					// Play Reload Animation
+                    if (weaponScene.GetComponentInChildren<Animator>())
+					    weaponScene.GetComponentInChildren<Animator>().SetTrigger("Reload");
+
                     isFiring = false;
                     isReloading = true;
                     weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
