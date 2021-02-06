@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Fungus;
 
 public enum Dimension
 {
@@ -17,14 +17,17 @@ public class GameManager : MonoBehaviour
 	//public string sceneToLoad;
 	public bool loadEnemies = true;
 
-	[Header("Ui and HUDs")]
+	[Header("UI and HUDs")]
 	public GameObject SettingsUI;
 	public GameObject PlayerHUD;
 	public GameObject Fungus;
 
-	[Header("Dimension Switching")]
 	public static Dimension currentActiveDimension;
 	public static int activeLayer;
+
+	[Header("Dimension Switching")]
+	public AudioClip dimensionClip;
+	private AudioSource src;
 
 	public GameObject realWorldObjects;
 	public GameObject digitalWorldObjects;
@@ -40,6 +43,13 @@ public class GameManager : MonoBehaviour
 	ReplacmentShader realCam;
 
 	static PlayerMovement playerMove;
+
+	public static AudioClip barkToPlay;
+	//[HideInInspector]
+	public List<GameObject> seenEnemies = new List<GameObject>();
+	private Flowchart flowchart;
+	
+
 
 	private void Start()
 	{
@@ -73,6 +83,7 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
+		src = GetComponent<AudioSource>();
 
 		UI(SettingsUI);
 		UI(PlayerHUD);
@@ -81,6 +92,12 @@ public class GameManager : MonoBehaviour
 		SettingsUI = transform.GetChild(1).gameObject;
 		PlayerHUD = transform.GetChild(2).gameObject;
 		Fungus = transform.GetChild(3).gameObject;
+
+		flowchart = Fungus.GetComponentInChildren<Flowchart>();
+
+		
+
+		StartCoroutine(StartBarks());
 
 		SettingsUI.SetActive(false);
 
@@ -104,6 +121,48 @@ public class GameManager : MonoBehaviour
 		SetDimension(Dimension.Real);
 
 		if (spawnAtSpawnPoint) GoToSpawn();
+
+	}
+	
+	public void AddEnemy(GameObject enemy)
+	{
+		seenEnemies.Add(enemy);
+	}
+	public void RemoveEnemy(GameObject enemy)
+	{
+		seenEnemies.Remove(enemy);
+	}
+
+	public void SetAudioBark(AudioClip clip)
+	{
+		Debug.Log("Setting Bark");
+		barkToPlay = clip;
+	}
+
+	public void PlayBark()
+	{
+		List<GameObject> _seenEnemies = FindObjectOfType<GameManager>().seenEnemies;
+		if (_seenEnemies.Count > 0)
+		{
+			// Selects random enemy from list
+			GameObject enemy = _seenEnemies[Random.Range(0, _seenEnemies.Count)];
+
+			AudioSource src = enemy.GetComponent<AudioSource>();
+			// if Enemy has audio compnatn
+			if (src != null && barkToPlay != null)
+			{
+				Debug.Log("playing " + barkToPlay + " on " + src.gameObject);
+				src.clip = barkToPlay;
+				src.Play();
+			}
+		}
+	}
+
+	IEnumerator StartBarks()
+	{
+		flowchart.ExecuteBlock("BarkTimeTrigger");
+
+		yield return new WaitForSeconds(0);
 	}
 
 	public void GoToSpawn()
@@ -153,6 +212,8 @@ public class GameManager : MonoBehaviour
 	#region Dimensions
 	public void ToggleDimension()
 	{
+		src.clip = dimensionClip;
+		src.Play();
 		switch (currentActiveDimension)
 		{
 			case Dimension.Digital:
