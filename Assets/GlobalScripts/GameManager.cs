@@ -44,9 +44,8 @@ public class GameManager : MonoBehaviour
 
 	static PlayerMovement playerMove;
 
-	[HideInInspector]
-	public AudioClip barkToPlay;
-	[HideInInspector]
+	public static AudioClip barkToPlay;
+	//[HideInInspector]
 	public List<GameObject> seenEnemies = new List<GameObject>();
 	private Flowchart flowchart;
 	
@@ -96,6 +95,8 @@ public class GameManager : MonoBehaviour
 
 		flowchart = Fungus.GetComponentInChildren<Flowchart>();
 
+		
+
 		StartCoroutine(StartBarks());
 
 		SettingsUI.SetActive(false);
@@ -140,16 +141,17 @@ public class GameManager : MonoBehaviour
 
 	public void PlayBark()
 	{
-		Debug.Log("playing Bark");
-		if (seenEnemies.Count > 0)
+		List<GameObject> _seenEnemies = FindObjectOfType<GameManager>().seenEnemies;
+		if (_seenEnemies.Count > 0)
 		{
 			// Selects random enemy from list
-			GameObject enemy = seenEnemies[Random.Range(0, seenEnemies.Count)];
+			GameObject enemy = _seenEnemies[Random.Range(0, _seenEnemies.Count)];
 
 			AudioSource src = enemy.GetComponent<AudioSource>();
 			// if Enemy has audio compnatn
 			if (src != null && barkToPlay != null)
 			{
+				Debug.Log("playing " + barkToPlay + " on " + src.gameObject);
 				src.clip = barkToPlay;
 				src.Play();
 			}
