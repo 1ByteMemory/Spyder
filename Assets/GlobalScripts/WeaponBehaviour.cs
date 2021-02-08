@@ -64,7 +64,7 @@ public class WeaponBehaviour : MonoBehaviour
 		{
             firingEndTime = Time.time + weaponAsset.firingTime;
             
-            if (weaponAsset.clip > 0)
+            if (weaponAsset.clip > 0 && Time.time >= reloadingEndTime)
 		    {
                 isFiring = true;
                 isReloading = false;
