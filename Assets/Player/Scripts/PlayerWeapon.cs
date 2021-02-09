@@ -14,12 +14,16 @@ public class PlayerWeapon : WeaponBehaviour
 
     public Transform gunViewModel;
 
+    private PlayerMovement pm;
+
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
 		
         cam = Camera.main.transform;
+
+        pm = GetComponent<PlayerMovement>();
 
         ammoText = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("AmmoReserve").GetComponent<TextMeshProUGUI>();
         clipText = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("AmmoClip").GetComponent<TextMeshProUGUI>();
@@ -51,7 +55,7 @@ public class PlayerWeapon : WeaponBehaviour
     {
         if (Input.mouseScrollDelta.y != 0)
             CycleWeapons(Mathf.FloorToInt(Input.mouseScrollDelta.y), false);
-
+        Transform activeGun = gunViewModel.GetChild(weaponIndex);
 
         if (weaponIndex >= 0 && weaponIndex < weapons.Length)
         {
@@ -59,9 +63,25 @@ public class PlayerWeapon : WeaponBehaviour
 
             if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
             {
-                UseWeapon(gunViewModel.GetChild(weaponIndex), weapons[weaponIndex], cam);
+                UseWeapon(activeGun, weapons[weaponIndex], cam);
             }
         }
+
+        Animator anim = activeGun.GetComponentInChildren<Animator>();
+        if (pm.IsMoving())
+		{
+            if (anim != null)
+			{
+                anim.SetBool("Is Moving", true);
+			}
+        }
+        else
+		{
+            if (anim != null)
+			{
+                anim.SetBool("Is Moving", false);
+			}
+		}
     }
 
     void DisplayAmmo(int ammo, int clip)
