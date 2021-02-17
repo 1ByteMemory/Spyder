@@ -86,6 +86,7 @@ public class CPButton : MonoBehaviour
 		float g = G != null ? G.value : 1;
 		float b = B != null ? B.value : 1;
 
+		color = new Color(r, g, b, 1);
 		img.color = new Color(r, g, b, 1);
 	}
 }

@@ -4,19 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public enum Colour
-{
-	Red,
-	Green,
-	Blue
-}
 
 [RequireComponent(typeof(Slider))]
 [ExecuteInEditMode]
 public class CPSlider : MonoBehaviour
 {
-	public Colour colour;
-
+	
 	[HideInInspector]
 	public float value;
 
