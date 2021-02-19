@@ -1,1 +1,34 @@
-{"feildOfView":0,"difficulty":0,"lookSensitivity":0.0,"scrollSensitivity":0.0,"outlines":{"r":0.0,"g":1.0,"b":0.0,"a":1.0},"background":{"r":0.0,"g":0.0,"b":0.0,"a":0.0},"enemyOutline":{"r":0.0,"g":0.0,"b":0.0,"a":0.0},"isFullscreen":false,"resolution":0,"enemyVoice":0.0,"soundFX":0.0,"music":0.0,"dialogue":0.0,"ambience":0.0,"epilepticMode":false,"toggelCrouch":false,"timeSlow":false}
+{
+    "feildOfView": 70,
+    "difficulty": 1,
+    "lookSensitivity": 150.0,
+    "scrollSensitivity": 10.0,
+    "outlines": {
+        "r": 0.0,
+        "g": 1.0,
+        "b": 0.0,
+        "a": 1.0
+    },
+    "background": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+    },
+    "enemyOutline": {
+        "r": 1.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+    },
+    "isFullscreen": true,
+    "resolution": 0,
+    "enemyVoice": 1.0,
+    "soundFX": 1.0,
+    "music": 1.0,
+    "dialogue": 1.0,
+    "ambience": 1.0,
+    "epilepticMode": false,
+    "toggelCrouch": false,
+    "timeSlow": false
+}

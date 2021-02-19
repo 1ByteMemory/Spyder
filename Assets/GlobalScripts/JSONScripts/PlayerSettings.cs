@@ -36,7 +36,7 @@ public class PlayerSettings
 
 	public string SaveToString()
 	{
-		return JsonUtility.ToJson(this);
+		return JsonUtility.ToJson(this, true);
 	}
 
 	public static PlayerSettings CreateFromJson(string jsonString)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class JsonIO : MonoBehaviour
 {
@@ -17,7 +18,10 @@ public class JsonIO : MonoBehaviour
 
 	public void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
+
+
+
+		if (Input.GetKeyDown(KeyCode.S))
 		{
 			playerSettings.feildOfView = 90;
 			playerSettings.outlines = Color.green;
@@ -26,7 +30,7 @@ public class JsonIO : MonoBehaviour
 			SaveSettings(playerSettings);
 		}
 
-		if (Input.GetKeyDown(KeyCode.B))
+		if (Input.GetKeyDown(KeyCode.L))
 		{
 			LoadSettings();
 
@@ -34,26 +38,74 @@ public class JsonIO : MonoBehaviour
 		text.text = playerSettings.feildOfView.ToString();
 	}
 
+	public void ResetSettings()
+	{
+		// General
+		playerSettings.feildOfView = 70;
+		playerSettings.difficulty = 1;
+
+		//Controls
+		playerSettings.lookSensitivity = 150;
+		playerSettings.scrollSensitivity = 10;
+
+		// Colors
+		playerSettings.outlines = Color.green;
+		playerSettings.background = Color.black;
+		playerSettings.enemyOutline = Color.red;
+
+		// Video
+		playerSettings.isFullscreen = true;
+		playerSettings.resolution = 0;
+
+		// Audio
+		playerSettings.enemyVoice = 1;
+		playerSettings.soundFX = 1;
+		playerSettings.music = 1;
+		playerSettings.dialogue = 1;
+		playerSettings.ambience = 1;
+
+		// Accessability
+		playerSettings.epilepticMode = false;
+		playerSettings.toggelCrouch = false;
+		playerSettings.timeSlow = false;
+}
+
 	public void LoadSettings()
 	{
-		Debug.Log("Loading Settings");
-		var jsonTextFile = Resources.Load<TextAsset>("settings");
-		playerSettings = PlayerSettings.CreateFromJson(jsonTextFile.ToString());
-		Debug.Log("Settings Loaded");
-		Debug.Log(playerSettings.ToString());
+		StreamReader reader;
+		
+		try
+		{
+			reader = new StreamReader(Application.dataPath + "/Resources/settings.json");
+			playerSettings = PlayerSettings.CreateFromJson(reader.ReadToEnd());
+			reader.Close();
+			Debug.Log("Settings Loaded");
+		}
+		catch (FileNotFoundException)
+		{
+			Debug.Log("Settings file not found, creating a new file...");
+			ResetSettings();
+			SaveSettings(playerSettings);
+		}
+		catch (DirectoryNotFoundException)
+		{
+			Debug.Log("Resources directory not found, creating Resources Folder");
+			AssetDatabase.CreateFolder("Assets", "Resources");
+			ResetSettings();
+			SaveSettings(playerSettings);
+
+		}
 	}
 
 	public void SaveSettings(PlayerSettings settings)
 	{
 		string jsonTextFile = settings.SaveToString();
 
-		Debug.Log("Saving Settings");
 		StreamWriter writer = new StreamWriter(Application.dataPath + "/Resources/settings.json");
 
-		Debug.Log("Writing line");
 		writer.WriteLine(jsonTextFile);
 		writer.Close();
-		
 
+		Debug.Log("Saved Settings");
 	}
 }
