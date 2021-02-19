@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/GlobalScripts/JSONScripts.meta
 guid: b800452b303dbd5499dd6a9d7fa4e49a
 folderAsset: yes
 DefaultImporter:
+=======
+guid: 21193476c7ed2c44a8309e9facc5ccdb
+NativeFormatImporter:
+>>>>>>> Level1Modifications:Assets/Environment/Materials/Conrete3.mat.meta
   externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
