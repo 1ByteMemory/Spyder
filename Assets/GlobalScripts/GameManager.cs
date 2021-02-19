@@ -78,9 +78,9 @@ public class GameManager : MonoBehaviour
 		UI(PlayerHUD);
 		UI(Fungus);
 
-		SettingsUI = transform.GetChild(1).gameObject;
-		PlayerHUD = transform.GetChild(2).gameObject;
-		Fungus = transform.GetChild(3).gameObject;
+		SettingsUI = transform.Find(SettingsUI.name + "(Clone)").gameObject;
+		PlayerHUD = transform.Find(PlayerHUD.name + "(Clone)").gameObject;
+		Fungus = transform.Find(Fungus.name + "(Clone)").gameObject;
 
 		SettingsUI.SetActive(false);
 
