@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
 				{
 					Animator anim = digitalWorldObjects.transform.GetChild(i).GetComponent<Animator>();
 					
-					if (anim != null)
+					if (anim != null && digitalWorldObjects.transform.GetChild(i).CompareTag("StopAnimation"))
 					{
 						anim.speed = 1;
 					}
@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
 				{
 					Animator anim = realWorldObjects.transform.GetChild(i).GetComponent<Animator>();
 
-					if (anim != null)
+					if (anim != null && realWorldObjects.transform.GetChild(i).CompareTag("StopAnimation"))
 					{
 						anim.speed = 0;
 					}
@@ -213,7 +213,7 @@ public class GameManager : MonoBehaviour
 				{
 					Animator anim = realWorldObjects.transform.GetChild(i).GetComponent<Animator>();
 
-					if (anim != null)
+					if (anim != null && realWorldObjects.transform.GetChild(i).CompareTag("StopAnimation"))
 					{
 						anim.speed = 1;
 					}
@@ -224,7 +224,7 @@ public class GameManager : MonoBehaviour
 				{
 					Animator anim = digitalWorldObjects.transform.GetChild(i).GetComponent<Animator>();
 
-					if (anim != null)
+					if (anim != null && digitalWorldObjects.transform.GetChild(i).CompareTag("StopAnimation"))
 					{
 						anim.speed = 0;
 					}
