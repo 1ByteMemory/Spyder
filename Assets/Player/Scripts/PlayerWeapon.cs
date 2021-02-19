@@ -16,6 +16,8 @@ public class PlayerWeapon : WeaponBehaviour
 
     private PlayerMovement pm;
 
+    public float scrollSensitivity = 1;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -54,7 +56,7 @@ public class PlayerWeapon : WeaponBehaviour
     void Update()
     {
         if (Input.mouseScrollDelta.y != 0)
-            CycleWeapons(Mathf.FloorToInt(Input.mouseScrollDelta.y), false);
+            CycleWeapons(Mathf.FloorToInt((Input.mouseScrollDelta.y / 10) * scrollSensitivity), false);
         Transform activeGun = gunViewModel.GetChild(weaponIndex);
 
         if (weaponIndex >= 0 && weaponIndex < weapons.Length)

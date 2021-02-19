@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour
 	//[HideInInspector]
 	public List<GameObject> seenEnemies = new List<GameObject>();
 	private Flowchart flowchart;
-	
 
 
 	private void Start()
@@ -123,7 +122,8 @@ public class GameManager : MonoBehaviour
 		if (spawnAtSpawnPoint) GoToSpawn();
 
 	}
-	
+
+	#region Enemy Barks
 	public void AddEnemy(GameObject enemy)
 	{
 		seenEnemies.Add(enemy);
@@ -139,6 +139,8 @@ public class GameManager : MonoBehaviour
 		barkToPlay = clip;
 	}
 
+
+	private float barkVolume;
 	public void PlayBark()
 	{
 		List<GameObject> _seenEnemies = FindObjectOfType<GameManager>().seenEnemies;
@@ -153,6 +155,7 @@ public class GameManager : MonoBehaviour
 			{
 				Debug.Log("playing " + barkToPlay + " on " + src.gameObject);
 				src.clip = barkToPlay;
+				src.volume = barkVolume;
 				src.Play();
 			}
 		}
@@ -164,6 +167,8 @@ public class GameManager : MonoBehaviour
 
 		yield return new WaitForSeconds(0);
 	}
+
+	#endregion
 
 	public void GoToSpawn()
 	{
@@ -315,11 +320,53 @@ public class GameManager : MonoBehaviour
 		Cursor.visible = value;
 	}
 
-	public void SetMouseSensitivity(float value)
+	#region Settings
+	public void LoadSettings()
+	{
+		GameObject player = playerMove.gameObject;
+
+		// FOV
+		foreach (Camera cam in player.GetComponentsInChildren<Camera>())
+		{
+			cam.fieldOfView = JsonIO.playerSettings.feildOfView;
+		}
+
+		// Sensitivity
+		MouseSensitivity(JsonIO.playerSettings.lookSensitivity);
+		player.GetComponent<PlayerWeapon>().scrollSensitivity = JsonIO.playerSettings.scrollSensitivity;
+
+
+		// Colors
+		Material ctr = player.GetComponent<PlayerController>().digitalEffect;
+		ctr.SetColor("_LeadColor", JsonIO.playerSettings.col_outlines);
+		ctr.SetColor("_TrailColor", JsonIO.playerSettings.col_background);
+		ctr.SetColor("_MidColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
+		ctr.SetColor("_HBarColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
+
+
+
+		// Audio
+		barkVolume = JsonIO.playerSettings.vol_Barks;
+		WeaponBehaviour.volume = JsonIO.playerSettings.vol_SoundFX;
+		FootstepsManager.volume = JsonIO.playerSettings.vol_SoundFX;
+		src.volume = JsonIO.playerSettings.vol_SoundFX;
+
+
+		// Accesability
+		PlayerController.toggleCrouch = JsonIO.playerSettings.acc_toggelCrouch;
+
+
+	}
+	
+	public void MouseSensitivity(float value)
 	{
 		playerMove.xMouseSensitivity = value;
 		playerMove.yMouseSensitivity = value;
 	}
+
+
+
+	#endregion
 
 	public void ResumeGame()
 	{

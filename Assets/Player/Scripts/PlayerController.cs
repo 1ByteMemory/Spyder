@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
 	CharacterController cc;
 
+	public static bool toggleCrouch;
+
 	private void Start()
 	{
 		game = FindObjectOfType<GameManager>();
@@ -40,15 +42,22 @@ public class PlayerController : MonoBehaviour
 			scanner.Scan(GameManager.currentActiveDimension);
         }
 
+		if (IsCrouching)
+		{
+			if (toggleCrouch && Input.GetKeyDown(KeyCode.LeftShift))
+			{
+				Crouch(false);
+			}
+			else if (!Input.GetKey(KeyCode.LeftShift))
+			{
+				Crouch(false);
+			}
+		}
 		if (Input.GetKeyDown(KeyCode.LeftShift))
 		{
 			Crouch(true);
 		}
-		if (IsCrouching && !Input.GetKey(KeyCode.LeftShift))
-		{
-			Crouch(false);
-		}
-    }
+	}
 
 	private bool canStand = false;
 	private static bool _isCrouch = false;

@@ -13,25 +13,25 @@ public class PlayerSettings
 	public float scrollSensitivity;
 
 	// Colors
-	public Color outlines;
-	public Color background;
-	public Color enemyOutline;
+	public Color col_outlines;
+	public Color col_background;
+	public Color col_enemyOutline;
 
 	// Video
 	public bool isFullscreen;
 	public int resolution;
 
 	// Audio
-	public float enemyVoice;
-	public float soundFX;
-	public float music;
-	public float dialogue;
-	public float ambience;
+	public float vol_Barks;
+	public float vol_SoundFX;
+	public float vol_Music;
+	public float vol_Dialogue;
+	public float vol_Ambience;
 
 	// Accessability
-	public bool epilepticMode;
-	public bool toggelCrouch;
-	public bool timeSlow;
+	public bool acc_epilepticMode;
+	public bool acc_toggelCrouch;
+	public bool acc_timeSlow;
 
 
 	public string SaveToString()

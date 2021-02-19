@@ -7,38 +7,10 @@ using UnityEditor;
 
 public class JsonIO : MonoBehaviour
 {
-    public PlayerSettings playerSettings = new PlayerSettings();
-
-	public Text text;
-
-	private void Start()
-	{
-		LoadSettings();
-	}
-
-	public void Update()
-	{
+    public static PlayerSettings playerSettings = new PlayerSettings();
 
 
-
-		if (Input.GetKeyDown(KeyCode.S))
-		{
-			playerSettings.feildOfView = 90;
-			playerSettings.outlines = Color.green;
-
-			
-			SaveSettings(playerSettings);
-		}
-
-		if (Input.GetKeyDown(KeyCode.L))
-		{
-			LoadSettings();
-
-		}
-		text.text = playerSettings.feildOfView.ToString();
-	}
-
-	public void ResetSettings()
+	public static void ResetSettings()
 	{
 		// General
 		playerSettings.feildOfView = 70;
@@ -49,28 +21,28 @@ public class JsonIO : MonoBehaviour
 		playerSettings.scrollSensitivity = 10;
 
 		// Colors
-		playerSettings.outlines = Color.green;
-		playerSettings.background = Color.black;
-		playerSettings.enemyOutline = Color.red;
+		playerSettings.col_outlines = Color.green;
+		playerSettings.col_background = Color.black;
+		playerSettings.col_enemyOutline = Color.red;
 
 		// Video
 		playerSettings.isFullscreen = true;
 		playerSettings.resolution = 0;
 
 		// Audio
-		playerSettings.enemyVoice = 1;
-		playerSettings.soundFX = 1;
-		playerSettings.music = 1;
-		playerSettings.dialogue = 1;
-		playerSettings.ambience = 1;
+		playerSettings.vol_Barks = 1;
+		playerSettings.vol_SoundFX = 1;
+		playerSettings.vol_Music = 1;
+		playerSettings.vol_Dialogue = 1;
+		playerSettings.vol_Ambience = 1;
 
 		// Accessability
-		playerSettings.epilepticMode = false;
-		playerSettings.toggelCrouch = false;
-		playerSettings.timeSlow = false;
+		playerSettings.acc_epilepticMode = false;
+		playerSettings.acc_toggelCrouch = false;
+		playerSettings.acc_timeSlow = false;
 }
 
-	public void LoadSettings()
+	public static void LoadSettings()
 	{
 		StreamReader reader;
 		
@@ -97,7 +69,7 @@ public class JsonIO : MonoBehaviour
 		}
 	}
 
-	public void SaveSettings(PlayerSettings settings)
+	public static void SaveSettings(PlayerSettings settings)
 	{
 		string jsonTextFile = settings.SaveToString();
 
