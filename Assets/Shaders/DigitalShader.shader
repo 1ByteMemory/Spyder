@@ -18,9 +18,8 @@
 
         
         _Color ("Color", Color) = (1,1,1,1)
-        _Tint("Tint", Color) = (1,1,1,1)
-        
-        _EdgeColor ("Edge Color", Color) = (1,1,1,1)
+        _BckColor("Backgrond Color", Color) = (0,0,0,0)
+
 		_EdgeThickness("Edge Thisckness", Float) = 1
         
 		_CellSize("Cell Size", Range(0,2)) = 2
@@ -75,13 +74,18 @@
             float _OffsetY;
 
             half4 _Color;
+            half4 _BckColor;
+
 
             fixed4 frag (v2f i) : SV_Target
             {
                 float x = 1 - saturate(round(abs(frac((i.uv.x + _OffsetX) * _SizeX) * _ThicknessX)));
                 float y = 1 - saturate(round(abs(frac((i.uv.y + _OffsetY) * _SizeY) * _ThicknessY)));
 
-                return (x + y) * _Color;
+                float4 squares = (1 - (x + y)) * _BckColor;
+                float4 lines = (x + y) * _Color;
+
+                return squares + lines;
             }
             ENDCG
         }

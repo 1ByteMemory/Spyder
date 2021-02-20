@@ -45,10 +45,12 @@ public class GameManager : MonoBehaviour
 	static PlayerMovement playerMove;
 
 	public static AudioClip barkToPlay;
-	//[HideInInspector]
+	
+	[HideInInspector]
 	public List<GameObject> seenEnemies = new List<GameObject>();
 	private Flowchart flowchart;
 
+	public Material digitalMats;
 
 	private void Start()
 	{
@@ -121,6 +123,7 @@ public class GameManager : MonoBehaviour
 
 		if (spawnAtSpawnPoint) GoToSpawn();
 
+		ApplySettings();
 	}
 
 	#region Enemy Barks
@@ -321,8 +324,11 @@ public class GameManager : MonoBehaviour
 	}
 
 	#region Settings
-	public void LoadSettings()
+	public void ApplySettings()
 	{
+		JsonIO.LoadSettings();
+
+
 		GameObject player = playerMove.gameObject;
 
 		// FOV
@@ -343,7 +349,8 @@ public class GameManager : MonoBehaviour
 		ctr.SetColor("_MidColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
 		ctr.SetColor("_HBarColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
 
-
+		digitalMats.SetColor("_Color", JsonIO.playerSettings.col_outlines);
+		digitalMats.SetColor("_BckColor", JsonIO.playerSettings.col_background);
 
 		// Audio
 		barkVolume = JsonIO.playerSettings.vol_Barks;
