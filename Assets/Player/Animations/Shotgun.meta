@@ -1,12 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Environment/Animations/3_Platform1 (7).controller.meta
-guid: cd4dc6d420ec4374fb8a20ec45f4741e
-NativeFormatImporter:
-=======
-guid: 41d2c926a67fe984fb81f93bce379fb2
 folderAsset: yes
+guid: 41d2c926a67fe984fb81f93bce379fb2
 DefaultImporter:
->>>>>>> origin/Weapons:Assets/Player/Animations/Shotgun.meta
   externalObjects: {}
   mainObjectFileID: 0
   userData: 

@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/PostProcessing.meta
-guid: 70924e6daed90984ca2a57c6d441218e
-=======
-guid: dbb9f4c3efd22c14eaed75b9dbff6763
->>>>>>> origin/Weapons:Assets/Player/Animations/Pistol.meta
+guid: d2e920d52e8a91146806c44b6871fe58
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
