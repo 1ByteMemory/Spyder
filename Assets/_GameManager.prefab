@@ -57,6 +57,7 @@ MonoBehaviour:
   digitalWorldObjects: {fileID: 0}
   spawnAtSpawnPoint: 1
   spawnPoint: {fileID: 0}
+  seenEnemies: []
 --- !u!82 &5427610743791985861
 AudioSource:
   m_ObjectHideFlags: 0
