@@ -35,6 +35,9 @@ public class SearchAndDestory : WeaponBehaviour
 	public Transform gunPosition;
 	protected Transform activeWeapon;
 
+	private GameManager gm;
+	private bool addedToList;
+
 	private void OnValidate()
 	{
 		if (attackRadius > searchRadius)
@@ -57,6 +60,8 @@ public class SearchAndDestory : WeaponBehaviour
 	protected override void Start()
     {
 		base.Start();
+
+		gm = FindObjectOfType<GameManager>();
 
 		navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -81,14 +86,17 @@ public class SearchAndDestory : WeaponBehaviour
 		{
             if (!navHit.transform.CompareTag("Player"))
 			{
+				RemoveFromSeenList();
 				agentState = AgentState.Search;
 			}
 			else if (distance > attackRadius)
 			{
+				AddToSeenList();
 				agentState = AgentState.Search;
 			}
 			else
 			{
+				AddToSeenList();
 				agentState = AgentState.Attack;
 			}
 		}
@@ -97,7 +105,23 @@ public class SearchAndDestory : WeaponBehaviour
         TakeAction(agentState);
     }
 
+	private void AddToSeenList()
+	{
+		if (!addedToList)
+		{
+			addedToList = true;
+			gm.AddEnemy(gameObject);
+		}
+	}
 
+	private void RemoveFromSeenList()
+	{
+		if (addedToList)
+		{
+			addedToList = false;
+			gm.RemoveEnemy(gameObject);
+		}
+	}
 
 	protected virtual void TakeAction(AgentState state)
 	{
@@ -138,8 +162,14 @@ public class SearchAndDestory : WeaponBehaviour
 		}
 	}
 
+	private void OnDestroy()
+	{
+		RemoveFromSeenList();
+	}
+
 	public virtual void EnemyDefeated()
 	{
+		RemoveFromSeenList();
 		if (spawnedFromSpawner)
 		{
 			GetComponentInParent<EnemyWaveSpawner>().remainingEnemies--;

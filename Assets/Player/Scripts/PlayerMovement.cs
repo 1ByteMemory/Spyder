@@ -124,11 +124,14 @@ public class PlayerMovement : MonoBehaviour
 			{
                 isCoyote = true;
                 timer = 0;
+                isAir = false;
                 GroundMove();
 			}
             else if (!_controller.isGrounded)
 			{
                 AirMove();
+
+                isAir = true;
 
                 // Coyote time to make jumping easier
                 if (timer <= coyoteTime && isCoyote)
@@ -182,6 +185,18 @@ public class PlayerMovement : MonoBehaviour
         _cmd.rightMove = Input.GetAxisRaw("Horizontal");
     }
 
+    public bool IsMoving()
+	{
+        if (_cmd.forwardMove != 0 || _cmd.rightMove != 0)
+		{
+            return true;
+		}
+		else
+		{
+            return false;
+		}
+	}
+
     /**
      * Queues the next jump just like in Q3
      */
@@ -198,6 +213,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonUp("Jump"))
             wishJump = false;
     }
+
+    private bool isAir;
+    public bool IsInAir
+	{
+		get { return isAir; }
+	}
 
     /**
      * Execs when the player is in the air

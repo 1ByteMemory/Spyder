@@ -43,6 +43,13 @@ public class WeaponBehaviour : MonoBehaviour
                 var main = muzzleFlash.main;
                 main.playOnAwake = false;
             }
+
+            // Add AudioSource componant if it doesn't have one
+            if (_gun.GetComponent<AudioSource>() == null)
+			{
+                AudioSource src = _gun.AddComponent<AudioSource>();
+                src.playOnAwake = false;
+			}
         }
     }
 
@@ -57,13 +64,22 @@ public class WeaponBehaviour : MonoBehaviour
 		{
             firingEndTime = Time.time + weaponAsset.firingTime;
             
-            if (weaponAsset.clip > 0)
+            if (weaponAsset.clip > 0 && Time.time >= reloadingEndTime)
 		    {
                 isFiring = true;
                 isReloading = false;
 
                 if (!weaponAsset.isClipInf)
                     weaponAsset.clip--;
+                
+                // Play Fire Sound
+                weaponScene.GetComponent<AudioSource>().clip = weaponAsset.fireAudio;
+                weaponScene.GetComponent<AudioSource>().Play();
+
+                // Play Fire Animation
+                if (weaponScene.GetComponentInChildren<Animator>())
+                    weaponScene.GetComponentInChildren<Animator>().SetTrigger("Fire");
+
 
                 if (weaponAsset.weaponType == WeaponType.HitScan)
                 {
@@ -76,13 +92,26 @@ public class WeaponBehaviour : MonoBehaviour
             }
 			else
 			{
-                isFiring = false;
-                isReloading = true;
-                weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
-                if (!weaponAsset.isAmmoInf)
+                if (Time.time >= reloadingEndTime)
 				{
-                    weaponAsset.ammo -= weaponAsset.maxClip;
-                    weaponAsset.ammo = weaponAsset.ammo < 0 ? 0 : weaponAsset.ammo;
+                    reloadingEndTime = Time.time + weaponAsset.reloadTime;
+
+                    // Play reload sound
+                    weaponScene.GetComponent<AudioSource>().clip = weaponAsset.reloadAudio;
+					weaponScene.GetComponent<AudioSource>().Play();
+
+					// Play Reload Animation
+                    if (weaponScene.GetComponentInChildren<Animator>())
+					    weaponScene.GetComponentInChildren<Animator>().SetTrigger("Reload");
+
+                    isFiring = false;
+                    isReloading = true;
+                    weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
+                    if (!weaponAsset.isAmmoInf)
+				    {
+                        weaponAsset.ammo -= weaponAsset.maxClip;
+                        weaponAsset.ammo = weaponAsset.ammo < 0 ? 0 : weaponAsset.ammo;
+				    }
 				}
 			}
 		}
