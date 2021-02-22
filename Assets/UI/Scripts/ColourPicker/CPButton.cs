@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 [ExecuteInEditMode]
@@ -18,6 +19,8 @@ public class CPButton : MonoBehaviour
 	private Color oldColor;
 
 	private RectTransform rect;
+
+	public UnityEvent OnColorPick;
 
 	private void Start()
 	{
@@ -58,6 +61,8 @@ public class CPButton : MonoBehaviour
 	public void CloseColorPicker()
 	{
 		colorPanel.SetActive(false);
+
+		OnColorPick.Invoke();
 	}
 
 	public void CancelChanges()
@@ -67,6 +72,8 @@ public class CPButton : MonoBehaviour
 		R.SetValue(oldColor.r);
 		G.SetValue(oldColor.g);
 		B.SetValue(oldColor.b);
+
+		OnColorPick.Invoke();
 	}
 
 	public void SetColour(Color col)

@@ -32,7 +32,7 @@ public class PlayerSettings
 	public bool acc_epilepticMode;
 	public bool acc_toggelCrouch;
 	public bool acc_timeSlow;
-
+	public bool acc_retro;
 
 	public string SaveToString()
 	{

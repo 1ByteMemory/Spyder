@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class JsonIO : MonoBehaviour
 {
-    public static PlayerSettings playerSettings = new PlayerSettings();
+	public static PlayerSettings playerSettings = new PlayerSettings();
 
 
 	public static void ResetSettings()
@@ -40,7 +40,8 @@ public class JsonIO : MonoBehaviour
 		playerSettings.acc_epilepticMode = false;
 		playerSettings.acc_toggelCrouch = false;
 		playerSettings.acc_timeSlow = false;
-}
+		playerSettings.acc_retro = true;
+	}
 
 	public static void LoadSettings()
 	{

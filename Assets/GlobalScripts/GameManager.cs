@@ -361,8 +361,6 @@ public class GameManager : MonoBehaviour
 
 		// Accesability
 		PlayerController.toggleCrouch = JsonIO.playerSettings.acc_toggelCrouch;
-
-
 	}
 	
 	public void MouseSensitivity(float value)
