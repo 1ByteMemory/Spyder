@@ -36,55 +36,18 @@ public class SettingsTab : MonoBehaviour
 	public GameObject[] TabsLabels;
 	public GameObject[] Options;
 
-
+	
 	private void OnEnable()
 	{
 		JsonIO.LoadSettings();
-		JsonIO.ResetSettings();
-		
+		//JsonIO.ResetSettings();
+
 		defaultColor = TabsLabels[0].GetComponent<Image>().color;
-		
-		for (int i = 0; i < Menus.Length; i++)
-		{
-			Menus[i].SetActive(true);
-		}
 
-		// General
-		Options[0].GetComponent<Slider>().value = JsonIO.playerSettings.feildOfView;
-		Options[1].GetComponent<TMP_Dropdown>().value = JsonIO.playerSettings.difficulty;
-
-		// Controls
-		Options[2].GetComponent<Slider>().value = JsonIO.playerSettings.lookSensitivity;
-		Options[3].GetComponent<Slider>().value = JsonIO.playerSettings.scrollSensitivity;
-
-		// Colors
-		Options[4].GetComponent<CPButton>().color = JsonIO.playerSettings.col_outlines;
-		Options[5].GetComponent<CPButton>().color = JsonIO.playerSettings.col_background;
-		Options[6].GetComponent<CPButton>().color = JsonIO.playerSettings.col_enemyOutline;
-
-		// Audio
-		Options[7].GetComponent<Toggle>().isOn = JsonIO.playerSettings.isFullscreen;
-		Options[8].GetComponent<TMP_Dropdown>().value = JsonIO.playerSettings.resolution;
-
-		// Video
-		Options[9].GetComponent<Slider>().value = JsonIO.playerSettings.vol_Barks;
-		Options[10].GetComponent<Slider>().value = JsonIO.playerSettings.vol_SoundFX;
-		Options[11].GetComponent<Slider>().value = JsonIO.playerSettings.vol_Music;
-		Options[12].GetComponent<Slider>().value = JsonIO.playerSettings.vol_Dialogue;
-		Options[13].GetComponent<Slider>().value = JsonIO.playerSettings.vol_Ambience;
-
-		// Accessibility
-		Options[14].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_epilepticMode;
-		Options[15].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_toggelCrouch;
-		Options[16].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_timeSlow;
-		Options[17].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_retro;
-
-		for (int i = 0; i < Menus.Length; i++)
-		{
-			Menus[i].SetActive(false);
-		}
+		OptionsUpdate();
 	}
 
+	private GameObject activeTab;
 	public void OpenTab(GameObject tab)
 	{
 		foreach (GameObject obj in Menus)
@@ -92,6 +55,7 @@ public class SettingsTab : MonoBehaviour
 			obj.SetActive(false);
 		}
 
+		activeTab = tab;
 		tab.SetActive(true);
 	}
 
@@ -142,9 +106,6 @@ public class SettingsTab : MonoBehaviour
 			case Setting.Amb:
 				JsonIO.playerSettings.vol_Ambience = value;
 				break;
-			default:
-				Debug.Log("Setting enum not set");
-				break;
 		}
 	}
 
@@ -157,9 +118,6 @@ public class SettingsTab : MonoBehaviour
 				break;
 			case Setting.Res:
 				JsonIO.playerSettings.resolution = value;
-				break;
-			default:
-				Debug.Log("Setting enum not set");
 				break;
 		}
 	}
@@ -177,9 +135,6 @@ public class SettingsTab : MonoBehaviour
 				break;
 			case Setting.EnemyOutline:
 				JsonIO.playerSettings.col_enemyOutline = value;
-				break;
-			default:
-				Debug.Log("Setting enum not set");
 				break;
 		}
 	}
@@ -211,8 +166,53 @@ public class SettingsTab : MonoBehaviour
 	#endregion
 
 
+	public void OptionsUpdate()
+	{
+		for (int i = 0; i < Menus.Length; i++)
+		{
+			Menus[i].SetActive(true);
+		}
+
+		// General
+		Options[0].GetComponent<Slider>().value = JsonIO.playerSettings.feildOfView;
+		Options[1].GetComponent<TMP_Dropdown>().value = JsonIO.playerSettings.difficulty;
+
+		// Controls
+		Options[2].GetComponent<Slider>().value = JsonIO.playerSettings.lookSensitivity;
+		Options[3].GetComponent<Slider>().value = JsonIO.playerSettings.scrollSensitivity;
+
+		// Colors
+		Options[4].GetComponent<CPButton>().color = JsonIO.playerSettings.col_outlines;
+		Options[5].GetComponent<CPButton>().color = JsonIO.playerSettings.col_background;
+		Options[6].GetComponent<CPButton>().color = JsonIO.playerSettings.col_enemyOutline;
+
+		// Audio
+		Options[7].GetComponent<Toggle>().isOn = JsonIO.playerSettings.isFullscreen;
+		Options[8].GetComponent<TMP_Dropdown>().value = JsonIO.playerSettings.resolution;
+
+		// Video
+		Options[9].GetComponent<Slider>().value = JsonIO.playerSettings.vol_Barks;
+		Options[10].GetComponent<Slider>().value = JsonIO.playerSettings.vol_SoundFX;
+		Options[11].GetComponent<Slider>().value = JsonIO.playerSettings.vol_Music;
+		Options[12].GetComponent<Slider>().value = JsonIO.playerSettings.vol_Dialogue;
+		Options[13].GetComponent<Slider>().value = JsonIO.playerSettings.vol_Ambience;
+
+		// Accessibility
+		Options[14].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_epilepticMode;
+		Options[15].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_toggelCrouch;
+		Options[16].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_timeSlow;
+		Options[17].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_retro;
+
+		for (int i = 0; i < Menus.Length; i++)
+		{
+			Menus[i].SetActive(false);
+		}
+	}
+
 	public void ApplyChanges()
 	{
+		JsonIO.SaveSettings(JsonIO.playerSettings);
+
 		GameManager gm = FindObjectOfType<GameManager>();
 
 		if (gm != null)
@@ -224,5 +224,9 @@ public class SettingsTab : MonoBehaviour
 	public void ResetChanges()
 	{
 		JsonIO.ResetSettings();
+
+		OptionsUpdate();
+		activeTab.SetActive(true);
+
 	}
 }

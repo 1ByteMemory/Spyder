@@ -60,9 +60,8 @@ public class CPButton : MonoBehaviour
 
 	public void CloseColorPicker()
 	{
-		colorPanel.SetActive(false);
-
 		OnColorPick.Invoke();
+		colorPanel.SetActive(false);
 	}
 
 	public void CancelChanges()
