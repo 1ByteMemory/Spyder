@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using Fungus;
 
 public enum Dimension
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
 	public bool loadEnemies = true;
 
 	[Header("UI and HUDs")]
+	public GameObject PauseMenu;
 	public GameObject SettingsUI;
 	public GameObject PlayerHUD;
 	public GameObject Fungus;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
 	public GameObject realWorldObjects;
 	public GameObject digitalWorldObjects;
 
+	public PostProcessProfile retroProfile;
 
 	[Header("")]
 	public bool spawnAtSpawnPoint = true;
@@ -86,21 +89,17 @@ public class GameManager : MonoBehaviour
 
 		src = GetComponent<AudioSource>();
 
-		UI(SettingsUI);
-		UI(PlayerHUD);
-		UI(Fungus);
-
-		SettingsUI = transform.Find(SettingsUI.name + "(Clone)").gameObject;
-		PlayerHUD = transform.Find(PlayerHUD.name + "(Clone)").gameObject;
-		Fungus = transform.Find(Fungus.name + "(Clone)").gameObject;
+		SettingsUI = UI(SettingsUI);
+		PauseMenu = UI(PauseMenu);
+		PlayerHUD = UI(PlayerHUD);
+		Fungus = UI(Fungus);
 
 		flowchart = Fungus.GetComponentInChildren<Flowchart>();
-
-		
-
 		StartCoroutine(StartBarks());
 
+
 		SettingsUI.SetActive(false);
+		PauseMenu.SetActive(false);
 
 		if (!loadEnemies)
 		{
@@ -187,26 +186,35 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	void UI(GameObject ui)
+	GameObject UI(GameObject ui)
 	{
 		if (ui != null && !GameObject.Find(ui.name))
 		{
-			Instantiate(ui, transform);
+			return Instantiate(ui, transform);
 		}
+		else return null;
 	}
 
-	static bool settingsToggel;
+	static bool pauseToggel;
 	private void Update()
 	{
-		if (SettingsUI != null)
+		if (PauseMenu != null && SettingsUI != null)
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				settingsToggel = !settingsToggel;
-				SetMouseActive(settingsToggel);
-				SettingsUI.SetActive(settingsToggel);
+				if (!SettingsUI.activeSelf)
+				{
+					pauseToggel = !pauseToggel;
+					SetMouseActive(pauseToggel);
+					PauseMenu.SetActive(pauseToggel);
 
-				Time.timeScale = settingsToggel ? 0 : 1;
+					Time.timeScale = pauseToggel ? 0 : 1;
+				}
+				else
+				{
+					SettingsUI.SetActive(false);
+					PauseMenu.SetActive(true);
+				}
 			}
 		}
 
@@ -349,6 +357,9 @@ public class GameManager : MonoBehaviour
 		ctr.SetColor("_MidColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
 		ctr.SetColor("_HBarColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
 
+		player.GetComponentInChildren<ScannerEffect>().lineColor = JsonIO.playerSettings.col_outlines;
+		player.GetComponentInChildren<ScannerEffect>().secondaryColor = JsonIO.playerSettings.col_background;
+
 		digitalMats.SetColor("_Color", JsonIO.playerSettings.col_outlines);
 		digitalMats.SetColor("_BckColor", JsonIO.playerSettings.col_background);
 
@@ -358,9 +369,18 @@ public class GameManager : MonoBehaviour
 		FootstepsManager.volume = JsonIO.playerSettings.vol_SoundFX;
 		src.volume = JsonIO.playerSettings.vol_SoundFX;
 
+		// Video
+		Screen.fullScreen = JsonIO.playerSettings.isFullscreen;
+
 
 		// Accesability
 		PlayerController.toggleCrouch = JsonIO.playerSettings.acc_toggelCrouch;
+
+
+		for (int i = 0; i < retroProfile.settings.Count; i++)
+		{
+			retroProfile.settings[i].active = JsonIO.playerSettings.acc_retro;
+		} 
 	}
 	
 	public void MouseSensitivity(float value)
@@ -377,13 +397,25 @@ public class GameManager : MonoBehaviour
 	{
 		Time.timeScale = 1;
 
-		settingsToggel = false;
+		pauseToggel = false;
 		SetMouseActive(false);
 
 		// Find the game manager in the scene and set active on the settings ui from there
 		// This is because this method is called as a static method from an intasiated gameObject
-		FindObjectOfType<GameManager>().SettingsUI.SetActive(false);
+		FindObjectOfType<GameManager>().PauseMenu.SetActive(false);
 
+	}
+
+	public void SettingsMenu()
+	{
+		FindObjectOfType<GameManager>().PauseMenu.SetActive(false);
+		FindObjectOfType<GameManager>().SettingsUI.SetActive(true);
+	}
+
+	public void OpenPauseMenu()
+	{
+		FindObjectOfType<GameManager>().PauseMenu.SetActive(true);
+		FindObjectOfType<GameManager>().SettingsUI.SetActive(false);
 	}
 
 	public void QuitGame()

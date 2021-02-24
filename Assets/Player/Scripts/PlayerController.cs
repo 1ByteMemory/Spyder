@@ -42,24 +42,26 @@ public class PlayerController : MonoBehaviour
 			scanner.Scan(GameManager.currentActiveDimension);
         }
 
-		if (IsCrouching)
+		if (toggleCrouch)
 		{
-			if (toggleCrouch && Input.GetKeyDown(KeyCode.LeftShift))
+			if (Input.GetKeyDown(KeyCode.LeftShift))
 			{
-				Crouch(false);
-			}
-			else if (!Input.GetKey(KeyCode.LeftShift))
-			{
-				Crouch(false);
+				Crouch(!IsCrouching);
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.LeftShift))
+		else
 		{
-			Crouch(true);
+			if (Input.GetKeyDown(KeyCode.LeftShift))
+			{
+				Crouch(true);
+			}
+			if (IsCrouching && !Input.GetKey(KeyCode.LeftShift))
+			{
+				Crouch(false);
+			}
 		}
 	}
 
-	private bool canStand = false;
 	private static bool _isCrouch = false;
 	public static bool IsCrouching
 	{

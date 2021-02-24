@@ -55,8 +55,14 @@ public class PlayerWeapon : WeaponBehaviour
 
     void Update()
     {
+        //float scrollValue = Input.mouseScrollDelta.y * scrollSensitivity;
         if (Input.mouseScrollDelta.y != 0)
-            CycleWeapons(Mathf.FloorToInt((Input.mouseScrollDelta.y / 10) * scrollSensitivity), false);
+		{
+            float num = Input.mouseScrollDelta.y;
+            num = num > 0 ? 1 : -1;
+
+            CycleWeapons((int)num, false);
+		}
         Transform activeGun = gunViewModel.GetChild(weaponIndex);
 
         if (weaponIndex >= 0 && weaponIndex < weapons.Length)

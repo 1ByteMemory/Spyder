@@ -221,12 +221,24 @@ public class SettingsTab : MonoBehaviour
 		}
 	}
 
+	private void OnDisable()
+	{
+		if (activeTab != null)
+			activeTab.SetActive(false);
+		
+		foreach (GameObject obj in TabsLabels)
+		{
+			obj.GetComponent<Image>().color = defaultColor;
+		}
+	}
+
 	public void ResetChanges()
 	{
 		JsonIO.ResetSettings();
 
 		OptionsUpdate();
-		activeTab.SetActive(true);
+		if (activeTab != null)
+			activeTab.SetActive(true);
 
 	}
 }

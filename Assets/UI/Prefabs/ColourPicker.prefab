@@ -932,6 +932,9 @@ MonoBehaviour:
   G: {fileID: 1816688612059674942}
   B: {fileID: 1816688612063654452}
   color: {r: 1, g: 1, b: 1, a: 0}
+  OnColorPick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1816688611074099639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071c674203427b45ba1e9042cb5e25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: 0
   value: 1
   text: {fileID: 1816688611160160727}
 --- !u!1 &1816688611120801684
@@ -2594,7 +2596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071c674203427b45ba1e9042cb5e25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: 1
   value: 1
   text: {fileID: 1816688611463031466}
 --- !u!1 &1816688612063654442
@@ -2721,7 +2722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071c674203427b45ba1e9042cb5e25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colour: 2
   value: 1
   text: {fileID: 1816688610996007437}
 --- !u!1 &1816688612179570747

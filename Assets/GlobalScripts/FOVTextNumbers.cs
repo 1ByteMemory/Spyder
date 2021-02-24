@@ -8,10 +8,19 @@ public class FOVTextNumbers : MonoBehaviour
 {
 	public TextMeshProUGUI text;
 	public Slider slider;
+	public bool roundDown;
 
 	private void Update()
 	{
-		text.text = slider.value.ToString();
+		if (roundDown)
+		{
+
+			text.text = (Mathf.Round(slider.value * 10) / 10).ToString();
+		}
+		else
+		{
+			text.text = slider.value.ToString();
+		}
 	}
 
 }

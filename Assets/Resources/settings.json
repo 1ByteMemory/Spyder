@@ -1,35 +1,35 @@
 {
-    "feildOfView": 113,
-    "difficulty": 2,
-    "lookSensitivity": 200.0,
-    "scrollSensitivity": 0.0,
+    "feildOfView": 70,
+    "difficulty": 1,
+    "lookSensitivity": 150.0,
+    "scrollSensitivity": 0.18075358867645265,
     "col_outlines": {
-        "r": 1.0,
+        "r": 0.0,
         "g": 1.0,
         "b": 0.0,
         "a": 1.0
     },
     "col_background": {
-        "r": 0.637499988079071,
-        "g": 0.06525001674890518,
-        "b": 0.612500011920929,
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
         "a": 1.0
     },
     "col_enemyOutline": {
         "r": 1.0,
         "g": 0.0,
-        "b": 1.0,
+        "b": 0.0,
         "a": 1.0
     },
     "isFullscreen": true,
     "resolution": 0,
     "vol_Barks": 1.0,
-    "vol_SoundFX": 0.10202256590127945,
+    "vol_SoundFX": 1.0,
     "vol_Music": 1.0,
     "vol_Dialogue": 1.0,
-    "vol_Ambience": 0.0,
+    "vol_Ambience": 1.0,
     "acc_epilepticMode": false,
-    "acc_toggelCrouch": true,
-    "acc_timeSlow": true,
+    "acc_toggelCrouch": false,
+    "acc_timeSlow": false,
     "acc_retro": true
 }
