@@ -32,6 +32,7 @@ public class ScannerEffect : MonoBehaviour
 
 	public float lineThickness;
 	public Color lineColor;
+	public Color secondaryColor;
 
 
 	[Header("Furthest Point")]
@@ -128,6 +129,7 @@ public class ScannerEffect : MonoBehaviour
 		
 		EffectMaterial.SetFloat("_Thickness", lineThickness / 1000);
 		EffectMaterial.SetVector("_Color", lineColor);
+		EffectMaterial.SetVector("_SecondaryColor", secondaryColor);
 	}
 
 	void RaycastCornerBlit(RenderTexture source, RenderTexture dest, Material mat)

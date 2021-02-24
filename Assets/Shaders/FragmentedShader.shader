@@ -3,10 +3,8 @@
 	Properties
 	{
 		_MainTex("Main Texture", 2D) = "white" {}
-		_Tint("Tint", Color) = (1,1,1,1)
 		_Color("Color", Color) = (1,1,1,1)
 
-		_EdgeColor("Edge Color", Color) = (1,1,1,1)
 		_EdgeThickness("Edge Thisckness", Float) = 1
 
 		_CellSize("Cell Size", Range(0,2)) = 2
@@ -45,10 +43,8 @@
 		#include "RandomGenerator.cginc"
 		
 		sampler2D _MainTex;
-		float3 _Tint;
 		float3 _Color;
 
-		float3 _EdgeColor;
 		float _EdgeThickness;
 
 		float _CellSize;
@@ -128,7 +124,7 @@
 			fixed4 c = tex2D(_MainTex, i.uv_MainTex);
 
 			o.Albedo = max(1 - fragments, c.rgb * _Color);
-			o.Emission = edge * _EdgeColor;
+			o.Emission = edge * _Color;
 
 			o.Alpha = fragments;
 			
