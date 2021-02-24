@@ -62,11 +62,12 @@ public class JsonIO : MonoBehaviour
 		}
 		catch (DirectoryNotFoundException)
 		{
+#if (UNITY_EDITOR)
 			Debug.Log("Resources directory not found, creating Resources Folder");
 			AssetDatabase.CreateFolder("Assets", "Resources");
 			ResetSettings();
 			SaveSettings(playerSettings);
-
+#endif
 		}
 	}
 
