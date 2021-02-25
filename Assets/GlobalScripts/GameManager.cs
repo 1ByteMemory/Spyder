@@ -375,7 +375,7 @@ public class GameManager : MonoBehaviour
 
 		// Accesability
 		PlayerController.toggleCrouch = JsonIO.playerSettings.acc_toggelCrouch;
-
+		player.GetComponentInChildren<ScannerEffect>().epilepsySafeMode = JsonIO.playerSettings.acc_epilepticMode;
 
 		for (int i = 0; i < retroProfile.settings.Count; i++)
 		{
