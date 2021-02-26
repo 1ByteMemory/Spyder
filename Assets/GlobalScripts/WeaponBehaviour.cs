@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 public class WeaponBehaviour : MonoBehaviour
 {
     
     protected int weaponIndex;
-    public Weapon[] weapons;
+    public List<Weapon> weapons;
 
     protected bool isFiring;
     protected bool isReloading;
@@ -28,31 +29,36 @@ public class WeaponBehaviour : MonoBehaviour
 	{
         foreach (Weapon gun in weapons)
         {
-            GameObject _gun = Instantiate(gun.model, gunTransform);
+            InstantiateWeapon(gunTransform, gun);
+        }
+    }
 
-            ParticleSystem bullet = gun.bullet.GetComponent<ParticleSystem>();
-            if (bullet != null)
-            {
-                bullet = Instantiate(gun.bullet, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
-                var main = bullet.main;
-                main.playOnAwake = false;
-            }
+    public void InstantiateWeapon(Transform gunTransform, Weapon gun)
+	{
+        GameObject _gun = Instantiate(gun.model, gunTransform);
 
-            ParticleSystem muzzleFlash = gun.muzzleFlash;
-            if (muzzleFlash != null)
-            {
-                muzzleFlash = Instantiate(gun.muzzleFlash, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
-                var main = muzzleFlash.main;
-                main.playOnAwake = false;
-            }
+        ParticleSystem bullet = gun.bullet.GetComponent<ParticleSystem>();
+        if (bullet != null)
+        {
+            bullet = Instantiate(gun.bullet, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
+            var main = bullet.main;
+            main.playOnAwake = false;
+        }
 
-            // Add AudioSource componant if it doesn't have one
-            if (_gun.GetComponent<AudioSource>() == null)
-			{
-                AudioSource src = _gun.AddComponent<AudioSource>();
-                src.volume = volume;
-                src.playOnAwake = false;
-			}
+        ParticleSystem muzzleFlash = gun.muzzleFlash;
+        if (muzzleFlash != null)
+        {
+            muzzleFlash = Instantiate(gun.muzzleFlash, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
+            var main = muzzleFlash.main;
+            main.playOnAwake = false;
+        }
+
+        // Add AudioSource componant if it doesn't have one
+        if (_gun.GetComponent<AudioSource>() == null)
+        {
+            AudioSource src = _gun.AddComponent<AudioSource>();
+            src.volume = volume;
+            src.playOnAwake = false;
         }
     }
 
@@ -125,6 +131,19 @@ public class WeaponBehaviour : MonoBehaviour
 		}
 	}
 
+    public Weapon GetWeapon(string name)
+	{
+		for (int i = 0; i < weapons.Count; i++)
+		{
+            if (weapons[i].name == name)
+			{
+                return weapons[i];
+			}
+		}
+
+        return null;
+	}
+
     void HitScan(Weapon weaponAsset, Transform weaponScene, Transform raycastOrigin)
     {
         //Transform spawnpoint = weapon.bulletOrigin;
@@ -172,7 +191,8 @@ public class WeaponBehaviour : MonoBehaviour
     /// <param name="refillAmmo"></param>
     public static void RefillAmmo(Weapon weapon, int refillAmmo)
 	{
-        weapon.ammo = refillAmmo;
+        weapon.ammo += refillAmmo;
+        if (weapon.ammo > weapon.maxAmmo) weapon.ammo = weapon.maxAmmo;
 	}
 
 

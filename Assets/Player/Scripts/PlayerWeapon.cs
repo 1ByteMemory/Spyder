@@ -38,7 +38,7 @@ public class PlayerWeapon : WeaponBehaviour
 
 	private void OnDrawGizmosSelected()
 	{
-        if (weapons.Length > 0)
+        if (weapons.Count > 0)
         {
             Gizmos.color = Color.green;
             Vector3[] points = BulletSpread(weapons[weaponIndex], Camera.main.transform);
@@ -53,7 +53,8 @@ public class PlayerWeapon : WeaponBehaviour
         }
     }
 
-    void Update()
+
+	void Update()
     {
         if (!GameManager.IsPaused)
         {
@@ -61,13 +62,13 @@ public class PlayerWeapon : WeaponBehaviour
             if (Input.mouseScrollDelta.y != 0)
             {
                 float num = Input.mouseScrollDelta.y;
-                num = num > 0 ? 1 : -1;
+                num = num > 0 ? -1 : 1;
 
                 CycleWeapons((int)num, false);
             }
             Transform activeGun = gunViewModel.GetChild(weaponIndex);
 
-            if (weaponIndex >= 0 && weaponIndex < weapons.Length)
+            if (weaponIndex >= 0 && weaponIndex < weapons.Count)
             {
                 DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
 
@@ -102,10 +103,10 @@ public class PlayerWeapon : WeaponBehaviour
 
     }
 
-    void CycleWeapons(int amount, bool isIndex)
+    public void CycleWeapons(int amount, bool isIndex)
 	{
         weaponIndex = isIndex ? amount : weaponIndex + amount;
-        weaponIndex = (int)Mathf.Repeat(weaponIndex, weapons.Length);
+        weaponIndex = (int)Mathf.Repeat(weaponIndex, weapons.Count);
 
 		// Disable all guns, then enable the selected on.
 		for (int i = 0; i < gunViewModel.childCount; i++)
