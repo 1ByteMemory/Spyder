@@ -2,7 +2,7 @@
     "feildOfView": 70,
     "difficulty": 1,
     "lookSensitivity": 150.0,
-    "scrollSensitivity": 0.18075358867645265,
+    "scrollSensitivity": 10.0,
     "col_outlines": {
         "r": 0.0,
         "g": 1.0,
