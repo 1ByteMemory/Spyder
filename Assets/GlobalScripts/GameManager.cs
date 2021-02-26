@@ -225,6 +225,11 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public static bool IsPaused
+	{
+		get { return Cursor.visible; }
+	}
+
 	#region Dimensions
 	public void ToggleDimension()
 	{
