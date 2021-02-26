@@ -6,15 +6,17 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ScannerEffect : MonoBehaviour
 {
-	
-
 	[Header("Scanner")]
 	public Transform ScannerOrigin;
-	public Material EffectMaterial;
+	public Material scanEffect;
+	public Material fadeEffect;
+
+	Material EffectMaterial;
 
 	public float MaxScanDist = 200;
 	public float ScanDistance;
 	public float scanSpeed = 100;
+	public float fadeSpeed = 1;
 
 	private Camera _camera;
 
@@ -32,41 +34,72 @@ public class ScannerEffect : MonoBehaviour
 
 	public float lineThickness;
 	public Color lineColor;
+	public Color secondaryColor;
 
 
 	[Header("Furthest Point")]
-	private float posX, posY;
 	private Vector2 scrPos;
 	private bool hasFurthestPoint;
 
+	[HideInInspector]
+	public bool epilepsySafeMode;
+
 	void Update()
 	{
-		if (_scanning)
+		if (epilepsySafeMode)
 		{
-			// Increase or decrease scanner radius
-			switch (currDimension)
+			EffectMaterial = fadeEffect;
+			if (_scanning)
 			{
-				case Dimension.Digital:
-					ScanDistance = ScanDistance < 0 ? 0 : ScanDistance;
-					ScanDistance += Time.deltaTime * scanSpeed;
-					hasFurthestPoint = false;
-					break;
-				case Dimension.Real:
-					if (!hasFurthestPoint)
-					{
-						ScanDistance = GetFurthestPoint();
-						hasFurthestPoint = true;
-					} 
+				switch (currDimension)
+				{
+					case Dimension.Digital:
+						ScanDistance = ScanDistance <= 0 ? 0 : ScanDistance;
+						ScanDistance += Time.deltaTime * fadeSpeed;
+						break;
+					case Dimension.Real:
+						ScanDistance = ScanDistance >= 1 ? 1 : ScanDistance;
+						ScanDistance -= Time.deltaTime * fadeSpeed;
+						break;
+				}
 
-					ScanDistance -= Time.deltaTime * scanSpeed;
-					break;
+				if (ScanDistance >= 1 || ScanDistance <= 0)
+				{
+					ScanDistance = Mathf.Clamp01(ScanDistance);
+					_scanning = false;
+				}
 			}
-
-			// prevent the numbers from getting too high
-			if (ScanDistance >= MaxScanDist || ScanDistance <= 0)
+		}
+		else
+		{
+			EffectMaterial = scanEffect;
+			if (_scanning)
 			{
-				//ScanDistance = 0;
-				_scanning = false;
+				// Increase or decrease scanner radius
+				switch (currDimension)
+				{
+					case Dimension.Digital:
+						ScanDistance = ScanDistance < 0 ? 0 : ScanDistance;
+						ScanDistance += Time.deltaTime * scanSpeed;
+						hasFurthestPoint = false;
+						break;
+					case Dimension.Real:
+						if (!hasFurthestPoint)
+						{
+							ScanDistance = GetFurthestPoint();
+							hasFurthestPoint = true;
+						}
+
+						ScanDistance -= Time.deltaTime * scanSpeed;
+						break;
+				}
+
+				// prevent the numbers from getting too high
+				if (ScanDistance >= MaxScanDist || ScanDistance <= 0)
+				{
+					//ScanDistance = 0;
+					_scanning = false;
+				}
 			}
 		}
 	}
@@ -111,12 +144,19 @@ public class ScannerEffect : MonoBehaviour
 	[ImageEffectOpaque]
 	void OnRenderImage(RenderTexture src, RenderTexture dst)
 	{
-		EffectMaterial.SetVector("_WorldSpaceScannerPos", ScannerOrigin.position);
-		EffectMaterial.SetFloat("_ScanDistance", ScanDistance);
-
 		SetEdgeProperties();
+		if (!epilepsySafeMode)
+		{
+			EffectMaterial.SetVector("_WorldSpaceScannerPos", ScannerOrigin.position);
+			EffectMaterial.SetFloat("_ScanDistance", ScanDistance);
+			RaycastCornerBlit(src, dst, EffectMaterial);
+		}
+		else
+		{
+			EffectMaterial.SetFloat("_Fade", ScanDistance);
 
-		RaycastCornerBlit(src, dst, EffectMaterial);
+			Graphics.Blit(src, dst, EffectMaterial);
+		}
 	}
 
 	void SetEdgeProperties()
@@ -128,6 +168,7 @@ public class ScannerEffect : MonoBehaviour
 		
 		EffectMaterial.SetFloat("_Thickness", lineThickness / 1000);
 		EffectMaterial.SetVector("_Color", lineColor);
+		EffectMaterial.SetVector("_SecondaryColor", secondaryColor);
 	}
 
 	void RaycastCornerBlit(RenderTexture source, RenderTexture dest, Material mat)

@@ -47,7 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadEnemies: 1
-  SettingsUI: {fileID: 8720969390859203546, guid: d12682c312290e74fa9b007930e3583c,
+  PauseMenu: {fileID: 8720969390859203546, guid: d12682c312290e74fa9b007930e3583c,
+    type: 3}
+  SettingsUI: {fileID: 2552081024986111036, guid: 83057398fa52fe94a87068be4fb4dcac,
     type: 3}
   PlayerHUD: {fileID: 2903384469483961456, guid: 4f9dc7c70f63c10478734714d3c54543,
     type: 3}
@@ -55,9 +57,11 @@ MonoBehaviour:
   dimensionClip: {fileID: 8300000, guid: f133e91368a53de46b9cf9ed504d6841, type: 3}
   realWorldObjects: {fileID: 0}
   digitalWorldObjects: {fileID: 0}
+  retroProfile: {fileID: 11400000, guid: 384e66f0092649a4e8f04152a9d794ad, type: 2}
   spawnAtSpawnPoint: 1
   spawnPoint: {fileID: 0}
   seenEnemies: []
+  digitalMats: {fileID: 2100000, guid: ec880374f354f1540a21ff447987a8fb, type: 2}
 --- !u!82 &5427610743791985861
 AudioSource:
   m_ObjectHideFlags: 0

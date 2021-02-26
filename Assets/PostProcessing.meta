@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/PostProcessing.meta
-guid: 70924e6daed90984ca2a57c6d441218e
+<<<<<<< HEAD:Assets/Scenes/DansTestScenes/UITest.unity.meta
+guid: d57172c058b7fb84d93c4388b20d688f
 =======
-guid: dbb9f4c3efd22c14eaed75b9dbff6763
->>>>>>> origin/Weapons:Assets/Player/Animations/Pistol.meta
+guid: 70924e6daed90984ca2a57c6d441218e
 folderAsset: yes
+>>>>>>> Level1Modifications:Assets/PostProcessing.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

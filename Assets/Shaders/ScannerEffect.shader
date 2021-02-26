@@ -13,6 +13,7 @@ Shader "Custom/ScannerEffect"
 		_MidColor("Mid Color", Color) = (1, 1, 1, 0)
 		_TrailColor("Trail Color", Color) = (1, 1, 1, 0)
 		_HBarColor("Horizontal Bar Color", Color) = (0.5, 0.5, 0.5, 0)
+		_SecondaryColor("Secondary color", Color) = (0, 0, 0, 0)
 	}
 	SubShader
 	{
@@ -75,6 +76,7 @@ Shader "Custom/ScannerEffect"
 			float4 _MidColor;
 			float4 _TrailColor;
 			float4 _HBarColor;
+			fixed4 _SecondaryColor;
 
 			// Edge variables
             sampler2D _CameraDepthNormalsTexture;
@@ -86,7 +88,6 @@ Shader "Custom/ScannerEffect"
             float _Distance;
             float _Bias;
             fixed4 _Color;
-
 
 			float4 horizBars(float2 p)
 			{	
@@ -158,17 +159,22 @@ Shader "Custom/ScannerEffect"
 
 				normalValue = clamp(pow(normalValue * _NormalScale, _NormalBias), 0,1);
 
+				fixed4 secondaryCol = fixed4(0,0,0,0);
+
 				if (dist < _ScanDistance && linearDepth < 1)
 				{
-					edgeCol = max(normalValue, depthValue) * _Color;
+					edgeCol = max(normalValue, depthValue);
 
 					float diff = (_ScanDistance - dist) / (_ScanWidth);
 					half4 edge = lerp(col, edgeCol, pow(diff, _LeadSharp));
 					edgeCol = lerp(edgeCol, edge, diff);
 					edgeCol *= diff;
+
+					secondaryCol = (1 - edgeCol) * _SecondaryColor;
+					edgeCol *= _Color;
 				}
 
-				return edgeCol + scannerCol;
+				return edgeCol + scannerCol + secondaryCol;
 			}
 			ENDCG
 		}

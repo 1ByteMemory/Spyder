@@ -24,6 +24,8 @@ public class FootstepsManager : MonoBehaviour
 	private AudioSource src;
 	private float strideEndTime;
 
+	public static float volume;
+
 	private void Start()
 	{
 		playerMove = GetComponent<PlayerMovement>();
@@ -58,12 +60,12 @@ public class FootstepsManager : MonoBehaviour
 					if (ren != null && matAudio != null)
 					{
 						src.clip =  matAudio.audioClip;
-						src.volume = matAudio.volume;
+						src.volume = matAudio.volume * volume;
 					}
 					else
 					{
 						src.clip =  defaultAudio;
-						src.volume = 1;
+						src.volume = volume;
 					}
 					src.Play();
 				}

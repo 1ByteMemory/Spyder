@@ -13,6 +13,8 @@ public class WeaponBehaviour : MonoBehaviour
     private float firingEndTime;
     private float reloadingEndTime;
 
+    public static float volume;
+
     protected virtual void Start()
 	{
 		foreach (Weapon item in weapons)
@@ -48,6 +50,7 @@ public class WeaponBehaviour : MonoBehaviour
             if (_gun.GetComponent<AudioSource>() == null)
 			{
                 AudioSource src = _gun.AddComponent<AudioSource>();
+                src.volume = volume;
                 src.playOnAwake = false;
 			}
         }
