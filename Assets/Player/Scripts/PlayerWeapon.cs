@@ -55,41 +55,44 @@ public class PlayerWeapon : WeaponBehaviour
 
     void Update()
     {
-        //float scrollValue = Input.mouseScrollDelta.y * scrollSensitivity;
-        if (Input.mouseScrollDelta.y != 0)
-		{
-            float num = Input.mouseScrollDelta.y;
-            num = num > 0 ? 1 : -1;
-
-            CycleWeapons((int)num, false);
-		}
-        Transform activeGun = gunViewModel.GetChild(weaponIndex);
-
-        if (weaponIndex >= 0 && weaponIndex < weapons.Length)
+        if (!GameManager.IsPaused)
         {
-            DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
-
-            if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
+            //float scrollValue = Input.mouseScrollDelta.y * scrollSensitivity;
+            if (Input.mouseScrollDelta.y != 0)
             {
-                UseWeapon(activeGun, weapons[weaponIndex], cam);
+                float num = Input.mouseScrollDelta.y;
+                num = num > 0 ? 1 : -1;
+
+                CycleWeapons((int)num, false);
+            }
+            Transform activeGun = gunViewModel.GetChild(weaponIndex);
+
+            if (weaponIndex >= 0 && weaponIndex < weapons.Length)
+            {
+                DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
+
+                if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
+                {
+                    UseWeapon(activeGun, weapons[weaponIndex], cam);
+                }
+            }
+
+            Animator anim = activeGun.GetComponentInChildren<Animator>();
+            if (pm.IsMoving())
+            {
+                if (anim != null)
+                {
+                    anim.SetBool("Is Moving", true);
+                }
+            }
+            else
+            {
+                if (anim != null)
+                {
+                    anim.SetBool("Is Moving", false);
+                }
             }
         }
-
-        Animator anim = activeGun.GetComponentInChildren<Animator>();
-        if (pm.IsMoving())
-		{
-            if (anim != null)
-			{
-                anim.SetBool("Is Moving", true);
-			}
-        }
-        else
-		{
-            if (anim != null)
-			{
-                anim.SetBool("Is Moving", false);
-			}
-		}
     }
 
     void DisplayAmmo(int ammo, int clip)

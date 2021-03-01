@@ -225,6 +225,11 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public static bool IsPaused
+	{
+		get { return Cursor.visible; }
+	}
+
 	#region Dimensions
 	public void ToggleDimension()
 	{
@@ -258,7 +263,7 @@ public class GameManager : MonoBehaviour
 				{
 					Animator anim = digitalWorldObjects.transform.GetChild(i).GetComponent<Animator>();
 					
-					if (anim != null)
+					if (anim != null && digitalWorldObjects.transform.GetChild(i).CompareTag("StopAnimation"))
 					{
 						anim.speed = 1;
 					}
@@ -269,7 +274,7 @@ public class GameManager : MonoBehaviour
 				{
 					Animator anim = realWorldObjects.transform.GetChild(i).GetComponent<Animator>();
 
-					if (anim != null)
+					if (anim != null && realWorldObjects.transform.GetChild(i).CompareTag("StopAnimation"))
 					{
 						anim.speed = 0;
 					}
@@ -290,7 +295,7 @@ public class GameManager : MonoBehaviour
 				{
 					Animator anim = realWorldObjects.transform.GetChild(i).GetComponent<Animator>();
 
-					if (anim != null)
+					if (anim != null && realWorldObjects.transform.GetChild(i).CompareTag("StopAnimation"))
 					{
 						anim.speed = 1;
 					}
@@ -301,7 +306,7 @@ public class GameManager : MonoBehaviour
 				{
 					Animator anim = digitalWorldObjects.transform.GetChild(i).GetComponent<Animator>();
 
-					if (anim != null)
+					if (anim != null && digitalWorldObjects.transform.GetChild(i).CompareTag("StopAnimation"))
 					{
 						anim.speed = 0;
 					}
@@ -375,7 +380,7 @@ public class GameManager : MonoBehaviour
 
 		// Accesability
 		PlayerController.toggleCrouch = JsonIO.playerSettings.acc_toggelCrouch;
-
+		player.GetComponentInChildren<ScannerEffect>().epilepsySafeMode = JsonIO.playerSettings.acc_epilepticMode;
 
 		for (int i = 0; i < retroProfile.settings.Count; i++)
 		{
