@@ -38,6 +38,8 @@ public class SearchAndDestory : WeaponBehaviour
 	private GameManager gm;
 	private bool addedToList;
 
+	private Animator anim;
+
 	private void OnValidate()
 	{
 		if (attackRadius > searchRadius)
@@ -65,6 +67,8 @@ public class SearchAndDestory : WeaponBehaviour
 
 		navMeshAgent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+		anim = GetComponentInChildren<Animator>();
 
 		InstantiateWeapons(gunPosition);
 		if (gunPosition.childCount > 0)
@@ -179,7 +183,10 @@ public class SearchAndDestory : WeaponBehaviour
 	protected virtual void Idle()
 	{
 		navMeshAgent.isStopped = true;
+
 		// Play idle animation
+		if (anim != null)
+			anim.SetTrigger("Idle");
 
 		// Maybe patrol a certain route
 	}
@@ -189,10 +196,18 @@ public class SearchAndDestory : WeaponBehaviour
 		// Get closer to player to attack
 		navMeshAgent.isStopped = false;
 		navMeshAgent.SetDestination(player.position);
+
+		if (anim != null)
+			anim.SetTrigger("Running");
+
 	}
 
 	protected virtual void Attack()
 	{
+		if (anim != null)
+			anim.SetTrigger("Attacking");
+
+
 		if (agentState == AgentState.Attack)
 			navMeshAgent.isStopped = true;
 
