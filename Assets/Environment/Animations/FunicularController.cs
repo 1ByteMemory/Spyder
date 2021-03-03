@@ -33,4 +33,5 @@ public class FunicularController : MonoBehaviour
 		anim.speed = 0;
 	}
 
+	
 }
