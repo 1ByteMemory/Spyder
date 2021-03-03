@@ -866,6 +866,7 @@ MonoBehaviour:
   coolDown: 0.5
   digitalEffect: {fileID: 2100000, guid: 8ddf3690dce2eba4fbc856adf4bb0b3e, type: 2}
   triggerDetector: {fileID: 6532164225303208852}
+  isAbilityUnlocked: 1
 --- !u!114 &8052970396253969105
 MonoBehaviour:
   m_ObjectHideFlags: 0
