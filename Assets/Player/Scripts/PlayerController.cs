@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 	CharacterController cc;
 
 	public static bool toggleCrouch;
+	[HideInInspector]
+	public bool isAbilityUnlocked = false;
 
 	private void Start()
 	{
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-        if (Input.GetMouseButtonDown(1) && !isInWall && Time.time >= endTime)
+        if (isAbilityUnlocked && Input.GetMouseButtonDown(1) && !isInWall && Time.time >= endTime)
         {
 			game.ToggleDimension();
 
