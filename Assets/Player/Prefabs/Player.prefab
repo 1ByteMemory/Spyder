@@ -903,7 +903,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f5c79dfaf659364dbe70374a281cb6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
+  weapons:
+  - {fileID: 11400000, guid: 2db7517f8db13a24a8a30510a41d3c58, type: 2}
+  - {fileID: 11400000, guid: 364f1677cb912a04b82876c02ccc7c61, type: 2}
   aimOffset: {x: 0, y: 0}
   gunViewModel: {fileID: 4461220149873880172}
   scrollSensitivity: 1
