@@ -1,0 +1,14 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AbilityUnlock : MonoBehaviour
+{
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			other.GetComponent<PlayerController>().isAbilityUnlocked = true;
+		}
+	}
+}

@@ -69,31 +69,36 @@ public class PlayerWeapon : WeaponBehaviour
 
                 CycleWeapons((int)num, false);
             }
-            Transform activeGun = gunViewModel.GetChild(weaponIndex);
 
-            if (weaponIndex >= 0 && weaponIndex < weapons.Count)
+            if (gunViewModel.childCount > 0)
             {
-                DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
 
-                if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
+                Transform activeGun = gunViewModel.GetChild(weaponIndex);
+
+                if (weaponIndex >= 0 && weaponIndex < weapons.Count)
                 {
-                    UseWeapon(activeGun, weapons[weaponIndex], cam);
+                    DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
+
+                    if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
+                    {
+                        UseWeapon(activeGun, weapons[weaponIndex], cam);
+                    }
                 }
-            }
 
-            Animator anim = activeGun.GetComponentInChildren<Animator>();
-            if (pm.IsMoving())
-            {
-                if (anim != null)
+                Animator anim = activeGun.GetComponentInChildren<Animator>();
+                if (pm.IsMoving())
                 {
-                    anim.SetBool("Is Moving", true);
+                    if (anim != null)
+                    {
+                        anim.SetBool("Is Moving", true);
+                    }
                 }
-            }
-            else
-            {
-                if (anim != null)
+                else
                 {
-                    anim.SetBool("Is Moving", false);
+                    if (anim != null)
+                    {
+                        anim.SetBool("Is Moving", false);
+                    }
                 }
             }
         }
@@ -117,6 +122,7 @@ public class PlayerWeapon : WeaponBehaviour
             gunViewModel.GetChild(i).gameObject.SetActive(false);
 		}
 
-        gunViewModel.GetChild(weaponIndex).gameObject.SetActive(true);
+        if (gunViewModel.childCount > 0)
+            gunViewModel.GetChild(weaponIndex).gameObject.SetActive(true);
 	}
 }
