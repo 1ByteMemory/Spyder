@@ -21,7 +21,14 @@ public class LevelSelection : MonoBehaviour
 		sceneLoader = GetComponent<SceneLoader>();
 
 		// How many cards can fit horizontally
-		int numInRow = Mathf.RoundToInt(scroll.content.sizeDelta.x / (128 + cardGap.x));
+		CanvasScaler canvas = GetComponentInParent<CanvasScaler>();
+		Vector2 canvasSize = canvas.referenceResolution;
+
+		RectTransform scrollRect = scroll.GetComponent<RectTransform>();
+		
+		int Row = Mathf.RoundToInt((canvasSize.x - Mathf.Abs(scrollRect.sizeDelta.x)) / (128 + cardGap.x));
+		scroll.content.sizeDelta = new Vector2(scroll.content.sizeDelta.x, (178 + cardGap.y) * (levels.Length / Row) + border.y);
+
 
 		for (int i = 0; i < levels.Length; i++)
 		{
@@ -55,7 +62,7 @@ public class LevelSelection : MonoBehaviour
 			{
 				float x;
 				float y;
-				if (i % numInRow == 0)
+				if (i % Row == 0)
 				{
 					// Place card on a new row 
 					x = 64 + border.x;
@@ -86,6 +93,11 @@ public class LevelSelection : MonoBehaviour
 			// Button
 			Button button = card.gameObject.AddComponent<Button>();
 			button.targetGraphic = img.GetComponent<Image>();
+			
+			// For some reason this is how you change button colors
+			ColorBlock block = button.colors;
+			block.highlightedColor = new Color(0.7f, 0.7f, 0.7f);
+			button.colors = block;
 
 			// Add LoadLevel Method to OnClick event
 			int index = i;
@@ -96,7 +108,10 @@ public class LevelSelection : MonoBehaviour
 
 	public void LoadScene(int index)
 	{
-		Debug.Log(index);
+		GameManager.loadedFromSelector = true;
+		GameManager.loadedSpawnPosition = levels[index].spawnPoint;
+		GameManager.loadedWeapons = levels[index].availableWeapons;
+
 		sceneLoader.LoadScene(levels[index].sceneName);
 	}
 
