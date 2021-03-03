@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+[RequireComponent(typeof(SceneLoader))]
 public class LevelSelection : MonoBehaviour
 {
     public ScrollRect scroll;
+	SceneLoader sceneLoader;
 
 	public Vector2 border;
 	public Vector2 cardGap;
@@ -16,6 +18,9 @@ public class LevelSelection : MonoBehaviour
 	private void Start()
 	{
 		RectTransform prevRect = new RectTransform();
+		sceneLoader = GetComponent<SceneLoader>();
+
+		// How many cards can fit horizontally
 		int numInRow = Mathf.RoundToInt(scroll.content.sizeDelta.x / (128 + cardGap.x));
 
 		for (int i = 0; i < levels.Length; i++)
@@ -42,6 +47,7 @@ public class LevelSelection : MonoBehaviour
 			card.anchorMax = new Vector2(0, 1);
 			if (i == 0)
 			{
+				// First card is set
 				card.anchoredPosition = new Vector2(64 + border.x, -64 - border.y);
 				prevRect = card;
 			}
@@ -51,7 +57,7 @@ public class LevelSelection : MonoBehaviour
 				float y;
 				if (i % numInRow == 0)
 				{
-					
+					// Place card on a new row 
 					x = 64 + border.x;
 					y = prevRect.anchoredPosition.y - 178 - cardGap.y;
 				}
@@ -75,9 +81,23 @@ public class LevelSelection : MonoBehaviour
 			title.anchorMax = new Vector2(1, 0);
 			title.anchoredPosition = new Vector2(0, -25);
 			title.sizeDelta = new Vector2(0, 50);
+
+
+			// Button
+			Button button = card.gameObject.AddComponent<Button>();
+			button.targetGraphic = img.GetComponent<Image>();
+
+			// Add LoadLevel Method to OnClick event
+			int index = i;
+			button.onClick.AddListener(() => LoadScene(index));
+
 		}
+	}
 
-
+	public void LoadScene(int index)
+	{
+		Debug.Log(index);
+		sceneLoader.LoadScene(levels[index].sceneName);
 	}
 
 	private RectTransform CreateRect(string name, RectTransform parent)

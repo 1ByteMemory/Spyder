@@ -702,6 +702,7 @@ GameObject:
   - component: {fileID: 1175283278}
   - component: {fileID: 1175283277}
   - component: {fileID: 1175283276}
+  - component: {fileID: 1175283281}
   m_Layer: 5
   m_Name: LevelSelect
   m_TagString: Untagged
@@ -725,123 +726,18 @@ MonoBehaviour:
   border: {x: 20, y: 20}
   cardGap: {x: 10, y: 10}
   levels:
-  - title: Name1
-    sceneName: 
+  - title: Level 1
+    sceneName: Level 1
     image: {fileID: 0}
     spawnPoint: {x: 0, y: 0, z: 0}
     availableWeapons: []
-  - title: Name2
-    sceneName: 
+  - title: Level 2
+    sceneName: Level 2
     image: {fileID: 0}
     spawnPoint: {x: 0, y: 0, z: 0}
     availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
-    image: {fileID: 0}
-    spawnPoint: {x: 0, y: 0, z: 0}
-    availableWeapons: []
-  - title: Name2
-    sceneName: 
+  - title: Level 4
+    sceneName: Level 4
     image: {fileID: 0}
     spawnPoint: {x: 0, y: 0, z: 0}
     availableWeapons: []
@@ -927,6 +823,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1175283281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1175283275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7182b68f5d1e1474db2791bfc1ffae83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: LoadingScreen
 --- !u!1 &1234032868
 GameObject:
   m_ObjectHideFlags: 0
