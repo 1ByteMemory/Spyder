@@ -8,7 +8,6 @@ public class Projectile : MonoBehaviour
 	public Weapon weapon;
 	public int layer;
 	public string ownerTag;
-	private float endTime = -1;
 	private Vector3 pos;
 
 

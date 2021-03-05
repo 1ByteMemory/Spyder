@@ -200,11 +200,25 @@ public class SearchAndDestory : WeaponBehaviour
 		// Maybe patrol a certain route
 	}
 
+	bool IsPositionInRange(float a, float b, float d)
+	{
+		if (a > b - d && a < b + d)
+			return true;
+		else
+			return false;
+
+	}
+
 	protected virtual void Search()
 	{
+
 		navMeshAgent.SetDestination(Player.position);
-		
-		if (navMeshAgent.destination == Player.position)
+
+		bool x = IsPositionInRange(navMeshAgent.pathEndPosition.x, Player.position.x, 2);
+		bool y = IsPositionInRange(navMeshAgent.pathEndPosition.y, Player.position.y, 2);
+		bool z = IsPositionInRange(navMeshAgent.pathEndPosition.z, Player.position.z, 2);
+
+		if (x && y && z)
 		{
 			// Get closer to player to attack
 			navMeshAgent.isStopped = false;
