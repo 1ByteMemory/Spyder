@@ -15,6 +15,7 @@ public enum AgentState
 [RequireComponent(typeof(NavMeshAgent))]
 public class SearchAndDestory : WeaponBehaviour
 {
+
     public float searchRadius = 20;
     public float attackRadius = 10;
 
@@ -27,7 +28,7 @@ public class SearchAndDestory : WeaponBehaviour
 
 	protected bool isStunned;
 
-	public Transform player { get; private set; }
+	public Transform Player { get; private set; }
 
 	[HideInInspector]
 	public bool spawnedFromSpawner;
@@ -39,6 +40,11 @@ public class SearchAndDestory : WeaponBehaviour
 	private bool addedToList;
 
 	private Animator anim;
+
+	public Transform lookPivot;
+
+	[HideInInspector]
+	public bool hasLineOfSight;
 
 	private void OnValidate()
 	{
@@ -66,7 +72,7 @@ public class SearchAndDestory : WeaponBehaviour
 		gm = FindObjectOfType<GameManager>();
 
 		navMeshAgent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
 
 		anim = GetComponentInChildren<Animator>();
 
@@ -75,20 +81,23 @@ public class SearchAndDestory : WeaponBehaviour
 			activeWeapon = gunPosition.GetChild(0);
 		else
 			Debug.Log(transform + "Doesn't have a gun!");
+
 	}
 
 	// Update is called once per frame
 	protected virtual void Update()
     {
-        float distance = Mathf.Abs((player.position - transform.position).magnitude);
+        float distance = Mathf.Abs((Player.position - transform.position).magnitude);
 
 		if (distance > searchRadius)
 		{
 			agentState = AgentState.Idle;
 		}
-		else if (Physics.Raycast(transform.position, player.position - transform.position, out navHit, searchRadius))
+		else if (Physics.Raycast(transform.position, Player.position - transform.position, out navHit, searchRadius))
 		{
-            if (!navHit.transform.CompareTag("Player"))
+			hasLineOfSight = navHit.transform.CompareTag("Player");
+
+			if (!hasLineOfSight)
 			{
 				RemoveFromSeenList();
 				agentState = AgentState.Search;
@@ -193,13 +202,26 @@ public class SearchAndDestory : WeaponBehaviour
 
 	protected virtual void Search()
 	{
-		// Get closer to player to attack
-		navMeshAgent.isStopped = false;
-		navMeshAgent.SetDestination(player.position);
+		navMeshAgent.SetDestination(Player.position);
+		
+		if (navMeshAgent.destination == Player.position)
+		{
+			// Get closer to player to attack
+			navMeshAgent.isStopped = false;
 
-		if (anim != null)
-			anim.SetTrigger("Running");
 
+			if (anim != null)
+				anim.SetTrigger("Running");
+		}
+		else
+		{
+			navMeshAgent.isStopped = true;
+
+			if (hasLineOfSight)
+			{
+				Attack();
+			}
+		}
 	}
 
 	protected virtual void Attack()
@@ -211,17 +233,13 @@ public class SearchAndDestory : WeaponBehaviour
 		if (agentState == AgentState.Attack)
 			navMeshAgent.isStopped = true;
 
+
+		transform.LookAt(Player);
+		activeWeapon
+
+
 		if (gunPosition.childCount > 0)
 			UseWeapon(activeWeapon);
 
 	}
-
-	/*
-	public virtual void Stun()
-	{
-		navMeshAgent.isStopped = true;
-
-		isStunned = true;
-	}
-	*/
 }
