@@ -235,8 +235,8 @@ public class SearchAndDestory : WeaponBehaviour
 
 
 		transform.LookAt(Player);
-		activeWeapon
 
+		gunPosition.LookAt(Player);
 
 		if (gunPosition.childCount > 0)
 			UseWeapon(activeWeapon);
