@@ -32,11 +32,11 @@ public class FunicularController : MonoBehaviour
 	// These methods are called from the animator event keys
 	public void Go()
 	{
-		//	GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().transform.SetParent(transform);
+		// GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().transform.SetParent(transform);
 	}
 	public void Stop()
 	{
-		//	GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().transform.SetParent(null);
+		// GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().transform.SetParent(null);
 	}
 	public void StopAnim()
 	{
