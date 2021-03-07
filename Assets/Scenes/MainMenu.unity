@@ -487,7 +487,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 39.7
+  m_fontSize: 39.3
   m_fontSizeBase: 45.5
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1798,7 +1798,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 2, y: -13.3}
+  m_AnchoredPosition: {x: 2, y: -13.299988}
   m_SizeDelta: {x: -253.1977, y: -216.2694}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1295406670
@@ -1824,7 +1824,7 @@ MonoBehaviour:
     this game.
 
 
-    This game features an <color="blue">Epilectic Safe Mode</color>
+    This game features an <color="blue">Epileptic Safe Mode</color>
     in  <color="red">Options</color> for those who suffer from this condition'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1853,7 +1853,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 29.15
+  m_fontSize: 29.1
   m_fontSizeBase: 50.6
   m_fontWeight: 400
   m_enableAutoSizing: 1
