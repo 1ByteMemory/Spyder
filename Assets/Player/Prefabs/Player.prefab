@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 7359043739171224173}
   - component: {fileID: 6470612708212771097}
   - component: {fileID: 5546906400404088932}
+  - component: {fileID: -5288027468109702799}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -866,6 +867,7 @@ MonoBehaviour:
   coolDown: 0.5
   digitalEffect: {fileID: 2100000, guid: 8ddf3690dce2eba4fbc856adf4bb0b3e, type: 2}
   triggerDetector: {fileID: 6532164225303208852}
+  isAbilityUnlocked: 0
 --- !u!114 &8052970396253969105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1075,6 +1077,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-5288027468109702799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808830610586471030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e138bcfac2f474e887a6b259dfcae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6808830611006798372
 GameObject:
   m_ObjectHideFlags: 0
