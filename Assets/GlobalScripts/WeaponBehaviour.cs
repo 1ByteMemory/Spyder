@@ -16,7 +16,6 @@ public class WeaponBehaviour : MonoBehaviour
 
     public static float volume;
 
-
     protected virtual void Start()
 	{
 		foreach (Weapon item in weapons)
@@ -197,7 +196,6 @@ public class WeaponBehaviour : MonoBehaviour
 	}
 
 
-    
     protected virtual void FireProjectile(Weapon weapon, Transform sceneWeapon)
 	{
         Vector2 offset = new Vector2(0, 0);
@@ -232,8 +230,10 @@ public class WeaponBehaviour : MonoBehaviour
 
         if (weapon.muzzleFlash != null)
             weapon.muzzleFlash.Play();
-    }
+        
 
+
+    }
 
 
     /// <summary>

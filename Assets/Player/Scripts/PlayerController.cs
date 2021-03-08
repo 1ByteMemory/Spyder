@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 	CharacterController cc;
 
 	public static bool toggleCrouch;
+	[HideInInspector]
 	public bool isAbilityUnlocked = false;
 
 	private void Start()
