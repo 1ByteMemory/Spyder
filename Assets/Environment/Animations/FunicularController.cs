@@ -6,12 +6,18 @@ public class FunicularController : MonoBehaviour
 {
 
 	Animator anim;
+	public AudioClip fhydro;
+	public AudioClip bgmrock;
+	AudioSource bgm;
+	AudioSource fsoundsiren;
 
 
 
 	private void Start()
 	{
 		anim = GetComponent<Animator>();
+		bgm = GetComponent<AudioSource>();
+		fsoundsiren = GetComponent<AudioSource>();
 	}
 
 	public void PlayAnim()
@@ -32,15 +38,20 @@ public class FunicularController : MonoBehaviour
 	// These methods are called from the animator event keys
 	public void Go()
 	{
-		// GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().transform.SetParent(transform);
+		fhydro.clip = fhydro;
+		fhydro.Play();
 	}
 	public void Stop()
 	{
-		// GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().transform.SetParent(null);
+		fsound.Stop();
+		bgm.clip = bgmrock;
+		bgm.Play();
+
 	}
 	public void StopAnim()
 	{
 		anim.speed = 0;
+		
 	}
 
 }
