@@ -4869,11 +4869,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 11400000, guid: 8e1f8df06e543e04a814f895d6f3149e, type: 2}
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 1793
   searchRadius: 25
   attackRadius: 6
   stunnedTime: 2
   spawnedFromSpawner: 0
   gunPosition: {fileID: 1226598378809151112}
+  lookPivot: {fileID: 7350832815863436660}
+  hasLineOfSight: 0
   reloadTime: 0.5
   normalDamage: 5
   modifiedDamage: 1
@@ -5133,6 +5138,12 @@ GameObject:
 --- !u!4 &1996086073065550286 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f474115ae9f23f64cad365cc005fdb1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2033723537777251877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7350832815863436660 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -415919170949790895, guid: f474115ae9f23f64cad365cc005fdb1f,
     type: 3}
   m_PrefabInstance: {fileID: 2033723537777251877}
   m_PrefabAsset: {fileID: 0}
