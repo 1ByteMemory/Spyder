@@ -55,12 +55,6 @@ public class GameManager : MonoBehaviour
 
 	public Material digitalMats;
 
-
-	// When loaded from level selector
-	public static Vector3 loadedSpawnPosition;
-	public static Weapon[] loadedWeapons;
-	public static bool loadedFromSelector;
-
 	private void Start()
 	{
 		SetMouseActive(false);
@@ -126,24 +120,7 @@ public class GameManager : MonoBehaviour
 		
 		SetDimension(Dimension.Real);
 
-		if (loadedFromSelector)
-		{
-			loadedFromSelector = false;
-
-			if (loadedSpawnPosition != Vector3.zero)
-				GoToSpawn(loadedSpawnPosition);
-
-			PlayerWeapon pw = playerMove.GetComponent<PlayerWeapon>();
-
-			pw.weapons.Clear();
-			for (int i = 0; i < loadedWeapons.Length; i++)
-			{
-				pw.weapons.Add(loadedWeapons[i]);
-			}
-
-
-		}
-		else if (spawnAtSpawnPoint) GoToSpawn();
+		if (spawnAtSpawnPoint) GoToSpawn();
 
 		ApplySettings();
 	}
@@ -195,7 +172,6 @@ public class GameManager : MonoBehaviour
 
 	#endregion
 
-
 	public void GoToSpawn()
 	{
 		if (spawnPoint != null)
@@ -208,14 +184,6 @@ public class GameManager : MonoBehaviour
 
 			playerMove.gameObject.SetActive(true);
 		}
-	}
-	public void GoToSpawn(Vector3 point)
-	{
-		playerMove.gameObject.SetActive(false);
-
-		playerMove.transform.position = point;
-
-		playerMove.gameObject.SetActive(true);
 	}
 
 	GameObject UI(GameObject ui)

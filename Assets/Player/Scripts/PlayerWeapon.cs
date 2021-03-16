@@ -18,8 +18,6 @@ public class PlayerWeapon : WeaponBehaviour
 
     public float scrollSensitivity = 1;
 
-    public LayerMask layer_Mask;
-
     // Start is called before the first frame update
     protected override void Start()
     {
