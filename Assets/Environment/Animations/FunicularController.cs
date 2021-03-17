@@ -38,12 +38,12 @@ public class FunicularController : MonoBehaviour
 	// These methods are called from the animator event keys
 	public void Go()
 	{
-		fhydro.clip = fhydro;
-		fhydro.Play();
+		fsoundsiren.clip = fhydro;
+		fsoundsiren.Play();
 	}
 	public void Stop()
 	{
-		fsound.Stop();
+		fsoundsiren.Stop();
 		bgm.clip = bgmrock;
 		bgm.Play();
 

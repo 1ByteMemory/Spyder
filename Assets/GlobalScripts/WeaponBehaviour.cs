@@ -38,20 +38,26 @@ public class WeaponBehaviour : MonoBehaviour
 	{
         GameObject _gun = Instantiate(gun.model, gunTransform);
 
-        ParticleSystem bullet = gun.bullet.GetComponent<ParticleSystem>();
-        if (bullet != null)
+        if (gun.bullet != null)
         {
-            bullet = Instantiate(gun.bullet, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
-            var main = bullet.main;
-            main.playOnAwake = false;
+            ParticleSystem bullet = gun.bullet.GetComponent<ParticleSystem>();
+            if (bullet != null)
+            {
+                bullet = Instantiate(gun.bullet, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
+                var main = bullet.main;
+                main.playOnAwake = false;
+            }
         }
 
-        ParticleSystem muzzleFlash = gun.muzzleFlash;
-        if (muzzleFlash != null)
+        if (gun.muzzleFlash != null)
         {
-            muzzleFlash = Instantiate(gun.muzzleFlash, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
-            var main = muzzleFlash.main;
-            main.playOnAwake = false;
+            ParticleSystem muzzleFlash = gun.muzzleFlash;
+            if (muzzleFlash != null)
+            {
+                muzzleFlash = Instantiate(gun.muzzleFlash, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
+                var main = muzzleFlash.main;
+                main.playOnAwake = false;
+            }
         }
 
         // Add AudioSource componant if it doesn't have one
@@ -81,10 +87,13 @@ public class WeaponBehaviour : MonoBehaviour
 
                 if (!weaponAsset.isClipInf)
                     weaponAsset.clip--;
-                
+
                 // Play Fire Sound
-                weaponScene.GetComponent<AudioSource>().clip = weaponAsset.fireAudio;
-                weaponScene.GetComponent<AudioSource>().Play();
+                if (weaponScene.GetComponentInChildren<AudioSource>())
+                {
+                    weaponScene.GetComponent<AudioSource>().clip = weaponAsset.fireAudio;
+                    weaponScene.GetComponent<AudioSource>().Play();
+                }
 
                 // Play Fire Animation
                 if (weaponScene.GetComponentInChildren<Animator>())
