@@ -55,7 +55,9 @@ public class Health : MonoBehaviour
 
 	private void Damage(int damage)
 	{
+		Debug.Log("Taking Damage");
 		currentHealth -= damage;
+		OnHit.Invoke();
 
 		if (bloodParticle != null)
 		{
@@ -64,10 +66,9 @@ public class Health : MonoBehaviour
 
 		if (currentHealth <= 0 && !isDead)
 		{
+			Debug.Log("Dead");
 			isDead = true;
 			OnDeath.Invoke();
 		}
-
-		OnHit.Invoke();
 	}
 }

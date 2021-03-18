@@ -176,6 +176,7 @@ public class SearchAndDestory : WeaponBehaviour
 
 	private void OnDestroy()
 	{
+		Debug.Log("Destroying");
 		RemoveFromSeenList();
 	}
 

@@ -174,11 +174,14 @@ public class WeaponBehaviour : MonoBehaviour
         for (int i = 0; i < bulletRays.Length; i++)
         {
             RaycastHit[] hit = Physics.RaycastAll(bulletRays[i], weaponAsset.range);
-
+            
+            Debug.Log(hit.Length);
 			for (int n = 0; n < hit.Length; n++)
 			{
-                if (hit[n].transform != transform && hit[n].transform.GetComponent<Health>())
+                Debug.Log(hit[n].transform);
+                if (hit[n].transform != transform && hit[n].transform.gameObject.GetComponent<Health>())
                 {
+                    Debug.Log("hitting");
                     hit[n].transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
                     break;
                 }
