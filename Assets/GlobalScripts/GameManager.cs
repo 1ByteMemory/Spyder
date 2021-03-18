@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
 		PlayerHUD = UI(PlayerHUD);
 		Fungus = UI(Fungus);
 
+
 		flowchart = Fungus.GetComponentInChildren<Flowchart>();
 		StartCoroutine(StartBarks());
 

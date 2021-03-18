@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GroundUnit : SearchAndDestory
+public class DigitalUnit : SearchAndDestory
 {
 
 	public float reloadTime;
