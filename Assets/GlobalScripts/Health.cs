@@ -18,6 +18,9 @@ public class Health : MonoBehaviour
 
 	private ParticleSystem bloodParticle;
 
+	public bool dimminsionHitOnly = false;
+	public Dimension dimension;
+
 
 	private protected virtual void Start()
 	{
@@ -36,6 +39,21 @@ public class Health : MonoBehaviour
 	}
 
 	public virtual void TakeDamage(int damage)
+	{
+		if (!dimminsionHitOnly)
+		{
+			Damage(damage);
+		}
+		else
+		{
+			if (GameManager.currentActiveDimension == dimension)
+			{
+				Damage(damage);
+			}
+		}
+	}
+
+	private void Damage(int damage)
 	{
 		currentHealth -= damage;
 
