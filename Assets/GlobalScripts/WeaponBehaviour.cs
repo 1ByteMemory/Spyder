@@ -173,10 +173,19 @@ public class WeaponBehaviour : MonoBehaviour
 
         for (int i = 0; i < bulletRays.Length; i++)
         {
-            RaycastHit[] hit = Physics.RaycastAll(bulletRays[i], weaponAsset.range);
+            Debug.DrawRay(bulletRays[i].origin, bulletRays[i].direction, Color.blue, 5f);
+
+            if (Physics.Raycast(bulletRays[i], out RaycastHit hit, weaponAsset.range, weaponAsset.hitLayers))
+            {
+                Debug.Log(hit.transform.name);
+                if (hit.transform.GetComponent<Health>())
+                {
+                    Debug.Log("Hitting");
+                    hit.transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
+                }
+            }
             
-            Debug.Log(hit.Length);
-			for (int n = 0; n < hit.Length; n++)
+            /*for (int n = 0; n < hit.Length; n++)
 			{
                 Debug.Log(hit[n].transform);
                 if (hit[n].transform != transform && hit[n].transform.gameObject.GetComponent<Health>())
@@ -185,7 +194,7 @@ public class WeaponBehaviour : MonoBehaviour
                     hit[n].transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
                     break;
                 }
-			}
+			}*/
         }
     }
 

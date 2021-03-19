@@ -59,6 +59,7 @@ public class WeaponEditor : Editor
 
 	public override void OnInspectorGUI()
 	{
+		
 		#region Styles and Layouts
 		GUIStyle subtitle = new GUIStyle
 		{
@@ -116,6 +117,18 @@ public class WeaponEditor : Editor
 		weaponType.enumValueIndex = (int)(WeaponType)EditorGUILayout.EnumPopup("Weapon Type", weapon.weaponType);
 		_weapontype = (WeaponType)weaponType.enumValueIndex;
 
+		if (_weapontype == WeaponType.HitScan)
+		{
+			string[] layerOptions = new string[32];
+			for (int i = 0; i < 32; i++)
+			{
+
+				layerOptions[i] = LayerMask.LayerToName(i);
+			}
+			
+			hitLayers.intValue = EditorGUILayout.MaskField("Hit Layers", hitLayers.intValue, layerOptions);
+
+		}
 
 		#region Enitity Flags
 		EditorGUILayout.Space();
