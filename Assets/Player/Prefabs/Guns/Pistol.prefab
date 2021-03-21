@@ -163,6 +163,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PistolRig
       objectReference: {fileID: 0}
+    - target: {fileID: 3725755399329585445, guid: 53c9e337358e384499e62648a9319d57,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53c9e337358e384499e62648a9319d57, type: 3}
 --- !u!1 &101205814226228734 stripped
