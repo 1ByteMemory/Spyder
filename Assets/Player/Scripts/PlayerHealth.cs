@@ -14,12 +14,14 @@ public class PlayerHealth : Health
 		base.Start();
 
 		healthSlider = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("HealthBar").GetComponent<Slider>();
+		Debug.Log(healthSlider.transform.parent.name);
 
 		healthSlider.maxValue = maxHealth;
 		healthSlider.value = maxHealth;
 	}
 
 	float endTime;
+	// Override to give immunity for brief time
 	public override void TakeDamage(int damage)
 	{
 		if (Time.time >= endTime)

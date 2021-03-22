@@ -38,20 +38,26 @@ public class WeaponBehaviour : MonoBehaviour
 	{
         GameObject _gun = Instantiate(gun.model, gunTransform);
 
-        ParticleSystem bullet = gun.bullet.GetComponent<ParticleSystem>();
-        if (bullet != null)
+        if (gun.bullet != null)
         {
-            bullet = Instantiate(gun.bullet, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
-            var main = bullet.main;
-            main.playOnAwake = false;
+            ParticleSystem bullet = gun.bullet.GetComponent<ParticleSystem>();
+            if (bullet != null)
+            {
+                bullet = Instantiate(gun.bullet, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
+                var main = bullet.main;
+                main.playOnAwake = false;
+            }
         }
 
-        ParticleSystem muzzleFlash = gun.muzzleFlash;
-        if (muzzleFlash != null)
+        if (gun.muzzleFlash != null)
         {
-            muzzleFlash = Instantiate(gun.muzzleFlash, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
-            var main = muzzleFlash.main;
-            main.playOnAwake = false;
+            ParticleSystem muzzleFlash = gun.muzzleFlash;
+            if (muzzleFlash != null)
+            {
+                muzzleFlash = Instantiate(gun.muzzleFlash, gun.GetBulletOrigin(_gun.transform)).GetComponent<ParticleSystem>();
+                var main = muzzleFlash.main;
+                main.playOnAwake = false;
+            }
         }
 
         // Add AudioSource componant if it doesn't have one
@@ -81,10 +87,13 @@ public class WeaponBehaviour : MonoBehaviour
 
                 if (!weaponAsset.isClipInf)
                     weaponAsset.clip--;
-                
+
                 // Play Fire Sound
-                weaponScene.GetComponent<AudioSource>().clip = weaponAsset.fireAudio;
-                weaponScene.GetComponent<AudioSource>().Play();
+                if (weaponScene.GetComponentInChildren<AudioSource>())
+                {
+                    weaponScene.GetComponent<AudioSource>().clip = weaponAsset.fireAudio;
+                    weaponScene.GetComponent<AudioSource>().Play();
+                }
 
                 // Play Fire Animation
                 if (weaponScene.GetComponentInChildren<Animator>())
@@ -164,16 +173,28 @@ public class WeaponBehaviour : MonoBehaviour
 
         for (int i = 0; i < bulletRays.Length; i++)
         {
-            RaycastHit[] hit = Physics.RaycastAll(bulletRays[i], weaponAsset.range);
+            Debug.DrawRay(bulletRays[i].origin, bulletRays[i].direction, Color.blue, 5f);
 
-			for (int n = 0; n < hit.Length; n++)
-			{
-                if (hit[n].transform != transform && hit[n].transform.GetComponent<Health>())
+            if (Physics.Raycast(bulletRays[i], out RaycastHit hit, weaponAsset.range, weaponAsset.hitLayers))
+            {
+                Debug.Log(hit.transform.name);
+                if (hit.transform.GetComponent<Health>())
                 {
+                    Debug.Log("Hitting");
+                    hit.transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
+                }
+            }
+            
+            /*for (int n = 0; n < hit.Length; n++)
+			{
+                Debug.Log(hit[n].transform);
+                if (hit[n].transform != transform && hit[n].transform.gameObject.GetComponent<Health>())
+                {
+                    Debug.Log("hitting");
                     hit[n].transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
                     break;
                 }
-			}
+			}*/
         }
     }
 
