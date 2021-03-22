@@ -9,12 +9,10 @@ public class Key : MonoBehaviour
 
 	public AudioClip pickUpSound;
 	private Transform src;
-	private GameManager game;
+
 
 	private void Start()
 	{
-		game = FindObjectOfType<GameManager>();
-
 		src = transform.GetChild(2);
 
 		src.GetComponent<AudioSource>().clip = pickUpSound;
@@ -24,8 +22,6 @@ public class Key : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			game.PlayerHUD.GetComponent<KeycardIcon>().KeyCollected(gameObject);
-
 			src.parent = null;
 			src.GetComponent<AudioSource>().Play();
 			isHeld = true;
