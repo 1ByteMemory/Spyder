@@ -41,7 +41,6 @@ public class SearchAndDestory : WeaponBehaviour
 
 	private Animator anim;
 
-	public Transform lookPivot;
 
 	[HideInInspector]
 	public bool hasLineOfSight;
@@ -76,12 +75,12 @@ public class SearchAndDestory : WeaponBehaviour
 
 		anim = GetComponentInChildren<Animator>();
 
-		InstantiateWeapons(gunPosition);
-		if (gunPosition.childCount > 0)
-			activeWeapon = gunPosition.GetChild(0);
-		else
-			Debug.Log(transform + "Doesn't have a gun!");
-
+		if (gunPosition != null)
+		{
+			InstantiateWeapons(gunPosition);
+			if (gunPosition.childCount > 0)
+				activeWeapon = gunPosition.GetChild(0);
+		}
 	}
 
 	// Update is called once per frame
@@ -177,6 +176,7 @@ public class SearchAndDestory : WeaponBehaviour
 
 	private void OnDestroy()
 	{
+		Debug.Log("Destroying");
 		RemoveFromSeenList();
 	}
 

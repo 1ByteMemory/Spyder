@@ -18,6 +18,9 @@ public class Health : MonoBehaviour
 
 	private ParticleSystem bloodParticle;
 
+	public bool dimminsionHitOnly = false;
+	public Dimension dimension;
+
 
 	private protected virtual void Start()
 	{
@@ -37,7 +40,24 @@ public class Health : MonoBehaviour
 
 	public virtual void TakeDamage(int damage)
 	{
+		if (!dimminsionHitOnly)
+		{
+			Damage(damage);
+		}
+		else
+		{
+			if (GameManager.currentActiveDimension == dimension)
+			{
+				Damage(damage);
+			}
+		}
+	}
+
+	private void Damage(int damage)
+	{
+		Debug.Log("Taking Damage");
 		currentHealth -= damage;
+		OnHit.Invoke();
 
 		if (bloodParticle != null)
 		{
@@ -46,10 +66,9 @@ public class Health : MonoBehaviour
 
 		if (currentHealth <= 0 && !isDead)
 		{
+			Debug.Log("Dead");
 			isDead = true;
 			OnDeath.Invoke();
 		}
-
-		OnHit.Invoke();
 	}
 }
