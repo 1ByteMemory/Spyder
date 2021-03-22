@@ -111,6 +111,12 @@ public class ScannerEffect : MonoBehaviour
 		_camera.depthTextureMode = DepthTextureMode.DepthNormals;
 	}
 
+	private void OnDestroy()
+	{
+		EffectMaterial.SetFloat("_ScanDistance", 0);
+	}
+
+
 	private float GetFurthestPoint()
 	{
 		float maxDist = 0;
