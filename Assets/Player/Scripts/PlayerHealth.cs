@@ -14,7 +14,6 @@ public class PlayerHealth : Health
 		base.Start();
 
 		healthSlider = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("HealthBar").GetComponent<Slider>();
-		Debug.Log(healthSlider.transform.parent.name);
 
 		healthSlider.maxValue = maxHealth;
 		healthSlider.value = maxHealth;

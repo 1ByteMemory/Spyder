@@ -98,11 +98,11 @@ public class GameManager : MonoBehaviour
 		SettingsUI = UI(SettingsUI);
 		PauseMenu = UI(PauseMenu);
 		PlayerHUD = UI(PlayerHUD);
-		Fungus = UI(Fungus);
+		//Fungus = UI(Fungus);
 
 
-		flowchart = Fungus.GetComponentInChildren<Flowchart>();
-		StartCoroutine(StartBarks());
+		//flowchart = Fungus.GetComponentInChildren<Flowchart>();
+		//StartCoroutine(StartBarks());
 
 
 		SettingsUI.SetActive(false);
@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour
 
 	IEnumerator StartBarks()
 	{
-		flowchart.ExecuteBlock("BarkTimeTrigger");
+		//flowchart.ExecuteBlock("BarkTimeTrigger");
 
 		yield return new WaitForSeconds(0);
 	}
