@@ -33,8 +33,7 @@ public class PlayerWeapon : WeaponBehaviour
 
         ammoText = gm.PlayerHUD.transform.Find("AmmoReserve").GetComponent<TextMeshProUGUI>();
         clipText = gm.PlayerHUD.transform.Find("AmmoClip").GetComponent<TextMeshProUGUI>();
-
-
+        
         InstantiateWeapons(gunViewModel);
 
         weaponIndex = 0;
@@ -74,17 +73,12 @@ public class PlayerWeapon : WeaponBehaviour
 
             if (gunViewModel.childCount > 0)
             {
+                DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
 
                 Transform activeGun = gunViewModel.GetChild(weaponIndex);
-
-                if (weaponIndex >= 0 && weaponIndex < weapons.Count)
+                if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
                 {
-                    DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
-
-                    if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
-                    {
-                        UseWeapon(activeGun, weapons[weaponIndex], cam);
-                    }
+                    UseWeapon(activeGun, weapons[weaponIndex], cam);
                 }
 
                 Animator anim = activeGun.GetComponentInChildren<Animator>();
