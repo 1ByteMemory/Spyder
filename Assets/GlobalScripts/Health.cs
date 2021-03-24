@@ -16,7 +16,6 @@ public class Health : MonoBehaviour
 	public UnityEvent OnHit;
 	public UnityEvent OnDeath;
 
-	private ParticleSystem bloodParticle;
 
 	public bool dimminsionHitOnly = false;
 	public Dimension dimension;
@@ -26,7 +25,6 @@ public class Health : MonoBehaviour
 	{
 		currentHealth = maxHealth;
 
-		bloodParticle = GetComponentInChildren<ParticleSystem>();
 	}
 
 	private protected virtual void Update()
@@ -55,14 +53,11 @@ public class Health : MonoBehaviour
 
 	private void Damage(int damage)
 	{
-		Debug.Log("Taking Damage");
+		if (transform.name != "Player")
+			Debug.Log("Taking Damage");
+		
 		currentHealth -= damage;
 		OnHit.Invoke();
-
-		if (bloodParticle != null)
-		{
-			bloodParticle.Play();
-		}
 
 		if (currentHealth <= 0 && !isDead)
 		{
