@@ -8,8 +8,8 @@ public class FunicularController : MonoBehaviour
 	Animator anim;
 	public AudioClip fhydro;
 	AudioSource fhydrosource;
-	//public AudioClip bgmrock;
-	//AudioSource fsoundsiren;
+	public AudioClip bgmrock;
+	AudioSource bgmsource;
 
 
 
@@ -17,7 +17,7 @@ public class FunicularController : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		fhydrosource = GetComponent<AudioSource>();
-		//fsoundsiren = GetComponent<AudioSource>();
+		bgmsource = GameObject.Find("Music").GetComponent<AudioSource>();
 	}
 
 	public void PlayAnim()
@@ -44,8 +44,8 @@ public class FunicularController : MonoBehaviour
 	public void Stop()
 	{
 		fhydrosource.Stop();
-		//bgm.clip = bgmrock;
-		//bgm.Play();
+		bgmsource.clip = bgmrock;
+		bgmsource.Play();
 
 	}
 	public void StopAnim()
