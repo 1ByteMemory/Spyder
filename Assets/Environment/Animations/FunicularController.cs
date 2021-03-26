@@ -17,7 +17,7 @@ public class FunicularController : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		fhydrosource = GetComponent<AudioSource>();
-		bgmsource = GetComponent<AudioSource>();
+		bgmsource = GameObject.Find("Music").GetComponent<AudioSource>();
 	}
 
 	public void PlayAnim()

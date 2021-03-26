@@ -773,7 +773,7 @@ MonoBehaviour:
   gravity: 24
   friction: 5
   moveSpeed: 9
-  crouchSpeed: 5
+  crouchSpeed: 6
   runAcceleration: 15
   runDeacceleration: 15
   coyoteTime: 0.1
@@ -911,9 +911,6 @@ MonoBehaviour:
   aimOffset: {x: 0, y: 0}
   gunViewModel: {fileID: 4461220149873880172}
   scrollSensitivity: 1
-  layer_Mask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &7283696070113170742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,6 +932,8 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  dimminsionHitOnly: 0
+  dimension: 0
   immunityWindow: 0.1
 --- !u!136 &6808830610586471018
 CapsuleCollider:

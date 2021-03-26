@@ -418,7 +418,12 @@ public class GameManager : MonoBehaviour
 		for (int i = 0; i < retroProfile.settings.Count; i++)
 		{
 			retroProfile.settings[i].active = JsonIO.playerSettings.acc_retro;
-		} 
+		}
+
+		if (GameObject.Find("Music"))
+		{
+			GameObject.Find("Music").GetComponent<AudioSource>().volume = JsonIO.playerSettings.vol_Music;
+		}
 	}
 	
 	public void MouseSensitivity(float value)
