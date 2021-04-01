@@ -4,14 +4,10 @@
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         
-        _SizeX ("Size X", Float) = 1
-        _SizeY ("Size Y", Float) = 1
+        _Size ("Size", Float) = 1
 
-        _ThicknessX ("Thickness X", Float) = 2
-        _ThicknessY ("Thickness Y", Float) = 2
+        _Thickness ("Thickness", Range(0,1)) = 0.1
 
-        _OffsetX ("Offset X", Float) = 0
-        _OffsetY ("Offset Y", Float) = 0
 
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
@@ -45,33 +41,33 @@
 
             #include "UnityCG.cginc"
 
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float2 uv : TEXCOORD0;
-            };
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
+                float3 worldPos : TEXCOORD1;
+                float3 worldNormal : TEXCOORD2;
             };
 
-            v2f vert (appdata v)
+            float _Size;
+            sampler2D _MainTex;
+
+            v2f vert (appdata_full v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+
+                float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+                half3 worldNormal = UnityObjectToWorldNormal(v.normal);
+
+                o.worldPos = worldPos;
+                o.worldNormal = worldNormal;
+
                 return o;
             }
 
-            sampler2D _MainTex;
-            float _SizeX;
-            float _SizeY;
-            float _ThicknessX;
-            float _ThicknessY;
-            float _OffsetX;
-            float _OffsetY;
+            float _Thickness;
 
             half4 _Color;
             half4 _BckColor;
@@ -79,13 +75,29 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float x = 1 - saturate(round(abs(frac((i.uv.x + _OffsetX) * _SizeX) * _ThicknessX)));
-                float y = 1 - saturate(round(abs(frac((i.uv.y + _OffsetY) * _SizeY) * _ThicknessY)));
+                //float2 xz = frac(i.worldPos.xz / _Size);
+                //float2 xy = frac(i.worldPos.xy / _Size);
+                //float2 yz = frac(i.worldPos.yz / _Size);
 
-                float4 squares = (1 - (x + y)) * _BckColor;
-                float4 lines = (x + y) * _Color;
+                //float checker = step(c, _Thickness);
 
-                return squares + lines;
+                return float4(i.worldNormal, 0);
+
+
+
+                //float x = 1 - saturate(round(abs(frac((i.worldPos.x + _OffsetX) * _SizeX) * _ThicknessX)));
+                //float y = 1 - saturate(round(abs(frac((i.worldPos.y + _OffsetY) * _SizeY) * _ThicknessY)));
+                //float z = 1 - saturate(round(abs(frac((i.worldPos.z + _OffsetX) * _SizeX) * _ThicknessX)));
+
+
+                //float x = step(frac(i.worldPos.x / _Size), _Thickness);
+                //float y = step(frac(i.worldPos.y / _Size), _Thickness);
+                //float z = step(frac(i.worldPos.z / _Size), _Thickness);
+
+                //float4 squares = (1 - (x + y + z)) * _BckColor;
+                //float4 lines = (x + y + z) * _Color;
+                
+                //return squares + lines;
             }
             ENDCG
         }
