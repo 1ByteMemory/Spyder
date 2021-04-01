@@ -75,29 +75,27 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                //float2 xz = frac(i.worldPos.xz / _Size);
-                //float2 xy = frac(i.worldPos.xy / _Size);
-                //float2 yz = frac(i.worldPos.yz / _Size);
+                float2 xz = frac(i.worldPos.xz / _Size);
+                float2 xy = frac(i.worldPos.xy / _Size);
+                float2 yz = frac(i.worldPos.yz / _Size);
 
-                //float checker = step(c, _Thickness);
+                float3 n = i.worldNormal;
 
-                return float4(i.worldNormal, 0);
-
-
-
-                //float x = 1 - saturate(round(abs(frac((i.worldPos.x + _OffsetX) * _SizeX) * _ThicknessX)));
-                //float y = 1 - saturate(round(abs(frac((i.worldPos.y + _OffsetY) * _SizeY) * _ThicknessY)));
-                //float z = 1 - saturate(round(abs(frac((i.worldPos.z + _OffsetX) * _SizeX) * _ThicknessX)));
+                float2 x = yz * abs(n.x);
+                float2 y = xz * abs(n.y);
+                float2 z = xy * abs(n.z);
 
 
-                //float x = step(frac(i.worldPos.x / _Size), _Thickness);
-                //float y = step(frac(i.worldPos.y / _Size), _Thickness);
-                //float z = step(frac(i.worldPos.z / _Size), _Thickness);
+                float r = x.x + y.x + z.x;
+                float g = x.y + y.y + z.y;
 
-                //float4 squares = (1 - (x + y + z)) * _BckColor;
-                //float4 lines = (x + y + z) * _Color;
-                
-                //return squares + lines;
+                r = step(r, _Thickness);
+                g = step(g, _Thickness);
+
+                float4 c = (r + g) * _Color;
+                float4 bc = (1 - (r + g)) * _BckColor;
+
+                return c + bc;
             }
             ENDCG
         }
