@@ -1,16 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class LevelInfo
 {
     public string title;
     public string sceneName;
-    public Sprite image;
+	public bool abilityUnlocked;
     public Vector3 spawnPoint;
     public Weapon[] availableWeapons;
-
 }

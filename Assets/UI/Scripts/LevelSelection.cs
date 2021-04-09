@@ -4,19 +4,62 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public enum SaveType
+{
+	Quick,
+	Auto
+}
+
 [RequireComponent(typeof(SceneLoader))]
 public class LevelSelection : MonoBehaviour
 {
-    public ScrollRect scroll;
+    public ScrollRect showCaseView;
+	public ScrollRect quickSavesView;
+	public ScrollRect autoSavesView;
+
+	public int maxQuickSaves = 10;
+	public int maxAutoSaves = 5;
+
 	SceneLoader sceneLoader;
 
 	public Vector2 border;
 	public Vector2 cardGap;
 
-    public LevelInfo[] levels;
-	
+	public float textHieght = 39;
+
+    public LevelInfo[] showCaseLevels;
+
+	private static List<LevelInfo> quickSaves = new List<LevelInfo>();
+	private static List<LevelInfo> autoSaves = new List<LevelInfo>();
+
+	public static void NewSave(LevelInfo save, SaveType saveType)
+	{
+		switch (saveType)
+		{
+			case SaveType.Quick:
+				quickSaves.Insert(0, save);
+				
+				break;
+			case SaveType.Auto:
+				autoSaves.Insert(0, save);
+				break;
+		}
+	}
+
+	public static void DeleteSave(LevelInfo save, SaveType saveType)
+	{
+		switch (saveType)
+		{
+			case SaveType.Quick:
+				break;
+			case SaveType.Auto:
+				break;
+		}
+	}
+
 	private void Start()
 	{
+
 		RectTransform prevRect = new RectTransform();
 		sceneLoader = GetComponent<SceneLoader>();
 
@@ -24,95 +67,67 @@ public class LevelSelection : MonoBehaviour
 		CanvasScaler canvas = GetComponentInParent<CanvasScaler>();
 		Vector2 canvasSize = canvas.referenceResolution;
 
-		RectTransform scrollRect = scroll.GetComponent<RectTransform>();
-		
-		int Row = Mathf.RoundToInt((canvasSize.x - Mathf.Abs(scrollRect.sizeDelta.x)) / (128 + cardGap.x));
-		scroll.content.sizeDelta = new Vector2(scroll.content.sizeDelta.x, (178 + cardGap.y) * (levels.Length / Row) + border.y);
+		RectTransform scrollRect = showCaseView.GetComponent<RectTransform>();
+		showCaseView.content.sizeDelta = new Vector2(0, showCaseLevels.Length * textHieght);
 
+		CreateList(showCaseView, showCaseLevels);
+		//CreateList(showCaseView, autoSaves.ToArray());
+	}
+	
 
-		for (int i = 0; i < levels.Length; i++)
+	public void CreateList(ScrollRect scrollRect, LevelInfo[] levelList)
+	{
+		for (int i = 0; i < levelList.Length; i++)
 		{
-			// Create empty rect
-			RectTransform card = CreateRect(levels[i].title, scroll.content);
+			Destroy(scrollRect.content.GetChild(i));
 
-			// Create Image
-			RectTransform img = CreateRect("Image", card);
-			img.gameObject.AddComponent<Image>().sprite = levels[i].image;
+			// Create empty rect
+			RectTransform save = CreateRect(levelList[i].title, scrollRect.content);
+			
+			// Set Sizes and position
+			save.anchorMin = new Vector2(0, 1.0f - (1.0f / levelList.Length));
+			save.anchorMax = new Vector2(0.94f, 1);
+			save.sizeDelta = new Vector2(0, 0);
+			save.anchoredPosition = new Vector2(0, -i * textHieght);
 
 			// Create Title
-			RectTransform title = CreateRect("Title", card);
+			RectTransform title = CreateRect("Title", save);
 			TextMeshProUGUI text = title.gameObject.AddComponent<TextMeshProUGUI>();
-			text.text = levels[i].title;
-			text.color = Color.black;
-			text.fontSize = 21;
-			text.alignment = TextAlignmentOptions.Top;
-
-
-			// Set Sizes and position
-			card.sizeDelta = new Vector2(128, 128);
-			card.anchorMin = new Vector2(0, 1);
-			card.anchorMax = new Vector2(0, 1);
-			if (i == 0)
-			{
-				// First card is set
-				card.anchoredPosition = new Vector2(64 + border.x, -64 - border.y);
-				prevRect = card;
-			}
-			else
-			{
-				float x;
-				float y;
-				if (i % Row == 0)
-				{
-					// Place card on a new row 
-					x = 64 + border.x;
-					y = prevRect.anchoredPosition.y - 178 - cardGap.y;
-				}
-				else
-				{
-					x = prevRect.anchoredPosition.x + 128 + cardGap.x;
-					y = prevRect.anchoredPosition.y;
-				}
-
-				card.anchoredPosition = new Vector2(x, y);
-
-				prevRect = card;
-			}
-
-			img.anchorMin = Vector2.zero;
-			img.anchorMax = Vector2.one;
-		    img.anchoredPosition = Vector2.zero;
-			img.sizeDelta = Vector2.zero;
+			text.text = levelList[i].title;
+			text.color = Color.white; // Needs to be white so the button can change it's color tint
+			text.enableAutoSizing = true;
+			text.alignment = TextAlignmentOptions.Center;
+			text.margin = new Vector4(0, 8, 0, 8);
 
 			title.anchorMin = Vector2.zero;
-			title.anchorMax = new Vector2(1, 0);
-			title.anchoredPosition = new Vector2(0, -25);
-			title.sizeDelta = new Vector2(0, 50);
-
+			title.anchorMax = new Vector2(1, 1);
+			title.sizeDelta = new Vector2(0, 0);
 
 			// Button
-			Button button = card.gameObject.AddComponent<Button>();
-			button.targetGraphic = img.GetComponent<Image>();
-			
-			// For some reason this is how you change button colors
+			Button button = save.gameObject.AddComponent<Button>();
+			button.targetGraphic = text;
+
+			// Change button colors
 			ColorBlock block = button.colors;
+			block.normalColor = new Color(0.1f, 0.12f, 0.12f);
 			block.highlightedColor = new Color(0.7f, 0.7f, 0.7f);
+			block.selectedColor = new Color(0.4f, 0.4f, 0.4f);
 			button.colors = block;
 
 			// Add LoadLevel Method to OnClick event
-			int index = i;
-			button.onClick.AddListener(() => LoadScene(index));
+			button.onClick.AddListener(() => LoadScene(i));
 
 		}
+
 	}
 
 	public void LoadScene(int index)
 	{
 		GameManager.loadedFromSelector = true;
-		GameManager.loadedSpawnPosition = levels[index].spawnPoint;
-		GameManager.loadedWeapons = levels[index].availableWeapons;
+		GameManager.loadedSpawnPosition = showCaseLevels[index].spawnPoint;
+		GameManager.loadedWeapons = showCaseLevels[index].availableWeapons;
 
-		sceneLoader.LoadScene(levels[index].sceneName);
+		sceneLoader.LoadScene(showCaseLevels[index].sceneName);
 	}
 
 	private RectTransform CreateRect(string name, RectTransform parent)
@@ -122,6 +137,4 @@ public class LevelSelection : MonoBehaviour
 		rect.SetParent(parent, false);
 		return rect;
 	}
-
-
 }

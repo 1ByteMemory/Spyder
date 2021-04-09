@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Checkpoints : MonoBehaviour
 {
-	LevelInfo[] quickSaves;
-	LevelInfo[] checkpoints;
+	public LevelInfo[] quickSaves;
+	public LevelInfo[] checkpoints;
 	LevelSelection selection;
 
     // Start is called before the first frame update

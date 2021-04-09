@@ -226,10 +226,10 @@ RectTransform:
   m_Father: {fileID: 2834518210610638286}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.9615328, y: 0}
+  m_AnchorMin: {x: 0.94961756, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &2962861789242960350
 CanvasRenderer:
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7301355880850671857}
   m_HandleRect: {fileID: 300751487413861116}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -348,7 +348,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000017805743}
+  m_AnchoredPosition: {x: 0, y: -0.000058525686}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &3742292965805488594
@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 227285970552611621}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -980,25 +980,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04acf21e01622f84aa4b135d7a43c63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scroll: {fileID: 8226430808704514413}
+  scrollView: {fileID: 8226430808704514413}
   border: {x: 20, y: 20}
   cardGap: {x: 10, y: 10}
-  levels:
-  - title: Level 1
-    sceneName: Level 1
-    image: {fileID: 21300000, guid: 0d9dbb90184754b46a58bbabb7d3310f, type: 3}
-    spawnPoint: {x: 216, y: 135, z: 102}
-    availableWeapons:
-    - {fileID: 11400000, guid: 2db7517f8db13a24a8a30510a41d3c58, type: 2}
-    - {fileID: 11400000, guid: 364f1677cb912a04b82876c02ccc7c61, type: 2}
-  - title: Level 2
-    sceneName: Level 2
-    image: {fileID: 21300000, guid: 65c6f158f92cd114b84de5da389cd4b3, type: 3}
+  textHieght: 39
+  showCaseLevels:
+  - title: 1
+    sceneName: 
+    abilityUnlocked: 0
     spawnPoint: {x: 0, y: 0, z: 0}
     availableWeapons: []
-  - title: Level 4
-    sceneName: Level 4
-    image: {fileID: 21300000, guid: 1dfe8b347c4e85f478dca050d8e45a2f, type: 3}
+  - title: 2
+    sceneName: 
+    abilityUnlocked: 0
+    spawnPoint: {x: 0, y: 0, z: 0}
+    availableWeapons: []
+  - title: 3
+    sceneName: 
+    abilityUnlocked: 0
     spawnPoint: {x: 0, y: 0, z: 0}
     availableWeapons: []
 --- !u!1 &5875880006394387011
@@ -1192,7 +1191,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6871074706511308972
 CanvasRenderer:
@@ -1265,5 +1264,5 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
