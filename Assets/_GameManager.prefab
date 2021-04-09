@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2167613234812103367}
   - component: {fileID: 6790534244141458623}
+  - component: {fileID: 1735706883957785994}
   - component: {fileID: 5427610743791985861}
   m_Layer: 0
   m_Name: _GameManager
@@ -62,6 +63,18 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   seenEnemies: []
   digitalMats: {fileID: 2100000, guid: ec880374f354f1540a21ff447987a8fb, type: 2}
+--- !u!114 &1735706883957785994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298756765287426993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fda11d5e151a4d4aa66561f0441ada0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &5427610743791985861
 AudioSource:
   m_ObjectHideFlags: 0

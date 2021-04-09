@@ -29,19 +29,20 @@ public class LevelSelection : MonoBehaviour
 
     public LevelInfo[] showCaseLevels;
 
-	private static List<LevelInfo> quickSaves = new List<LevelInfo>();
-	private static List<LevelInfo> autoSaves = new List<LevelInfo>();
+	private List<LevelInfo> quickSaves = new List<LevelInfo>();
+	private List<LevelInfo> autoSaves = new List<LevelInfo>();
 
-	public static void NewSave(LevelInfo save, SaveType saveType)
+	public void NewSave(LevelInfo save, SaveType saveType)
 	{
 		switch (saveType)
 		{
 			case SaveType.Quick:
 				quickSaves.Insert(0, save);
-				
+				CreateList(quickSavesView, quickSaves.ToArray());
 				break;
 			case SaveType.Auto:
 				autoSaves.Insert(0, save);
+				CreateList(autoSavesView, autoSaves.ToArray());
 				break;
 		}
 	}
@@ -79,6 +80,8 @@ public class LevelSelection : MonoBehaviour
 	{
 		for (int i = 0; i < levelList.Length; i++)
 		{
+			// Destroy current button to create a new one
+			// Maybe not the best solution?
 			Destroy(scrollRect.content.GetChild(i));
 
 			// Create empty rect
