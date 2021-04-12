@@ -398,7 +398,7 @@ public class GameManager : MonoBehaviour
 		player.GetComponentInChildren<ScannerEffect>().lineColor = JsonIO.playerSettings.col_outlines;
 		player.GetComponentInChildren<ScannerEffect>().secondaryColor = JsonIO.playerSettings.col_background;
 
-		for (int i = 0; 1 < digitalMats.Length; i++)
+		for (int i = 0; i < digitalMats.Length; i++)
 		{
 			digitalMats[i].SetColor("_Color", JsonIO.playerSettings.col_outlines);
 			digitalMats[i].SetColor("_BckColor", JsonIO.playerSettings.col_background);
