@@ -14,6 +14,7 @@ public class WeaponBehaviour : MonoBehaviour
     private float firingEndTime;
     private float reloadingEndTime;
 
+
     public static float volume;
 
 
@@ -76,6 +77,8 @@ public class WeaponBehaviour : MonoBehaviour
 
     protected virtual void UseWeapon(Transform weaponScene, Weapon weaponAsset, Transform raycastOrigin)
 	{
+        weaponScene.GetComponentInChildren<AudioSource>().volume = volume;
+
         if (Time.time >= firingEndTime)
 		{
             firingEndTime = Time.time + weaponAsset.firingTime;
