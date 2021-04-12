@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> seenEnemies = new List<GameObject>();
 	private Flowchart flowchart;
 
-	public Material digitalMats;
+	public Material[] digitalMats;
 
 
 	// When loaded from level selector
@@ -398,8 +398,11 @@ public class GameManager : MonoBehaviour
 		player.GetComponentInChildren<ScannerEffect>().lineColor = JsonIO.playerSettings.col_outlines;
 		player.GetComponentInChildren<ScannerEffect>().secondaryColor = JsonIO.playerSettings.col_background;
 
-		digitalMats.SetColor("_Color", JsonIO.playerSettings.col_outlines);
-		digitalMats.SetColor("_BckColor", JsonIO.playerSettings.col_background);
+		for (int i = 0; i < digitalMats.Length; i++)
+		{
+			digitalMats[i].SetColor("_Color", JsonIO.playerSettings.col_outlines);
+			digitalMats[i].SetColor("_BckColor", JsonIO.playerSettings.col_background);
+		}
 
 		// Audio
 		barkVolume = JsonIO.playerSettings.vol_Barks;
