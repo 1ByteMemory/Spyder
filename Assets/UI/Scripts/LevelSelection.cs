@@ -27,12 +27,12 @@ public class LevelSelection : MonoBehaviour
 
 	public float textHieght = 39;
 
-    public LevelInfo[] showCaseLevels;
+    public SaveInfo[] showCaseLevels;
 
-	private List<LevelInfo> quickSaves = new List<LevelInfo>();
-	private List<LevelInfo> autoSaves = new List<LevelInfo>();
+	private List<SaveInfo> quickSaves = new List<SaveInfo>();
+	private List<SaveInfo> autoSaves = new List<SaveInfo>();
 
-	public void NewSave(LevelInfo save, SaveType saveType)
+	public void NewSave(SaveInfo save, SaveType saveType)
 	{
 		switch (saveType)
 		{
@@ -47,7 +47,7 @@ public class LevelSelection : MonoBehaviour
 		}
 	}
 
-	public static void DeleteSave(LevelInfo save, SaveType saveType)
+	public static void DeleteSave(SaveInfo save, SaveType saveType)
 	{
 		switch (saveType)
 		{
@@ -76,7 +76,7 @@ public class LevelSelection : MonoBehaviour
 	}
 	
 
-	public void CreateList(ScrollRect scrollRect, LevelInfo[] levelList)
+	public void CreateList(ScrollRect scrollRect, SaveInfo[] levelList)
 	{
 		for (int i = 0; i < levelList.Length; i++)
 		{
@@ -128,7 +128,8 @@ public class LevelSelection : MonoBehaviour
 	{
 		GameManager.loadedFromSelector = true;
 		GameManager.loadedSpawnPosition = showCaseLevels[index].spawnPoint;
-		GameManager.loadedWeapons = showCaseLevels[index].availableWeapons;
+		
+		//GameManager.loadedWeapons = showCaseLevels[index].availableWeapons;
 
 		sceneLoader.LoadScene(showCaseLevels[index].sceneName);
 	}

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Globalization;
 using UnityEngine;
 
 public class Checkpoints : MonoBehaviour
@@ -8,9 +10,12 @@ public class Checkpoints : MonoBehaviour
 	GameManager gm;
 	GameObject player;
 	PlayerController pc;
-	PlayerWeapon weapons;
+	PlayerWeapon playerWeapons;
+	SavesContainer savesContainer = new SavesContainer();
 
 	string sceneName;
+	string date;
+	string time;
 
 	// Start is called before the first frame update
 	void Start()
@@ -19,7 +24,7 @@ public class Checkpoints : MonoBehaviour
 		gm = GetComponent<GameManager>();
 		player = GameObject.FindGameObjectWithTag("Player");
 		pc = player.GetComponent<PlayerController>();
-		weapons = player.GetComponent<PlayerWeapon>();
+		playerWeapons = player.GetComponent<PlayerWeapon>();
 		sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
     }
 
@@ -27,20 +32,33 @@ public class Checkpoints : MonoBehaviour
     void Update()
     {
      
-		if (Input.GetKey(KeyCode.F5))
+		if (Input.GetKeyDown(KeyCode.F5))
 		{
 			// Quick Save
-			LevelInfo lvl = new LevelInfo();
+			SaveInfo lvl = new SaveInfo();
 			lvl.abilityUnlocked = pc.isAbilityUnlocked;
 			lvl.sceneName = sceneName; // null
 			lvl.spawnPoint = player.transform.position;
-			lvl.title = System.DateTime.Now.ToShortDateString() + " " + System.DateTime.Now.ToShortTimeString(); // make this -> mm-dd-yy
-			lvl.availableWeapons = weapons.weapons.ToArray();
+			
+			date = System.DateTime.Now.ToShortDateString().ToString(new CultureInfo("en-US")).Replace("/", "-");
+			time = System.DateTime.Now.ToShortTimeString().Replace(":", "");
+
+			lvl.title = date + " " + time;
+
+			lvl.availableWeapons = new Gun[playerWeapons.weapons.Count];
+			for (int i = 0; i < playerWeapons.weapons.Count; i++)
+			{
+				Weapon wep = playerWeapons.weapons[i];
+				lvl.availableWeapons[i] = new Gun(wep.Name, wep.ammo, wep.clip);
+			}
 			lvl.foundKeys = KeycardIcon.keysFound;
 			lvl.dimension = (int)GameManager.currentActiveDimension;
+
+			Debug.Log("Saving");
+			savesContainer.SaveToXml(Path.Combine(Application.persistentDataPath, + lvl.title + ".xml"), lvl);
 		}
 
-		if (Input.GetKey(KeyCode.F6))
+		if (Input.GetKeyDown(KeyCode.F6))
 		{
 			// Quick Load
 
