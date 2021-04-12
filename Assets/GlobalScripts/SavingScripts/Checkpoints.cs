@@ -35,11 +35,13 @@ public class Checkpoints : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.F5))
 		{
 			// Quick Save
-			SaveInfo lvl = new SaveInfo();
-			lvl.abilityUnlocked = pc.isAbilityUnlocked;
-			lvl.sceneName = sceneName; // null
-			lvl.spawnPoint = player.transform.position;
-			
+			SaveInfo lvl = new SaveInfo
+			{
+				abilityUnlocked = pc.isAbilityUnlocked,
+				sceneName = sceneName,
+				spawnPoint = player.transform.position
+			};
+
 			date = System.DateTime.Now.ToShortDateString().ToString(new CultureInfo("en-US")).Replace("/", "-");
 			time = System.DateTime.Now.ToShortTimeString().Replace(":", "");
 
@@ -55,7 +57,7 @@ public class Checkpoints : MonoBehaviour
 			lvl.dimension = (int)GameManager.currentActiveDimension;
 
 			Debug.Log("Saving");
-			savesContainer.SaveToXml(Path.Combine(Application.persistentDataPath, + lvl.title + ".xml"), lvl);
+			savesContainer.SaveToXml(Path.Combine(Application.persistentDataPath, lvl.title + ".xml"), lvl);
 		}
 
 		if (Input.GetKeyDown(KeyCode.F6))
