@@ -46,7 +46,7 @@ public class Gun
 [XmlRoot("Saves Collection")]
 public class SavesContainer
 {
-	//public 
+	public List<SavesContainer> SavesList = new List<SavesContainer>();
 
 
     public void SaveToXml(string path, SaveInfo save)
@@ -67,13 +67,18 @@ public class SavesContainer
 		}
 	}
 
-	public static SavesContainer LoadFromXmls(string folderPath)
+	public static SaveInfo[] LoadFromXmls(string folderPath)
 	{
+
+		string[] files = Directory.GetFiles(folderPath);
+		SaveInfo[] saves = new SaveInfo[files.Length];
+
 		// loop through all files in folder
+		for (int i = 0; i < files.Length; i++)
+		{
+			saves[i] = LoadFromXml(files[i]);
+		}
 
-
-
-
-		return null;
+		return saves;
 	}
 }

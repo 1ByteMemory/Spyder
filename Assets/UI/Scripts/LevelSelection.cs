@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -27,10 +28,12 @@ public class LevelSelection : MonoBehaviour
 
 	public float textHieght = 39;
 
-    public SaveInfo[] showCaseLevels;
+    public SaveInfo[] showCaseLevels = new SaveInfo[0];
 
 	private List<SaveInfo> quickSaves = new List<SaveInfo>();
 	private List<SaveInfo> autoSaves = new List<SaveInfo>();
+
+	private SaveInfo[] AllSaves;
 
 	public void NewSave(SaveInfo save, SaveType saveType)
 	{
@@ -60,7 +63,6 @@ public class LevelSelection : MonoBehaviour
 
 	private void Start()
 	{
-
 		RectTransform prevRect = new RectTransform();
 		sceneLoader = GetComponent<SceneLoader>();
 
@@ -69,10 +71,38 @@ public class LevelSelection : MonoBehaviour
 		Vector2 canvasSize = canvas.referenceResolution;
 
 		RectTransform scrollRect = showCaseView.GetComponent<RectTransform>();
-		showCaseView.content.sizeDelta = new Vector2(0, showCaseLevels.Length * textHieght);
+		//showCaseView.content.sizeDelta = new Vector2(0, showCaseLevels.Length * textHieght);
 
-		CreateList(showCaseView, showCaseLevels);
-		//CreateList(showCaseView, autoSaves.ToArray());
+		SaveInfo[] QuickSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "saves"));
+		for (int i = 0; i < QuickSaves.Length; i++)
+		{
+			quickSaves.Add(QuickSaves[i]);
+		}
+
+		/*
+		SaveInfo[] AutoSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "autosaves"));
+		for (int i = 0; i < AutoSaves.Length; i++)
+		{
+			autoSaves.Add(AutoSaves[i]);
+		}
+		*/
+
+		AllSaves = new SaveInfo[showCaseLevels.Length + quickSaves.Count + autoSaves.Count];
+		for (int i = 0; i < showCaseLevels.Length; i++)
+		{
+			AllSaves[i] = showCaseLevels[i];
+		}
+		for (int i = 0; i < quickSaves.Count; i++)
+		{
+			AllSaves[i + showCaseLevels.Length] = quickSaves[i];
+		}
+		for (int i = 0; i < autoSaves.Count; i++)
+		{
+			AllSaves[i + showCaseLevels.Length + quickSaves.Count] = autoSaves[i];
+		}
+
+		//CreateList(showCaseView, showCaseLevels);
+		CreateList(quickSavesView, quickSaves.ToArray());
 	}
 	
 
@@ -82,7 +112,7 @@ public class LevelSelection : MonoBehaviour
 		{
 			// Destroy current button to create a new one
 			// Maybe not the best solution?
-			Destroy(scrollRect.content.GetChild(i));
+			//Destroy(scrollRect.content.GetChild(i));
 
 			// Create empty rect
 			RectTransform save = CreateRect(levelList[i].title, scrollRect.content);
@@ -117,22 +147,34 @@ public class LevelSelection : MonoBehaviour
 			block.selectedColor = new Color(0.4f, 0.4f, 0.4f);
 			button.colors = block;
 
-			// Add LoadLevel Method to OnClick event
-			button.onClick.AddListener(() => LoadScene(i));
 
+			Debug.Log(i);
+
+			// Add LoadLevel Method to OnClick event
+
+			string tempTitle = levelList[i].title;
+			button.onClick.AddListener(delegate { LoadScene(tempTitle); });
 		}
 
 	}
 
-	public void LoadScene(int index)
+	public void LoadScene(string name)
 	{
-		GameManager.loadedFromSelector = true;
-		GameManager.loadedSpawnPosition = showCaseLevels[index].spawnPoint;
-		
-		//GameManager.loadedWeapons = showCaseLevels[index].availableWeapons;
+		Debug.Log(name);
+		for (int i = 0; i < AllSaves.Length; i++)
+		{
+			if (AllSaves[i].title == name)
+			{
+				Checkpoints.mostRecentLoad = AllSaves[i];
 
-		sceneLoader.LoadScene(showCaseLevels[index].sceneName);
+				GameManager.loadedFromSave = true;
+				GameManager.loadedSpawnPosition = AllSaves[i].spawnPoint;
+
+				sceneLoader.LoadScene(AllSaves[i].sceneName);
+			}
+		}
 	}
+
 
 	private RectTransform CreateRect(string name, RectTransform parent)
 	{

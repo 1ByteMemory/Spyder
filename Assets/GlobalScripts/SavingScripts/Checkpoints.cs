@@ -17,7 +17,7 @@ public class Checkpoints : MonoBehaviour
 	string date;
 	string time;
 
-	public static SaveInfo mostRecentSave;
+	public static SaveInfo mostRecentLoad;
 
 	public Weapon[] weapons;
 
@@ -86,10 +86,10 @@ public class Checkpoints : MonoBehaviour
 			// Quick Load
 			Debug.Log("Loading...");
 
-			mostRecentSave = SavesContainer.LoadFromXml(Path.Combine(Application.persistentDataPath, "_Recent" + ".xml"));
+			mostRecentLoad = SavesContainer.LoadFromXml(Path.Combine(Application.persistentDataPath, "_Recent" + ".xml"));
 			GameManager.loadedFromSave = true;
 
-			SceneLoader.Load_Scene(mostRecentSave.sceneName);
+			SceneLoader.Load_Scene(mostRecentLoad.sceneName);
 
 		}
     }
