@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 			game.ToggleDimension();
 
 			endTime = Time.time + coolDown;
-			scanner.Scan(GameManager.currentActiveDimension);
+			scanner.Scan(GameManager.currentDimension);
         }
 
 		if (toggleCrouch)

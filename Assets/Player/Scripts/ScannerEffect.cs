@@ -14,7 +14,7 @@ public class ScannerEffect : MonoBehaviour
 	Material EffectMaterial;
 
 	public float MaxScanDist = 200;
-	public float ScanDistance;
+	public static float ScanDistance;
 	public float scanSpeed = 100;
 	public float fadeSpeed = 1;
 

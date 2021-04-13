@@ -18,27 +18,39 @@ public class PlayerWeapon : WeaponBehaviour
 
     public float scrollSensitivity = 1;
 
-    //public LayerMask layer_Mask;
+    public static bool loadedFromSave;
 
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-		
-        cam = Camera.main.transform;
+	//public LayerMask layer_Mask;
 
-        pm = GetComponent<PlayerMovement>();
+	// Start is called before the first frame update
+	protected override void Start()
+	{
+		base.Start();
 
-        GameManager gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+		cam = Camera.main.transform;
 
-        ammoText = gm.PlayerHUD.transform.Find("AmmoReserve").GetComponent<TextMeshProUGUI>();
-        clipText = gm.PlayerHUD.transform.Find("AmmoClip").GetComponent<TextMeshProUGUI>();
-        
-        InstantiateWeapons(gunViewModel);
+		pm = GetComponent<PlayerMovement>();
 
-        weaponIndex = 0;
-        CycleWeapons(0, true);
-    }
+		GameManager gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
+		ammoText = gm.PlayerHUD.transform.Find("AmmoReserve").GetComponent<TextMeshProUGUI>();
+		clipText = gm.PlayerHUD.transform.Find("AmmoClip").GetComponent<TextMeshProUGUI>();
+
+		InstantiateWeapons(gunViewModel);
+
+		weaponIndex = 0;
+		CycleWeapons(0, true);
+
+        if (loadedFromSave)
+		{
+            loadedFromSave = false;
+			for (int i = 0; i < weapons.Count; i++)
+			{
+                weapons[i].ammo = QuickSave.mostRecentLoad.availableWeapons[i].ammo;
+                weapons[i].clip = QuickSave.mostRecentLoad.availableWeapons[i].clip;
+			}
+		}
+	}
 
 	private void OnDrawGizmosSelected()
 	{

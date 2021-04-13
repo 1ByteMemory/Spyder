@@ -146,16 +146,27 @@ public class WeaponBehaviour : MonoBehaviour
 
     public Weapon GetWeapon(string name)
 	{
-		for (int i = 0; i < weapons.Count; i++)
-		{
+        for (int i = 0; i < weapons.Count; i++)
+        {
             if (weapons[i].name == name)
-			{
+            {
                 return weapons[i];
-			}
-		}
-
+            }
+        }
         return null;
-	}
+    }
+
+    public static Weapon GetWeapon(Weapon[] array, string name)
+	{
+        for (int i = 0; i < array.Length; i++)
+        {
+            if (array[i].name == name)
+            {
+                return array[i];
+            }
+        }
+        return null;
+    }
 
     void HitScan(Weapon weaponAsset, Transform weaponScene, Transform raycastOrigin)
     {
@@ -180,7 +191,6 @@ public class WeaponBehaviour : MonoBehaviour
 
             if (Physics.Raycast(bulletRays[i], out RaycastHit hit, weaponAsset.range, weaponAsset.hitLayers))
             {
-                Debug.Log(hit.transform.name);
                 if (hit.transform.GetComponent<Health>())
                 {
                     Debug.Log("Hitting");

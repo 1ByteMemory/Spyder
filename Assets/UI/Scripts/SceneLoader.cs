@@ -13,4 +13,9 @@ public class SceneLoader : MonoBehaviour
 		SceneManager.LoadScene(loadingScreen);
 	}
 
+	public static void Load_Scene(string levelName)
+	{
+		LoadingScreen.sceneToLoad = levelName;
+		SceneManager.LoadScene("LoadingScreen");
+	}
 }

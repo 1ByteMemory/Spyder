@@ -13,10 +13,7 @@ public class WeaponEditor : Editor
 
 	SerializedProperty Name;
 	SerializedProperty weaponType;
-	SerializedProperty weaponTypeIndex;
 	SerializedProperty hitLayers;
-
-	SerializedProperty flags;
 
 	SerializedProperty model;
 	SerializedProperty bullet;
@@ -77,9 +74,7 @@ public class WeaponEditor : Editor
 		#region serializedObjects
 		Name = serializedObject.FindProperty("Name");
 		weaponType = serializedObject.FindProperty("weaponType");
-		weaponTypeIndex = serializedObject.FindProperty("weaponTypeIndex");
 		hitLayers = serializedObject.FindProperty("hitLayers");
-		flags = serializedObject.FindProperty("flags");
 
 		model = serializedObject.FindProperty("model");
 		bullet = serializedObject.FindProperty("bullet");
@@ -130,19 +125,7 @@ public class WeaponEditor : Editor
 
 		}
 
-		#region Enitity Flags
-		EditorGUILayout.Space();
-		EditorGUILayout.Space();
-		EditorGUILayout.LabelField("Entities that can use this weapon:", subtitle);
-
-		string[] options = new string[] { "Player", "Goons", "Security", "Digital Spiders" };
-		flags.arraySize = options.Length;
 		
-		for (int i = 0; i < options.Length; i++)
-		{
-			flags.GetArrayElementAtIndex(i).boolValue = EditorGUILayout.Toggle(options[i], flags.GetArrayElementAtIndex(i).boolValue);
-		}
-		#endregion
 
 		#region Gun and Bullet Model
 		EditorGUILayout.Space();
@@ -151,6 +134,7 @@ public class WeaponEditor : Editor
 
 		model.objectReferenceValue = EditorGUILayout.ObjectField("Gun Model", model.objectReferenceValue, typeof(GameObject), false);
 
+		string[] options = new string[0];
 		if ((GameObject)model.objectReferenceValue != null)
 		{
 			GameObject obj = (GameObject)model.objectReferenceValue;
@@ -196,11 +180,8 @@ public class WeaponEditor : Editor
 		EditorGUILayout.Space();
 		EditorGUILayout.LabelField("Stats", subtitle);
 
-		// If the player can use the weapon, display HoldToFire bool
-		if (flags.GetArrayElementAtIndex(0).boolValue)
-		{
-			holdToFire.boolValue = EditorGUILayout.Toggle("Hold To Fire", holdToFire.boolValue);
-		}
+		
+		holdToFire.boolValue = EditorGUILayout.Toggle("Hold To Fire", holdToFire.boolValue);
 		
 		firingTime.floatValue = EditorGUILayout.FloatField("Time between shots", firingTime.floatValue);
 		reloadTime.floatValue = EditorGUILayout.FloatField("Reloading Time", reloadTime.floatValue);

@@ -15,12 +15,15 @@ public class KeycardIcon : MonoBehaviour
 	GameObject[] keyCards;
 	Image[] imgs;
 
+	public static bool[] keysFound;
+
 	private void Start()
 	{
 		Key[] _keycards = FindObjectsOfType<Key>();
 		keyCards = new GameObject[_keycards.Length];
 		imgs = new Image[_keycards.Length];
 
+		
 		backPanel.sizeDelta = new Vector2((_keycards.Length - 1) * 75, 0);
 		
 		for (int i = 0; i < _keycards.Length; i++)
@@ -42,6 +45,18 @@ public class KeycardIcon : MonoBehaviour
 			icon.sizeDelta = new Vector2(0, 0);
 			icon.anchoredPosition = new Vector2(-i * 75, 0);
 		}
+
+		if (keysFound == null)
+			keysFound = new bool[_keycards.Length];
+		
+		for (int i = 0; i < keysFound.Length; i++)
+		{
+			if (keysFound[i])
+			{
+				KeyCollected(keyCards[i]);
+				keyCards[i].GetComponent<Key>().Loaded();
+			}
+		}
 	}
 
 
@@ -57,6 +72,7 @@ public class KeycardIcon : MonoBehaviour
 		{
 			if (key == keyCards[i])
 			{
+				keysFound[i] = true;
 				imgs[i].sprite = keySprite;
 			}
 		}
