@@ -32,4 +32,11 @@ public class Key : MonoBehaviour
 			gameObject.SetActive(false);
 		}
 	}
+
+	public void Loaded()
+	{
+		src.parent = null;
+		isHeld = true;
+		gameObject.SetActive(false);
+	}
 }

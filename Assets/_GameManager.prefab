@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2167613234812103367}
   - component: {fileID: 6790534244141458623}
+  - component: {fileID: 1735706883957785994}
   - component: {fileID: 5427610743791985861}
   m_Layer: 0
   m_Name: _GameManager
@@ -64,6 +65,24 @@ MonoBehaviour:
   digitalMats:
   - {fileID: 2100000, guid: ec880374f354f1540a21ff447987a8fb, type: 2}
   - {fileID: 2100000, guid: 3d4bbfc8689b511438e961ae86a06076, type: 2}
+--- !u!114 &1735706883957785994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298756765287426993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fda11d5e151a4d4aa66561f0441ada0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 11400000, guid: 364f1677cb912a04b82876c02ccc7c61, type: 2}
+  - {fileID: 11400000, guid: c1f91f7f3ba79fe4ca3b4b9e0d98a8cb, type: 2}
+  - {fileID: 11400000, guid: 2db7517f8db13a24a8a30510a41d3c58, type: 2}
+  - {fileID: 11400000, guid: 8e1f8df06e543e04a814f895d6f3149e, type: 2}
+  - {fileID: 11400000, guid: b9ed89b22505380449c6e11e4f91c551, type: 2}
 --- !u!82 &5427610743791985861
 AudioSource:
   m_ObjectHideFlags: 0

@@ -44,7 +44,7 @@ public class Health : MonoBehaviour
 		}
 		else
 		{
-			if (GameManager.currentActiveDimension == dimension)
+			if (GameManager.currentDimension == dimension)
 			{
 				Damage(damage);
 			}
