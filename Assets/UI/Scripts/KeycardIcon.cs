@@ -46,7 +46,9 @@ public class KeycardIcon : MonoBehaviour
 			icon.anchoredPosition = new Vector2(-i * 75, 0);
 		}
 
-		keysFound = new bool[_keycards.Length];
+		if (keysFound == null)
+			keysFound = new bool[_keycards.Length];
+		
 		for (int i = 0; i < keysFound.Length; i++)
 		{
 			if (keysFound[i])

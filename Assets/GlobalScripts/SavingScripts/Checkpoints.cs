@@ -17,6 +17,10 @@ public class Checkpoints : MonoBehaviour
 	string date;
 	string time;
 
+	public static SaveInfo mostRecentSave;
+
+	public Weapon[] weapons;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -26,7 +30,8 @@ public class Checkpoints : MonoBehaviour
 		pc = player.GetComponent<PlayerController>();
 		playerWeapons = player.GetComponent<PlayerWeapon>();
 		sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-    }
+    
+	}
 
     // Update is called once per frame
     void Update()
@@ -39,7 +44,8 @@ public class Checkpoints : MonoBehaviour
 			{
 				abilityUnlocked = pc.isAbilityUnlocked,
 				sceneName = sceneName,
-				spawnPoint = player.transform.position
+				spawnPoint = player.transform.position,
+				spawnRotation = player.transform.eulerAngles
 			};
 
 			date = System.DateTime.Now.ToShortDateString().ToString(new CultureInfo("en-US")).Replace("/", "-");
@@ -54,16 +60,36 @@ public class Checkpoints : MonoBehaviour
 				lvl.availableWeapons[i] = new Gun(wep.Name, wep.ammo, wep.clip);
 			}
 			lvl.foundKeys = KeycardIcon.keysFound;
-			lvl.dimension = (int)GameManager.currentActiveDimension;
+			lvl.dimension = (int)GameManager.currentDimension;
+
+			lvl.health = player.GetComponent<PlayerHealth>().currentHealth;
 
 			Debug.Log("Saving");
-			savesContainer.SaveToXml(Path.Combine(Application.persistentDataPath, lvl.title + ".xml"), lvl);
+
+			// Save with the time and date in the saves folder
+			string savesFolder = Path.Combine(Application.persistentDataPath, "saves");
+
+
+			if (!File.Exists(savesFolder))
+			{
+				Directory.CreateDirectory(savesFolder);
+			}
+
+			savesContainer.SaveToXml(Path.Combine(savesFolder, lvl.title + ".xml"), lvl);
+			
+			// Save as the most recent
+			savesContainer.SaveToXml(Path.Combine(Application.persistentDataPath, "_Recent" + ".xml"), lvl);
 		}
 
 		if (Input.GetKeyDown(KeyCode.F6))
 		{
 			// Quick Load
+			Debug.Log("Loading...");
 
+			mostRecentSave = SavesContainer.LoadFromXml(Path.Combine(Application.persistentDataPath, "_Recent" + ".xml"));
+			GameManager.loadedFromSave = true;
+
+			SceneLoader.Load_Scene(mostRecentSave.sceneName);
 
 		}
     }

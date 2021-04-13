@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 	public GameObject PlayerHUD;
 	public GameObject Fungus;
 
-	public static Dimension currentActiveDimension;
+	public static Dimension currentDimension;
 	public static int activeLayer;
 
 	[Header("Dimension Switching")]
@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
 	public static Vector3 loadedSpawnPosition;
 	public static Weapon[] loadedWeapons;
 	public static bool loadedFromSelector;
+	public static bool loadedFromSave;
 
 	private void Start()
 	{
@@ -127,6 +128,7 @@ public class GameManager : MonoBehaviour
 		
 		SetDimension(Dimension.Real);
 
+		PlayerWeapon pw = playerMove.GetComponent<PlayerWeapon>();
 		if (loadedFromSelector)
 		{
 			loadedFromSelector = false;
@@ -134,7 +136,6 @@ public class GameManager : MonoBehaviour
 			if (loadedSpawnPosition != Vector3.zero)
 				GoToSpawn(loadedSpawnPosition);
 
-			PlayerWeapon pw = playerMove.GetComponent<PlayerWeapon>();
 
 			pw.weapons.Clear();
 			for (int i = 0; i < loadedWeapons.Length; i++)
@@ -143,6 +144,55 @@ public class GameManager : MonoBehaviour
 			}
 
 
+		}
+		else if (loadedFromSave)
+		{
+			loadedFromSave = false;
+
+
+			// ----- Weapons ----- //
+			
+			pw.weapons.Clear();
+			Gun[] savedWeapons = Checkpoints.mostRecentSave.availableWeapons;
+			for (int i = 0; i < savedWeapons.Length; i++)
+			{
+				// Get weapon from save
+				Checkpoints checkpoints = GetComponent<Checkpoints>();
+				Weapon weapon = WeaponBehaviour.GetWeapon(checkpoints.weapons, savedWeapons[i].name);
+
+				// Set ammo and clip from save
+				
+				// add weapon to player
+				pw.weapons.Add(weapon);
+
+				// Ammo set in PlayerWeapon
+				PlayerWeapon.loadedFromSave = true;
+			}
+
+			// ----- Position and Rotation ----- //
+			GoToSpawn(Checkpoints.mostRecentSave.spawnPoint, Checkpoints.mostRecentSave.spawnRotation);
+
+			// ----- Health ----- //
+			// Health is set on the PlayerHealth script
+			PlayerHealth.loadedFromSave = true;
+
+
+			// ----- Dimension ----- //
+			Dimension savedDim = (Dimension)Checkpoints.mostRecentSave.dimension;
+			if (savedDim == Dimension.Real)
+			{
+				// Set dimension to digital first so it doesn't mess up some stuff.
+				SetDimension(Dimension.Digital);
+			}
+			SetDimension(savedDim);
+				
+			ScannerEffect.ScanDistance = currentDimension == (Dimension)0 ? 200 : 0.1f;
+
+			// ----- Ability ----- //
+			playerMove.GetComponent<PlayerController>().isAbilityUnlocked = Checkpoints.mostRecentSave.abilityUnlocked;
+
+			// ----- Keys Found ----- //
+			KeycardIcon.keysFound = Checkpoints.mostRecentSave.foundKeys;
 		}
 		else if (spawnAtSpawnPoint) GoToSpawn();
 
@@ -197,6 +247,7 @@ public class GameManager : MonoBehaviour
 	#endregion
 
 
+
 	public void GoToSpawn()
 	{
 		if (spawnPoint != null)
@@ -210,14 +261,16 @@ public class GameManager : MonoBehaviour
 			playerMove.gameObject.SetActive(true);
 		}
 	}
-	public void GoToSpawn(Vector3 point)
+	public void GoToSpawn(Vector3 point, Vector3 rotation = default)
 	{
 		playerMove.gameObject.SetActive(false);
 
 		playerMove.transform.position = point;
+		playerMove.transform.eulerAngles = rotation;
 
 		playerMove.gameObject.SetActive(true);
 	}
+
 
 	GameObject UI(GameObject ui)
 	{
@@ -231,6 +284,11 @@ public class GameManager : MonoBehaviour
 	static bool pauseToggel;
 	private void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			playerMove.GetComponent<PlayerHealth>().TakeDamage(30);
+		}
+
 		if (PauseMenu != null && SettingsUI != null)
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
@@ -268,7 +326,7 @@ public class GameManager : MonoBehaviour
 	{
 		src.clip = dimensionClip;
 		src.Play();
-		switch (currentActiveDimension)
+		switch (currentDimension)
 		{
 			case Dimension.Digital:
 				SetDimension(Dimension.Real);
@@ -282,9 +340,9 @@ public class GameManager : MonoBehaviour
 
 	public void SetDimension(Dimension dimension)
 	{
-		if (dimension != currentActiveDimension)
+		if (dimension != currentDimension)
 		{
-			currentActiveDimension = dimension;
+			currentDimension = dimension;
 
 			if (dimension == Dimension.Digital)
 			{

@@ -11,8 +11,10 @@ public class SaveInfo
     public string sceneName = string.Empty;
 	public bool abilityUnlocked = false;
 	public bool[] foundKeys = new bool[0];
+	public int health = 0;
 	public int dimension = 0;
     public Vector3 spawnPoint = Vector3.zero;
+	public Vector3 spawnRotation = Vector3.zero;
 
 	public Gun[] availableWeapons = new Gun[0];
 }
@@ -44,6 +46,9 @@ public class Gun
 [XmlRoot("Saves Collection")]
 public class SavesContainer
 {
+	//public 
+
+
     public void SaveToXml(string path, SaveInfo save)
 	{
         var serializer = new XmlSerializer(typeof(SaveInfo));
@@ -53,12 +58,22 @@ public class SavesContainer
 		}
 	}
 
-    public static SavesContainer LoadFromXml(string path)
+    public static SaveInfo LoadFromXml(string path)
 	{
-		var serializer = new XmlSerializer(typeof(SavesContainer));
+		var serializer = new XmlSerializer(typeof(SaveInfo));
 		using (var stream = new FileStream(path, FileMode.Open))
 		{
-			return serializer.Deserialize(stream) as SavesContainer;
+			return serializer.Deserialize(stream) as SaveInfo;
 		}
+	}
+
+	public static SavesContainer LoadFromXmls(string folderPath)
+	{
+		// loop through all files in folder
+
+
+
+
+		return null;
 	}
 }

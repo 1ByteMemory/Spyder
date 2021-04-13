@@ -9,14 +9,28 @@ public class PlayerHealth : Health
 
 	public float immunityWindow = 0.1f;
 
+	public static int startingHealth;
+
+	public static bool loadedFromSave;
+
 	private protected override void Start()
 	{
-		base.Start();
 
 		healthSlider = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("HealthBar").GetComponent<Slider>();
 
 		healthSlider.maxValue = maxHealth;
 		healthSlider.value = maxHealth;
+
+		if (loadedFromSave)
+		{
+			loadedFromSave = false;
+			currentHealth = Checkpoints.mostRecentSave.health;
+			healthSlider.value = currentHealth;
+		}
+		else
+		{
+			base.Start();
+		}
 	}
 
 	float endTime;

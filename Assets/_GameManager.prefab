@@ -75,6 +75,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fda11d5e151a4d4aa66561f0441ada0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 11400000, guid: 364f1677cb912a04b82876c02ccc7c61, type: 2}
+  - {fileID: 11400000, guid: c1f91f7f3ba79fe4ca3b4b9e0d98a8cb, type: 2}
+  - {fileID: 11400000, guid: 2db7517f8db13a24a8a30510a41d3c58, type: 2}
+  - {fileID: 11400000, guid: 8e1f8df06e543e04a814f895d6f3149e, type: 2}
+  - {fileID: 11400000, guid: b9ed89b22505380449c6e11e4f91c551, type: 2}
 --- !u!82 &5427610743791985861
 AudioSource:
   m_ObjectHideFlags: 0
