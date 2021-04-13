@@ -70,7 +70,6 @@ public class LevelSelection : MonoBehaviour
 		CanvasScaler canvas = GetComponentInParent<CanvasScaler>();
 
 		showCaseLevels = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "showcase"));
-		showCaseView.content.sizeDelta = new Vector2(0, showCaseLevels.Length * textHieght);
 
 		SaveInfo[] QuickSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "saves"));
 		for (int i = 0; i < QuickSaves.Length; i++)
@@ -78,13 +77,15 @@ public class LevelSelection : MonoBehaviour
 			quickSaves.Add(QuickSaves[i]);
 		}
 
-		
 		SaveInfo[] AutoSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "autosaves"));
 		for (int i = 0; i < AutoSaves.Length; i++)
 		{
 			autoSaves.Add(AutoSaves[i]);
 		}
 		
+		showCaseView.content.sizeDelta = new Vector2(0, showCaseLevels.Length * textHieght);
+		quickSavesView.content.sizeDelta = new Vector2(0, quickSaves.Count * textHieght);
+		autoSavesView.content.sizeDelta = new Vector2(0, autoSaves.Count * textHieght);
 
 		AllSaves = new SaveInfo[showCaseLevels.Length + quickSaves.Count + autoSaves.Count];
 		for (int i = 0; i < showCaseLevels.Length; i++)
@@ -108,12 +109,13 @@ public class LevelSelection : MonoBehaviour
 
 	public void CreateList(ScrollRect scrollRect, SaveInfo[] levelList)
 	{
+		for (int i = 0; i < scrollRect.content.childCount; i++)
+		{
+			Destroy(scrollRect.content.GetChild(i));
+		}
+
 		for (int i = 0; i < levelList.Length; i++)
 		{
-			// Destroy current button to create a new one
-			// Maybe not the best solution?
-			//Destroy(scrollRect.content.GetChild(i));
-
 			// Create empty rect
 			RectTransform save = CreateRect(levelList[i].title, scrollRect.content);
 			
@@ -146,9 +148,6 @@ public class LevelSelection : MonoBehaviour
 			block.highlightedColor = new Color(0.7f, 0.7f, 0.7f);
 			block.selectedColor = new Color(0.4f, 0.4f, 0.4f);
 			button.colors = block;
-
-
-			Debug.Log(i);
 
 			// Add LoadLevel Method to OnClick event
 
