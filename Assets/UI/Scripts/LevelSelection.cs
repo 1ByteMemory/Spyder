@@ -61,17 +61,13 @@ public class LevelSelection : MonoBehaviour
 		}
 	}
 
-	private void Start()
+	private void OnEnable()
 	{
-		RectTransform prevRect = new RectTransform();
 		sceneLoader = GetComponent<SceneLoader>();
-
-		// How many cards can fit horizontally
-		CanvasScaler canvas = GetComponentInParent<CanvasScaler>();
 
 		showCaseLevels = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "showcase"));
 
-		SaveInfo[] QuickSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "saves"));
+		SaveInfo[] QuickSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "quicksaves"));
 		for (int i = 0; i < QuickSaves.Length; i++)
 		{
 			quickSaves.Add(QuickSaves[i]);
@@ -105,13 +101,12 @@ public class LevelSelection : MonoBehaviour
 		CreateList(quickSavesView, quickSaves.ToArray());
 		CreateList(autoSavesView, autoSaves.ToArray());
 	}
-	
 
 	public void CreateList(ScrollRect scrollRect, SaveInfo[] levelList)
 	{
 		for (int i = 0; i < scrollRect.content.childCount; i++)
 		{
-			Destroy(scrollRect.content.GetChild(i));
+			Destroy(scrollRect.content.GetChild(i).gameObject);
 		}
 
 		for (int i = 0; i < levelList.Length; i++)
