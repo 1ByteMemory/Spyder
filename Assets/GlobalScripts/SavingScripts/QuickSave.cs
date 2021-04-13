@@ -59,7 +59,17 @@ public class QuickSave : MonoBehaviour
 
 	}
 
+
+
 	public static void Save(string destinationFolder)
+	{
+		date = System.DateTime.Now.ToShortDateString().ToString(new CultureInfo("en-US")).Replace("/", "-");
+		time = System.DateTime.Now.ToShortTimeString().Replace(":", "");
+
+		Save(destinationFolder, date + " " + time);
+	}
+
+	public static void Save(string destinationFolder, string fileName)
 	{
 		SaveInfo lvl = new SaveInfo
 		{
@@ -69,10 +79,7 @@ public class QuickSave : MonoBehaviour
 			spawnRotation = player.transform.eulerAngles
 		};
 
-		date = System.DateTime.Now.ToShortDateString().ToString(new CultureInfo("en-US")).Replace("/", "-");
-		time = System.DateTime.Now.ToShortTimeString().Replace(":", "");
-
-		lvl.title = date + " " + time;
+		lvl.title = fileName;
 
 		lvl.availableWeapons = new Gun[playerWeapons.weapons.Count];
 		for (int i = 0; i < playerWeapons.weapons.Count; i++)

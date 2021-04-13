@@ -3,6 +3,8 @@
 public class Checkpoint : MonoBehaviour
 {
 	bool triggered;
+	public string checkpointName;
+
 
 	private void OnTriggerEnter(Collider other)
 	{
@@ -10,7 +12,14 @@ public class Checkpoint : MonoBehaviour
 		{
 			triggered = true;
 
-			QuickSave.Save("autosaves");
+			if (checkpointName == "")
+			{
+				QuickSave.Save("autosaves", checkpointName);
+			}
+			else
+			{
+				QuickSave.Save("autosaves");
+			}
 		}
 	}
 }
