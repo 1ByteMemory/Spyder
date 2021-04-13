@@ -54,7 +54,7 @@ public class QuickSave : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.F9))
 		{
 			Debug.Log("Saving a showcase load. File can be found here:\n<color=blue>" + Application.persistentDataPath + "/showcase</color>");
-			Save("showcase");
+			SaveShowcase();
 		}
 
 	}
@@ -109,5 +109,38 @@ public class QuickSave : MonoBehaviour
 
 		// Save as the most recent
 		savesContainer.SaveToXml(Path.Combine(Application.persistentDataPath, "_Recent" + ".xml"), lvl);
+	}
+
+
+	public void SaveShowcase()
+	{
+		FindObjectOfType<GameManager>().GetComponentInChildren<Animator>().SetTrigger("Play");
+
+		SaveInfo lvl = new SaveInfo
+		{
+			abilityUnlocked = pc.isAbilityUnlocked,
+			sceneName = sceneName,
+			spawnPoint = player.transform.position,
+			spawnRotation = player.transform.eulerAngles
+		};
+
+		lvl.title = "TITLE " + System.DateTime.Now.ToShortTimeString().Replace(":", "");
+
+		lvl.availableWeapons = new Gun[playerWeapons.weapons.Count];
+		for (int i = 0; i < playerWeapons.weapons.Count; i++)
+		{
+			Weapon wep = playerWeapons.weapons[i];
+			lvl.availableWeapons[i] = new Gun(wep.Name, wep.ammo, wep.clip);
+		}
+		lvl.foundKeys = KeycardIcon.keysFound;
+		lvl.dimension = (int)GameManager.currentDimension;
+
+		lvl.health = player.GetComponent<PlayerHealth>().currentHealth;
+
+		Debug.Log("Saving");
+
+		string savesFolder = Application.dataPath + "/Resources/Showcase Saves";
+
+		savesContainer.SaveToXml(Path.Combine(savesFolder, lvl.title + ".xml"), lvl);
 	}
 }
