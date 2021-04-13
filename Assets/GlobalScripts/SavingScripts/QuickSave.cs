@@ -71,6 +71,8 @@ public class QuickSave : MonoBehaviour
 
 	public static void Save(string destinationFolder, string fileName)
 	{
+		FindObjectOfType<GameManager>().GetComponentInChildren<Animator>().SetTrigger("Play");
+
 		SaveInfo lvl = new SaveInfo
 		{
 			abilityUnlocked = pc.isAbilityUnlocked,
