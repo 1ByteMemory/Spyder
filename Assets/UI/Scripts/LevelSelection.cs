@@ -68,10 +68,9 @@ public class LevelSelection : MonoBehaviour
 
 		// How many cards can fit horizontally
 		CanvasScaler canvas = GetComponentInParent<CanvasScaler>();
-		Vector2 canvasSize = canvas.referenceResolution;
 
-		RectTransform scrollRect = showCaseView.GetComponent<RectTransform>();
-		//showCaseView.content.sizeDelta = new Vector2(0, showCaseLevels.Length * textHieght);
+		showCaseLevels = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "showcase"));
+		showCaseView.content.sizeDelta = new Vector2(0, showCaseLevels.Length * textHieght);
 
 		SaveInfo[] QuickSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "saves"));
 		for (int i = 0; i < QuickSaves.Length; i++)
@@ -79,13 +78,13 @@ public class LevelSelection : MonoBehaviour
 			quickSaves.Add(QuickSaves[i]);
 		}
 
-		/*
+		
 		SaveInfo[] AutoSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "autosaves"));
 		for (int i = 0; i < AutoSaves.Length; i++)
 		{
 			autoSaves.Add(AutoSaves[i]);
 		}
-		*/
+		
 
 		AllSaves = new SaveInfo[showCaseLevels.Length + quickSaves.Count + autoSaves.Count];
 		for (int i = 0; i < showCaseLevels.Length; i++)
@@ -101,8 +100,9 @@ public class LevelSelection : MonoBehaviour
 			AllSaves[i + showCaseLevels.Length + quickSaves.Count] = autoSaves[i];
 		}
 
-		//CreateList(showCaseView, showCaseLevels);
+		CreateList(showCaseView, showCaseLevels);
 		CreateList(quickSavesView, quickSaves.ToArray());
+		CreateList(autoSavesView, autoSaves.ToArray());
 	}
 	
 
@@ -165,7 +165,7 @@ public class LevelSelection : MonoBehaviour
 		{
 			if (AllSaves[i].title == name)
 			{
-				Checkpoints.mostRecentLoad = AllSaves[i];
+				QuickSave.mostRecentLoad = AllSaves[i];
 
 				GameManager.loadedFromSave = true;
 				GameManager.loadedSpawnPosition = AllSaves[i].spawnPoint;

@@ -24,7 +24,7 @@ public class PlayerHealth : Health
 		if (loadedFromSave)
 		{
 			loadedFromSave = false;
-			currentHealth = Checkpoints.mostRecentLoad.health;
+			currentHealth = QuickSave.mostRecentLoad.health;
 			healthSlider.value = currentHealth;
 		}
 		else

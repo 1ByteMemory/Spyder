@@ -46,8 +46,8 @@ public class PlayerWeapon : WeaponBehaviour
             loadedFromSave = false;
 			for (int i = 0; i < weapons.Count; i++)
 			{
-                weapons[i].ammo = Checkpoints.mostRecentLoad.availableWeapons[i].ammo;
-                weapons[i].clip = Checkpoints.mostRecentLoad.availableWeapons[i].clip;
+                weapons[i].ammo = QuickSave.mostRecentLoad.availableWeapons[i].ammo;
+                weapons[i].clip = QuickSave.mostRecentLoad.availableWeapons[i].clip;
 			}
 		}
 	}

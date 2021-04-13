@@ -153,12 +153,12 @@ public class GameManager : MonoBehaviour
 			// ----- Weapons ----- //
 			
 			pw.weapons.Clear();
-			Gun[] savedWeapons = Checkpoints.mostRecentLoad.availableWeapons;
+			Gun[] savedWeapons = QuickSave.mostRecentLoad.availableWeapons;
 			for (int i = 0; i < savedWeapons.Length; i++)
 			{
 				// Get weapon from save
-				Checkpoints checkpoints = GetComponent<Checkpoints>();
-				Weapon weapon = WeaponBehaviour.GetWeapon(checkpoints.weapons, savedWeapons[i].name);
+				QuickSave quicksave = GetComponent<QuickSave>();
+				Weapon weapon = WeaponBehaviour.GetWeapon(quicksave.weapons, savedWeapons[i].name);
 
 				// Set ammo and clip from save
 				
@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
 			}
 
 			// ----- Position and Rotation ----- //
-			GoToSpawn(Checkpoints.mostRecentLoad.spawnPoint, Checkpoints.mostRecentLoad.spawnRotation);
+			GoToSpawn(QuickSave.mostRecentLoad.spawnPoint, QuickSave.mostRecentLoad.spawnRotation);
 
 			// ----- Health ----- //
 			// Health is set on the PlayerHealth script
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
 
 
 			// ----- Dimension ----- //
-			Dimension savedDim = (Dimension)Checkpoints.mostRecentLoad.dimension;
+			Dimension savedDim = (Dimension)QuickSave.mostRecentLoad.dimension;
 			if (savedDim == Dimension.Real)
 			{
 				// Set dimension to digital first so it doesn't mess up some stuff.
@@ -189,10 +189,10 @@ public class GameManager : MonoBehaviour
 			ScannerEffect.ScanDistance = currentDimension == (Dimension)0 ? 200 : 0.1f;
 
 			// ----- Ability ----- //
-			playerMove.GetComponent<PlayerController>().isAbilityUnlocked = Checkpoints.mostRecentLoad.abilityUnlocked;
+			playerMove.GetComponent<PlayerController>().isAbilityUnlocked = QuickSave.mostRecentLoad.abilityUnlocked;
 
 			// ----- Keys Found ----- //
-			KeycardIcon.keysFound = Checkpoints.mostRecentLoad.foundKeys;
+			KeycardIcon.keysFound = QuickSave.mostRecentLoad.foundKeys;
 		}
 		else if (spawnAtSpawnPoint) GoToSpawn();
 
