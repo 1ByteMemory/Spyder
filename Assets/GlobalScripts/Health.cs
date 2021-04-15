@@ -52,8 +52,8 @@ public class Health : MonoBehaviour
 
 	private void Damage(int damage)
 	{
-		if (transform.name != "Player")
-			Debug.Log("Taking Damage");
+		//if (transform.name != "Player")
+		Debug.Log(currentHealth);
 		
 		currentHealth -= damage;
 		OnHit.Invoke();

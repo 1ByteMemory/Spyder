@@ -43,12 +43,7 @@ public class QuickSave : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.F6))
 		{
 			// Quick Load
-			Debug.Log("Loading...");
-
-			mostRecentLoad = SavesContainer.LoadFromXml(Path.Combine(Application.persistentDataPath, "_Recent" + ".xml"));
-			GameManager.loadedFromSave = true;
-
-			SceneLoader.Load_Scene(mostRecentLoad.sceneName);
+			QuickLoad();
 		}
 
 		if (Input.GetKeyDown(KeyCode.F9))
@@ -59,6 +54,15 @@ public class QuickSave : MonoBehaviour
 
 	}
 
+	public void QuickLoad()
+	{
+		Debug.Log("Loading...");
+
+		mostRecentLoad = SavesContainer.LoadFromXml(Path.Combine(Application.persistentDataPath, "_Recent" + ".xml"));
+		GameManager.loadedFromSave = true;
+
+		SceneLoader.Load_Scene(mostRecentLoad.sceneName);
+	}
 
 
 	public static void Save(string destinationFolder)

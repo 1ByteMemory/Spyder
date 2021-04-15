@@ -25,6 +25,9 @@ public class PlayerHealth : Health
 		{
 			loadedFromSave = false;
 			currentHealth = QuickSave.mostRecentLoad.health;
+			if (currentHealth > maxHealth)
+				currentHealth = maxHealth;
+
 			healthSlider.value = currentHealth;
 		}
 		else
