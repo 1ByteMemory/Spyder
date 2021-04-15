@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerHealth : Health
 {
@@ -13,6 +14,8 @@ public class PlayerHealth : Health
 
 	public static bool loadedFromSave;
 
+	Animator hertEffect;
+
 	private protected override void Start()
 	{
 
@@ -20,6 +23,8 @@ public class PlayerHealth : Health
 
 		healthSlider.maxValue = maxHealth;
 		healthSlider.value = maxHealth;
+
+		hertEffect = GetComponentInChildren<Animator>();
 
 		if (loadedFromSave)
 		{
@@ -46,6 +51,8 @@ public class PlayerHealth : Health
 			healthSlider.value = currentHealth;
 			
 			endTime = immunityWindow + Time.time;
+
+			hertEffect.SetTrigger("Play");
 		}
 	}
 
