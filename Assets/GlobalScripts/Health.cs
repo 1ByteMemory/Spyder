@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -61,7 +60,6 @@ public class Health : MonoBehaviour
 
 		if (currentHealth <= 0 && !isDead)
 		{
-			Debug.Log("Dead");
 			isDead = true;
 			OnDeath.Invoke();
 		}

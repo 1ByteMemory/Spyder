@@ -197,7 +197,19 @@ public class GameManager : MonoBehaviour
 		else if (spawnAtSpawnPoint) GoToSpawn();
 
 		ApplySettings();
+
+
+		// Add Death Menu to OnDeath
+		DeathEffectController deathEffect = GetComponentInChildren<DeathEffectController>();
+		deathEffect.PlayerDeath += DeathMenu;
+	
 	}
+
+	public void DeathMenu()
+	{
+		Debug.Log("DEAD");
+	}
+
 
 	#region Enemy Barks
 	public void AddEnemy(GameObject enemy)
@@ -245,7 +257,6 @@ public class GameManager : MonoBehaviour
 	}
 
 	#endregion
-
 
 
 	public void GoToSpawn()

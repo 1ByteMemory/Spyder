@@ -45,4 +45,10 @@ public class PlayerHealth : Health
 			endTime = immunityWindow + Time.time;
 		}
 	}
+
+	// Added to the unity event
+	public void DeathEffect()
+	{
+		FindObjectOfType<DeathEffectController>().Play();
+	}
 }

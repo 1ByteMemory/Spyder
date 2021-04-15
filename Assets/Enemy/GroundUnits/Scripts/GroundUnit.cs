@@ -8,10 +8,6 @@ public class GroundUnit : SearchAndDestory
 
 	public float reloadTime;
 
-	public int normalDamage = 2;
-	public int modifiedDamage = 1;
-
-
 	protected override void Start()
 	{
 		base.Start();
@@ -44,14 +40,8 @@ public class GroundUnit : SearchAndDestory
 	protected override void Search()
 	{
 		base.Search();
-
-		// Go to player
-		
-
 	}
 
-	float fireingTime;
-	float reloadEndTime;
 	protected override void Attack()
 	{
 		base.Attack();
