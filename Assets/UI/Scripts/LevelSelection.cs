@@ -64,8 +64,7 @@ public class LevelSelection : MonoBehaviour
 	private void OnEnable()
 	{
 		sceneLoader = GetComponent<SceneLoader>();
-
-		showCaseLevels = SavesContainer.LoadFromXmls(Application.dataPath + "/Resources/Showcase Saves");
+		showCaseLevels = SavesContainer.LoadFromXmls(Path.Combine(Application.dataPath, "Resources", "Showcase Saves"));
 
 		SaveInfo[] QuickSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "quicksaves"));
 		for (int i = 0; i < QuickSaves.Length; i++)

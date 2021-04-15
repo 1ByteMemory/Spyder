@@ -3,6 +3,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 [XmlRoot("Save")]
 public class SaveInfo
@@ -63,14 +64,15 @@ public class SavesContainer
 		var serializer = new XmlSerializer(typeof(SaveInfo));
 		using (var stream = new FileStream(path, FileMode.Open))
 		{
-			return serializer.Deserialize(stream) as SaveInfo;
+			SaveInfo info = serializer.Deserialize(stream) as SaveInfo;
+			return info;
 		}
 	}
 
 	public static SaveInfo[] LoadFromXmls(string folderPath)
 	{
 
-		string[] files = Directory.GetFiles(folderPath);
+		string[] files = Directory.GetFiles(folderPath, "*.xml");
 		SaveInfo[] saves = new SaveInfo[files.Length];
 
 		// loop through all files in folder

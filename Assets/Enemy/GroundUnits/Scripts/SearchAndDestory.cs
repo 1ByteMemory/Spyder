@@ -86,35 +86,43 @@ public class SearchAndDestory : WeaponBehaviour
 	// Update is called once per frame
 	protected virtual void Update()
     {
-        float distance = Mathf.Abs((Player.position - transform.position).magnitude);
-
-		if (distance > searchRadius)
+		if (!GameManager.IsPaused)
 		{
-			agentState = AgentState.Idle;
+			float distance = Mathf.Abs((Player.position - transform.position).magnitude);
+
+			if (distance > searchRadius)
+			{
+				agentState = AgentState.Idle;
+			}
+			else if (Physics.Raycast(transform.position, Player.position - transform.position, out navHit, searchRadius))
+			{
+				hasLineOfSight = navHit.transform.CompareTag("Player");
+
+				if (!hasLineOfSight)
+				{
+					RemoveFromSeenList();
+					agentState = AgentState.Search;
+				}
+				else if (distance > attackRadius)
+				{
+					AddToSeenList();
+					agentState = AgentState.Search;
+				}
+				else
+				{
+					AddToSeenList();
+					agentState = AgentState.Attack;
+				}
+			}
+
+
+			TakeAction(agentState);
 		}
-		else if (Physics.Raycast(transform.position, Player.position - transform.position, out navHit, searchRadius))
+		else
 		{
-			hasLineOfSight = navHit.transform.CompareTag("Player");
-
-			if (!hasLineOfSight)
-			{
-				RemoveFromSeenList();
-				agentState = AgentState.Search;
-			}
-			else if (distance > attackRadius)
-			{
-				AddToSeenList();
-				agentState = AgentState.Search;
-			}
-			else
-			{
-				AddToSeenList();
-				agentState = AgentState.Attack;
-			}
+			// Stop playing animations
+			anim.speed = 0;
 		}
-
-
-        TakeAction(agentState);
     }
 
 	private void AddToSeenList()

@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -53,15 +52,14 @@ public class Health : MonoBehaviour
 
 	private void Damage(int damage)
 	{
-		if (transform.name != "Player")
-			Debug.Log("Taking Damage");
+		//if (transform.name != "Player")
+		Debug.Log(currentHealth);
 		
 		currentHealth -= damage;
 		OnHit.Invoke();
 
 		if (currentHealth <= 0 && !isDead)
 		{
-			Debug.Log("Dead");
 			isDead = true;
 			OnDeath.Invoke();
 		}

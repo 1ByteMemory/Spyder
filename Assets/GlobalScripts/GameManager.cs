@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 	public GameObject PauseMenu;
 	public GameObject SettingsUI;
 	public GameObject PlayerHUD;
+	public GameObject DeathMenuUI;
 	public GameObject Fungus;
 
 	public static Dimension currentDimension;
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour
 		SettingsUI = UI(SettingsUI);
 		PauseMenu = UI(PauseMenu);
 		PlayerHUD = UI(PlayerHUD);
+		DeathMenuUI = UI(DeathMenuUI);
 		//Fungus = UI(Fungus);
 
 
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
 
 		SettingsUI.SetActive(false);
 		PauseMenu.SetActive(false);
+		DeathMenuUI.SetActive(false);
 
 		if (!loadEnemies)
 		{
@@ -197,7 +200,14 @@ public class GameManager : MonoBehaviour
 		else if (spawnAtSpawnPoint) GoToSpawn();
 
 		ApplySettings();
+
+
+		// Add Death Menu to OnDeath
+		DeathEffectController deathEffect = GetComponentInChildren<DeathEffectController>();
+		deathEffect.PlayerDeath += DeathMenu;
+	
 	}
+
 
 	#region Enemy Barks
 	public void AddEnemy(GameObject enemy)
@@ -247,7 +257,6 @@ public class GameManager : MonoBehaviour
 	#endregion
 
 
-
 	public void GoToSpawn()
 	{
 		if (spawnPoint != null)
@@ -282,16 +291,12 @@ public class GameManager : MonoBehaviour
 	}
 
 	static bool pauseToggel;
+	bool canPause = true;
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			playerMove.GetComponent<PlayerHealth>().TakeDamage(30);
-		}
-
 		if (PauseMenu != null && SettingsUI != null)
 		{
-			if (Input.GetKeyDown(KeyCode.Escape))
+			if (Input.GetKeyDown(KeyCode.Escape) && canPause)
 			{
 				if (!SettingsUI.activeSelf)
 				{
@@ -497,6 +502,11 @@ public class GameManager : MonoBehaviour
 
 	#endregion
 
+	public void MainMenu()
+	{
+		SceneLoader.Load_Scene("MainMenu");
+	}
+
 	public void ResumeGame()
 	{
 		Time.timeScale = 1;
@@ -509,6 +519,16 @@ public class GameManager : MonoBehaviour
 		FindObjectOfType<GameManager>().PauseMenu.SetActive(false);
 
 	}
+
+	public void DeathMenu()
+	{
+		Debug.Log("!! DEAD !!");
+		Time.timeScale = 0;
+		canPause = false;
+		SetMouseActive(true);
+		DeathMenuUI.SetActive(true);
+	}
+
 
 	public void SettingsMenu()
 	{
