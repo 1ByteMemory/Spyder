@@ -314,10 +314,11 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (playerMove.transform.position.y <= -100)
+		if (playerMove.transform.position.y <= -50)
 		{
 			Debug.LogError("Player was below -100, teleporting to spawn");
-			GoToSpawn();
+			//GoToSpawn();
+			playerMove.GetComponent<PlayerHealth>().TakeDamage(50000);
 		}
 	}
 

@@ -52,7 +52,10 @@ public class PlayerHealth : Health
 			
 			endTime = immunityWindow + Time.time;
 
-			hertEffect.SetTrigger("Play");
+			if (damage > 0)
+			{
+				hertEffect.SetTrigger("Play");
+			}
 		}
 	}
 

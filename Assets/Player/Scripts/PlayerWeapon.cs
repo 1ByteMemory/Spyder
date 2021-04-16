@@ -83,6 +83,15 @@ public class PlayerWeapon : WeaponBehaviour
                 CycleWeapons((int)num, false);
             }
 
+			for (int i = 0; i < weapons.Count; i++)
+			{
+                if (Input.GetKeyDown((i + 1).ToString()))
+			    {
+                    Debug.Log(i);
+                    CycleWeapons(i, true);
+			    }
+			}
+
             if (gunViewModel.childCount > 0)
             {
                 DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
@@ -121,8 +130,15 @@ public class PlayerWeapon : WeaponBehaviour
 
     public void CycleWeapons(int amount, bool isIndex)
 	{
-        weaponIndex = isIndex ? amount : weaponIndex + amount;
-        weaponIndex = (int)Mathf.Repeat(weaponIndex, weapons.Count);
+        if (isIndex)
+		{
+            weaponIndex = amount;
+		}
+		else
+		{
+            weaponIndex += amount;
+            weaponIndex = (int)Mathf.Repeat(weaponIndex, weapons.Count);
+		}
 
 		// Disable all guns, then enable the selected on.
 		for (int i = 0; i < gunViewModel.childCount; i++)
