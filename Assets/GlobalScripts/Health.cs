@@ -52,11 +52,17 @@ public class Health : MonoBehaviour
 
 	private void Damage(int damage)
 	{
-		//if (transform.name != "Player")
-		Debug.Log(currentHealth);
 		
 		currentHealth -= damage;
-		OnHit.Invoke();
+		if (damage > 0)
+		{
+			OnHit.Invoke();
+		}
+
+		if (currentHealth > maxHealth)
+		{
+			currentHealth = maxHealth;
+		}
 
 		if (currentHealth <= 0 && !isDead)
 		{
