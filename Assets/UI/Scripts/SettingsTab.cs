@@ -175,7 +175,7 @@ public class SettingsTab : MonoBehaviour
 
 		// General
 		Options[0].GetComponent<Slider>().value = JsonIO.playerSettings.feildOfView;
-		Options[1].GetComponent<TMP_Dropdown>().value = JsonIO.playerSettings.difficulty;
+		//Options[1].GetComponent<TMP_Dropdown>().value = JsonIO.playerSettings.difficulty;
 
 		// Controls
 		Options[2].GetComponent<Slider>().value = JsonIO.playerSettings.lookSensitivity;
@@ -200,7 +200,7 @@ public class SettingsTab : MonoBehaviour
 		// Accessibility
 		Options[14].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_epilepticMode;
 		Options[15].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_toggelCrouch;
-		Options[16].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_timeSlow;
+		//Options[16].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_timeSlow;
 		Options[17].GetComponent<Toggle>().isOn = JsonIO.playerSettings.acc_retro;
 
 		for (int i = 0; i < Menus.Length; i++)
