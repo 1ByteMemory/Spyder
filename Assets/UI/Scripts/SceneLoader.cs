@@ -18,4 +18,10 @@ public class SceneLoader : MonoBehaviour
 		LoadingScreen.sceneToLoad = levelName;
 		SceneManager.LoadScene("LoadingScreen");
 	}
+
+	public void ReloadCurrentScene()
+	{
+		LoadingScreen.sceneToLoad = SceneManager.GetActiveScene().name;
+		SceneManager.LoadScene(loadingScreen);
+	}
 }

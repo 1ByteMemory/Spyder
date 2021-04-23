@@ -63,21 +63,29 @@ public class LevelSelection : MonoBehaviour
 
 	private void OnEnable()
 	{
+		RefreshList();
+	}
+
+	void RefreshList()
+	{
 		sceneLoader = GetComponent<SceneLoader>();
 		showCaseLevels = SavesContainer.LoadFromXmls(Path.Combine(Application.dataPath, "Resources", "Showcase Saves"));
 
+		quickSaves.Clear();
+		autoSaves.Clear();
+
 		SaveInfo[] QuickSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "quicksaves"));
-		for (int i = 0; i < QuickSaves.Length; i++)
+		for (int i = QuickSaves.Length - 1; i >= 0; i--)
 		{
 			quickSaves.Add(QuickSaves[i]);
 		}
 
 		SaveInfo[] AutoSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "autosaves"));
-		for (int i = 0; i < AutoSaves.Length; i++)
+		for (int i = AutoSaves.Length - 1; i >= 0; i--)
 		{
 			autoSaves.Add(AutoSaves[i]);
 		}
-		
+
 		showCaseView.content.sizeDelta = new Vector2(0, showCaseLevels.Length * textHieght);
 		quickSavesView.content.sizeDelta = new Vector2(0, quickSaves.Count * textHieght);
 		autoSavesView.content.sizeDelta = new Vector2(0, autoSaves.Count * textHieght);
@@ -175,5 +183,12 @@ public class LevelSelection : MonoBehaviour
 		rect.name = name;
 		rect.SetParent(parent, false);
 		return rect;
+	}
+
+
+	public void DeleteFolder(string folder)
+	{
+		SavesContainer.DeleteFolder(folder);
+		RefreshList();
 	}
 }

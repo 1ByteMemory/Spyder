@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
-using Fungus;
+//using Fungus;
 
 public enum Dimension
 {
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 	public GameObject SettingsUI;
 	public GameObject PlayerHUD;
 	public GameObject DeathMenuUI;
-	public GameObject Fungus;
+	//public GameObject Fungus;
 
 	public static Dimension currentDimension;
 	public static int activeLayer;
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 	
 	[HideInInspector]
 	public List<GameObject> seenEnemies = new List<GameObject>();
-	private Flowchart flowchart;
+	//private Flowchart flowchart;
 
 	public Material[] digitalMats;
 
@@ -63,9 +63,13 @@ public class GameManager : MonoBehaviour
 	public static bool loadedFromSelector;
 	public static bool loadedFromSave;
 
+	private QuickSave quickSave;
+
 	private void Start()
 	{
 		SetMouseActive(false);
+
+		quickSave = GetComponent<QuickSave>();
 
 		mainCam = Camera.main;
 
@@ -160,8 +164,8 @@ public class GameManager : MonoBehaviour
 			for (int i = 0; i < savedWeapons.Length; i++)
 			{
 				// Get weapon from save
-				QuickSave quicksave = GetComponent<QuickSave>();
-				Weapon weapon = WeaponBehaviour.GetWeapon(quicksave.weapons, savedWeapons[i].name);
+				//QuickSave quicksave = GetComponent<QuickSave>();
+				Weapon weapon = WeaponBehaviour.GetWeapon(quickSave.weapons, savedWeapons[i].name);
 
 				// Set ammo and clip from save
 				
@@ -314,13 +318,32 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (playerMove.transform.position.y <= -50)
+		if (playerMove.transform.position.y <= -50 && !isPlayerDead)
 		{
-			Debug.LogError("Player was below -100, teleporting to spawn");
-			//GoToSpawn();
+			isPlayerDead = true; // Only apply the damage once
 			playerMove.GetComponent<PlayerHealth>().TakeDamage(50000);
 		}
+
+
+		if (Input.GetKeyDown(KeyCode.F5))
+		{
+			// Quick Save
+			QuickSave.Save("quicksaves");
+		}
+
+		if (Input.GetKeyDown(KeyCode.F6))
+		{
+			// Quick Load
+			quickSave.QuickLoad();
+		}
+
+		if (Input.GetKeyDown(KeyCode.F9))
+		{
+			Debug.Log("Saving a showcase load. File can be found here:\n<color=blue>" + Application.persistentDataPath + "/showcase</color>");
+			quickSave.SaveShowcase();
+		}
 	}
+	bool isPlayerDead;
 
 	public static bool IsPaused
 	{
@@ -529,7 +552,6 @@ public class GameManager : MonoBehaviour
 		SetMouseActive(true);
 		DeathMenuUI.SetActive(true);
 	}
-
 
 	public void SettingsMenu()
 	{
