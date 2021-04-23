@@ -8,6 +8,7 @@ public class QuickSave : MonoBehaviour
 {
 
 	private static GameObject player;
+	private static GameManager gm;
 	private static PlayerController pc;
 	private static PlayerWeapon playerWeapons;
 	private static SavesContainer savesContainer = new SavesContainer();
@@ -24,34 +25,11 @@ public class QuickSave : MonoBehaviour
 	void Start()
     {
 		player = GameObject.FindGameObjectWithTag("Player");
+		gm = FindObjectOfType<GameManager>();
 		pc = player.GetComponent<PlayerController>();
 		playerWeapons = player.GetComponent<PlayerWeapon>();
 		sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
     
-	}
-
-    // Update is called once per frame
-    void Update()
-    {
-     
-		if (Input.GetKeyDown(KeyCode.F5))
-		{
-			// Quick Save
-			Save("quicksaves");
-		}
-
-		if (Input.GetKeyDown(KeyCode.F6))
-		{
-			// Quick Load
-			QuickLoad();
-		}
-
-		if (Input.GetKeyDown(KeyCode.F9))
-		{
-			Debug.Log("Saving a showcase load. File can be found here:\n<color=blue>" + Application.persistentDataPath + "/showcase</color>");
-			SaveShowcase();
-		}
-
 	}
 
 	public void QuickLoad()
@@ -64,6 +42,10 @@ public class QuickSave : MonoBehaviour
 		SceneLoader.Load_Scene(mostRecentLoad.sceneName);
 	}
 
+	public void ClickSave(string destinationFolder)
+	{
+		Save(destinationFolder);
+	}
 
 	public static void Save(string destinationFolder)
 	{
@@ -75,7 +57,7 @@ public class QuickSave : MonoBehaviour
 
 	public static void Save(string destinationFolder, string fileName)
 	{
-		FindObjectOfType<GameManager>().GetComponentInChildren<Animator>().SetTrigger("Play");
+		gm.PlayerHUD.GetComponentInChildren<Animator>().SetTrigger("Play");
 
 		SaveInfo lvl = new SaveInfo
 		{

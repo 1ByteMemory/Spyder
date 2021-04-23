@@ -1275,7 +1275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.8927771}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -27.559998, y: -0.48031616}
+  m_AnchoredPosition: {x: -27.560059, y: -0.48034668}
   m_SizeDelta: {x: 48.92032, y: 0.80067444}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4942633434302486815
@@ -1327,7 +1327,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: fd5787a32da7ecc468c9813ff0d1080e, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
