@@ -85,4 +85,14 @@ public class SavesContainer
 		}
 		return saves;
 	}
+
+	public static void DeleteFolder(string folder)
+	{
+		string path = Path.Combine(Application.persistentDataPath, folder);
+		if (Directory.Exists(path))
+		{
+			Debug.Log("Deleting");
+			Directory.Delete(path, true);
+		}
+	}
 }
