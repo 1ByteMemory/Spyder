@@ -12,7 +12,8 @@ public class CPButton : MonoBehaviour
     public Image img;
 	public GameObject colorPanel;
 
-	public CPSlider R, G, B;
+	//public CPSlider R, G, B;
+	public FlexibleColorPicker colorPicker;
 
 	public Color color;
 
@@ -68,10 +69,7 @@ public class CPButton : MonoBehaviour
 	{
 		img.color = oldColor;
 
-		R.SetValue(oldColor.r);
-		G.SetValue(oldColor.g);
-		B.SetValue(oldColor.b);
-
+		colorPicker.color = oldColor;
 		OnColorPick.Invoke();
 	}
 
@@ -80,19 +78,14 @@ public class CPButton : MonoBehaviour
 		col.a = 1;
 		img.color = col;
 
-		R.SetValue(col.r);
-		G.SetValue(col.g);
-		B.SetValue(col.b);
+		colorPicker.color = col;
 	}
 
 
 	public void ChangeColour()
 	{
-		float r = R != null ? R.value : 1;
-		float g = G != null ? G.value : 1;
-		float b = B != null ? B.value : 1;
-
-		color = new Color(r, g, b, 1);
-		img.color = new Color(r, g, b, 1);
+		Debug.Log(colorPicker.color);
+		color = colorPicker.color;
+		img.color = colorPicker.color;
 	}
 }
