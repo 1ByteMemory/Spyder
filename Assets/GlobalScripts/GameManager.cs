@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
-using Fungus;
+//using Fungus;
 
 public enum Dimension
 {
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 	public GameObject SettingsUI;
 	public GameObject PlayerHUD;
 	public GameObject DeathMenuUI;
-	public GameObject Fungus;
+	//public GameObject Fungus;
 
 	public static Dimension currentDimension;
 	public static int activeLayer;
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 	
 	[HideInInspector]
 	public List<GameObject> seenEnemies = new List<GameObject>();
-	private Flowchart flowchart;
+	//private Flowchart flowchart;
 
 	public Material[] digitalMats;
 
@@ -314,13 +314,13 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (playerMove.transform.position.y <= -50)
+		if (playerMove.transform.position.y <= -50 && !isPlayerDead)
 		{
-			Debug.LogError("Player was below -100, teleporting to spawn");
-			//GoToSpawn();
+			isPlayerDead = true; // Only apply the damage once
 			playerMove.GetComponent<PlayerHealth>().TakeDamage(50000);
 		}
 	}
+	bool isPlayerDead;
 
 	public static bool IsPaused
 	{
@@ -529,7 +529,6 @@ public class GameManager : MonoBehaviour
 		SetMouseActive(true);
 		DeathMenuUI.SetActive(true);
 	}
-
 
 	public void SettingsMenu()
 	{

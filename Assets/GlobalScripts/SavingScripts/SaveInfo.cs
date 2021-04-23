@@ -71,16 +71,18 @@ public class SavesContainer
 
 	public static SaveInfo[] LoadFromXmls(string folderPath)
 	{
-
-		string[] files = Directory.GetFiles(folderPath, "*.xml");
-		SaveInfo[] saves = new SaveInfo[files.Length];
-
-		// loop through all files in folder
-		for (int i = 0; i < files.Length; i++)
+		SaveInfo[] saves = new SaveInfo[0];
+		if (Directory.Exists(folderPath))
 		{
-			saves[i] = LoadFromXml(files[i]);
-		}
+			string[] files = Directory.GetFiles(folderPath, "*.xml");
+			saves = new SaveInfo[files.Length];
 
+			// loop through all files in folder
+			for (int i = 0; i < files.Length; i++)
+			{
+				saves[i] = LoadFromXml(files[i]);
+			}
+		}
 		return saves;
 	}
 }

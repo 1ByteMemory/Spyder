@@ -67,13 +67,13 @@ public class LevelSelection : MonoBehaviour
 		showCaseLevels = SavesContainer.LoadFromXmls(Path.Combine(Application.dataPath, "Resources", "Showcase Saves"));
 
 		SaveInfo[] QuickSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "quicksaves"));
-		for (int i = 0; i < QuickSaves.Length; i++)
+		for (int i = QuickSaves.Length - 1; i >= 0; i--)
 		{
 			quickSaves.Add(QuickSaves[i]);
 		}
 
 		SaveInfo[] AutoSaves = SavesContainer.LoadFromXmls(Path.Combine(Application.persistentDataPath, "autosaves"));
-		for (int i = 0; i < AutoSaves.Length; i++)
+		for (int i = AutoSaves.Length - 1; i >= 0 ; i--)
 		{
 			autoSaves.Add(AutoSaves[i]);
 		}
