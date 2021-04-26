@@ -36,15 +36,19 @@ public class SettingsTab : MonoBehaviour
 	public GameObject[] TabsLabels;
 	public GameObject[] Options;
 
-	
+	private Animator savingIconAnim;
+
+
 	private void OnEnable()
 	{
 		JsonIO.LoadSettings();
-		//JsonIO.ResetSettings();
+		
+		savingIconAnim = GetComponentInChildren<Animator>();
 
 		defaultColor = TabsLabels[0].GetComponent<Image>().color;
 
 		OptionsUpdate();
+		OpenTab(Menus[0]);
 	}
 
 	private GameObject activeTab;
@@ -215,6 +219,8 @@ public class SettingsTab : MonoBehaviour
 
 		GameManager gm = FindObjectOfType<GameManager>();
 
+		savingIconAnim.SetTrigger("Play");
+
 		if (gm != null)
 		{
 			gm.ApplySettings();
@@ -236,6 +242,7 @@ public class SettingsTab : MonoBehaviour
 	{
 		JsonIO.ResetSettings();
 
+		savingIconAnim.SetTrigger("Play");
 		OptionsUpdate();
 		if (activeTab != null)
 			activeTab.SetActive(true);
