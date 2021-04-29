@@ -28,7 +28,7 @@
     "vol_Music": 1.0,
     "vol_Dialogue": 1.0,
     "vol_Ambience": 1.0,
-    "acc_epilepticMode": true,
+    "acc_epilepticMode": false,
     "acc_toggelCrouch": false,
     "acc_timeSlow": false,
     "acc_retro": true
