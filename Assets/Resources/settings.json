@@ -1,7 +1,7 @@
 {
-    "feildOfView": 70,
+    "feildOfView": 90,
     "difficulty": 1,
-    "lookSensitivity": 150.0,
+    "lookSensitivity": 193.08370971679688,
     "scrollSensitivity": 10.0,
     "col_outlines": {
         "r": 0.0,
@@ -24,11 +24,11 @@
     "isFullscreen": true,
     "resolution": 0,
     "vol_Barks": 1.0,
-    "vol_SoundFX": 1.0,
-    "vol_Music": 1.0,
+    "vol_SoundFX": 0.5785237550735474,
+    "vol_Music": 0.0,
     "vol_Dialogue": 1.0,
     "vol_Ambience": 1.0,
-    "acc_epilepticMode": true,
+    "acc_epilepticMode": false,
     "acc_toggelCrouch": false,
     "acc_timeSlow": false,
     "acc_retro": true
