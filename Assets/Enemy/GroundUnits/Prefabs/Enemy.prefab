@@ -4870,15 +4870,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 11400000, guid: 8e1f8df06e543e04a814f895d6f3149e, type: 2}
-  searchRadius: 25
-  attackRadius: 6
+  searchRadius: 20
+  attackRadius: 14
   stunnedTime: 2
   spawnedFromSpawner: 0
   gunPosition: {fileID: 1226598378809151112}
   hasLineOfSight: 0
   reloadTime: 0.5
-  normalDamage: 5
-  modifiedDamage: 1
 --- !u!195 &1659801140377113248
 NavMeshAgent:
   m_ObjectHideFlags: 0
