@@ -16,6 +16,8 @@ public class PlayerHealth : Health
 
 	Animator hertEffect;
 
+	private float loadindImmunityEndTime;
+
 	private protected override void Start()
 	{
 
@@ -25,6 +27,8 @@ public class PlayerHealth : Health
 		healthSlider.value = maxHealth;
 
 		hertEffect = GetComponentInChildren<Animator>();
+
+		loadindImmunityEndTime = Time.time + 2;
 
 		if (loadedFromSave)
 		{
@@ -45,11 +49,14 @@ public class PlayerHealth : Health
 	// Override to give immunity for brief time
 	public override void TakeDamage(int damage)
 	{
-		if (Time.time >= endTime)
+		// Brief immunity window
+		if (Time.time >= endTime					// immunity from regular damage,
+			&& Time.time >= loadindImmunityEndTime	// immunity from loading in
+			&& damage < 10)							// only if damage is less than amount (stops bypassing death pits)
 		{
 			base.TakeDamage(damage);
 			healthSlider.value = currentHealth;
-			
+
 			endTime = immunityWindow + Time.time;
 
 			if (damage > 0)

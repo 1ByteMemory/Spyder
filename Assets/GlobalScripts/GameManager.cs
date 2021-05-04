@@ -56,12 +56,20 @@ public class GameManager : MonoBehaviour
 
 	public Material[] digitalMats;
 
+	static bool pauseToggel;
 
 	// When loaded from level selector
 	public static Vector3 loadedSpawnPosition;
 	public static Weapon[] loadedWeapons;
 	public static bool loadedFromSelector;
 	public static bool loadedFromSave;
+	public void LoadedFromMainMenu()
+	{
+		// When the player selects new game
+		loadedFromSave = false;
+		loadedFromSelector = false;
+	}
+
 
 	private QuickSave quickSave;
 
@@ -87,6 +95,9 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
+		// reset pause toggle
+		pauseToggel = false;
+
 		SetMouseActive(false);
 
 		quickSave = GetComponent<QuickSave>();
@@ -152,8 +163,13 @@ public class GameManager : MonoBehaviour
 		}
 
 		// Set the active dimension to the real
-		
 		SetDimension(Dimension.Real);
+		
+		// Reset scan distance to zero
+		ScannerEffect.ScanDistance = 0;
+
+		// Reset keys found
+		KeycardIcon.keysFound = null;
 
 		PlayerWeapon pw = playerMove.GetComponent<PlayerWeapon>();
 		if (loadedFromSelector)
@@ -175,7 +191,6 @@ public class GameManager : MonoBehaviour
 		else if (loadedFromSave)
 		{
 			loadedFromSave = false;
-
 
 			// ----- Weapons ----- //
 			
@@ -324,7 +339,7 @@ public class GameManager : MonoBehaviour
 		else return null;
 	}
 
-	static bool pauseToggel;
+
 	bool canPause = true;
 	private void Update()
 	{
