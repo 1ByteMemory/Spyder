@@ -163,8 +163,13 @@ public class GameManager : MonoBehaviour
 		}
 
 		// Set the active dimension to the real
-		
 		SetDimension(Dimension.Real);
+		
+		// Reset scan distance to zero
+		ScannerEffect.ScanDistance = 0;
+
+		// Reset keys found
+		KeycardIcon.keysFound = null;
 
 		PlayerWeapon pw = playerMove.GetComponent<PlayerWeapon>();
 		if (loadedFromSelector)
