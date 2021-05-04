@@ -12,6 +12,7 @@ public class SaveInfo
     public string sceneName = string.Empty;
 	public bool abilityUnlocked = false;
 	public bool[] foundKeys = new bool[0];
+	public int[] enemiesKilled = new int[0];
 	public int health = 0;
 	public int dimension = 0;
     public Vector3 spawnPoint = Vector3.zero;

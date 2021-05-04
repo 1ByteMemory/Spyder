@@ -65,6 +65,26 @@ public class GameManager : MonoBehaviour
 
 	private QuickSave quickSave;
 
+	public readonly List<int> killedEnemiesID = new List<int>();
+	public bool HasEnemyID(int id)
+	{
+		foreach (int idItem in killedEnemiesID)
+		{
+			if (idItem == id)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	public void AddKilledEnemy(int id)
+	{
+		if (!HasEnemyID(id))
+		{
+			killedEnemiesID.Add(id);
+		}
+	}
+
 	private void Start()
 	{
 		SetMouseActive(false);
@@ -200,6 +220,16 @@ public class GameManager : MonoBehaviour
 
 			// ----- Keys Found ----- //
 			KeycardIcon.keysFound = QuickSave.mostRecentLoad.foundKeys;
+
+			// ----- Enemies Killed ----//
+			int[] enemies = QuickSave.mostRecentLoad.enemiesKilled;
+			killedEnemiesID.Clear();
+			foreach (int item in enemies)
+			{
+				killedEnemiesID.Add(item);
+			
+				// Killed Enemies are destroied on the SearchAndDestroy script
+			}
 		}
 		else if (spawnAtSpawnPoint) GoToSpawn();
 
