@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
 	public Material[] digitalMats;
 
+	static bool pauseToggel;
 
 	// When loaded from level selector
 	public static Vector3 loadedSpawnPosition;
@@ -94,6 +95,9 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
+		// reset pause toggle
+		pauseToggel = false;
+
 		SetMouseActive(false);
 
 		quickSave = GetComponent<QuickSave>();
@@ -182,7 +186,6 @@ public class GameManager : MonoBehaviour
 		else if (loadedFromSave)
 		{
 			loadedFromSave = false;
-
 
 			// ----- Weapons ----- //
 			
@@ -331,7 +334,7 @@ public class GameManager : MonoBehaviour
 		else return null;
 	}
 
-	static bool pauseToggel;
+
 	bool canPause = true;
 	private void Update()
 	{
