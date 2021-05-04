@@ -56,17 +56,48 @@ public class GameManager : MonoBehaviour
 
 	public Material[] digitalMats;
 
+	static bool pauseToggel;
 
 	// When loaded from level selector
 	public static Vector3 loadedSpawnPosition;
 	public static Weapon[] loadedWeapons;
 	public static bool loadedFromSelector;
 	public static bool loadedFromSave;
+	public void LoadedFromMainMenu()
+	{
+		// When the player selects new game
+		loadedFromSave = false;
+		loadedFromSelector = false;
+	}
+
 
 	private QuickSave quickSave;
 
+	public readonly List<int> killedEnemiesID = new List<int>();
+	public bool HasEnemyID(int id)
+	{
+		foreach (int idItem in killedEnemiesID)
+		{
+			if (idItem == id)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	public void AddKilledEnemy(int id)
+	{
+		if (!HasEnemyID(id))
+		{
+			killedEnemiesID.Add(id);
+		}
+	}
+
 	private void Start()
 	{
+		// reset pause toggle
+		pauseToggel = false;
+
 		SetMouseActive(false);
 
 		quickSave = GetComponent<QuickSave>();
@@ -132,8 +163,13 @@ public class GameManager : MonoBehaviour
 		}
 
 		// Set the active dimension to the real
-		
 		SetDimension(Dimension.Real);
+		
+		// Reset scan distance to zero
+		ScannerEffect.ScanDistance = 0;
+
+		// Reset keys found
+		KeycardIcon.keysFound = null;
 
 		PlayerWeapon pw = playerMove.GetComponent<PlayerWeapon>();
 		if (loadedFromSelector)
@@ -155,7 +191,6 @@ public class GameManager : MonoBehaviour
 		else if (loadedFromSave)
 		{
 			loadedFromSave = false;
-
 
 			// ----- Weapons ----- //
 			
@@ -200,6 +235,16 @@ public class GameManager : MonoBehaviour
 
 			// ----- Keys Found ----- //
 			KeycardIcon.keysFound = QuickSave.mostRecentLoad.foundKeys;
+
+			// ----- Enemies Killed ----//
+			int[] enemies = QuickSave.mostRecentLoad.enemiesKilled;
+			killedEnemiesID.Clear();
+			foreach (int item in enemies)
+			{
+				killedEnemiesID.Add(item);
+			
+				// Killed Enemies are destroied on the SearchAndDestroy script
+			}
 		}
 		else if (spawnAtSpawnPoint) GoToSpawn();
 
@@ -294,7 +339,7 @@ public class GameManager : MonoBehaviour
 		else return null;
 	}
 
-	static bool pauseToggel;
+
 	bool canPause = true;
 	private void Update()
 	{

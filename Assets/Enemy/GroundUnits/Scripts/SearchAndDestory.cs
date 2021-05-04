@@ -12,7 +12,7 @@ public enum AgentState
 	Stun
 }
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent), typeof(UniqueID))]
 public class SearchAndDestory : WeaponBehaviour
 {
 
@@ -69,6 +69,11 @@ public class SearchAndDestory : WeaponBehaviour
 		base.Start();
 
 		gm = FindObjectOfType<GameManager>();
+
+		if (gm.HasEnemyID(GetComponent<UniqueID>().ID))
+		{
+			Destroy(gameObject);
+		}
 
 		navMeshAgent = GetComponent<NavMeshAgent>();
         Player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -185,6 +190,7 @@ public class SearchAndDestory : WeaponBehaviour
 	private void OnDestroy()
 	{
 		//Debug.Log("Destroying");
+		gm.AddKilledEnemy(GetComponent<UniqueID>().ID);
 		RemoveFromSeenList();
 	}
 

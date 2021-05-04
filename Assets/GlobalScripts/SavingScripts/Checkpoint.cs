@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player") && !triggered)
+		if (other.CompareTag("Player") && !triggered && !GameManager.loadedFromSave)
 		{
 			triggered = true;
 

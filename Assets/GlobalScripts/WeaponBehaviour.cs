@@ -114,27 +114,7 @@ public class WeaponBehaviour : MonoBehaviour
             }
 			else
 			{
-                if (Time.time >= reloadingEndTime)
-				{
-                    reloadingEndTime = Time.time + weaponAsset.reloadTime;
-
-                    // Play reload sound
-                    weaponScene.GetComponent<AudioSource>().clip = weaponAsset.reloadAudio;
-					weaponScene.GetComponent<AudioSource>().Play();
-
-					// Play Reload Animation
-                    if (weaponScene.GetComponentInChildren<Animator>())
-					    weaponScene.GetComponentInChildren<Animator>().SetTrigger("Reload");
-
-                    isFiring = false;
-                    isReloading = true;
-                    weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
-                    if (!weaponAsset.isAmmoInf)
-				    {
-                        weaponAsset.ammo -= weaponAsset.maxClip;
-                        weaponAsset.ammo = weaponAsset.ammo < 0 ? 0 : weaponAsset.ammo;
-				    }
-				}
+                Reload(weaponScene, weaponAsset);
 			}
 		}
 		else
@@ -166,6 +146,31 @@ public class WeaponBehaviour : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void Reload(Transform weaponScene, Weapon weaponAsset)
+	{
+        if (Time.time >= reloadingEndTime)
+        {
+            reloadingEndTime = Time.time + weaponAsset.reloadTime;
+
+            // Play reload sound
+            weaponScene.GetComponent<AudioSource>().clip = weaponAsset.reloadAudio;
+            weaponScene.GetComponent<AudioSource>().Play();
+
+            // Play Reload Animation
+            if (weaponScene.GetComponentInChildren<Animator>())
+                weaponScene.GetComponentInChildren<Animator>().SetTrigger("Reload");
+
+            isFiring = false;
+            isReloading = true;
+            weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
+            if (!weaponAsset.isAmmoInf)
+            {
+                weaponAsset.ammo -= weaponAsset.maxClip;
+                weaponAsset.ammo = weaponAsset.ammo < 0 ? 0 : weaponAsset.ammo;
+            }
+        }
     }
 
     void HitScan(Weapon weaponAsset, Transform weaponScene, Transform raycastOrigin)

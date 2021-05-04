@@ -69,7 +69,7 @@ public class PlayerWeapon : WeaponBehaviour
         }
     }
 
-
+    private float autoReload;
 	void Update()
     {
         if (!GameManager.IsPaused)
@@ -96,11 +96,29 @@ public class PlayerWeapon : WeaponBehaviour
             {
                 DisplayAmmo(weapons[weaponIndex].ammo, weapons[weaponIndex].clip);
 
+
+                // FIRE WEAPON //
                 Transform activeGun = gunViewModel.GetChild(weaponIndex);
                 if (!weapons[weaponIndex].holdToFire && Input.GetMouseButtonDown(0) || weapons[weaponIndex].holdToFire && Input.GetMouseButton(0))
                 {
                     UseWeapon(activeGun, weapons[weaponIndex], cam);
+
+                    if (weapons[weaponIndex].clip == 0)
+					{
+                        autoReload = Time.time + 0.5f;
+					}
                 }
+
+                // RELOAD WEAPON //
+                if (Input.GetKeyDown(KeyCode.R))
+				{
+                    Reload(activeGun, weapons[weaponIndex]);
+				}
+
+                if (Time.time >= autoReload && weapons[weaponIndex].clip == 0)
+				{
+                    Reload(activeGun, weapons[weaponIndex]);
+				}
 
                 Animator anim = activeGun.GetComponentInChildren<Animator>();
                 if (pm.IsMoving())
