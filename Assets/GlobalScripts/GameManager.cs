@@ -62,6 +62,13 @@ public class GameManager : MonoBehaviour
 	public static Weapon[] loadedWeapons;
 	public static bool loadedFromSelector;
 	public static bool loadedFromSave;
+	public void LoadedFromMainMenu()
+	{
+		// When the player selects new game
+		loadedFromSave = false;
+		loadedFromSelector = false;
+	}
+
 
 	private QuickSave quickSave;
 
