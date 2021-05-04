@@ -76,6 +76,8 @@ public class QuickSave : MonoBehaviour
 			lvl.availableWeapons[i] = new Gun(wep.Name, wep.ammo, wep.clip);
 		}
 		lvl.foundKeys = KeycardIcon.keysFound;
+
+		lvl.enemiesKilled = gm.killedEnemiesID.ToArray();
 		lvl.dimension = (int)GameManager.currentDimension;
 
 		lvl.health = player.GetComponent<PlayerHealth>().currentHealth;
@@ -119,6 +121,7 @@ public class QuickSave : MonoBehaviour
 			lvl.availableWeapons[i] = new Gun(wep.Name, wep.ammo, wep.clip);
 		}
 		lvl.foundKeys = KeycardIcon.keysFound;
+		lvl.enemiesKilled = gm.killedEnemiesID.ToArray();
 		lvl.dimension = (int)GameManager.currentDimension;
 
 		lvl.health = player.GetComponent<PlayerHealth>().currentHealth;
