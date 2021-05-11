@@ -24,7 +24,7 @@ public class Key : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			game.PlayerHUD.GetComponent<KeycardIcon>().KeyCollected(gameObject);
+			game.PlayerHUD.GetComponent<PlayerHUD>().KeyCollected(gameObject);
 
 			src.parent = null;
 			src.GetComponent<AudioSource>().Play();

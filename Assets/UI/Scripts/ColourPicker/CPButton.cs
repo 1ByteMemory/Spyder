@@ -84,7 +84,6 @@ public class CPButton : MonoBehaviour
 
 	public void ChangeColour()
 	{
-		Debug.Log(colorPicker.color);
 		color = colorPicker.color;
 		img.color = colorPicker.color;
 	}

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Rendering.PostProcessing;
+using TMPro;
 
 public class PlayerHealth : Health
 {
-	Slider healthSlider;
+	TextMeshProUGUI healthSlider;
 
 	public float immunityWindow = 0.1f;
 
@@ -20,11 +20,9 @@ public class PlayerHealth : Health
 
 	private protected override void Start()
 	{
+		healthSlider = FindObjectOfType<GameManager>().PlayerHUD.GetComponent<PlayerHUD>().health;
 
-		healthSlider = FindObjectOfType<GameManager>().PlayerHUD.transform.Find("HealthBar").GetComponent<Slider>();
-
-		healthSlider.maxValue = maxHealth;
-		healthSlider.value = maxHealth;
+		healthSlider.text = maxHealth.ToString();
 
 		hertEffect = GetComponentInChildren<Animator>();
 
@@ -37,7 +35,7 @@ public class PlayerHealth : Health
 			if (currentHealth > maxHealth)
 				currentHealth = maxHealth;
 
-			healthSlider.value = currentHealth;
+			healthSlider.text = currentHealth.ToString();
 		}
 		else
 		{
@@ -55,7 +53,7 @@ public class PlayerHealth : Health
 			&& damage < 10)							// only if damage is less than amount (stops bypassing death pits)
 		{
 			base.TakeDamage(damage);
-			healthSlider.value = currentHealth;
+			healthSlider.text = currentHealth.ToString();
 
 			endTime = immunityWindow + Time.time;
 
