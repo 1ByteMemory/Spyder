@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
-public class KeycardIcon : MonoBehaviour
+public class PlayerHUD : MonoBehaviour
 {
 
     public RectTransform displayPanel;
-	public RectTransform backPanel;
+	public TextMeshProUGUI AmmoClip;
+	public TextMeshProUGUI AmmoReserve;
+	public TextMeshProUGUI health;
+	
+	//public RectTransform backPanel;
 
 	public Sprite keySprite;
 	public Sprite noKeySprite;
@@ -23,8 +28,10 @@ public class KeycardIcon : MonoBehaviour
 		keyCards = new GameObject[_keycards.Length];
 		imgs = new Image[_keycards.Length];
 
-		
-		backPanel.sizeDelta = new Vector2((_keycards.Length - 1) * 75, 0);
+		float width = displayPanel.rect.width;
+		float height = displayPanel.rect.height;
+
+		displayPanel.sizeDelta = new Vector2(_keycards.Length * width, height);
 		
 		for (int i = 0; i < _keycards.Length; i++)
 		{
@@ -36,14 +43,14 @@ public class KeycardIcon : MonoBehaviour
 			// Add the sprite icon
 			imgs[i] = icon.gameObject.AddComponent<Image>();
 			imgs[i].sprite = noKeySprite;
-			imgs[i].color = key.GetComponentInChildren<Renderer>().material.color;
+			//imgs[i].color = key.GetComponentInChildren<Renderer>().material.color;
 
 			// Position the icon
 			icon.anchorMin = new Vector2(0, 0);
-			icon.anchorMax = new Vector2(1, 1);
+			icon.anchorMax = new Vector2(0, 1);
 
-			icon.sizeDelta = new Vector2(0, 0);
-			icon.anchoredPosition = new Vector2(-i * 75, 0);
+			icon.sizeDelta = new Vector2(width, 0);
+			icon.anchoredPosition = new Vector2(i * width + (width / 2), 0);
 		}
 
 		if (keysFound == null)
@@ -74,6 +81,7 @@ public class KeycardIcon : MonoBehaviour
 			{
 				keysFound[i] = true;
 				imgs[i].sprite = keySprite;
+				imgs[i].color = key.GetComponentInChildren<Renderer>().material.color;
 			}
 		}
 	}

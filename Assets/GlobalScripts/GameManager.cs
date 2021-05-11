@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
 		ScannerEffect.ScanDistance = 0;
 
 		// Reset keys found
-		KeycardIcon.keysFound = null;
+		global::PlayerHUD.keysFound = null;
 
 		PlayerWeapon pw = playerMove.GetComponent<PlayerWeapon>();
 		if (loadedFromSelector)
@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
 			playerMove.GetComponent<PlayerController>().isAbilityUnlocked = QuickSave.mostRecentLoad.abilityUnlocked;
 
 			// ----- Keys Found ----- //
-			KeycardIcon.keysFound = QuickSave.mostRecentLoad.foundKeys;
+			global::PlayerHUD.keysFound = QuickSave.mostRecentLoad.foundKeys;
 
 			// ----- Enemies Killed ----//
 			int[] enemies = QuickSave.mostRecentLoad.enemiesKilled;
@@ -526,6 +526,9 @@ public class GameManager : MonoBehaviour
 		ctr.SetColor("_TrailColor", JsonIO.playerSettings.col_background);
 		ctr.SetColor("_MidColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
 		ctr.SetColor("_HBarColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
+
+		DigitalColorUI.color = JsonIO.playerSettings.col_outlines;
+		DigitalColorUI.setColDelagate?.Invoke(JsonIO.playerSettings.col_outlines);
 
 		player.GetComponentInChildren<ScannerEffect>().lineColor = JsonIO.playerSettings.col_outlines;
 		player.GetComponentInChildren<ScannerEffect>().secondaryColor = JsonIO.playerSettings.col_background;

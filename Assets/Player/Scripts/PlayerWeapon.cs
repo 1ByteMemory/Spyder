@@ -33,8 +33,8 @@ public class PlayerWeapon : WeaponBehaviour
 
 		GameManager gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
-		ammoText = gm.PlayerHUD.transform.Find("AmmoReserve").GetComponent<TextMeshProUGUI>();
-		clipText = gm.PlayerHUD.transform.Find("AmmoClip").GetComponent<TextMeshProUGUI>();
+		ammoText = gm.PlayerHUD.GetComponent<PlayerHUD>().AmmoReserve;
+		clipText = gm.PlayerHUD.GetComponent<PlayerHUD>().AmmoClip;
 
 		InstantiateWeapons(gunViewModel);
 
