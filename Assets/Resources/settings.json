@@ -4,9 +4,9 @@
     "lookSensitivity": 150.0,
     "scrollSensitivity": 10.0,
     "col_outlines": {
-        "r": 0.0,
-        "g": 1.0,
-        "b": 0.0,
+        "r": 0.5621383786201477,
+        "g": 0.5621383786201477,
+        "b": 0.5621383786201477,
         "a": 1.0
     },
     "col_background": {
@@ -24,8 +24,8 @@
     "isFullscreen": true,
     "resolution": 0,
     "vol_Barks": 1.0,
-    "vol_SoundFX": 1.0,
-    "vol_Music": 1.0,
+    "vol_SoundFX": 0.5311912298202515,
+    "vol_Music": 0.5507134795188904,
     "vol_Dialogue": 1.0,
     "vol_Ambience": 1.0,
     "acc_epilepticMode": false,
