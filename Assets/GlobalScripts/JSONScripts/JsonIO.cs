@@ -11,6 +11,8 @@ public class JsonIO : MonoBehaviour
 
 	public static void ResetSettings()
 	{
+		playerSettings.version = GameManager.version;
+
 		// General
 		playerSettings.feildOfView = 70;
 		playerSettings.difficulty = 1;
@@ -22,7 +24,7 @@ public class JsonIO : MonoBehaviour
 		// Colors
 		playerSettings.col_outlines = Color.green;
 		playerSettings.col_background = Color.black;
-		playerSettings.col_enemyOutline = Color.red;
+		playerSettings.col_text = Color.white;
 
 		// Video
 		playerSettings.isFullscreen = true;
@@ -48,10 +50,17 @@ public class JsonIO : MonoBehaviour
 		
 		try
 		{
-			reader = new StreamReader(Application.dataPath + "/Resources/settings.json");
+			reader = new StreamReader(Application.dataPath + "/Resources/config.json");
 			playerSettings = PlayerSettings.CreateFromJson(reader.ReadToEnd());
 			reader.Close();
 			Debug.Log("Settings Loaded");
+
+			if (GameManager.version != playerSettings.version)
+			{
+				Debug.Log("Config version is not up to date, creating new config");
+				ResetSettings();
+				SaveSettings(playerSettings);
+			}
 		}
 		catch (FileNotFoundException)
 		{
@@ -74,7 +83,7 @@ public class JsonIO : MonoBehaviour
 	{
 		string jsonTextFile = settings.SaveToString();
 
-		StreamWriter writer = new StreamWriter(Application.dataPath + "/Resources/settings.json");
+		StreamWriter writer = new StreamWriter(Application.dataPath + "/Resources/config.json");
 
 		writer.WriteLine(jsonTextFile);
 		writer.Close();

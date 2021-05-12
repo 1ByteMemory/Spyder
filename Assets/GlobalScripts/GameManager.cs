@@ -12,6 +12,8 @@ public enum Dimension
 
 public class GameManager : MonoBehaviour
 {
+	public const string version = "a0.26";
+
 	[Header("Scene Loader")]
 	//public bool addScene;
 	bool isLoaded;
@@ -70,7 +72,6 @@ public class GameManager : MonoBehaviour
 		loadedFromSelector = false;
 	}
 
-
 	private QuickSave quickSave;
 
 	public readonly List<int> killedEnemiesID = new List<int>();
@@ -95,166 +96,169 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		// reset pause toggle
-		pauseToggel = false;
-
-		SetMouseActive(false);
-
-		quickSave = GetComponent<QuickSave>();
-
-		mainCam = Camera.main;
-
-		realCam = mainCam.transform.Find("RealWorldCam").gameObject.GetComponent<ReplacmentShader>();
-		digitalCam = mainCam.transform.Find("DigitalWorldCam").gameObject.GetComponent<ReplacmentShader>();
-		
-
 		playerMove = FindObjectOfType<PlayerMovement>();
 
-		Time.timeScale = 1;
-
-		if (realWorldObjects != null)
+		if (playerMove != null)
 		{
-			// Asign objects to layers
-			for (int i = 0; i < realWorldObjects.transform.childCount; i++)
+			// reset pause toggle
+			pauseToggel = false;
+
+			SetMouseActive(false);
+
+			quickSave = GetComponent<QuickSave>();
+
+			mainCam = Camera.main;
+
+			realCam = mainCam.transform.Find("RealWorldCam").gameObject.GetComponent<ReplacmentShader>();
+			digitalCam = mainCam.transform.Find("DigitalWorldCam").gameObject.GetComponent<ReplacmentShader>();
+
+
+
+			Time.timeScale = 1;
+
+			if (realWorldObjects != null)
 			{
-				realWorldObjects.transform.GetChild(i).gameObject.layer = 9; // the real world layer
+				// Asign objects to layers
+				for (int i = 0; i < realWorldObjects.transform.childCount; i++)
+				{
+					realWorldObjects.transform.GetChild(i).gameObject.layer = 9; // the real world layer
+				}
 			}
+
+
+			if (digitalWorldObjects != null)
+			{
+				for (int i = 0; i < digitalWorldObjects.transform.childCount; i++)
+				{
+					digitalWorldObjects.transform.GetChild(i).gameObject.layer = 8; // the digital layer
+				}
+			}
+
+			src = GetComponent<AudioSource>();
+
+			SettingsUI = UI(SettingsUI);
+			PauseMenu = UI(PauseMenu);
+			PlayerHUD = UI(PlayerHUD);
+			DeathMenuUI = UI(DeathMenuUI);
+			//Fungus = UI(Fungus);
+
+
+			//flowchart = Fungus.GetComponentInChildren<Flowchart>();
+			//StartCoroutine(StartBarks());
+
+
+			SettingsUI.SetActive(false);
+			PauseMenu.SetActive(false);
+			DeathMenuUI.SetActive(false);
+
+			if (!loadEnemies)
+			{
+				Debug.LogWarning("All enemies have been disabled. To enable them, go to _GameManager and set Load Enemies to true.");
+				GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+				foreach (GameObject enemy in enemies)
+				{
+					enemy.SetActive(false);
+				}
+				EnemyWaveSpawner[] spawners = GameObject.FindObjectsOfType<EnemyWaveSpawner>();
+				foreach (EnemyWaveSpawner spawner in spawners)
+				{
+					spawner.gameObject.SetActive(false);
+				}
+			}
+
+			// Set the active dimension to the real
+			SetDimension(Dimension.Real);
+
+			// Reset scan distance to zero
+			ScannerEffect.ScanDistance = 0;
+
+			// Reset keys found
+			global::PlayerHUD.keysFound = null;
+
+			PlayerWeapon pw = playerMove.GetComponent<PlayerWeapon>();
+			if (loadedFromSelector)
+			{
+				loadedFromSelector = false;
+
+				if (loadedSpawnPosition != Vector3.zero)
+					GoToSpawn(loadedSpawnPosition);
+
+
+				pw.weapons.Clear();
+				for (int i = 0; i < loadedWeapons.Length; i++)
+				{
+					pw.weapons.Add(loadedWeapons[i]);
+				}
+
+
+			}
+			else if (loadedFromSave)
+			{
+				loadedFromSave = false;
+
+				// ----- Weapons ----- //
+
+				pw.weapons.Clear();
+				Gun[] savedWeapons = QuickSave.mostRecentLoad.availableWeapons;
+				for (int i = 0; i < savedWeapons.Length; i++)
+				{
+					// Get weapon from save
+					//QuickSave quicksave = GetComponent<QuickSave>();
+					Weapon weapon = WeaponBehaviour.GetWeapon(quickSave.weapons, savedWeapons[i].name);
+
+					// Set ammo and clip from save
+
+					// add weapon to player
+					pw.weapons.Add(weapon);
+
+					// Ammo set in PlayerWeapon
+					PlayerWeapon.loadedFromSave = true;
+				}
+
+				// ----- Position and Rotation ----- //
+				GoToSpawn(QuickSave.mostRecentLoad.spawnPoint, QuickSave.mostRecentLoad.spawnRotation);
+
+				// ----- Health ----- //
+				// Health is set on the PlayerHealth script
+				PlayerHealth.loadedFromSave = true;
+
+
+				// ----- Dimension ----- //
+				Dimension savedDim = (Dimension)QuickSave.mostRecentLoad.dimension;
+				if (savedDim == Dimension.Real)
+				{
+					// Set dimension to digital first so it doesn't mess up some stuff.
+					SetDimension(Dimension.Digital);
+				}
+				SetDimension(savedDim);
+
+				ScannerEffect.ScanDistance = currentDimension == (Dimension)0 ? 200 : 0.1f;
+
+				// ----- Ability ----- //
+				playerMove.GetComponent<PlayerController>().isAbilityUnlocked = QuickSave.mostRecentLoad.abilityUnlocked;
+
+				// ----- Keys Found ----- //
+				global::PlayerHUD.keysFound = QuickSave.mostRecentLoad.foundKeys;
+
+				// ----- Enemies Killed ----//
+				int[] enemies = QuickSave.mostRecentLoad.enemiesKilled;
+				killedEnemiesID.Clear();
+				foreach (int item in enemies)
+				{
+					killedEnemiesID.Add(item);
+
+					// Killed Enemies are destroied on the SearchAndDestroy script
+				}
+			}
+			else if (spawnAtSpawnPoint) GoToSpawn();
+
+
+
+			// Add Death Menu to OnDeath
+			DeathEffectController deathEffect = GetComponentInChildren<DeathEffectController>();
+			deathEffect.PlayerDeath += DeathMenu;
 		}
-
-
-		if (digitalWorldObjects != null)
-		{
-			for (int i = 0; i < digitalWorldObjects.transform.childCount; i++)
-			{
-				digitalWorldObjects.transform.GetChild(i).gameObject.layer = 8; // the digital layer
-			}
-		}
-
-		src = GetComponent<AudioSource>();
-
-		SettingsUI = UI(SettingsUI);
-		PauseMenu = UI(PauseMenu);
-		PlayerHUD = UI(PlayerHUD);
-		DeathMenuUI = UI(DeathMenuUI);
-		//Fungus = UI(Fungus);
-
-
-		//flowchart = Fungus.GetComponentInChildren<Flowchart>();
-		//StartCoroutine(StartBarks());
-
-
-		SettingsUI.SetActive(false);
-		PauseMenu.SetActive(false);
-		DeathMenuUI.SetActive(false);
-
-		if (!loadEnemies)
-		{
-			Debug.LogWarning("All enemies have been disabled. To enable them, go to _GameManager and set Load Enemies to true.");
-			GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-			foreach (GameObject enemy in enemies)
-			{
-				enemy.SetActive(false);
-			}
-			EnemyWaveSpawner[] spawners = GameObject.FindObjectsOfType<EnemyWaveSpawner>();
-			foreach (EnemyWaveSpawner spawner in spawners)
-			{
-				spawner.gameObject.SetActive(false);
-			}
-		}
-
-		// Set the active dimension to the real
-		SetDimension(Dimension.Real);
-		
-		// Reset scan distance to zero
-		ScannerEffect.ScanDistance = 0;
-
-		// Reset keys found
-		global::PlayerHUD.keysFound = null;
-
-		PlayerWeapon pw = playerMove.GetComponent<PlayerWeapon>();
-		if (loadedFromSelector)
-		{
-			loadedFromSelector = false;
-
-			if (loadedSpawnPosition != Vector3.zero)
-				GoToSpawn(loadedSpawnPosition);
-
-
-			pw.weapons.Clear();
-			for (int i = 0; i < loadedWeapons.Length; i++)
-			{
-				pw.weapons.Add(loadedWeapons[i]);
-			}
-
-
-		}
-		else if (loadedFromSave)
-		{
-			loadedFromSave = false;
-
-			// ----- Weapons ----- //
-			
-			pw.weapons.Clear();
-			Gun[] savedWeapons = QuickSave.mostRecentLoad.availableWeapons;
-			for (int i = 0; i < savedWeapons.Length; i++)
-			{
-				// Get weapon from save
-				//QuickSave quicksave = GetComponent<QuickSave>();
-				Weapon weapon = WeaponBehaviour.GetWeapon(quickSave.weapons, savedWeapons[i].name);
-
-				// Set ammo and clip from save
-				
-				// add weapon to player
-				pw.weapons.Add(weapon);
-
-				// Ammo set in PlayerWeapon
-				PlayerWeapon.loadedFromSave = true;
-			}
-
-			// ----- Position and Rotation ----- //
-			GoToSpawn(QuickSave.mostRecentLoad.spawnPoint, QuickSave.mostRecentLoad.spawnRotation);
-
-			// ----- Health ----- //
-			// Health is set on the PlayerHealth script
-			PlayerHealth.loadedFromSave = true;
-
-
-			// ----- Dimension ----- //
-			Dimension savedDim = (Dimension)QuickSave.mostRecentLoad.dimension;
-			if (savedDim == Dimension.Real)
-			{
-				// Set dimension to digital first so it doesn't mess up some stuff.
-				SetDimension(Dimension.Digital);
-			}
-			SetDimension(savedDim);
-				
-			ScannerEffect.ScanDistance = currentDimension == (Dimension)0 ? 200 : 0.1f;
-
-			// ----- Ability ----- //
-			playerMove.GetComponent<PlayerController>().isAbilityUnlocked = QuickSave.mostRecentLoad.abilityUnlocked;
-
-			// ----- Keys Found ----- //
-			global::PlayerHUD.keysFound = QuickSave.mostRecentLoad.foundKeys;
-
-			// ----- Enemies Killed ----//
-			int[] enemies = QuickSave.mostRecentLoad.enemiesKilled;
-			killedEnemiesID.Clear();
-			foreach (int item in enemies)
-			{
-				killedEnemiesID.Add(item);
-			
-				// Killed Enemies are destroied on the SearchAndDestroy script
-			}
-		}
-		else if (spawnAtSpawnPoint) GoToSpawn();
-
 		ApplySettings();
-
-
-		// Add Death Menu to OnDeath
-		DeathEffectController deathEffect = GetComponentInChildren<DeathEffectController>();
-		deathEffect.PlayerDeath += DeathMenu;
-	
 	}
 
 
@@ -343,49 +347,52 @@ public class GameManager : MonoBehaviour
 	bool canPause = true;
 	private void Update()
 	{
-		if (PauseMenu != null && SettingsUI != null)
+		if (playerMove != null)
 		{
-			if (Input.GetKeyDown(KeyCode.Escape) && canPause)
+			if (PauseMenu != null && SettingsUI != null)
 			{
-				if (!SettingsUI.activeSelf)
+				if (Input.GetKeyDown(KeyCode.Escape) && canPause)
 				{
-					pauseToggel = !pauseToggel;
-					SetMouseActive(pauseToggel);
-					PauseMenu.SetActive(pauseToggel);
+					if (!SettingsUI.activeSelf)
+					{
+						pauseToggel = !pauseToggel;
+						SetMouseActive(pauseToggel);
+						PauseMenu.SetActive(pauseToggel);
 
-					Time.timeScale = pauseToggel ? 0 : 1;
-				}
-				else
-				{
-					SettingsUI.SetActive(false);
-					PauseMenu.SetActive(true);
+						Time.timeScale = pauseToggel ? 0 : 1;
+					}
+					else
+					{
+						SettingsUI.SetActive(false);
+						PauseMenu.SetActive(true);
+					}
 				}
 			}
-		}
 
-		if (playerMove.transform.position.y <= -50 && !isPlayerDead)
-		{
-			isPlayerDead = true; // Only apply the damage once
-			playerMove.GetComponent<PlayerHealth>().TakeDamage(50000);
-		}
+			if (playerMove.transform.position.y <= -50 && !isPlayerDead)
+			{
+				isPlayerDead = true; // Only apply the damage once
+				playerMove.GetComponent<PlayerHealth>().TakeDamage(50000);
+			}
 
 
-		if (Input.GetKeyDown(KeyCode.F5))
-		{
-			// Quick Save
-			QuickSave.Save("quicksaves");
-		}
+			if (Input.GetKeyDown(KeyCode.F5))
+			{
+				// Quick Save
+				QuickSave.Save("quicksaves");
+			}
 
-		if (Input.GetKeyDown(KeyCode.F6))
-		{
-			// Quick Load
-			quickSave.QuickLoad();
-		}
+			if (Input.GetKeyDown(KeyCode.F6))
+			{
+				// Quick Load
+				quickSave.QuickLoad();
+			}
 
-		if (Input.GetKeyDown(KeyCode.F9))
-		{
-			Debug.Log("Saving a showcase load. File can be found here:\n<color=blue>" + Application.persistentDataPath + "/showcase</color>");
-			quickSave.SaveShowcase();
+			if (Input.GetKeyDown(KeyCode.F9))
+			{
+				Debug.Log("Saving a showcase load. File can be found here:\n<color=blue>" + Application.persistentDataPath + "/showcase</color>");
+				quickSave.SaveShowcase();
+			}
 		}
 	}
 	bool isPlayerDead;
@@ -506,32 +513,45 @@ public class GameManager : MonoBehaviour
 	{
 		JsonIO.LoadSettings();
 
-
-		GameObject player = playerMove.gameObject;
-
-		// FOV
-		foreach (Camera cam in player.GetComponentsInChildren<Camera>())
+		if (playerMove != null)
 		{
-			cam.fieldOfView = JsonIO.playerSettings.feildOfView;
+			GameObject player = playerMove.gameObject;
+			// FOV
+			foreach (Camera cam in player.GetComponentsInChildren<Camera>())
+			{
+				cam.fieldOfView = JsonIO.playerSettings.feildOfView;
+			}
+
+			// Sensitivity
+			MouseSensitivity(JsonIO.playerSettings.lookSensitivity);
+			player.GetComponent<PlayerWeapon>().scrollSensitivity = JsonIO.playerSettings.scrollSensitivity;
+
+
+			// Colors
+			Material ctr = player.GetComponent<PlayerController>().digitalEffect;
+			ctr.SetColor("_LeadColor", JsonIO.playerSettings.col_outlines);
+			ctr.SetColor("_TrailColor", JsonIO.playerSettings.col_background);
+			ctr.SetColor("_MidColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
+			ctr.SetColor("_HBarColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
+
+
+			player.GetComponentInChildren<ScannerEffect>().lineColor = JsonIO.playerSettings.col_outlines;
+			player.GetComponentInChildren<ScannerEffect>().secondaryColor = JsonIO.playerSettings.col_background;
+
+			// Accesability
+			PlayerController.toggleCrouch = JsonIO.playerSettings.acc_toggelCrouch;
+			player.GetComponentInChildren<ScannerEffect>().epilepsySafeMode = JsonIO.playerSettings.acc_epilepticMode;
+
+			src.volume = JsonIO.playerSettings.vol_SoundFX;
 		}
 
-		// Sensitivity
-		MouseSensitivity(JsonIO.playerSettings.lookSensitivity);
-		player.GetComponent<PlayerWeapon>().scrollSensitivity = JsonIO.playerSettings.scrollSensitivity;
 
+		AccessableColors.digitalColor = JsonIO.playerSettings.col_outlines;
+		AccessableColors.textColor = JsonIO.playerSettings.col_text;
 
-		// Colors
-		Material ctr = player.GetComponent<PlayerController>().digitalEffect;
-		ctr.SetColor("_LeadColor", JsonIO.playerSettings.col_outlines);
-		ctr.SetColor("_TrailColor", JsonIO.playerSettings.col_background);
-		ctr.SetColor("_MidColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
-		ctr.SetColor("_HBarColor", JsonIO.playerSettings.col_outlines * 0.6f); // darken the colour by 60%
+		AccessableColors.setColDelagate?.Invoke(JsonIO.playerSettings.col_outlines);
+		AccessableColors.setTextColor?.Invoke(JsonIO.playerSettings.col_text);
 
-		DigitalColorUI.color = JsonIO.playerSettings.col_outlines;
-		DigitalColorUI.setColDelagate?.Invoke(JsonIO.playerSettings.col_outlines);
-
-		player.GetComponentInChildren<ScannerEffect>().lineColor = JsonIO.playerSettings.col_outlines;
-		player.GetComponentInChildren<ScannerEffect>().secondaryColor = JsonIO.playerSettings.col_background;
 
 		for (int i = 0; i < digitalMats.Length; i++)
 		{
@@ -543,15 +563,11 @@ public class GameManager : MonoBehaviour
 		barkVolume = JsonIO.playerSettings.vol_Barks;
 		WeaponBehaviour.volume = JsonIO.playerSettings.vol_SoundFX;
 		FootstepsManager.volume = JsonIO.playerSettings.vol_SoundFX;
-		src.volume = JsonIO.playerSettings.vol_SoundFX;
+
 
 		// Video
 		Screen.fullScreen = JsonIO.playerSettings.isFullscreen;
 
-
-		// Accesability
-		PlayerController.toggleCrouch = JsonIO.playerSettings.acc_toggelCrouch;
-		player.GetComponentInChildren<ScannerEffect>().epilepsySafeMode = JsonIO.playerSettings.acc_epilepticMode;
 
 		for (int i = 0; i < retroProfile.settings.Count; i++)
 		{
@@ -562,6 +578,7 @@ public class GameManager : MonoBehaviour
 		{
 			GameObject.Find("Music").GetComponent<AudioSource>().volume = JsonIO.playerSettings.vol_Music;
 		}
+
 	}
 	
 	public void MouseSensitivity(float value)
