@@ -4,6 +4,8 @@ using UnityEngine;
 [Serializable]
 public class PlayerSettings
 {
+	public string version;
+
 	// General
 	public int feildOfView;
 	public int difficulty;
@@ -15,7 +17,7 @@ public class PlayerSettings
 	// Colors
 	public Color col_outlines;
 	public Color col_background;
-	public Color col_enemyOutline;
+	public Color col_text;
 
 	// Video
 	public bool isFullscreen;

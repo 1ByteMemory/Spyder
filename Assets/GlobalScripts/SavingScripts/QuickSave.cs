@@ -24,10 +24,13 @@ public class QuickSave : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		player = GameObject.FindGameObjectWithTag("Player");
 		gm = FindObjectOfType<GameManager>();
-		pc = player.GetComponent<PlayerController>();
-		playerWeapons = player.GetComponent<PlayerWeapon>();
+		player = GameObject.FindGameObjectWithTag("Player");
+		if (player != null)
+		{
+			pc = player.GetComponent<PlayerController>();
+			playerWeapons = player.GetComponent<PlayerWeapon>();
+		}
 		sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
     
 	}

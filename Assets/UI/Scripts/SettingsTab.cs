@@ -138,7 +138,7 @@ public class SettingsTab : MonoBehaviour
 				JsonIO.playerSettings.col_background = value;
 				break;
 			case Setting.EnemyOutline:
-				JsonIO.playerSettings.col_enemyOutline = value;
+				JsonIO.playerSettings.col_text = value;
 				break;
 		}
 	}
@@ -188,7 +188,7 @@ public class SettingsTab : MonoBehaviour
 		// Colors
 		Options[4].GetComponent<CPButton>().color = JsonIO.playerSettings.col_outlines;
 		Options[5].GetComponent<CPButton>().color = JsonIO.playerSettings.col_background;
-		Options[6].GetComponent<CPButton>().color = JsonIO.playerSettings.col_enemyOutline;
+		Options[6].GetComponent<CPButton>().color = JsonIO.playerSettings.col_text;
 
 		// Audio
 		Options[7].GetComponent<Toggle>().isOn = JsonIO.playerSettings.isFullscreen;

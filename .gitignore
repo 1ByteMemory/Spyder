@@ -45,3 +45,5 @@ sysinfo.txt
 /bin
 Assets/Resources/settings.json
 .vsconfig
+Assets/Resources/config.json
+Assets/Resources/config.json.meta
