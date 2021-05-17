@@ -392,8 +392,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7490279c18f9cef49955c3ca6d97a7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 0
   imgCol: {fileID: 0}
-  textCol: {fileID: 1231827578509505714}
+  textCol: {fileID: 0}
+  textColUGUI: {fileID: 1231827578509505714}
 --- !u!1 &2903384469370993353
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,8 +485,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7490279c18f9cef49955c3ca6d97a7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 0
   imgCol: {fileID: 2672118412627320358}
   textCol: {fileID: 0}
+  textColUGUI: {fileID: 0}
 --- !u!1 &2903384469483961456
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,8 +780,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7490279c18f9cef49955c3ca6d97a7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 0
   imgCol: {fileID: 0}
-  textCol: {fileID: 7167319476157543761}
+  textCol: {fileID: 0}
+  textColUGUI: {fileID: 7167319476157543761}
 --- !u!1 &3598447291579582603
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,8 +954,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7490279c18f9cef49955c3ca6d97a7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 0
   imgCol: {fileID: 0}
-  textCol: {fileID: 2877323962886184796}
+  textCol: {fileID: 0}
+  textColUGUI: {fileID: 2877323962886184796}
 --- !u!1 &4072635953274778504
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,8 +1174,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7490279c18f9cef49955c3ca6d97a7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 0
   imgCol: {fileID: 0}
-  textCol: {fileID: 6814293126515629970}
+  textCol: {fileID: 0}
+  textColUGUI: {fileID: 6814293126515629970}
 --- !u!1 &4376913532432893966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,8 +1347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7490279c18f9cef49955c3ca6d97a7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 0
   imgCol: {fileID: 0}
-  textCol: {fileID: 2604991861689242255}
+  textCol: {fileID: 0}
+  textColUGUI: {fileID: 2604991861689242255}
 --- !u!1 &4919388547684446074
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,8 +1558,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7490279c18f9cef49955c3ca6d97a7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 0
   imgCol: {fileID: 0}
-  textCol: {fileID: 3792799889213156248}
+  textCol: {fileID: 0}
+  textColUGUI: {fileID: 3792799889213156248}
 --- !u!1 &5792977801909859975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,7 +1572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8026747695969968923}
   m_Layer: 0
-  m_Name: CrossHeair
+  m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1836,7 +1850,7 @@ PrefabInstance:
     - target: {fileID: 349102596082433351, guid: f996fbe9f5fd408489404a89ae3f394a,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -27.559998
+      value: -27.560059
       objectReference: {fileID: 0}
     - target: {fileID: 349102596082433351, guid: f996fbe9f5fd408489404a89ae3f394a,
         type: 3}

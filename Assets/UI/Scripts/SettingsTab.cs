@@ -23,7 +23,8 @@ public enum Setting
 	EpiMode,
 	Crouch,
 	Time,
-	Retro
+	Retro,
+	Crosshair,
 }
 
 public class SettingsTab : MonoBehaviour
@@ -140,6 +141,9 @@ public class SettingsTab : MonoBehaviour
 			case Setting.EnemyOutline:
 				JsonIO.playerSettings.col_text = value;
 				break;
+			case Setting.Crosshair:
+				JsonIO.playerSettings.col_crosshair = value;
+				break;
 		}
 	}
 
@@ -189,6 +193,7 @@ public class SettingsTab : MonoBehaviour
 		Options[4].GetComponent<CPButton>().color = JsonIO.playerSettings.col_outlines;
 		Options[5].GetComponent<CPButton>().color = JsonIO.playerSettings.col_background;
 		Options[6].GetComponent<CPButton>().color = JsonIO.playerSettings.col_text;
+		Options[1].GetComponent<CPButton>().color = JsonIO.playerSettings.col_crosshair;
 
 		// Audio
 		Options[7].GetComponent<Toggle>().isOn = JsonIO.playerSettings.isFullscreen;
