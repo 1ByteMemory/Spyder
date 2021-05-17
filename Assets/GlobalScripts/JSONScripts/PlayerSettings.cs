@@ -18,6 +18,7 @@ public class PlayerSettings
 	public Color col_outlines;
 	public Color col_background;
 	public Color col_text;
+	public Color col_crosshair;
 
 	// Video
 	public bool isFullscreen;

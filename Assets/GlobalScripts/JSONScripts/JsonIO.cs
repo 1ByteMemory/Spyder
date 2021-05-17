@@ -25,6 +25,7 @@ public class JsonIO : MonoBehaviour
 		playerSettings.col_outlines = Color.green;
 		playerSettings.col_background = Color.black;
 		playerSettings.col_text = Color.white;
+		playerSettings.col_crosshair = Color.white;
 
 		// Video
 		playerSettings.isFullscreen = true;

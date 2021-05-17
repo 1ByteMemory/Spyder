@@ -12,7 +12,7 @@ public enum Dimension
 
 public class GameManager : MonoBehaviour
 {
-	public const string version = "a0.26";
+	public const string version = "a0.26.1";
 
 	[Header("Scene Loader")]
 	//public bool addScene;
@@ -543,6 +543,13 @@ public class GameManager : MonoBehaviour
 			player.GetComponentInChildren<ScannerEffect>().epilepsySafeMode = JsonIO.playerSettings.acc_epilepticMode;
 
 			src.volume = JsonIO.playerSettings.vol_SoundFX;
+
+			UnityEngine.UI.Image[] corsshair = PlayerHUD.transform.Find("Crosshair").GetComponentsInChildren<UnityEngine.UI.Image>();
+			Debug.Log(corsshair.Length);
+			for (int i = 0; i < corsshair.Length; i++)
+			{
+				corsshair[i].color = JsonIO.playerSettings.col_crosshair;
+			}
 		}
 
 
