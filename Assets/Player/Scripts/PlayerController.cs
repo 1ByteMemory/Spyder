@@ -35,30 +35,33 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-        if (isAbilityUnlocked && Input.GetMouseButtonDown(1) && !isInWall && Time.time >= endTime)
-        {
-			game.ToggleDimension();
-
-			endTime = Time.time + coolDown;
-			scanner.Scan(GameManager.currentDimension);
-        }
-
-		if (toggleCrouch)
+		if (!GameManager.IsPaused)
 		{
-			if (Input.GetKeyDown(KeyCode.LeftShift))
+			if (isAbilityUnlocked && Input.GetMouseButtonDown(1) && !isInWall && Time.time >= endTime)
 			{
-				Crouch(!IsCrouching);
+				game.ToggleDimension();
+
+				endTime = Time.time + coolDown;
+				scanner.Scan(GameManager.currentDimension);
 			}
-		}
-		else
-		{
-			if (Input.GetKeyDown(KeyCode.LeftShift))
+
+			if (toggleCrouch)
 			{
-				Crouch(true);
+				if (Input.GetKeyDown(KeyCode.LeftShift))
+				{
+					Crouch(!IsCrouching);
+				}
 			}
-			if (IsCrouching && !Input.GetKey(KeyCode.LeftShift))
+			else
 			{
-				Crouch(false);
+				if (Input.GetKeyDown(KeyCode.LeftShift))
+				{
+					Crouch(true);
+				}
+				if (IsCrouching && !Input.GetKey(KeyCode.LeftShift))
+				{
+					Crouch(false);
+				}
 			}
 		}
 	}
