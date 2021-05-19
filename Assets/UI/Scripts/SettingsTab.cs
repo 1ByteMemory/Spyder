@@ -193,7 +193,7 @@ public class SettingsTab : MonoBehaviour
 		Options[4].GetComponent<CPButton>().color = JsonIO.playerSettings.col_outlines;
 		Options[5].GetComponent<CPButton>().color = JsonIO.playerSettings.col_background;
 		Options[6].GetComponent<CPButton>().color = JsonIO.playerSettings.col_text;
-		Options[1].GetComponent<CPButton>().color = JsonIO.playerSettings.col_crosshair;
+		Options[18].GetComponent<CPButton>().color = JsonIO.playerSettings.col_crosshair;
 
 		// Audio
 		Options[7].GetComponent<Toggle>().isOn = JsonIO.playerSettings.isFullscreen;

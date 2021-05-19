@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
             dt -= 1.0f / fpsDisplayRate;
         }
 
-        if (!Cursor.visible)
+        if (!GameManager.IsPaused)
         {
             /* Camera rotation stuff, mouse controls this shit */
             rotX -= Input.GetAxisRaw("Mouse Y") * xMouseSensitivity * 0.02f;
