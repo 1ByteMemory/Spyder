@@ -18,7 +18,13 @@ public class ChangeFont : MonoBehaviour
 
 			for (int i = 0; i < text.Length; i++)
 			{
-				text[i].font = font;
+				if (!text[i].GetComponent<AccessableColors>())
+				{
+
+					AccessableColors accss = text[i].gameObject.AddComponent<AccessableColors>();
+					accss.colorType = ColorType.TextColors;
+					//text[i].font = font;
+				}
 			}
 		}
 	}
