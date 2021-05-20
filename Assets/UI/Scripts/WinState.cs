@@ -13,12 +13,16 @@ public class WinState : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		Cursor.visible = true;
-		Cursor.lockState = CursorLockMode.None;
+		if (other.CompareTag("Player"))
+		{
 
-		transform.GetChild(0).gameObject.SetActive(true);
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
 
-		GameManager.IsGameWin = true;
+			transform.GetChild(0).gameObject.SetActive(true);
+
+			GameManager.IsGameWin = true;
+		}
 	}
 
 }
