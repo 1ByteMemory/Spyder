@@ -12,7 +12,7 @@ public enum Dimension
 
 public class GameManager : MonoBehaviour
 {
-	public const string version = "a0.26.1";
+	public const string version = "a0.26.3";
 
 	[Header("Scene Loader")]
 	//public bool addScene;
@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
 
 	static bool pauseToggel;
 	public static bool IsGameWin;
+
+	public Key[] keys;
 
 	// When loaded from level selector
 	public static Vector3 loadedSpawnPosition;
