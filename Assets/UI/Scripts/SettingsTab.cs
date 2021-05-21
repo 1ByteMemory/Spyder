@@ -46,7 +46,7 @@ public class SettingsTab : MonoBehaviour
 		
 		savingIconAnim = GetComponentInChildren<Animator>();
 
-		defaultColor = TabsLabels[0].GetComponent<Image>().color;
+		defaultColor = TabsLabels[0].GetComponentInChildren<TextMeshProUGUI>().color;
 
 		OptionsUpdate();
 		OpenTab(Menus[0]);
@@ -65,11 +65,11 @@ public class SettingsTab : MonoBehaviour
 	}
 
 
-	public void TabSelected(Image img)
+	public void TabSelected(TextMeshProUGUI img)
 	{
 		foreach (GameObject obj in TabsLabels)
 		{
-			obj.GetComponent<Image>().color = defaultColor;
+			obj.GetComponentInChildren<TextMeshProUGUI>().color = defaultColor;
 		}
 
 		img.color = OpenColor;
@@ -239,7 +239,7 @@ public class SettingsTab : MonoBehaviour
 		
 		foreach (GameObject obj in TabsLabels)
 		{
-			obj.GetComponent<Image>().color = defaultColor;
+			obj.GetComponentInChildren<TextMeshProUGUI>().color = defaultColor;
 		}
 	}
 
