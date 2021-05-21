@@ -47,12 +47,21 @@ public class PlayerHealth : Health
 	// Override to give immunity for brief time
 	public override void TakeDamage(int damage)
 	{
-		// Brief immunity window
-		if (Time.time >= endTime					// immunity from regular damage,
-			&& Time.time >= loadindImmunityEndTime	// immunity from loading in
-			&& damage < 10)							// only if damage is less than amount (stops bypassing death pits)
+		if (damage >= 10)
 		{
 			base.TakeDamage(damage);
+			if (currentHealth <= 0) currentHealth = 0;
+			healthSlider.text = currentHealth.ToString();
+
+			hertEffect.SetTrigger("Play");
+		}
+
+		// Brief immunity window
+		if (Time.time >= endTime					// immunity from regular damage,
+			&& Time.time >= loadindImmunityEndTime)	// immunity from loading in
+		{
+			base.TakeDamage(damage);
+			if (currentHealth <= 0) currentHealth = 0;
 			healthSlider.text = currentHealth.ToString();
 
 			endTime = immunityWindow + Time.time;
