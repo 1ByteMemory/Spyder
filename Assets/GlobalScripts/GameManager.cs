@@ -372,7 +372,7 @@ public class GameManager : MonoBehaviour
 				}
 			}
 
-			if (playerMove.transform.position.y <= -50 && !isPlayerDead)
+			if (playerMove.transform.position.y <= -200 && !isPlayerDead)
 			{
 				isPlayerDead = true; // Only apply the damage once
 				playerMove.GetComponent<PlayerHealth>().TakeDamage(50000);
