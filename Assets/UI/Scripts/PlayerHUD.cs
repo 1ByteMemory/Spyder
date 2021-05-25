@@ -24,7 +24,7 @@ public class PlayerHUD : MonoBehaviour
 
 	private void Start()
 	{
-		Key[] _keycards = FindObjectsOfType<Key>();
+		Key[] _keycards = FindObjectOfType<GameManager>().keys;
 		keyCards = new GameObject[_keycards.Length];
 		imgs = new Image[_keycards.Length];
 

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Save xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <title>CheckpointTest</title>
+  <sceneName>Level 1</sceneName>
+  <abilityUnlocked>false</abilityUnlocked>
+  <foundKeys>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+  </foundKeys>
+  <enemiesKilled />
+  <health>10</health>
+  <dimension>1</dimension>
+  <spawnPoint>
+    <x>24.2216148</x>
+    <y>43.9434128</y>
+    <z>-35.13687</z>
+  </spawnPoint>
+  <spawnRotation>
+    <x>0</x>
+    <y>274.199982</y>
+    <z>0</z>
+  </spawnRotation>
+  <availableWeapons />
+</Save>

@@ -10,7 +10,7 @@ public class HealthPack : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-
+			Debug.Log("TakeDamage: " + -health);
 			other.GetComponent<PlayerHealth>().TakeDamage(-health);
 
 			gameObject.SetActive(false);
