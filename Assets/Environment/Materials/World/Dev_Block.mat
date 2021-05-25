@@ -71,12 +71,14 @@ Material:
     - _OffsetX: 0
     - _OffsetY: 0
     - _Parallax: 0.02
+    - _Size: 1
     - _SizeX: 10
     - _SizeY: 10
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Step: 0.381
+    - _Thickness: 0.1
     - _ThicknessX: 3
     - _ThicknessY: 3
     - _TimeScale: 0.15
