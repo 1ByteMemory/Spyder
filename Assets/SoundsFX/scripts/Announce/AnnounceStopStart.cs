@@ -20,11 +20,14 @@ public class AnnounceStopStart : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        Announcesource.clip = Announcement;
-        Announcesource.Play();
-        gameObject.SetActive(false);
+        if (other.CompareTag("Player"))
+        {
+            Announcesource.clip = Announcement;
+            Announcesource.Play();
+            gameObject.SetActive(false);
+        }
         //combatsource.clip = combat;
         //combatsource.Play();
     }

@@ -20,12 +20,15 @@ public class MusicStopStartLoop : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        combatsource2.clip = combat2;
-        combatsource2.Play();
-        combatsource2.loop = true;
-        gameObject.SetActive(false);
+        if (other.CompareTag("Player"))
+        {
+            combatsource2.clip = combat2;
+            combatsource2.Play();
+            combatsource2.loop = true;
+            gameObject.SetActive(false);
+        }
         //combatsource.clip = combat;
         //combatsource.Play();
     }

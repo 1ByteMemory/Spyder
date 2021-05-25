@@ -12,7 +12,7 @@ public enum Dimension
 
 public class GameManager : MonoBehaviour
 {
-	public const string version = "a0.26.1";
+	public const string version = "a0.26.3";
 
 	[Header("Scene Loader")]
 	//public bool addScene;
@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
 
 	static bool pauseToggel;
 	public static bool IsGameWin;
+
+	public Key[] keys;
 
 	// When loaded from level selector
 	public static Vector3 loadedSpawnPosition;
@@ -370,7 +372,7 @@ public class GameManager : MonoBehaviour
 				}
 			}
 
-			if (playerMove.transform.position.y <= -50 && !isPlayerDead)
+			if (playerMove.transform.position.y <= -200 && !isPlayerDead)
 			{
 				isPlayerDead = true; // Only apply the damage once
 				playerMove.GetComponent<PlayerHealth>().TakeDamage(50000);

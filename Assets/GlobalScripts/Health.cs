@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
 		if (!dontDestroyOnDeath && isDead)
 		{
 			//gameObject.SetActive(false);
-			Destroy(gameObject);
+			Destroy(gameObject, Time.deltaTime);
 		}
 	}
 
