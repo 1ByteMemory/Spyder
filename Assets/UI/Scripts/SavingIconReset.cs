@@ -14,6 +14,7 @@ public class SavingIconReset : MonoBehaviour
 
 	private void OnDisable()
 	{
-        anim.SetTrigger("Stop");
+        if (anim != null)
+            anim.SetTrigger("Stop");
 	}
 }

@@ -87,6 +87,24 @@ public class SavesContainer
 		return saves;
 	}
 
+	public static SaveInfo[] LoadShowCase(TextAsset[] textAssets)
+	{
+		SaveInfo[] showcaseSaves = new SaveInfo[textAssets.Length];
+		for (int i = 0; i < textAssets.Length; i++)
+		{
+			XmlSerializer serializer = new XmlSerializer(typeof(SaveInfo));
+		
+			string data = textAssets[i].text;
+		
+			using (StringReader reader = new StringReader(data))
+			{
+				showcaseSaves[i] = (serializer.Deserialize(reader)) as SaveInfo;
+			}
+		}
+
+		return showcaseSaves;
+	}
+
 	public static void DeleteFolder(string folder)
 	{
 		string path = Path.Combine(Application.persistentDataPath, folder);

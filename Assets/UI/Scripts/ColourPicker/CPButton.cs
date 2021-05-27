@@ -41,6 +41,13 @@ public class CPButton : MonoBehaviour
 
 	public void ToggleColorPicker()
 	{
+		// Close other color pickers that might be open
+		GameObject[] colorPickers = GameObject.FindGameObjectsWithTag("ColorPicker");
+		for (int i = 0; i < colorPickers.Length; i++)
+		{
+			colorPickers[i].SetActive(false);
+		}
+
 		// Check if button is clicked and not the colour display panel
 		if (RectTransformUtility.RectangleContainsScreenPoint(rect, Input.mousePosition))
 		{
@@ -61,7 +68,8 @@ public class CPButton : MonoBehaviour
 
 	public void CloseColorPicker()
 	{
-		OnColorPick.Invoke();
+		ChangeColour();
+		//OnColorPick.Invoke();
 		colorPanel.SetActive(false);
 	}
 
@@ -86,5 +94,6 @@ public class CPButton : MonoBehaviour
 	{
 		color = colorPicker.color;
 		img.color = colorPicker.color;
+		OnColorPick.Invoke();
 	}
 }
