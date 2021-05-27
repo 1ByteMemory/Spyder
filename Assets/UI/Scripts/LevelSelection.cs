@@ -69,8 +69,13 @@ public class LevelSelection : MonoBehaviour
 	void RefreshList()
 	{
 		sceneLoader = GetComponent<SceneLoader>();
-		showCaseLevels = SavesContainer.LoadFromXmls(Path.Combine(Application.dataPath, "Resources", "Showcase Saves"));
 
+		// Load showcase files as a string
+		TextAsset[] showcaseAssets = Resources.LoadAll<TextAsset>("Showcase Saves");
+
+		showCaseLevels = SavesContainer.LoadShowCase(showcaseAssets);
+		
+		
 		quickSaves.Clear();
 		autoSaves.Clear();
 
