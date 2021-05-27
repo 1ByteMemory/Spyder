@@ -37,15 +37,12 @@ public class SettingsTab : MonoBehaviour
 	public GameObject[] TabsLabels;
 	public GameObject[] Options;
 
-	private Animator savingIconAnim;
-
+	
 
 	private void OnEnable()
 	{
 		JsonIO.LoadSettings();
 		
-		savingIconAnim = GetComponentInChildren<Animator>();
-
 		defaultColor = TabsLabels[0].GetComponentInChildren<TextMeshProUGUI>().color;
 
 		OptionsUpdate();
@@ -112,6 +109,7 @@ public class SettingsTab : MonoBehaviour
 				JsonIO.playerSettings.vol_Ambience = value;
 				break;
 		}
+		ApplyChanges();
 	}
 
 	public void ChangeInt(int value)
@@ -125,6 +123,7 @@ public class SettingsTab : MonoBehaviour
 				JsonIO.playerSettings.resolution = value;
 				break;
 		}
+		ApplyChanges();
 	}
 
 	public void ChangeColor(CPButton buttonValue)
@@ -145,6 +144,7 @@ public class SettingsTab : MonoBehaviour
 				JsonIO.playerSettings.col_crosshair = value;
 				break;
 		}
+		ApplyChanges();
 	}
 
 	public void ChangeBool(bool value)
@@ -170,6 +170,7 @@ public class SettingsTab : MonoBehaviour
 				Debug.Log("Setting enum not set");
 				break;
 		}
+		ApplyChanges();
 	}
 	#endregion
 
@@ -224,7 +225,6 @@ public class SettingsTab : MonoBehaviour
 
 		GameManager gm = FindObjectOfType<GameManager>();
 
-		savingIconAnim.SetTrigger("Play");
 
 		if (gm != null)
 		{
@@ -247,7 +247,6 @@ public class SettingsTab : MonoBehaviour
 	{
 		JsonIO.ResetSettings();
 
-		savingIconAnim.SetTrigger("Play");
 		OptionsUpdate();
 		if (activeTab != null)
 			activeTab.SetActive(true);
