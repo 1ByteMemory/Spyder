@@ -126,7 +126,8 @@ public class SearchAndDestory : WeaponBehaviour
 		else
 		{
 			// Stop playing animations
-			anim.speed = 0;
+			if (anim != null)
+				anim.speed = 0;
 		}
     }
 
@@ -261,13 +262,15 @@ public class SearchAndDestory : WeaponBehaviour
 		if (agentState == AgentState.Attack)
 			navMeshAgent.isStopped = true;
 
-
 		transform.LookAt(Player);
 
-		gunPosition.LookAt(Player);
+		if (gunPosition != null)
+		{
 
-		if (gunPosition.childCount > 0)
-			UseWeapon(activeWeapon);
+			gunPosition.LookAt(Player);
 
+			if (gunPosition.childCount > 0)
+				UseWeapon(activeWeapon);
+		}
 	}
 }

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 553838666452293417}
   - component: {fileID: 553838666452293418}
   - component: {fileID: 2978206568118656699}
-  - component: {fileID: 553838666452293419}
+  - component: {fileID: 4772213356522851933}
+  - component: {fileID: 8164431377779330293}
   - component: {fileID: 553838666452293423}
   m_Layer: 8
   m_Name: EnemyDigital
@@ -106,7 +107,7 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 553838666452293419}
+      - m_Target: {fileID: 0}
         m_MethodName: EnemyDefeated
         m_Mode: 1
         m_Arguments:
@@ -119,7 +120,7 @@ MonoBehaviour:
         m_CallState: 2
   dimminsionHitOnly: 1
   dimension: 0
---- !u!114 &553838666452293419
+--- !u!114 &4772213356522851933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,8 +141,19 @@ MonoBehaviour:
   gunPosition: {fileID: 553838667515895948}
   hasLineOfSight: 0
   reloadTime: 0
-  normalDamage: 10
-  modifiedDamage: 1
+--- !u!114 &8164431377779330293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553838666452293412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca405d5c035719743bf2452c99fe3247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!82 &553838666452293423
 AudioSource:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ public class JsonIO : MonoBehaviour
 			reader = new StreamReader(Application.dataPath + "/Resources/config.json");
 			playerSettings = PlayerSettings.CreateFromJson(reader.ReadToEnd());
 			reader.Close();
-			Debug.Log("Settings Loaded");
+			//Debug.Log("Settings Loaded");
 
 			if (GameManager.version != playerSettings.version)
 			{
@@ -89,6 +89,6 @@ public class JsonIO : MonoBehaviour
 		writer.WriteLine(jsonTextFile);
 		writer.Close();
 
-		Debug.Log("Saved Settings");
+		//Debug.Log("Saved Settings");
 	}
 }
