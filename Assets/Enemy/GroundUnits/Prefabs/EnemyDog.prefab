@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1995877955555665814}
   - component: {fileID: 1995877955555665815}
   - component: {fileID: 6533007164795052207}
+  - component: {fileID: 5035150580245184522}
   - component: {fileID: 1995877955555665811}
   m_Layer: 0
   m_Name: EnemyDog
@@ -95,8 +96,6 @@ MonoBehaviour:
   gunPosition: {fileID: 1995877956614311984}
   hasLineOfSight: 0
   reloadTime: 0
-  normalDamage: 10
-  modifiedDamage: 1
 --- !u!114 &6533007164795052207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +139,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  dimminsionHitOnly: 0
+  dimension: 0
+--- !u!114 &5035150580245184522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995877955555665816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca405d5c035719743bf2452c99fe3247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!82 &1995877955555665811
 AudioSource:
   m_ObjectHideFlags: 0
