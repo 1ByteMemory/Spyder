@@ -8,7 +8,8 @@ public class WeaponPickup : MonoBehaviour
     public Weapon weapon;
 
 	//public AudioClip pickUPSound;
-
+	public AudioClip pickUpSound;
+	private AudioSource src;
 
 	private void OnValidate()
 	{
@@ -17,13 +18,25 @@ public class WeaponPickup : MonoBehaviour
 			Instantiate(weapon.model, transform).name = weapon.name;
 			SpawnModel = false;
 		}
+		if (GetComponent<AudioSource>() == null)
+		{
+			gameObject.AddComponent<AudioSource>();
+		}
 	}
 
+	private void Start()
+	{
+		src = GetComponent<AudioSource>();
+		src.playOnAwake = false;
+		src.loop = false;
+	}
 
+	private bool pickedUp;
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player"))
+		if (other.CompareTag("Player") && pickedUp == false)
 		{
+			pickedUp = true;
 			PlayerWeapon pw = other.GetComponent<PlayerWeapon>();
 
 			if (pw.weapons.Contains(weapon))
@@ -37,9 +50,16 @@ public class WeaponPickup : MonoBehaviour
 				pw.CycleWeapons(pw.weapons.Count - 1, true);
 			}
 
-			Destroy(gameObject);
+			// Play pick up sound
+			src.volume = JsonIO.playerSettings.vol_SoundFX;
+			src.clip = pickUpSound;
+			src.Play();
+
+			// Destroy child objects
+			for (int i = 0; i < transform.childCount; i++)
+			{
+				Destroy(transform.GetChild(i).gameObject);
+			}
 		}
 	}
-
-
 }

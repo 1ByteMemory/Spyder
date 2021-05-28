@@ -29,7 +29,7 @@ public class FootstepsManager : MonoBehaviour
 	private void Start()
 	{
 		playerMove = GetComponent<PlayerMovement>();
-		src = GetComponent<AudioSource>();
+		src = GetComponents<AudioSource>()[0];
 	}
 
 	private void Update()

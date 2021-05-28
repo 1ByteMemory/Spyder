@@ -112,6 +112,7 @@ public class PlayerWeapon : WeaponBehaviour
                 // RELOAD WEAPON //
                 if (Input.GetKeyDown(KeyCode.R))
 				{
+                    if (weapons[weaponIndex].clip == weapons[weaponIndex].maxClip) return;
                     Reload(activeGun, weapons[weaponIndex]);
 				}
 

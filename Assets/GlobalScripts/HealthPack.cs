@@ -5,15 +5,27 @@ using UnityEngine;
 public class HealthPack : MonoBehaviour
 {
 	public int health = 2;
+	
 
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
 		{
-			Debug.Log("TakeDamage: " + -health);
-			other.GetComponent<PlayerHealth>().TakeDamage(-health);
+			PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
 
-			gameObject.SetActive(false);
+			if (playerHealth.currentHealth == playerHealth.maxHealth) return;
+			
+			Debug.Log("TakeDamage: " + -health);
+			playerHealth.TakeDamage(-health);
+
+			if (GetComponent<AudioSource>() != null)
+			{
+				GetComponent<AudioSource>().volume = JsonIO.playerSettings.vol_SoundFX;
+				GetComponent<AudioSource>().Play();
+			}
+
+			transform.GetChild(0).gameObject.SetActive(false);
+			
 		}
 	}
 }

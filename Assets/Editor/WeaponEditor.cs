@@ -44,7 +44,7 @@ public class WeaponEditor : Editor
 	SerializedProperty clip;
 
 	public WeaponType _weapontype;
-
+	int soundListSize;
 
 	private void OnEnable()
 	{
@@ -153,8 +153,33 @@ public class WeaponEditor : Editor
 		muzzleFlash.objectReferenceValue = EditorGUILayout.ObjectField("Muzzle Flash", muzzleFlash.objectReferenceValue, typeof(GameObject), false);
 		bulletIndex.intValue = EditorGUILayout.Popup("Bullet Origin:", bulletIndex.intValue, options, EditorStyles.popup);
 
+		EditorGUILayout.Space();
+		soundListSize = fireAudio.arraySize;
+		soundListSize = EditorGUILayout.IntField("Fire Sound List", soundListSize);
 
-		fireAudio.objectReferenceValue = EditorGUILayout.ObjectField("Firing Sound", fireAudio.objectReferenceValue, typeof(AudioClip), false);
+		// Resize the list
+		if (soundListSize != fireAudio.arraySize)
+		{
+			while(soundListSize > fireAudio.arraySize)
+			{
+				fireAudio.InsertArrayElementAtIndex(fireAudio.arraySize);
+				fireAudio.GetArrayElementAtIndex(fireAudio.arraySize - 1).objectReferenceValue = null;
+			}
+			while (soundListSize < fireAudio.arraySize)
+			{
+				fireAudio.DeleteArrayElementAtIndex(fireAudio.arraySize -1);
+			}
+		}
+
+		for (int a = 0; a < fireAudio.arraySize; a++)
+		{
+			EditorGUILayout.PropertyField(fireAudio.GetArrayElementAtIndex(a));
+			
+		}
+		//fireAudio.GetArrayElementAtIndex(i).objectReferenceValue = EditorGUILayout.ObjectField("Firing Sound", fireAudio.objectReferenceValue, typeof(AudioClip), false);
+
+
+		EditorGUILayout.Space();
 		reloadAudio.objectReferenceValue = EditorGUILayout.ObjectField("Reloading Sound", reloadAudio.objectReferenceValue, typeof(AudioClip), false);
 		
 		
