@@ -8,6 +8,8 @@ public class JsonIO : MonoBehaviour
 {
 	public static PlayerSettings playerSettings = new PlayerSettings();
 
+	private static int frameSinceLastSave;
+	private static int frameSinceLastLoad;
 
 	public static void ResetSettings()
 	{
@@ -47,6 +49,10 @@ public class JsonIO : MonoBehaviour
 
 	public static void LoadSettings()
 	{
+		if (frameSinceLastLoad == Time.frameCount)
+			return;
+		frameSinceLastLoad = Time.frameCount;
+		
 		StreamReader reader;
 		
 		try
@@ -54,7 +60,7 @@ public class JsonIO : MonoBehaviour
 			reader = new StreamReader(Application.dataPath + "/Resources/config.json");
 			playerSettings = PlayerSettings.CreateFromJson(reader.ReadToEnd());
 			reader.Close();
-			//Debug.Log("Settings Loaded");
+			Debug.Log("Settings Loaded");
 
 			if (GameManager.version != playerSettings.version)
 			{
@@ -82,6 +88,10 @@ public class JsonIO : MonoBehaviour
 
 	public static void SaveSettings(PlayerSettings settings)
 	{
+		if (frameSinceLastSave == Time.frameCount)
+			return;
+		frameSinceLastSave = Time.frameCount;
+
 		string jsonTextFile = settings.SaveToString();
 
 		StreamWriter writer = new StreamWriter(Application.dataPath + "/Resources/config.json");
@@ -89,6 +99,6 @@ public class JsonIO : MonoBehaviour
 		writer.WriteLine(jsonTextFile);
 		writer.Close();
 
-		//Debug.Log("Saved Settings");
+		Debug.Log("Saved Settings");
 	}
 }
