@@ -6,6 +6,7 @@ public class WeaponBehaviour : MonoBehaviour
 {
     
     protected int weaponIndex;
+    [Header("Weapons")]
     public List<Weapon> weapons;
 
     protected bool isFiring;

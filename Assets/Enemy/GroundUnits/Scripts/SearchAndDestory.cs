@@ -15,8 +15,17 @@ public enum AgentState
 [RequireComponent(typeof(NavMeshAgent), typeof(UniqueID))]
 public class SearchAndDestory : WeaponBehaviour
 {
+	[Header("Search And Destory")]
+	public AudioClip[] barks;
+	[Min(0)]
+	public float minBarkDelay = 3;
+	[Min(0)]
+	public float maxBarkDelay = 7;
+	private float endBarkTimer;
+	private AudioSource audioSrc;
 
-    public float searchRadius = 20;
+
+	public float searchRadius = 20;
     public float attackRadius = 10;
 
 	public float stunnedTime = 1;
@@ -86,6 +95,9 @@ public class SearchAndDestory : WeaponBehaviour
 			if (gunPosition.childCount > 0)
 				activeWeapon = gunPosition.GetChild(0);
 		}
+
+		audioSrc = GetComponent<AudioSource>();
+		endBarkTimer = minBarkDelay;
 	}
 
 	// Update is called once per frame
@@ -195,6 +207,21 @@ public class SearchAndDestory : WeaponBehaviour
 		RemoveFromSeenList();
 	}
 
+	void PlayBark()
+	{
+		if (Time.time >= endBarkTimer)
+		{
+			endBarkTimer = Time.time + Random.Range(minBarkDelay, maxBarkDelay);
+
+			if (audioSrc != null && !audioSrc.isPlaying)
+			{
+				audioSrc.volume = JsonIO.playerSettings.vol_Barks;
+				audioSrc.clip = barks[Random.Range(0, barks.Length)];
+				audioSrc.Play();
+			}
+		}
+	}
+
 	public virtual void EnemyDefeated()
 	{
 		RemoveFromSeenList();
@@ -251,6 +278,8 @@ public class SearchAndDestory : WeaponBehaviour
 				Attack();
 			}
 		}
+
+		PlayBark();
 	}
 
 	protected virtual void Attack()
@@ -272,5 +301,7 @@ public class SearchAndDestory : WeaponBehaviour
 			if (gunPosition.childCount > 0)
 				UseWeapon(activeWeapon);
 		}
+
+		PlayBark();
 	}
 }
