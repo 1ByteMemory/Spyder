@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-	public AudioClip deathClip;
-	public AudioClip hurtClip;
+	public AudioClip[] deathClip;
+	public AudioClip[] hurtClip;
 	public AudioSource deathSoundsrc;
 
 	[HideInInspector]
@@ -49,7 +49,12 @@ public class Health : MonoBehaviour
 	public void Hurt(bool Dead)
 	{
 		deathSoundsrc.volume = JsonIO.playerSettings.vol_SoundFX;
-		deathSoundsrc.clip = Dead ? deathClip : hurtClip;
+		if (Dead)
+			deathSoundsrc.clip = deathClip.Length > 0 ? deathClip[Random.Range(0, deathClip.Length)] : null;
+		else
+			deathSoundsrc.clip = hurtClip.Length > 0 ? hurtClip[Random.Range(0, hurtClip.Length)] : null;
+
+
 		if (deathSoundsrc.isPlaying) deathSoundsrc.Stop();
 		deathSoundsrc.Play();
 	}

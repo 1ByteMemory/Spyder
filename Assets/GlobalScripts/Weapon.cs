@@ -25,7 +25,7 @@ public class Weapon : ScriptableObject
 	public GameObject bullet;
 	public ParticleSystem muzzleFlash;
 
-	public AudioClip fireAudio;
+	public AudioClip[] fireAudio;
 	public AudioClip reloadAudio;
 
 	public int bulletIndex;
