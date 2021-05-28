@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnModel: 0
   weapon: {fileID: 0}
+  pickUpSound: {fileID: 0}
 --- !u!65 &1536046610561889024
 BoxCollider:
   m_ObjectHideFlags: 0

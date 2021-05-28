@@ -48,6 +48,7 @@ public class Health : MonoBehaviour
 
 	public void Hurt(bool Dead)
 	{
+		deathSoundsrc.volume = JsonIO.playerSettings.vol_SoundFX;
 		deathSoundsrc.clip = Dead ? deathClip : hurtClip;
 		if (deathSoundsrc.isPlaying) deathSoundsrc.Stop();
 		deathSoundsrc.Play();

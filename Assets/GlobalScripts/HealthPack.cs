@@ -20,6 +20,7 @@ public class HealthPack : MonoBehaviour
 
 			if (GetComponent<AudioSource>() != null)
 			{
+				GetComponent<AudioSource>().volume = JsonIO.playerSettings.vol_SoundFX;
 				GetComponent<AudioSource>().Play();
 			}
 
