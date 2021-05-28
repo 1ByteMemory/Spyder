@@ -1093,8 +1093,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6790534244141458623, guid: 3b956cd20d5c39b408b7141044c7219d,
-          type: 3}
+      - m_Target: {fileID: 524314115}
         m_MethodName: LoadedFromMainMenu
         m_Mode: 1
         m_Arguments:

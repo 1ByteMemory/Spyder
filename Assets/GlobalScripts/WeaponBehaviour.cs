@@ -198,7 +198,7 @@ public class WeaponBehaviour : MonoBehaviour
             {
                 if (hit.transform.GetComponent<Health>())
                 {
-                    Debug.Log("Hitting");
+                    Debug.Log(transform.name + " hit " + hit.transform.name);
                     hit.transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
                 }
             }

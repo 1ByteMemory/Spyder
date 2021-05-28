@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 	public void LoadedFromMainMenu()
 	{
 		// When the player selects new game
+		IsGameWin = false;
 		loadedFromSave = false;
 		loadedFromSelector = false;
 	}
