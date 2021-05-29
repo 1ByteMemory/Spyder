@@ -6,6 +6,7 @@ public class WeaponBehaviour : MonoBehaviour
 {
     
     protected int weaponIndex;
+    [Header("Weapons")]
     public List<Weapon> weapons;
 
     protected bool isFiring;
@@ -94,8 +95,11 @@ public class WeaponBehaviour : MonoBehaviour
                 // Play Fire Sound
                 if (weaponScene.GetComponentInChildren<AudioSource>())
                 {
-                    weaponScene.GetComponent<AudioSource>().clip = weaponAsset.fireAudio;
-                    weaponScene.GetComponent<AudioSource>().Play();
+                    if (weaponAsset.fireAudio.Length > 0)
+                    {
+                        weaponScene.GetComponent<AudioSource>().clip = weaponAsset.fireAudio[Random.Range(0, weaponAsset.fireAudio.Length)];
+                        weaponScene.GetComponent<AudioSource>().Play();
+                    }
                 }
 
                 // Play Fire Animation
@@ -198,7 +202,7 @@ public class WeaponBehaviour : MonoBehaviour
             {
                 if (hit.transform.GetComponent<Health>())
                 {
-                    Debug.Log("Hitting");
+                    Debug.Log(transform.name + " hit " + hit.transform.name);
                     hit.transform.GetComponent<Health>().TakeDamage(weaponAsset.damage);
                 }
             }

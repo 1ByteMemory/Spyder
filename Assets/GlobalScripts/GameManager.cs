@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
 	public void LoadedFromMainMenu()
 	{
 		// When the player selects new game
+		IsGameWin = false;
 		loadedFromSave = false;
 		loadedFromSelector = false;
 	}
@@ -585,9 +586,15 @@ public class GameManager : MonoBehaviour
 			retroProfile.settings[i].active = JsonIO.playerSettings.acc_retro;
 		}
 
-		if (GameObject.Find("Music"))
+		GameObject music = GameObject.Find("Music");
+		if (music != null)
 		{
-			GameObject.Find("Music").GetComponent<AudioSource>().volume = JsonIO.playerSettings.vol_Music;
+			music.GetComponent<AudioSource>().volume = JsonIO.playerSettings.vol_Music;
+		}
+		GameObject announce = GameObject.Find("Announce");
+		if (announce != null)
+		{
+			announce.GetComponent<AudioSource>().volume = JsonIO.playerSettings.vol_Music;
 		}
 
 	}

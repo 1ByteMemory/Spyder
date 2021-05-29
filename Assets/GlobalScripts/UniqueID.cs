@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UniqueID : MonoBehaviour
 {
-	public int id;
+	private int id;
 	public int ID
 	{
 		get { return id; }
