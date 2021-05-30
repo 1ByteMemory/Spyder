@@ -9,6 +9,7 @@ public class HealthPack : MonoBehaviour
 
 	private void Start()
 	{
+		if (GetComponent<AudioSource>() == null) return;
 		GetComponent<AudioSource>().clip = healthSound;
 	}
 
