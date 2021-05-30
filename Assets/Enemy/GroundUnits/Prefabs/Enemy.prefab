@@ -4824,8 +4824,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af4048f259c5ec4fbe4db87ab8d9f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathClip: {fileID: 0}
-  hurtClip: {fileID: 0}
+  deathClip:
+  - {fileID: 8300000, guid: 96bdc0f19677f2c428983cbe387ba9da, type: 3}
+  - {fileID: 8300000, guid: a19e5c94dd4f76e45a6559221b3fde0c, type: 3}
+  - {fileID: 8300000, guid: 1ec439a72f710ea49b5ad65951f10db0, type: 3}
+  hurtClip:
+  - {fileID: 8300000, guid: 4868de7630bdb6f40aed8c18ac8bb014, type: 3}
+  - {fileID: 8300000, guid: 1b892c26f8d1d2d46a893e6d2aa7d1e2, type: 3}
   deathSoundsrc: {fileID: 6549293617276455553}
   currentHealth: 0
   maxHealth: 5
@@ -4918,6 +4923,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 11400000, guid: 8e1f8df06e543e04a814f895d6f3149e, type: 2}
+  barks:
+  - {fileID: 8300000, guid: 7ef3dec575d44384a8538a13776fc8b6, type: 3}
+  - {fileID: 8300000, guid: 33b2b73f009a1bc4db5e270b090794e7, type: 3}
+  - {fileID: 8300000, guid: 014caff411c13d34199a416f52da6de3, type: 3}
+  - {fileID: 8300000, guid: f1925c4431e7f0b4e80925b995a40dfa, type: 3}
+  minBarkDelay: 3
+  maxBarkDelay: 7
   searchRadius: 20
   attackRadius: 14
   stunnedTime: 2
@@ -5069,7 +5081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca405d5c035719743bf2452c99fe3247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
 --- !u!1 &1808172351690111808
 GameObject:
   m_ObjectHideFlags: 0
