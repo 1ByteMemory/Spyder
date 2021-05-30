@@ -168,12 +168,12 @@ public class WeaponBehaviour : MonoBehaviour
 
             isFiring = false;
             isReloading = true;
-            weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
             if (!weaponAsset.isAmmoInf)
             {
-                weaponAsset.ammo -= weaponAsset.maxClip;
+                weaponAsset.ammo -= weaponAsset.maxClip - weaponAsset.clip;
                 weaponAsset.ammo = weaponAsset.ammo < 0 ? 0 : weaponAsset.ammo;
             }
+            weaponAsset.clip = weaponAsset.ammo > weaponAsset.maxClip ? weaponAsset.maxClip : weaponAsset.ammo;
         }
     }
 

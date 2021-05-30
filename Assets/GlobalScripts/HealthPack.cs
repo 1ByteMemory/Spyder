@@ -5,7 +5,12 @@ using UnityEngine;
 public class HealthPack : MonoBehaviour
 {
 	public int health = 2;
-	
+	public AudioClip healthSound;
+
+	private void Start()
+	{
+		GetComponent<AudioSource>().clip = healthSound;
+	}
 
 	private void OnTriggerEnter(Collider other)
 	{
