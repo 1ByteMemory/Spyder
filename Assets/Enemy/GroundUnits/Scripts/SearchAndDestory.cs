@@ -27,7 +27,7 @@ public class SearchAndDestory : WeaponBehaviour
 
 	public float searchRadius = 20;
     public float attackRadius = 10;
-
+	public bool lookAtPlayer;
 	public float stunnedTime = 1;
 
     protected NavMeshAgent navMeshAgent;
@@ -105,6 +105,8 @@ public class SearchAndDestory : WeaponBehaviour
     {
 		if (!GameManager.IsPaused)
 		{
+			if (anim != null)
+				anim.speed = 1;
 			float distance = Mathf.Abs((Player.position - transform.position).magnitude);
 
 			if (distance > searchRadius)
@@ -213,7 +215,7 @@ public class SearchAndDestory : WeaponBehaviour
 		{
 			endBarkTimer = Time.time + Random.Range(minBarkDelay, maxBarkDelay);
 
-			if (audioSrc != null && !audioSrc.isPlaying)
+			if (audioSrc != null && !audioSrc.isPlaying &&barks.Length >0)
 			{
 				audioSrc.volume = JsonIO.playerSettings.vol_Barks;
 				audioSrc.clip = barks[Random.Range(0, barks.Length)];
@@ -290,8 +292,8 @@ public class SearchAndDestory : WeaponBehaviour
 
 		if (agentState == AgentState.Attack)
 			navMeshAgent.isStopped = true;
-
-		transform.LookAt(Player);
+		if (lookAtPlayer)
+			transform.LookAt(Player);
 
 		if (gunPosition != null)
 		{

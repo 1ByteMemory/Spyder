@@ -113,6 +113,7 @@ MonoBehaviour:
   maxBarkDelay: 7
   searchRadius: 25
   attackRadius: 2
+  lookAtPlayer: 0
   stunnedTime: 1
   spawnedFromSpawner: 0
   gunPosition: {fileID: 1995877956614311984}
@@ -5125,6 +5126,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chimp Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 932196180760241699, guid: 87c7c332e293db749aa595d63b243a00,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec880374f354f1540a21ff447987a8fb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87c7c332e293db749aa595d63b243a00, type: 3}
 --- !u!1 &382803852863425290 stripped

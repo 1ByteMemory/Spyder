@@ -18,7 +18,7 @@ public class HealthPack : MonoBehaviour
 		{
 			PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
 
-			if (playerHealth.currentHealth == playerHealth.maxHealth) return;
+			if (playerHealth.currentHealth == playerHealth.maxHealth && health >0) return;
 			
 			Debug.Log("TakeDamage: " + -health);
 			playerHealth.TakeDamage(-health);

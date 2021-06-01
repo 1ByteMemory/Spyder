@@ -4829,8 +4829,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a19e5c94dd4f76e45a6559221b3fde0c, type: 3}
   - {fileID: 8300000, guid: 1ec439a72f710ea49b5ad65951f10db0, type: 3}
   hurtClip:
-  - {fileID: 8300000, guid: 4868de7630bdb6f40aed8c18ac8bb014, type: 3}
-  - {fileID: 8300000, guid: 1b892c26f8d1d2d46a893e6d2aa7d1e2, type: 3}
+  - {fileID: 8300000, guid: 51bdc2aa36f711946af951286915030e, type: 3}
+  - {fileID: 8300000, guid: 001b4867d77930d49adb04b982b83ef2, type: 3}
+  - {fileID: 8300000, guid: fefea571e61bbd544a87d4bcec35868a, type: 3}
+  - {fileID: 8300000, guid: c49f8cf78e6ef5346b11e89b845eedbc, type: 3}
+  - {fileID: 8300000, guid: b461cf53cd6976e458e359aa38e16ab3, type: 3}
   deathSoundsrc: {fileID: 6549293617276455553}
   currentHealth: 0
   maxHealth: 5
@@ -4932,6 +4935,7 @@ MonoBehaviour:
   maxBarkDelay: 7
   searchRadius: 20
   attackRadius: 14
+  lookAtPlayer: 1
   stunnedTime: 2
   spawnedFromSpawner: 0
   gunPosition: {fileID: 1226598378809151112}
