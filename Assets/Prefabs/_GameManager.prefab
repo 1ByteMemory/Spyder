@@ -119,7 +119,6 @@ MonoBehaviour:
     type: 3}
   DeathMenuUI: {fileID: 298908390530794642, guid: dae39356b884c1d4ba5fadf6302f708b,
     type: 3}
-  Fungus: {fileID: 1702795076003710115, guid: 021bc6490108c094ba62e413ff237212, type: 3}
   dimensionClip: {fileID: 8300000, guid: f133e91368a53de46b9cf9ed504d6841, type: 3}
   realWorldObjects: {fileID: 0}
   digitalWorldObjects: {fileID: 0}
@@ -130,6 +129,7 @@ MonoBehaviour:
   digitalMats:
   - {fileID: 2100000, guid: ec880374f354f1540a21ff447987a8fb, type: 2}
   - {fileID: 2100000, guid: 3d4bbfc8689b511438e961ae86a06076, type: 2}
+  keys: []
 --- !u!114 &1735706883957785994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2db7517f8db13a24a8a30510a41d3c58, type: 2}
   - {fileID: 11400000, guid: 8e1f8df06e543e04a814f895d6f3149e, type: 2}
   - {fileID: 11400000, guid: b9ed89b22505380449c6e11e4f91c551, type: 2}
+  - {fileID: 11400000, guid: 68dc84b2730ce8340a8029499d2ca0b0, type: 2}
 --- !u!82 &5427610743791985861
 AudioSource:
   m_ObjectHideFlags: 0
