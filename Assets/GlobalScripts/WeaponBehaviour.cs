@@ -69,6 +69,9 @@ public class WeaponBehaviour : MonoBehaviour
             src.volume = volume;
             src.playOnAwake = false;
         }
+
+        gun.clip = gun.maxClip;
+        gun.ammo = gun.maxAmmo;
     }
 
     protected virtual void UseWeapon(Transform weaponScene)
