@@ -11,6 +11,7 @@ public enum SaveType
 	Auto
 }
 
+
 [RequireComponent(typeof(SceneLoader))]
 public class LevelSelection : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class LevelSelection : MonoBehaviour
 	public float textHieght = 39;
 
     public SaveInfo[] showCaseLevels = new SaveInfo[0];
+	public TextAsset[] showcaseAssets;
 
 	private List<SaveInfo> quickSaves = new List<SaveInfo>();
 	private List<SaveInfo> autoSaves = new List<SaveInfo>();
@@ -70,9 +72,12 @@ public class LevelSelection : MonoBehaviour
 	{
 		sceneLoader = GetComponent<SceneLoader>();
 
-		// Load showcase files as a string
-		TextAsset[] showcaseAssets = Resources.LoadAll<TextAsset>("Showcase Saves");
 
+		var dict = new Dictionary<string, TextAsset>();
+
+		// Load showcase files as a string
+		//TextAsset[] showcaseAssets = Resources.LoadAll<TextAsset>("Showcase Saves");
+		
 		showCaseLevels = SavesContainer.LoadShowCase(showcaseAssets);
 		
 		

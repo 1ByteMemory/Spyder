@@ -2253,6 +2253,19 @@ MonoBehaviour:
   border: {x: 20, y: 20}
   cardGap: {x: 10, y: 10}
   textHieght: 39
+  showcaseAssets:
+  - {fileID: 4900000, guid: 4b1afb4753e43f04d9cec5ff37b9c166, type: 3}
+  - {fileID: 4900000, guid: 67252da0e8d62d44e981f366970c5e1e, type: 3}
+  - {fileID: 4900000, guid: d3139d4a2da16474a9dbc22b7f511417, type: 3}
+  - {fileID: 4900000, guid: b0c696baf95953d4d823284bd14d7369, type: 3}
+  - {fileID: 4900000, guid: cd029c54f5fa30c43bf0d83edabc6b94, type: 3}
+  - {fileID: 4900000, guid: e7f3f22ceca5c694e90e9b6777ad0ed5, type: 3}
+  - {fileID: 4900000, guid: bbbea755cc00e58488035d1cccc722c5, type: 3}
+  - {fileID: 4900000, guid: 17b8dcbaf239e53439bcda909603b2b4, type: 3}
+  - {fileID: 4900000, guid: 1c00e0002cad31a4f9de9f399079f2f7, type: 3}
+  - {fileID: 4900000, guid: 41a8b7bf9256c434c922380eed2821e9, type: 3}
+  - {fileID: 4900000, guid: afae7eae8f441b24ca54e9198dcca485, type: 3}
+  - {fileID: 4900000, guid: 405f79beda59c4e49823c37b982a9dce, type: 3}
 --- !u!1 &5875880006394387011
 GameObject:
   m_ObjectHideFlags: 0
