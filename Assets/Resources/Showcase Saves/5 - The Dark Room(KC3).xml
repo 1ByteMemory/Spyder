@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Save xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <title>The DarkRoom(PurpleKC)</title>
+  <title>The Dark Room</title>
   <sceneName>Level 1</sceneName>
   <abilityUnlocked>true</abilityUnlocked>
   <foundKeys>
