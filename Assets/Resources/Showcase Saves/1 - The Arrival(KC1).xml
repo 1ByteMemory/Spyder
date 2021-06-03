@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Save xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <title>The Arrival</title>
+  <sceneName>Level 1</sceneName>
+  <abilityUnlocked>false</abilityUnlocked>
+  <foundKeys>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+  </foundKeys>
+  <enemiesKilled />
+  <health>100</health>
+  <dimension>1</dimension>
+  <spawnPoint>
+    <x>221.551743</x>
+    <y>153.78</y>
+    <z>76.9638748</z>
+  </spawnPoint>
+  <spawnRotation>
+    <x>2.05221677E-13</x>
+    <y>176.7374</y>
+    <z>-1.16986007E-14</z>
+  </spawnRotation>
+  <availableWeapons />
+</Save>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Save xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <title>Mysterious Vent</title>
+  <sceneName>Level 1</sceneName>
+  <abilityUnlocked>true</abilityUnlocked>
+  <foundKeys>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+  </foundKeys>
+  <enemiesKilled>
+    <int>56855992</int>
+    <int>56855984</int>
+    <int>45476000</int>
+    <int>31649744</int>
+  </enemiesKilled>
+  <health>100</health>
+  <dimension>1</dimension>
+  <spawnPoint>
+    <x>23.6016388</x>
+    <y>19.0286865</y>
+    <z>51.3042831</z>
+  </spawnPoint>
+  <spawnRotation>
+    <x>0.6069047</x>
+    <y>184.233063</y>
+    <z>0.0256500319</z>
+  </spawnRotation>
+  <availableWeapons>
+    <Gun name="Pistol" ammo="973" clip="7" />
+    <Gun name="Shotgun" ammo="499" clip="2" />
+  </availableWeapons>
+</Save>

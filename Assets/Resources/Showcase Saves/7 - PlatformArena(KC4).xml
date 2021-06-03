@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<Save xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <title>Platform Arena(KC4)</title>
+  <sceneName>Level 1</sceneName>
+  <abilityUnlocked>true</abilityUnlocked>
+  <foundKeys>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+  </foundKeys>
+  <enemiesKilled>
+    <int>56855992</int>
+    <int>56855984</int>
+    <int>45476000</int>
+    <int>31649744</int>
+    <int>19044102</int>
+    <int>18442432</int>
+    <int>45324284</int>
+    <int>35119248</int>
+    <int>-6365972</int>
+    <int>-12031678</int>
+    <int>-10222298</int>
+    <int>-11151666</int>
+    <int>-331602</int>
+    <int>-13917482</int>
+    <int>35403180</int>
+    <int>35101276</int>
+    <int>34109904</int>
+    <int>36085036</int>
+    <int>3242368</int>
+    <int>3086797</int>
+    <int>-5203194</int>
+    <int>-4732456</int>
+    <int>-27524846</int>
+    <int>-48031976</int>
+    <int>-47931468</int>
+  </enemiesKilled>
+  <health>100</health>
+  <dimension>1</dimension>
+  <spawnPoint>
+    <x>-45.2763367</x>
+    <y>1.74766028</y>
+    <z>-39.96742</z>
+  </spawnPoint>
+  <spawnRotation>
+    <x>0.0383589342</x>
+    <y>358.994232</y>
+    <z>0.000361557439</z>
+  </spawnRotation>
+  <availableWeapons>
+    <Gun name="Pistol" ammo="885" clip="7" />
+    <Gun name="Shotgun" ammo="486" clip="2" />
+  </availableWeapons>
+</Save>

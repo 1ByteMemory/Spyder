@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Save xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <title>The Digital Ability</title>
+  <sceneName>Level 1</sceneName>
+  <abilityUnlocked>false</abilityUnlocked>
+  <foundKeys>
+    <boolean>true</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+  </foundKeys>
+  <enemiesKilled />
+  <health>100</health>
+  <dimension>1</dimension>
+  <spawnPoint>
+    <x>202.986282</x>
+    <y>134.608688</y>
+    <z>101.53817</z>
+  </spawnPoint>
+  <spawnRotation>
+    <x>359.053375</x>
+    <y>90.32346</y>
+    <z>-0.0005389648</z>
+  </spawnRotation>
+  <availableWeapons>
+    <Gun name="Pistol" ammo="1000" clip="7" />
+  </availableWeapons>
+</Save>

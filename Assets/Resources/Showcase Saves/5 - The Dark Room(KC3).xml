@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<Save xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <title>The DarkRoom(PurpleKC)</title>
+  <sceneName>Level 1</sceneName>
+  <abilityUnlocked>true</abilityUnlocked>
+  <foundKeys>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+    <boolean>false</boolean>
+  </foundKeys>
+  <enemiesKilled>
+    <int>56855992</int>
+    <int>56855984</int>
+    <int>45476000</int>
+    <int>31649744</int>
+    <int>19044102</int>
+    <int>18442432</int>
+    <int>45324284</int>
+    <int>35119248</int>
+    <int>-6365972</int>
+    <int>-12031678</int>
+    <int>-10222298</int>
+    <int>-11151666</int>
+    <int>-331602</int>
+    <int>-13917482</int>
+  </enemiesKilled>
+  <health>100</health>
+  <dimension>1</dimension>
+  <spawnPoint>
+    <x>36.3260269</x>
+    <y>2.16694045</y>
+    <z>4.37037945</z>
+  </spawnPoint>
+  <spawnRotation>
+    <x>2.279911E-08</x>
+    <y>186.219284</y>
+    <z>-3.53592952E-07</z>
+  </spawnRotation>
+  <availableWeapons>
+    <Gun name="Pistol" ammo="973" clip="7" />
+    <Gun name="Shotgun" ammo="487" clip="2" />
+  </availableWeapons>
+</Save>
